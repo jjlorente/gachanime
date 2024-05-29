@@ -4,9 +4,22 @@ function App() {
 
   return (
     <div className='App'>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <div className='container-app'>
+
+        <div className='container-title'>
+          <h1 className="title jaro-regular">
+            GACHANIME
+          </h1>
+        </div>
+
+        <div className='container-form'>
+          <img className='naruto-up-img' src="./naruto-sticker-1.png" alt="sticker naruto" />
+          <img className='goku-up-img' src="./goku-sticker-1.png" alt="sticker goku" />
+        </div>
+
+      </div>
+
     </div>
   )
 }

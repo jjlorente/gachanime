@@ -2,7 +2,7 @@
 .App {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("./background-gachanime.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./background-gachanime.jpg");
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -12,4 +12,80 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.container-app{
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 2rem;
+}
+
+.container-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.title {
+  width: 100%;
+  font-size: 6rem;
+  background-color: rgb(20 39 88);
+  border-radius: 15px;
+  color: white;
+  border: white 2px solid;
+  margin: 0;
+}
+
+.naruto-up-img{
+  position: absolute;
+  width: 300px;
+  left: -52.2%;
+  top: 10%;
+  transform: rotate(-90deg);
+}
+
+.goku-up-img{
+  position: absolute;
+  width: 350px;
+  right: -60.9%;
+  top: 40%;
+  transform: rotate(90deg);
+}
+
+.container-form {
+  position: relative;
+  display: flex;
+  width: 99.5%;
+  height: 500px;
+  border-radius: 15px;
+  background-color: rgb(20 39 88);
+  border: white 2px solid;
+  min-height: 500px;
+}
+
+/* FONTS */
+.font-titan {
+  font-family: "Titan One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poetsen-one-regular {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jaro-regular {
+  font-family: "Jaro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
