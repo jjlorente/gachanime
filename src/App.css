@@ -2,7 +2,6 @@
   position: relative;
   width: 100%;
   height: auto;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./background-gachanime.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -10,7 +9,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: #EFEFF1;
   font-weight: 600;
   box-sizing: border-box;
 }
@@ -39,7 +37,6 @@
   font-size: 6rem;
   background-color: rgb(20 39 88);
   border-radius: 15px;
-  color: white;
   border: white 2px solid;
   margin: 0;
 }
@@ -90,4 +87,49 @@
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+/* MEDIA QUERYS */
+
+@media (max-width: 930px) {
+  .naruto-up-img {
+    position: absolute;
+    width: 200px;
+    left: -35.1%;
+    top: 25%;
+    transform: rotate(-90deg);
+  } 
+}
+
+@media (max-width: 930px) {
+  .naruto-up-img {
+    position: absolute;
+    width: 200px;
+    left: -35.1%;
+    top: 25%;
+    transform: rotate(-90deg);
+  } 
+}
+
+@media (max-width: 660px) {
+  .container-app {
+    max-width: 350px;
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  .naruto-up-img {
+    width: 150px;
+    left: -37.7%;
+    top: 35%;
+  } 
+  
+  .goku-up-img {
+    width: 100px;
+    right: -24.8%;
+    top: 5%;
+    transform: rotate(90deg);
+  }
 }

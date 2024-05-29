@@ -4,7 +4,7 @@ function App() {
 
   return (
     <div className='App'>
-      
+
       <div className='container-app'>
 
         <div className='container-title'>
@@ -15,7 +15,7 @@ function App() {
         </div>
 
         <div className='container-form'>
-          <img className='naruto-up-img' src="./naruto-sticker-1.png" alt="sticker naruto" />
+          {/* <img className='naruto-up-img' src="./naruto-sticker-1.png" alt="sticker naruto" /> */}
         </div>
 
       </div>
