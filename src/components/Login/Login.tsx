@@ -48,7 +48,7 @@ export const Login = () => {
     }
 
     function registerUser() {
-        console.log("Nombre de usuario:", username);
+        navigate('register');
     }
 
     function handleFocus(event: React.FocusEvent<HTMLInputElement>) {
@@ -88,68 +88,55 @@ export const Login = () => {
     };
 
     return (
-        <div className='container-app'>
-            <div className='container-title'>
-                <h1 className="title jaro-regular">
-                    GACHANIME
-                </h1>
-                <img className='goku-up-img' src="./goku-sticker-1.png" alt="sticker goku" />
-            </div>
-
-            <div className='container-form'>
-                {/* <img className='naruto-up-img' src="./naruto-sticker-1.png" alt="sticker naruto" /> */}
-                <h2 className="jaro-regular" id='title-form'>¡Bienvenido a <span style={{color:"rgb(255, 170, 42)", margin:"0", padding:"0"}}>GACHANIME</span>!</h2>
-
-                <form className='form-user' onSubmit={submitUser}>
-                    <div className='input-container'>
-                    {inputText === "username" ? <span className='span-input-focus'>Nombre de usuario</span> : ""}
-                    <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={handleUsernameChange}
-                        required
-                        placeholder={inputText === "username" ? "" : "Nombre de usuario"}
-                        className='jaro-regular'
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        maxLength={15}
-                    />
-                    </div>
-                    <div className='input-container'>
-                    {inputText === "password" ? <span className='span-input-focus'>Contraseña</span> : ""}
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        id="password"
-                        value={password}
-                        ref={passwordRef}
-                        onChange={handlePasswordChange}
-                        required
-                        placeholder={inputText === "password" ? "" : "Contraseña"}
-                        className='jaro-regular'
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        maxLength={15}
-                    />
-                    <img className='btn-toggle-password' onClick={handlePasswordToggle} src={showPassword ? "./eye-2.png" : "./eye-1.png"} alt=""/>
-                    </div>
-                    {showErrorLogin ? 
-                        <span className='span-error-login'>{showErrorLogin}</span> : <></>
-                    }
-                    <button className='btn-form jaro-regular' type='submit'>Iniciar sesión</button>
-                    <span className='span-reg'>¿No tienes cuenta? <span className='reg-btn' onClick={registerUser}>Regístrate</span></span>
-                </form>
-                <div className='container-spacer'>
-                    <span className='span-spacer'></span>
-                    <span className='span-text-spacer'>O</span>
-                    <span className='span-spacer'></span>
+        <>
+            <form className='form-user' onSubmit={submitUser}>
+                <div className='input-container'>
+                {inputText === "username" ? <span className='span-input-focus'>Nombre de usuario</span> : ""}
+                <input
+                    type="text"
+                    id="username"
+                    value={username}
+                    onChange={handleUsernameChange}
+                    required
+                    placeholder={inputText === "username" ? "" : "Nombre de usuario"}
+                    className='jaro-regular'
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    maxLength={15}
+                />
                 </div>
-                <button className='google-btn jaro-regular'>
-                    <img className='google-img' src="./google-logo.png" alt="google logo" />
-                    Continuar con Google
-                </button>
+                <div className='input-container'>
+                {inputText === "password" ? <span className='span-input-focus'>Contraseña</span> : ""}
+                <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    value={password}
+                    ref={passwordRef}
+                    onChange={handlePasswordChange}
+                    required
+                    placeholder={inputText === "password" ? "" : "Contraseña"}
+                    className='jaro-regular'
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    maxLength={15}
+                />
+                <img className='btn-toggle-password' onClick={handlePasswordToggle} src={showPassword ? "./eye-2.png" : "./eye-1.png"} alt=""/>
+                </div>
+                {showErrorLogin ? 
+                    <span className='span-error-login'>{showErrorLogin}</span> : <></>
+                }
+                <button className='btn-form jaro-regular' type='submit'>Iniciar sesión</button>
+                <span className='span-reg'>¿No tienes cuenta? <span className='reg-btn' onClick={registerUser}>Regístrate</span></span>
+            </form>
+            <div className='container-spacer'>
+                <span className='span-spacer'></span>
+                <span className='span-text-spacer'>O</span>
+                <span className='span-spacer'></span>
             </div>
-        </div>
-
+            <button className='google-btn jaro-regular'>
+                <img className='google-img' src="../google-logo.png" alt="google logo" />
+                Continuar con Google
+            </button>
+        </>
     )
 }
