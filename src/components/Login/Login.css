@@ -40,7 +40,7 @@
     position: absolute;
     width: 150px;
     right: -25.8%;
-    top: 5%;
+    top: -2%;
     transform: rotate(90deg);
     filter: brightness(1.05);
 }

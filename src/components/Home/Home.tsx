@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   const [_id, set_Id] = useState<string>('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  
   useEffect(() => {
     if(localStorage.getItem("_id")) {
       const idUser = localStorage.getItem("_id");
@@ -17,7 +18,12 @@ export const Home = () => {
 
   return (
     <div className='Home'>
-      {_id}
+      <div className='nav'>
+
+      </div>
+      <div className='section'>
+
+      </div>
     </div>
   )
 }

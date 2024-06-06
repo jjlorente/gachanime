@@ -1,12 +1,11 @@
 .container-app {
-    width: 100%;
-    height: fit-content;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 0;
-    gap: 2rem;
+  width: 100%;
+  height: fit-content;
+  max-width: 500px;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 2rem;
 }
   
 .container-title {

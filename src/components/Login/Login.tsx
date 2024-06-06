@@ -15,7 +15,7 @@ export const Login = () => {
     
     const [showErrorLogin, setShowErrorLogin] = useState<string>("");
 
-    function submitUser(event: React.FormEvent<HTMLFormElement>) {
+    const submitUser = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         fetch('http://localhost:3000/api/users/find', {
         method: 'POST',
@@ -46,19 +46,19 @@ export const Login = () => {
             console.error('Error:', error);
         });
     }
-
-    function registerUser() {
-        navigate('register');
+  
+    const registerUser =()=>  {
+        navigate('/auth/register');
     }
-
-    function handleFocus(event: React.FocusEvent<HTMLInputElement>) {
+  
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         setInputText(event.target.id)
     }
-
-    function handleBlur() {
+  
+    const handleBlur = () => {
         setInputText("event.target.id")
     }
-
+  
     const handlePasswordToggle = (event: React.MouseEvent<HTMLImageElement>) => {
         event.preventDefault();
         setShowPassword(!showPassword);
@@ -70,7 +70,7 @@ export const Login = () => {
         }
         }, 0);
     };
-
+  
     const handleUsernameChange = (event: React.FocusEvent<HTMLInputElement>) => {
         const value = event.target.value;
         const regex = /^[a-zA-Z0-9]*$/;
@@ -78,7 +78,7 @@ export const Login = () => {
             setUsername(value);
         }
     };
-
+  
     const handlePasswordChange = (event: React.FocusEvent<HTMLInputElement>) => {
         const value = event.target.value;
         const regex = /^[a-zA-Z0-9]*$/;
@@ -120,7 +120,7 @@ export const Login = () => {
                     onBlur={handleBlur}
                     maxLength={15}
                 />
-                <img className='btn-toggle-password' onClick={handlePasswordToggle} src={showPassword ? "./eye-2.png" : "./eye-1.png"} alt=""/>
+                <img className='btn-toggle-password' onClick={handlePasswordToggle} src={showPassword ? "../eye-2.png" : "../eye-1.png"} alt=""/>
                 </div>
                 {showErrorLogin ? 
                     <span className='span-error-login'>{showErrorLogin}</span> : <></>
