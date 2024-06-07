@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gapi-script": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.1"
+    "react-google-login": "^5.2.2",
+    "react-router-dom": "^6.23.1",
+    "validator": "^13.12.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/validator": "^13.11.10",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",

@@ -5,10 +5,11 @@ import { ContainerForm } from './components/ContainerForms/ContainerForm';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { gapi } from 'gapi-script';
 
 function App() {
   const navigate = useNavigate();
+  const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
 
   useEffect(() => {
     const userId = localStorage.getItem("_id");
@@ -19,6 +20,16 @@ function App() {
     
   }, []);
 
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ""
+      })
+    };
+
+    gapi.load('client:auth2', start)
+  }, [])
 
   return (
     <div className='App jaro-regular'>

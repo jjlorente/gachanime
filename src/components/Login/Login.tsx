@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useRef } from 'react';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -15,19 +16,51 @@ export const Login = () => {
     
     const [showErrorLogin, setShowErrorLogin] = useState<string>("");
 
-    const submitUser = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        fetch('http://localhost:3000/api/users/find', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+    const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
+    const onSuccess = (res: any) => {
+        let email = res.profileObj.email;
+        let username = res.profileObj.name;
+        let googleAccount = true;
+
+        fetch('http://localhost:3000/api/users/findGoogle', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, googleAccount }),
         })
         .then(response => response.json())
         .then(data => {
             if(data._id) {
                 localStorage.setItem("_id", data._id)
+                localStorage.setItem("googleAccount", data.googleAccount)
+                navigate('/home');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+    const onFailure = (res: any) => {
+        console.log("Login failed", res)
+    }
+
+    const submitUser = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        let googleAccount = false;
+        fetch('http://localhost:3000/api/users/find', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, googleAccount }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data._id) {
+                localStorage.setItem("_id", data._id)
+                localStorage.setItem("googleAccount", data.googleAccount)
                 navigate('/home');
             } else {
                 if(data.error === "Usuario no encontrado") {
@@ -133,10 +166,15 @@ export const Login = () => {
                 <span className='span-text-spacer'>O</span>
                 <span className='span-spacer'></span>
             </div>
-            <button className='google-btn jaro-regular'>
-                <img className='google-img' src="../google-logo.png" alt="google logo" />
-                Continuar con Google
-            </button>
+            <GoogleLogin
+                clientId={clientId}
+                buttonText="Continuar con Google"
+                onSuccess={onSuccess}
+                onFailure={onFailure}
+                cookiePolicy={'single_host_origin'}
+                isSignedIn={true}
+                className="google-btn jaro-regular"
+            />
         </>
     )
 }
