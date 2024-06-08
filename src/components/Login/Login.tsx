@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import { findGoogleUser, findUser } from '../../services/user';
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -17,68 +18,53 @@ export const Login = () => {
     const [showErrorLogin, setShowErrorLogin] = useState<string>("");
 
     const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
-    const onSuccess = (res: any) => {
+    const onSuccess = async (res: any) => {
         let email = res.profileObj.email;
         let username = res.profileObj.name;
         let googleAccount = true;
-
-        fetch('http://localhost:3000/api/users/findGoogle', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, email, googleAccount }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data._id) {
-                localStorage.setItem("_id", data._id)
-                localStorage.setItem("googleAccount", data.googleAccount)
-                navigate('/home');
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
+    
+        try {
+          const data = await findGoogleUser(username, email, googleAccount);
+          if(data._id) {
+            localStorage.setItem("_id", data._id)
+            localStorage.setItem("googleAccount", data.googleAccount)
+            navigate('/home');
+          }
+        } catch (error) {
+          console.error('Error during Google user find:', error);
+        }
+    };
 
     const onFailure = (res: any) => {
         console.log("Login failed", res)
     }
 
-    const submitUser = (event: React.FormEvent<HTMLFormElement>) => {
+    const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        let googleAccount = false;
-        fetch('http://localhost:3000/api/users/find', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password, googleAccount }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data._id) {
-                localStorage.setItem("_id", data._id)
-                localStorage.setItem("googleAccount", data.googleAccount)
+        const googleAccount = false;
+
+        try {
+            const data = await findUser(username, password, googleAccount);
+            if ('_id' in data) {
+                localStorage.setItem("_id", data._id);
+                localStorage.setItem("googleAccount", String(data.googleAccount));
                 navigate('/home');
-            } else {
-                if(data.error === "Usuario no encontrado") {
-                    setShowErrorLogin("Nombre de usuario incorrecto")
-                    setUsername("")
-                    setPassword("")
-                    document.getElementById("username")?.focus()
-                } else if(data.error === "Credenciales inválidas") {
-                    setShowErrorLogin("Contraseña incorrecta")
-                    setPassword("")
-                    document.getElementById("password")?.focus()
-                }
             }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
+        } catch (error: any) {
+            if (error.message === "Usuario no encontrado") {
+                setShowErrorLogin("Nombre de usuario incorrecto");
+                setUsername("");
+                setPassword("");
+                document.getElementById("username")?.focus();
+            } else if (error.message === "Credenciales inválidas") {
+                setShowErrorLogin("Contraseña incorrecta");
+                setPassword("");
+                document.getElementById("password")?.focus();
+            } else {
+                setShowErrorLogin(`Error during user find: ${error.message}`);
+            }
+        }
+    };
   
     const registerUser =()=>  {
         navigate('/auth/register');

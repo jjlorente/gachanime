@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import validator from 'validator'
+import { findGoogleUser, registerUser } from '../../services/user';
 
 export const Register = () => {
 
@@ -25,36 +26,29 @@ export const Register = () => {
   const [showErrorLogin, setShowErrorLogin] = useState<string>("");
 
   const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
-  const onSuccess = (res: any) => {
-      let email = res.profileObj.email;
-      let username = res.profileObj.name;
-      let googleAccount = true;
 
-      fetch('http://localhost:3000/api/users/findGoogle', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, email, googleAccount }),
-      })
-      .then(response => response.json())
-      .then(data => {
-          if(data._id) {
-              localStorage.setItem("_id", data._id)
-              localStorage.setItem("googleAccount", data.googleAccount)
-              navigate('/home');
-          }
-      })
-      .catch((error) => {
-          console.error('Error:', error);
-      });
-  }
+  const onSuccess = async (res: any) => {
+    let email = res.profileObj.email;
+    let username = res.profileObj.name;
+    let googleAccount = true;
+
+    try {
+      const data = await findGoogleUser(username, email, googleAccount);
+      if(data._id) {
+        localStorage.setItem("_id", data._id)
+        localStorage.setItem("googleAccount", data.googleAccount)
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Error during Google user find:', error);
+    }
+  };
 
   const onFailure = (res: any) => {
       console.log("Login failed", res)
   }
 
-  const submitUser = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let googleAccount = false;
     if (password !== passwordRepeat) {
@@ -66,45 +60,34 @@ export const Register = () => {
       setEmail("")
       document.getElementById("email")?.focus()
     } else {
-      fetch('http://localhost:3000/api/users/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password, email, googleAccount }),
-      })
-      .then(response => response.json())
-      .then(data => {
+      try {
+        const data = await registerUser(username, password, email, googleAccount);
         if(data._id) {
           localStorage.setItem("_id", data._id)
           localStorage.setItem("googleAccount", data.googleAccount)
           navigate('/home');
-        } else {
-          if(data.error === "Nombre de usuario en uso") {
-            setShowErrorLogin("Nombre de usuario en uso")
-            setUsername("")
-            setPassword("")
-            setPasswordRepeat("")
-            document.getElementById("username")?.focus()
-          } else if(data.error === "Credenciales inválidas") {
-            setShowErrorLogin("Contraseña incorrecta")
-            setPassword("")
-            setPasswordRepeat("")
-            document.getElementById("password")?.focus()
-          } else if(data.error === "Correo electrónico en uso") {
-            setShowErrorLogin("Correo electrónico en uso")
-            setEmail("")
-            setPassword("")
-            setPasswordRepeat("")
-            document.getElementById("email")?.focus()
-          }
         }
-      })
-      .catch((error) => {
-          console.error('Error:', error);
-      });
+      } catch (error: any) {
+        if(error.message === "Nombre de usuario en uso") {
+          setShowErrorLogin("Nombre de usuario en uso")
+          setUsername("")
+          setPassword("")
+          setPasswordRepeat("")
+          document.getElementById("username")?.focus()
+        } else if(error.message === "Credenciales inválidas") {
+          setShowErrorLogin("Contraseña incorrecta")
+          setPassword("")
+          setPasswordRepeat("")
+          document.getElementById("password")?.focus()
+        } else if(error.message === "Correo electrónico en uso") {
+          setShowErrorLogin("Correo electrónico en uso")
+          setEmail("")
+          setPassword("")
+          setPasswordRepeat("")
+          document.getElementById("email")?.focus()
+        }
+      }
     }
-
   }
 
   const logInUser =()=>  {
