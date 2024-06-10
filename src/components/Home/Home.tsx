@@ -1,7 +1,8 @@
 import './Home.css'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { GoogleLogout } from 'react-google-login';
+import { Nav } from './Nav/Nav';
 
 export const Home = () => {
 
@@ -48,7 +49,6 @@ export const Home = () => {
       .then(response => response.json())
       .then(data => {
         if (data) {
-          console.log(data);
           setUserData(data);
           localStorage.setItem("userData", JSON.stringify(data));
         }
@@ -61,22 +61,8 @@ export const Home = () => {
 
   return (
     <div className='Home'>
-      <div className='nav'>
-
-      </div>
-      <div className='section'>
-        {googleAccount ? 
-          <GoogleLogout 
-            clientId={clientId}
-            buttonText={"Logout"}
-            onLogoutSuccess={onSuccessLogout}
-          /> 
-          : 
-          <></>
-        }
-
-
-      </div>
+      <Nav />
+      <Outlet />
     </div>
   )
 }

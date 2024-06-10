@@ -6,6 +6,9 @@ import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
+import { Games } from './components/Home/Games/Games';
+import { Quests } from './components/Home/Quests/Quests';
+import { Settings } from './components/Home/Settings/Settings';
 
 function App() {
   const navigate = useNavigate();
@@ -21,15 +24,25 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // Function to start gapi client
     function start() {
       gapi.client.init({
         clientId: clientId,
         scope: ""
-      })
-    };
+      }).then(() => {
+        console.log("GAPI client initialized successfully");
+      }).catch((error: any) => {
+        console.error("Error initializing GAPI client", error);
+      });
+    }
 
-    gapi.load('client:auth2', start)
-  }, [])
+    // Ensure gapi is loaded before attempting to initialize
+    if (gapi && gapi.load) {
+      gapi.load('client:auth2', start);
+    } else {
+      console.error("GAPI script not loaded correctly");
+    }
+  }, []);
 
   return (
     <div className='App jaro-regular'>
@@ -38,7 +51,14 @@ function App() {
           <Route index element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="home" element={<Home />} />
+        <Route path="home" element={<Home />} >
+          <Route index element={<Games />} />
+          <Route path='games' element={<Games />} />
+          <Route path="quests" element={<Quests />} />
+          <Route path="quests" element={<Quests />} />
+          <Route path="quests" element={<Quests />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
         <Route path="*" element={<Navigate to="auth" replace />}/>
       </Routes>
     </div>
