@@ -1,0 +1,9 @@
+.custom-google-login {
+    background-color: #fff;
+    width: 99%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 5px;
+}

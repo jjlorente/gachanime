@@ -1,7 +1,6 @@
 import './Home.css'
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
-import { GoogleLogout } from 'react-google-login';
 import { Nav } from './Nav/Nav';
 
 export const Home = () => {

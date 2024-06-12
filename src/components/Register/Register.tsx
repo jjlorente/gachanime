@@ -2,9 +2,9 @@ import React from 'react'
 import './Register.css'
 import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
-import { GoogleLogin } from 'react-google-login';
 import validator from 'validator'
-import { findGoogleUser, registerUser } from '../../services/user';
+import { registerUser } from '../../services/user';
+import GoogleLogin from '../Login/GoogleLogin/GoogleLogin';
 
 export const Register = () => {
 
@@ -24,29 +24,6 @@ export const Register = () => {
   const passwordRepeatRef = useRef<HTMLInputElement>(null);
 
   const [showErrorLogin, setShowErrorLogin] = useState<string>("");
-
-  const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
-
-  const onSuccess = async (res: any) => {
-    let email = res.profileObj.email;
-    let username = res.profileObj.name;
-    let googleAccount = true;
-
-    try {
-      const data = await findGoogleUser(username, email, googleAccount);
-      if(data._id) {
-        localStorage.setItem("_id", data._id)
-        localStorage.setItem("googleAccount", data.googleAccount)
-        navigate('/home');
-      }
-    } catch (error) {
-      console.error('Error during Google user find:', error);
-    }
-  };
-
-  const onFailure = (res: any) => {
-      console.log("Login failed", res)
-  }
 
   const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -239,15 +216,7 @@ export const Register = () => {
         <span className='span-text-spacer'>O</span>
         <span className='span-spacer'></span>
     </div>
-    <GoogleLogin
-      clientId={clientId}
-      buttonText="Continuar con Google"
-      onSuccess={onSuccess}
-      onFailure={onFailure}
-      cookiePolicy={'single_host_origin'}
-      isSignedIn={true}
-      className="google-btn jaro-regular"
-    />
+    <GoogleLogin />
   </>
   )
 }
