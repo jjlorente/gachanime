@@ -10,7 +10,6 @@ export const Home = () => {
   const [userData, setUserData] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
 
   const onSuccessLogout = () => {
     console.log("Logout succes")

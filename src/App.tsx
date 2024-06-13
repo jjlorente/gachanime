@@ -9,6 +9,9 @@ import { gapi } from 'gapi-script';
 import { Games } from './components/Home/Games/Games';
 import { Quests } from './components/Home/Quests/Quests';
 import { Settings } from './components/Home/Settings/Settings';
+import { Main } from './components/Home/Main/Main';
+import { Summon } from './components/Home/Summon/Summon';
+import { Collection } from './components/Home/Collection/Collection';
 
 function App() {
   const navigate = useNavigate();
@@ -18,7 +21,7 @@ function App() {
     const userId = localStorage.getItem("_id");
 
     if (userId) {
-      navigate('/home');
+      navigate('/home/main');
     }
     
   }, []);
@@ -52,10 +55,12 @@ function App() {
           <Route path="register" element={<Register />} />
         </Route>
         <Route path="home" element={<Home />} >
-          <Route index element={<Games />} />
+          <Route index element={<Navigate to="main" />} />
+          <Route path="*" element={<Navigate to="/main" replace />}/>
+          <Route path='main' element={<Main />} />
           <Route path='games' element={<Games />} />
-          <Route path="quests" element={<Quests />} />
-          <Route path="quests" element={<Quests />} />
+          <Route path="summon" element={<Summon />} />
+          <Route path="collection" element={<Collection />} />
           <Route path="quests" element={<Quests />} />
           <Route path="settings" element={<Settings />} />
         </Route>

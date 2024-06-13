@@ -22,9 +22,3 @@ html, body {
   box-sizing: border-box;
 
 }
-
-@media (max-height: 800px) {
-  body {
-    min-height: 800px;
-  }
-}
