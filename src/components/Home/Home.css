@@ -1,20 +1,23 @@
 .Home {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    background-color: #0060B6;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../public/home/anime-sky.jpg");
+    background-color: #0e0e38;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    min-height: 520px;
+    min-height: 100vh;
 }
 
 .section {
     flex: 5;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    overflow: auto;
+    margin-top: 80px;
 }

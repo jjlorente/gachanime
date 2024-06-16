@@ -1,6 +1,6 @@
 .Nav {
+    position: relative;
     height: 100%;
-    /* flex: 1; */
     display: flex;
     width: 70px;
     justify-content: space-between;
@@ -9,6 +9,12 @@
     box-sizing: border-box;
     padding: 10px;
     transition: all ease-in-out .05s;
+    gap: 2rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
 }   
 
 .nav-items{
@@ -20,6 +26,7 @@
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    
 }
 
 .nav-items-active {
@@ -29,7 +36,6 @@
     flex-direction: column;
     gap: 1.8rem;
     box-sizing: border-box;
-    align-items: start;
 }
 
 .nav-section {
@@ -49,7 +55,7 @@
 }
 
 .nav-section:hover {
-    background-color: #fea92a6c ;
+    background-color: #232353;
     border-radius: 5px;
 }
 .nav-active{
@@ -58,7 +64,7 @@
 }
 .title-nav {
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-size: 2.2rem;
     text-align: center;
     width: 100%;
@@ -83,7 +89,7 @@
 }
 
 .color-inactive {
-    color: rgba(255, 255, 255, 0.658);
+    color: rgba(255, 255, 255, 0.781);
 }
 
 .img-section-nav {
@@ -142,4 +148,82 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.logout-btn {
+    width: 100%;
+    font-family: "Jaro", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #0f4f97;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    list-style: none;
+    outline-style: none;
+    border: none;
+    gap: 1rem;
+    transition: ease all .1s;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #3891f7;
+}
+
+.svg-logout {
+    width: 25px;
+}
+
+.span-inactive-logout {
+    display: none;
+}
+.span-active-logout {
+    display: block;
+    animation: vanish .1s;
+}
+
+
+@keyframes vanish {
+    from {
+        display: none;
+        font-size: 0rem;
+        opacity: 0;
+    }
+    to {
+        display: block;
+        font-size: 1.3rem;
+        opacity: 1;
+    }
+}
+
+/* Estilos personalizados del scrollbar */
+.Nav::-webkit-scrollbar {
+width: 8px; /* Ancho del scrollbar */
+}
+
+.Nav::-webkit-scrollbar-track {
+background-color: #0303039a; /* Color del fondo del scrollbar */
+}
+
+.Nav::-webkit-scrollbar-thumb {
+    background-color: #224080; /* Color del thumb (parte deslizable del scrollbar) */
+    border-radius: 4px; /* Borde redondeado del thumb */
+}
+
+.Nav::-webkit-scrollbar-thumb:hover {
+    background-color: #476cbd; /* Color del thumb al pasar el cursor */
+}
+
+@media (max-height: 570px) {
+    .Nav {
+        overflow-y: scroll;        
+    }
+
 }

@@ -83,26 +83,3 @@
       transform: rotate(-90deg);
     } 
 }
-  
-@media (max-width: 660px) {
-    .container-app {
-      max-width: 350px;
-    }
-  
-    .title {
-      font-size: 4rem;
-    }
-  
-    .naruto-up-img {
-      width: 150px;
-      left: -37.7%;
-      top: 35%;
-    } 
-    
-    .goku-up-img {
-        width: 100px;
-        right: -24.8%;
-        top: 5%;
-        transform: rotate(90deg);
-    }
-}

@@ -94,8 +94,11 @@ export const Nav = () => {
           })}
         </div>
       </div>
-      <div>
-        <button onClick={logOut}>Log out</button>
+      <div className='container-btn-logout'>
+        <button onClick={logOut} className="logout-btn">
+          {classNav === "Nav container-nav-active" ? <span className='span-active-logout'>Cerrar sesión</span> : <span className='span-inactive-logout'>Cerrar sesión</span>}
+          <img className='svg-logout' src='../home/logout.svg'></img>
+        </button>
       </div>
     </div>
   );

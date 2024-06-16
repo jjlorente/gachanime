@@ -186,34 +186,7 @@ input:focus {
     padding: 0 20px;
 }
   
-.google-btn {
-    width: 98%;
-    background-color: #f3f3f3;
-    font-size: 1.7rem !important;
-    border-radius: 5px;
-    padding: 10px 15px;
-    color: rgb(15, 15, 15) !important;
-    cursor: pointer;
-    border: 2px solid rgb(15, 15, 15) !important;
-    transition: ease all .2s;
-    text-align: start;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
 
-.google-btn:hover {
-    color: rgb(26, 26, 26);
-    cursor: pointer;
-    background-color: rgb(235, 235, 235);
-    border: 2px solid rgb(26, 26, 26);
-}
-  
-.google-img {
-    width: 25px;
-    margin-top: 1px;
-}
   
 /* FONTS */
 .font-titan {
@@ -257,7 +230,7 @@ input:focus {
     } 
 }
   
-@media (max-width: 660px) {
+@media (max-width: 740px) {
     .container-app {
       max-width: 350px;
     }
@@ -265,17 +238,73 @@ input:focus {
     .title {
       font-size: 4rem;
     }
-  
+
+    #title-form {
+        font-size: 1.5rem;
+    }
+
     .naruto-up-img {
       width: 150px;
       left: -37.7%;
       top: 35%;
     } 
     
+    input {
+        font-size: 1rem;
+    }
+
     .goku-up-img {
         width: 100px;
         right: -24.8%;
         top: 5%;
         transform: rotate(90deg);
+    }
+    .btn-toggle-password {
+        width: 20px;
+        right: 20px;
+    }
+
+    .btn-form {
+        font-size: 1.5rem;
+    }
+    .span-reg{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 510px) {
+    .goku-up-img {
+        display: none;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .container-app {
+        max-width: 300px;
+      }
+    
+    .title {
+        font-size: 3rem;
+    }
+
+    #title-form {
+        font-size: 1.2rem;
+    }
+    
+    input {
+        font-size: 1rem;
+    }
+
+    .btn-toggle-password {
+        width: 18px;
+        right: 18px;
+    }
+
+    .btn-form {
+        font-size: 1.3rem;
+    }
+    .span-reg{
+        font-size: 0.8rem;
     }
 }

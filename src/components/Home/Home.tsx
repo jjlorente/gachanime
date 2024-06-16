@@ -2,22 +2,15 @@ import './Home.css'
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Nav } from './Nav/Nav';
+import { Header } from '../Header/Header';
 
 export const Home = () => {
 
   const [_id, set_Id] = useState<string>('');
   const [googleAccount, setGoogleAccount] = useState<boolean>(false);
-  const [userData, setUserData] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>(false);
 
   const navigate = useNavigate();
-
-  const onSuccessLogout = () => {
-    console.log("Logout succes")
-    localStorage.setItem("_id", "")
-    localStorage.setItem("googleAccount", "")
-    localStorage.setItem("userData", "")
-    navigate("/")
-  }
 
   useEffect(() => {
     if(localStorage.getItem("_id")) {
@@ -59,6 +52,7 @@ export const Home = () => {
 
   return (
     <div className='Home'>
+      <Header />
       <Nav />
       <Outlet />
     </div>
