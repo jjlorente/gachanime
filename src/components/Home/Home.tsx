@@ -8,7 +8,7 @@ export const Home = () => {
 
   const [_id, set_Id] = useState<string>('');
   const [googleAccount, setGoogleAccount] = useState<boolean>(false);
-  const [userData, setUserData] = useState<any>(false);
+  const [userData, setUserData] = useState<any>();
 
   const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ export const Home = () => {
 
   return (
     <div className='Home'>
-      <Header />
+      <Header userData={userData}/>
       <Nav />
       <Outlet />
     </div>

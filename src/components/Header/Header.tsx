@@ -1,9 +1,13 @@
 import './Header.css'
 
-export const Header = () => {
+interface HeaderProps {
+  userData: any;
+}
+
+export const Header: React.FC<HeaderProps> = ({ userData }) => {
   return (
     <div className='Header'>
-        
+        <h1 className='title-header'>GACHANIME</h1>
     </div>
   )
 }

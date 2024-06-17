@@ -5,7 +5,7 @@
     width: 70px;
     justify-content: space-between;
     flex-direction: column;
-    background-color: #121233;
+    background-color: #0F214E;
     box-sizing: border-box;
     padding: 10px;
     transition: all ease-in-out .05s;
@@ -14,7 +14,6 @@
     left: 0;
     bottom: 0;
     z-index: 1000;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
 }   
 
 .nav-items{
@@ -55,23 +54,15 @@
 }
 
 .nav-section:hover {
-    background-color: #232353;
+    background-color: #ffffff33;
     border-radius: 5px;
 }
+
 .nav-active{
     border-radius: 5px;
-    background-color: #e0921b !important;
+    background-color: #fea500d5 !important;
 }
-.title-nav {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    font-size: 2.2rem;
-    text-align: center;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    color: #FEAA2A;
-}
+
 .title-nav-active{
     margin-left: .5px;
 }
@@ -102,9 +93,9 @@
     color:#ffffff !important;
 } 
 
-.Nav:hover {
+.Nav-active {
     width: 200px;
-} 
+}
 
 .link-reset {
     text-decoration: none;
@@ -156,7 +147,7 @@
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    background-color: #0f4f97;
+    background-color: #df3131c0;
     color: white;
     font-size: 1.3rem;
     cursor: pointer;
@@ -174,7 +165,7 @@
 }
 
 .logout-btn:hover {
-    background-color: #3891f7;
+    background-color: #ff4646;
 }
 
 .svg-logout {
@@ -205,11 +196,12 @@
 
 /* Estilos personalizados del scrollbar */
 .Nav::-webkit-scrollbar {
-width: 8px; /* Ancho del scrollbar */
+    width: 7px; /* Ancho del scrollbar */
+    margin-left: 10px;
 }
 
 .Nav::-webkit-scrollbar-track {
-background-color: #0303039a; /* Color del fondo del scrollbar */
+    background-color: #ffffffb9; /* Color del fondo del scrollbar */
 }
 
 .Nav::-webkit-scrollbar-thumb {
@@ -221,9 +213,40 @@ background-color: #0303039a; /* Color del fondo del scrollbar */
     background-color: #476cbd; /* Color del thumb al pasar el cursor */
 }
 
-@media (max-height: 570px) {
+@media (max-height: 550px) {
     .Nav {
-        overflow-y: scroll;        
+        overflow-y: auto;     
+        scrollbar-gutter: stable;
     }
+}
 
+
+.toggle-section {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: fit-content;
+    gap: 1rem;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    transition: ease all .1s;
+    margin-bottom:1.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.toggle-section-nav-active {
+    width: 30px !important;
+    color:#ffffff !important;
+    transform: rotate(180deg);
+} 
+
+.toggle-section-nav {
+    width: 30px;
+    color:#ffffff !important;
+} 
+
+.toggle-section:hover {
+    background-color: #ffffff33;
 }

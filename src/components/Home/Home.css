@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    background-color: #0e0e38;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../home/anime-sky.jpg");
+
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

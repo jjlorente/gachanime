@@ -23,11 +23,10 @@ export const Nav = () => {
     }
   }, []);
 
-  const [classNav, setClassNav] = useState("Nav");
+  const [classNav, setClassNav] = useState(false);
   const [user, setUser] = useState<User>()
   const [activeIndex, setActiveIndex] = useState("main");
   
-    
   const navItems = [
     { label: 'Inicio', link: 'main' },
     { label: 'Juegos', link: 'games' },
@@ -55,13 +54,15 @@ export const Nav = () => {
     settings: settings
   };
 
-  const onMouseEnterNav = () => {
-    setClassNav("Nav container-nav-active")
+  const onToggleMenu = () => {
+    if(classNav) {
+      setClassNav(false)
+    } else {
+      setClassNav(true)
+    }
   }
-
-  const onMouseLeaveNav = () => {
-    setClassNav("Nav")
-  }
+  
+  const svgMenu = <svg className={classNav ? 'toggle-section-nav-active' : 'toggle-section-nav'} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></svg>
 
   const logOut = () => {
     googleLogout();
@@ -73,12 +74,13 @@ export const Nav = () => {
   }
 
   return (
-    <div className={classNav} onMouseEnter={onMouseEnterNav} onMouseLeave={onMouseLeaveNav}>
+    <div className={classNav ? "Nav Nav-active" : "Nav "}>
 
       <div>
-        <span className={classNav === "Nav container-nav-active" ? "title-nav title-nav-active" : "title-nav"}>{classNav === "Nav container-nav-active" ? 'GACHANIME' : "G"}</span>
-        <span className='spacer'></span>
-        <div className={classNav === "Nav container-nav-active" ? "nav-items-active" : "nav-items"}>
+        <div className={`toggle-section link-reset`}  onClick={onToggleMenu} >
+          {svgMenu}
+        </div>
+        <div className={classNav ? "nav-items-active" : "nav-items"}>
           {navItems.map((item, index) => {
             return (
               <Link 
@@ -88,7 +90,7 @@ export const Nav = () => {
                 onClick={() => setActiveIndex(item.link)}
               >
                 {icons[item.link as NavItemLink]}
-                {classNav === "Nav container-nav-active" ? <span className={activeIndex === item.link ? "span-section-nav-active color-active" : "span-section-nav-active color-inactive"}>{item.label}</span> : <span className='span-section-nav-inactive'>{item.label}</span> }
+                {classNav ? <span className={activeIndex === item.link ? "span-section-nav-active color-active" : "span-section-nav-active color-inactive"}>{item.label}</span> : <span className='span-section-nav-inactive'>{item.label}</span> }
               </Link>
             );
           })}
@@ -96,7 +98,7 @@ export const Nav = () => {
       </div>
       <div className='container-btn-logout'>
         <button onClick={logOut} className="logout-btn">
-          {classNav === "Nav container-nav-active" ? <span className='span-active-logout'>Cerrar sesión</span> : <span className='span-inactive-logout'>Cerrar sesión</span>}
+          {classNav ? <span className='span-active-logout'>Cerrar sesión</span> : <span className='span-inactive-logout'>Cerrar sesión</span>}
           <img className='svg-logout' src='../home/logout.svg'></img>
         </button>
       </div>
