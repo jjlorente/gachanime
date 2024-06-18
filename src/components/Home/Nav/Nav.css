@@ -223,9 +223,8 @@
 
 .toggle-section {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
-    width: fit-content;
     gap: 1rem;
     box-sizing: border-box;
     padding: 5px 10px;
@@ -234,6 +233,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.5rem;
+    margin-top: 0.4rem;
 }
 
 .toggle-section-nav-active {
@@ -249,4 +249,10 @@
 
 .toggle-section:hover {
     background-color: #ffffff33;
+}
+
+@media (max-width: 700px) {
+    .Nav {
+        display: none;
+    }
 }

@@ -1,0 +1,146 @@
+.Header {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #0f214e;
+    position: fixed;
+    top: 0;
+    left: -100px;
+    z-index: 1000;
+    width: 100%;
+    margin-left: 170px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+}
+
+.container-name-gachas {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-header {
+    color: #f8a915;
+    font-size: 2.1rem;
+    letter-spacing: 3px;
+    text-align: center;
+    display: flex;
+    margin-top: -5px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    transition: ease all .1s;
+}
+
+.title-header:hover h1 {
+    color:#ffb834;
+}
+
+.container-header {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -140px;
+}
+
+.gachas-container {
+    position: absolute;
+    right: 0;
+    width: fit-content;
+    background-color: rgb(0, 0, 0);
+    padding: 6px 15px;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    background-color:#dd9206;
+    border: solid 2px rgba(0, 0, 0, 0.521);
+    box-sizing: border-box;
+    text-align: center;
+    transition: ease all .1s;
+    word-spacing: 5px;
+    margin-right: 10px;
+}
+
+.gachas-container:hover {
+    background-color:#f3b23b;
+}
+
+@media (max-width: 700px) {
+    .gachas-container {
+        position: relative;
+        font-size: 1rem;
+    }
+    .container-header {
+        justify-content: space-between;
+    }
+    .title-header {
+        margin-left: 90px;
+        font-size: 1.5rem;
+        word-spacing: 0px;
+    }
+    .gachas-container {
+        padding: 0px 10px;
+
+    }
+    
+}
+
+.gachas-container span::after {
+    content: " Gachas";
+}
+
+.test {
+    margin-left: 10px;
+}
+
+.logo-menu {
+    display: none;
+    width: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: ease all .2s;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.logo-menu:hover {
+    transform: scale(1.1);
+    background-color: #ffffff3d;
+}
+
+@media (max-width: 450px) {
+    .gachas-container span::after {
+        content: "";
+    }
+}
+
+@media (max-width: 700px) {
+    .title-header {
+        word-spacing: 0 !important;
+        margin-left: 0px;
+        margin-left: 4px;
+    }
+    .Header {
+        left: 0;
+        margin-left: 0px;
+    }
+    .container-header {
+        margin-left: 0px;
+        gap: .5rem;
+    }
+    .logo-menu {
+        display: block;
+    }
+}
+
+@media (max-width: 360px) {
+    .title-header {
+        font-size: 1rem;
+    }
+}

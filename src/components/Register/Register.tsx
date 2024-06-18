@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import validator from 'validator'
 import { registerUser } from '../../services/user';
+import { registerGacha } from '../../services/gacha';
 import GoogleLogin from '../Login/GoogleLogin/GoogleLogin';
 
 export const Register = () => {
@@ -40,6 +41,8 @@ export const Register = () => {
       try {
         const data = await registerUser(username, password, email, googleAccount);
         if(data._id) {
+          const dataGacha = await registerGacha(data._id, 100);
+          console.log(dataGacha)
           localStorage.setItem("_id", data._id)
           localStorage.setItem("googleAccount", data.googleAccount)
           navigate('/home');

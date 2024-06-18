@@ -3,29 +3,37 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import './GoogleLogin.css';
 import { findGoogleUser } from '../../../services/user';
+import { findGacha, registerGacha } from '../../../services/gacha';
 import { useState, useEffect } from 'react';
 
 const Login = () => {
     const navigate = useNavigate();
     const [widthGoogle, setWidthGoogle] = useState("500px");
+
     const handleLoginSuccess = async (credentialResponse: any) => {
-        console.log("Login Success: ", credentialResponse);
         let googleAccount = true;
         const token = credentialResponse.credential;
         const decoded: any = jwtDecode(token);
-        console.log("Decoded JWT: ", decoded);
+
         let email = decoded.email;
         let username = decoded.name;
         try {
             const data = await findGoogleUser(username, email, googleAccount);
             if(data._id) {
-              localStorage.setItem("_id", data._id)
-              localStorage.setItem("googleAccount", data.googleAccount)
-              navigate('/home');
+                try {
+                    const dataGacha = await findGacha(data._id);
+                    console.log("usuario existente");
+                } catch (gachaError) {
+                    const gacha = await registerGacha(data._id, 100);
+                    console.log("Gachas creados:",gacha);
+                }
+                localStorage.setItem("_id", data._id)
+                localStorage.setItem("googleAccount", data.googleAccount)
+                navigate('/home');
             }
-          } catch (error) {
+        } catch (error) {
             console.error('Error during Google user find:', error);
-          }
+        }
     };
     
     const handleLoginError = () => {

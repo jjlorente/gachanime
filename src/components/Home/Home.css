@@ -21,4 +21,7 @@
     height: auto;
     overflow: auto;
     margin-top: 80px;
+    background-color: bisque;
+    max-width: 1200px;
+    width: 100%;
 }
