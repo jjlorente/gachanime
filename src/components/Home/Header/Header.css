@@ -23,23 +23,6 @@
     align-items: center;
 }
 
-.title-header {
-    color: #f8a915;
-    font-size: 2.1rem;
-    letter-spacing: 3px;
-    text-align: center;
-    display: flex;
-    margin-top: -5px;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    transition: ease all .1s;
-}
-
-.title-header:hover h1 {
-    color:#ffb834;
-}
-
 .container-header {
     position: relative;
     max-width: 1200px;
@@ -50,58 +33,73 @@
     margin-left: -140px;
 }
 
+.vertical-nav {
+    position: absolute;
+    background-color: #0F214E;
+    top: 115px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0 0px 10px 0;
+    gap: 1rem;
+    padding: 1rem;
+    overflow-y: auto; /* Usar auto en lugar de scroll */
+    height: fit-content;
+    max-height: calc(100vh - 115px); /* Ajustar la altura máxima según sea necesario */
+    width: auto;
+    box-sizing: border-box;
+}
+
+
+.item-nav-vertical {
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    width: 160px;
+    gap: 1rem;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.item-nav-vertical:hover {
+    background-color: #ffffff33;
+}
 .gachas-container {
     position: absolute;
     right: 0;
     width: fit-content;
-    background-color: rgb(0, 0, 0);
-    padding: 6px 15px;
+    padding: 2px 15px;
     font-size: 1.5rem;
     border-radius: 15px;
-    background-color:#dd9206;
-    border: solid 2px rgba(0, 0, 0, 0.521);
+    border: solid 2px #fea92ab4;
+    background-color: #ffffff10;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     transition: ease all .1s;
     word-spacing: 5px;
     margin-right: 10px;
+    gap: .5rem;
+    font-size: 2rem;
+    color: #FEAA2A;
 }
 
 .gachas-container:hover {
-    background-color:#f3b23b;
+    background-color:#ffffff27;
 }
 
-@media (max-width: 700px) {
-    .gachas-container {
-        position: relative;
-        font-size: 1rem;
-    }
-    .container-header {
-        justify-content: space-between;
-    }
-    .title-header {
-        margin-left: 90px;
-        font-size: 1.5rem;
-        word-spacing: 0px;
-    }
-    .gachas-container {
-        padding: 0px 10px;
-
-    }
-    
-}
-
-.gachas-container span::after {
-    content: " Gachas";
-}
-
-.test {
-    margin-left: 10px;
+.logo-summon {
+    width: 35px;
 }
 
 .logo-menu {
     display: none;
-    width: 25px;
+    width: 35px;
     margin-left: 10px;
     cursor: pointer;
     transition: ease all .2s;
@@ -114,17 +112,31 @@
     background-color: #ffffff3d;
 }
 
-@media (max-width: 450px) {
-    .gachas-container span::after {
-        content: "";
+@media (min-width: 700px) {
+    .logo-menu {
+        display: none;
+    }
+    .vertical-nav {
+        display: none;
     }
 }
 
 @media (max-width: 700px) {
+    .gachas-container {
+        position: relative;
+        font-size: 1.4rem;
+        padding: 5px 11px;
+    }
+    .container-header {
+        justify-content: space-between;
+    }
+    .logo-summon {
+        width: 25px;
+    }
     .title-header {
         word-spacing: 0 !important;
         margin-left: 0px;
-        margin-left: 4px;
+        margin-left: 14px;
     }
     .Header {
         left: 0;
@@ -139,8 +151,77 @@
     }
 }
 
+@media (max-width: 500px) {
+    .gachas-container {
+        position: relative;
+        font-size: 1.1rem;
+        padding: 5px 11px;
+    }
+    .logo-summon {
+        width: 20px;
+    }
+    .title-header {
+        font-size:3rem !important;
+        margin-top: 28px !important;
+    }
+    .vertical-nav {
+        top: 95px !important;
+    }
+}
+@media (max-width: 420px) {
+    .title-header {
+        margin-left: 0px !important;
+        font-size: 2rem !important;
+        margin-top: 20px !important;
+        padding: 0px !important;
+        letter-spacing: 0px !important;
+    }
+    .logo-menu {
+        width: 25px;
+    }
+    .gachas-container {
+        position: relative;
+        font-size: 1rem;
+        padding: 2px 8px;
+    }
+    .vertical-nav {
+        top: 76px !important;
+    }
+
+}
 @media (max-width: 360px) {
     .title-header {
         font-size: 1rem;
     }
+}
+@media (max-height: 550px) {
+    .vertical-nav {
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+    }
+}
+.title-header {
+    font-size: 4rem;
+    padding: 0 10px;
+    color: rgb(255, 170, 42);
+    letter-spacing: 2px;
+    margin-top: 37px;
+}
+/* Estilos personalizados del scrollbar */
+.vertical-nav::-webkit-scrollbar {
+    width: 7px; /* Ancho del scrollbar */
+    margin-left: 10px;
+}
+
+.vertical-nav::-webkit-scrollbar-track {
+    background-color: #ffffffb9; /* Color del fondo del scrollbar */
+}
+
+.vertical-nav::-webkit-scrollbar-thumb {
+    background-color: #224080; /* Color del thumb (parte deslizable del scrollbar) */
+    border-radius: 4px; /* Borde redondeado del thumb */
+}
+
+.vertical-nav::-webkit-scrollbar-thumb:hover {
+    background-color: #476cbd; /* Color del thumb al pasar el cursor */
 }
