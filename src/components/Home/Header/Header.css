@@ -44,9 +44,9 @@
     border-radius: 0 0px 10px 0;
     gap: 1rem;
     padding: 1rem;
-    overflow-y: auto; /* Usar auto en lugar de scroll */
+    overflow-y: auto;
     height: fit-content;
-    max-height: calc(100vh - 115px); /* Ajustar la altura máxima según sea necesario */
+    max-height: calc(100vh - 115px);
     width: auto;
     box-sizing: border-box;
 }
