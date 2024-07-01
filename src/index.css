@@ -21,5 +21,6 @@ html, body {
   flex-direction: column;
   font-weight: 600;
   box-sizing: border-box;
-
+  overflow-x: hidden;
+  overflow: auto;
 }

@@ -2,10 +2,8 @@ import './Main.css'
 
 export const Main = () => {
   return (
-    <div className="section">
-      <div className="Main">
-        Main
-      </div>
+    <div className="Main">
+      <div className='section'>HOLAAA</div>
     </div>
   )
 }

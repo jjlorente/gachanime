@@ -1,8 +1,18 @@
+/* Main.css */
 .Main {
-    background-color: red;
+    display: flex;
+    height: auto;
+    max-height: calc(100vh - 70px);
+    overflow: auto;
+    background-color: rgb(202, 141, 65);
     max-width: 1200px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.section {
+    width: 100%;
+    background-color: rgb(206, 206, 206);
+    height: fit-content;
 }
