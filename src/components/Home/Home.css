@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../home/anime-sky.jpg");
 
     background-size: cover;
     background-repeat: no-repeat;

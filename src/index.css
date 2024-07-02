@@ -1,26 +1,10 @@
-#root {
-  color: white;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-
-  height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../background-gachanime.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  font-weight: 600;
-  box-sizing: border-box;
-  overflow-x: hidden;
+body {
   overflow: auto;
+  overflow-x: hidden;
+  background-color: #0f214eee;
 }

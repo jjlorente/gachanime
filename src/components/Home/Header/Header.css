@@ -5,14 +5,13 @@
     align-items: center;
     height: 70px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #0f214e;
+    background-color: #051641;
     position: fixed;
     top: 0;
     left: -100px;
     z-index: 1000;
     width: 100%;
-    margin-left: 170px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.6);
+    margin-left: 168.4px;
     box-sizing: border-box;
 }
 
@@ -35,8 +34,8 @@
 
 .vertical-nav {
     position: absolute;
-    background-color: #0F214E;
-    top: 115px;
+    background-color: #051641;
+    top: 70px;
     display: block;
     justify-content: center;
     align-items: center;
@@ -94,7 +93,7 @@
 }
 
 .logo-summon {
-    width: 35px;
+    width: 30px;
 }
 
 .logo-menu {
@@ -135,8 +134,6 @@
     }
     .title-header {
         word-spacing: 0 !important;
-        margin-left: 0px;
-        margin-left: 14px;
     }
     .Header {
         left: 0;
@@ -162,17 +159,14 @@
     }
     .title-header {
         font-size:3rem !important;
-        margin-top: 28px !important;
     }
     .vertical-nav {
-        top: 95px !important;
+        top: 60px !important;
     }
 }
 @media (max-width: 420px) {
     .title-header {
-        margin-left: 0px !important;
         font-size: 2rem !important;
-        margin-top: 20px !important;
         padding: 0px !important;
         letter-spacing: 0px !important;
     }
@@ -185,7 +179,7 @@
         padding: 2px 8px;
     }
     .vertical-nav {
-        top: 76px !important;
+        top: 50px !important;
     }
 
 }
@@ -205,23 +199,23 @@
     padding: 0 10px;
     color: rgb(255, 170, 42);
     letter-spacing: 2px;
-    margin-top: 37px;
+    margin-top: -5px;
 }
-/* Estilos personalizados del scrollbar */
+
 .vertical-nav::-webkit-scrollbar {
-    width: 7px; /* Ancho del scrollbar */
+    width: 7px;
     margin-left: 10px;
 }
 
 .vertical-nav::-webkit-scrollbar-track {
-    background-color: #ffffffb9; /* Color del fondo del scrollbar */
+    background-color: #ffffffb9;
 }
 
 .vertical-nav::-webkit-scrollbar-thumb {
-    background-color: #224080; /* Color del thumb (parte deslizable del scrollbar) */
-    border-radius: 4px; /* Borde redondeado del thumb */
+    background-color: #224080;
+    border-radius: 4px;
 }
 
 .vertical-nav::-webkit-scrollbar-thumb:hover {
-    background-color: #476cbd; /* Color del thumb al pasar el cursor */
+    background-color: #476cbd;
 }

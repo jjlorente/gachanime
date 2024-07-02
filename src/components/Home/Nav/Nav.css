@@ -5,7 +5,7 @@
     width: 70px;
     justify-content: space-between;
     flex-direction: column;
-    background-color: #0F214E;
+    background-color: #051641;
     box-sizing: border-box;
     padding: 10px;
     transition: all ease-in-out .05s;
@@ -13,8 +13,10 @@
     position: fixed;
     left: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 1000; 
+    color: #ffffff;
 }   
+
 
 .nav-items{
     display: flex;
@@ -149,7 +151,7 @@
     font-style: normal;
     background-color: #df3131c0;
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
     display: flex;
     margin-top: 10px;
