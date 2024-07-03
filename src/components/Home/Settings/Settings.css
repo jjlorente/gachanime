@@ -1,0 +1,22 @@
+.Settings {
+    display: flex;
+    height: auto;
+    max-height: calc(100vh - 70px);
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    padding-right: 35px;
+    box-sizing: border-box;
+}
+
+.section {
+    width: 100%;
+    background-color: rgb(206, 206, 206);
+    height: auto;
+}
+
+@media (max-width: 700px) {
+    .Settings {
+        padding-right: 25px;
+    }
+}

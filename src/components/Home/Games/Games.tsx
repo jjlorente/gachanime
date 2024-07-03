@@ -1,7 +1,9 @@
-
+import './Games.css'
 
 export const Games = () => {
   return (
-    <div className="section">Games</div>
+    <div className="Games">
+      <div className='section'>JUEGOS</div>
+    </div>
   )
 }

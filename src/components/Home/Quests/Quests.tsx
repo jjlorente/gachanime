@@ -1,6 +1,8 @@
-
+import './Quests.css'
 export const Quests = () => {
   return (
-    <div className="section">quests</div>
+    <div className="Quests">
+      <div className='section'>MISIONES</div>
+    </div>
   )
 }
