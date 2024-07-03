@@ -1,4 +1,5 @@
 import './Quests.css'
+
 export const Quests = () => {
   return (
     <div className="Quests">

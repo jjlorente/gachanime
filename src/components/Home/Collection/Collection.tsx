@@ -1,4 +1,5 @@
 import './Collection.css'
+
 export const Collection = () => {
   return (
     <div className="Collection">
