@@ -4,6 +4,7 @@ export const Collection = () => {
   return (
     <div className="Collection">
       <div className='section'>COLECCIÓN</div>
+      <div className='section'>TEST DOUBLE</div>
     </div>
   )
 }
