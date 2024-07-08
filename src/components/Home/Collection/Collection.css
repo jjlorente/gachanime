@@ -1,6 +1,7 @@
 .Collection {
     display: flex;
-    height: auto;
+    height: fit-content;
+    background-color: aquamarine;
     max-height: calc(100vh - 70px);
     max-width: 1200px;
     width: 100%;
@@ -11,8 +12,8 @@
 
 .section {
     width: 100%;
-    background-color: rgb(206, 206, 206);
-    height: auto;
+    background-color: rgb(136, 136, 136);
+    height: fit-content;
 }
 
 @media (max-width: 700px) {

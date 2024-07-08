@@ -44,7 +44,7 @@ export const Summon = () => {
       <div className='section'>
         {imgs.length > 0 ? (
           imgs.map((img: any, index: any) => (
-            <img key={index} src={img.base64_image} alt={`Imagen ${index + 1}`} />
+            <img className='card' key={index} src={img.base64_image} alt={`Imagen ${index + 1}`} />
           ))
         ) : (
           <p>Cargando imágenes...</p>

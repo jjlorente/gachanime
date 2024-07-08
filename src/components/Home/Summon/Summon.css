@@ -1,6 +1,6 @@
-/* Main.css */
 .Summon {
     display: flex;
+    flex-wrap: wrap; /* Permite que los elementos hijos se ajusten en varias líneas si es necesario */
     height: auto;
     max-height: calc(100vh - 70px);
     max-width: 1200px;
@@ -8,12 +8,23 @@
     padding: 20px;
     padding-right: 35px;
     box-sizing: border-box;
+    overflow: auto; /* Permite que el contenido adicional sea desplazable */
 }
 
 .section {
     width: 100%;
     background-color: rgb(206, 206, 206);
+    height: fit-content;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos hijos se ajusten en varias líneas si es necesario */
+}
+
+.card {
+    width: 100%;
+    max-width: 300px;
     height: auto;
+    margin: 5px;
 }
 
 @media (max-width: 700px) {
