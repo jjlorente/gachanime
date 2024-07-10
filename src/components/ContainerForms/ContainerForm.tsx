@@ -4,6 +4,7 @@ import "./ContainerForm.css"
 export const ContainerForm = () => {
   return (
     <div className='container-app'>
+      <div className='background-login-img'></div>
       <div className='container-title'>
           <h1 className="title jaro-regular">
             GACHANIME
