@@ -8,7 +8,7 @@
     padding: 20px;
     padding-right: 35px;
     box-sizing: border-box;
-    overflow: auto; /* Permite que el contenido adicional sea desplazable */
+    overflow: auto;
 }
 
 .section {
@@ -17,7 +17,7 @@
     height: fit-content;
     position: relative;
     display: flex;
-    flex-wrap: wrap; /* Permite que los elementos hijos se ajusten en varias líneas si es necesario */
+    flex-wrap: wrap;
 }
 
 .card {

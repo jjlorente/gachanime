@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import './Summon.css'
 
 export const Summon = () => {
@@ -44,10 +44,10 @@ export const Summon = () => {
       <div className='section'>
         {imgs.length > 0 ? (
           imgs.map((img: any, index: any) => (
-            <img className='card' key={index} src={img.base64_image} alt={`Imagen ${index + 1}`} />
+            <img style={{backgroundColor:"white", borderRadius:"10px"}} className='card' key={index} src={img.base64_image} alt={`Imagen ${index + 1}`} />
           ))
         ) : (
-          <p>Cargando imágenes...</p>
+          <p>Cargando cartas...</p>
         )}
       </div>
     </div>

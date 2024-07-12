@@ -4,17 +4,13 @@
   width: 100vw; 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: normal;
   background-image: url('./home/image.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   color: white;
+  overflow: auto;
 }
 
-@media (max-height: 800px) {
-  .App {
-    align-items: normal;
-  }
-}

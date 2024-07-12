@@ -8,7 +8,6 @@
     background-color: #051641;
     box-sizing: border-box;
     padding: 10px;
-    transition: all ease-in-out .1s;
     gap: 2rem;
     position: fixed;
     left: 0;
@@ -48,7 +47,6 @@
     box-sizing: border-box;
     padding: 5px 10px;
     gap: 1rem;
-    transition: ease all .1s;
 }
 
 .nav-items-active > .nav-section {
@@ -107,8 +105,8 @@
 
 .span-section-nav-active {
     display: block;
-    animation: vanish .2s;
-    font-size: 1.3rem;
+    animation: vanish .3s;
+    font-size: 1.2rem;
 }
 
 .span-section-nav-inactive {
@@ -164,7 +162,6 @@
     outline-style: none;
     border: none;
     gap: 1rem;
-    transition: ease all .1s;
     border-radius: 5px;
 }
 
@@ -181,7 +178,7 @@
 }
 .span-active-logout {
     display: block;
-    animation: vanish .1s;
+    animation: vanish .3s;
 }
 
 
@@ -193,7 +190,7 @@
     }
     to {
         display: block;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         opacity: 1;
     }
 }
@@ -232,7 +229,7 @@
     gap: 1rem;
     box-sizing: border-box;
     padding: 5px 10px;
-    transition: ease all .1s;
+    transition: ease all .3s;
     margin-bottom:1.8rem;
     border-radius: 5px;
     cursor: pointer;

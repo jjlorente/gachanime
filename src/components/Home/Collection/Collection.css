@@ -1,20 +1,114 @@
 .Collection {
     display: flex;
     height: fit-content;
-    background-color: aquamarine;
-    max-height: calc(100vh - 70px);
     max-width: 1200px;
     width: 100%;
     padding: 20px;
     padding-right: 35px;
     box-sizing: border-box;
+    overflow: auto;
+    max-height: calc(100vh - 70px);
 }
 
-.section {
+.filter {
     width: 100%;
-    background-color: rgb(136, 136, 136);
-    height: fit-content;
+    height: 60px;
+    background-color: #01081A;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 5px;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
+.container-select {
+    display: flex;
+    gap: .5rem;
+    flex-direction: row;
+}
+.section-collection {
+    width: 100%;
+    height: fit-content;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cards {
+    width: 100%;
+    background-color: #01081a;
+    box-sizing: border-box;
+    padding: 10px;
+    height: fit-content;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-sizing: border-box;
+}
+
+.container-card {
+    width: 100%;
+    max-width: 173px;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.rarity-card {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size:1.5rem;
+    left: 2px;
+    top: 2px;
+    border-radius: 0 0 5px 0;
+}
+
+.name-card {
+    width: 99%;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    font-size: 1.4rem;
+    box-sizing: border-box;
+    padding: 5px 0;
+}
+
+.card-collection {
+    width: 100%;
+    max-width: 171px;
+    height: 280px;
+    background-color: rgba(255, 255, 255, 0.979);
+    border-radius: 5px 5px 0 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.card-user {
+    transition: ease all .1s;
+}
+
+.card-user:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.card-not-user:hover {
+    cursor: not-allowed;
+}
+
+.card-not-user {
+    filter: grayscale(100%);
+}
+  
 
 @media (max-width: 700px) {
     .Collection {
