@@ -65,9 +65,15 @@ export const Collection = () => {
 
         const rarityOrder = ["S+", "S", "A", "B"];
         data.sort((a:any, b:any) => {
-          return rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity);
+          const rarityComparison = rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity);
+          
+          if (rarityComparison === 0) {
+            return b.power - a.power ;
+          }
+          
+          return rarityComparison;
         });
-        
+
         setImgs(data)
         setImgsSelected(data)
 
@@ -93,7 +99,9 @@ export const Collection = () => {
   };
 
   const userContainCard = (_id: string) => {
-    return userCards.some((card: any) => card === _id);
+    if(userCards) {
+      return userCards.some((card: any) => card === _id);
+    }
   };
 
   const getBackgroundColor = (rarity:any) => {
@@ -112,7 +120,7 @@ export const Collection = () => {
   return (
     <div className="Collection">
       <div className='section-collection'>
-        <CollectionSelect imgsSelected={imgsSelected} setImgsSelected={setImgsSelected} imgs={imgs} userCards={userCards}/>
+        <CollectionSelect imgsSelected={imgsSelected} setImgsSelected={setImgsSelected} imgs={imgs} userCards={userCards} setCurrentPage={setCurrentPage}/>
         <div className="cards-container">
           <div className="cards">
             {currentCards.length > 0 ? (

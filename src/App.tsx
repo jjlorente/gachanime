@@ -48,7 +48,7 @@ function App() {
   }, []);
 
   return (
-    <div className='App jaro-regular'>
+    <div className='App jaro-regular' style={{backgroundImage:"url('./home/image.jpg')"}}>
       <Routes>
         <Route path="auth" element={<ContainerForm />}>
           <Route index element={<Login />} />

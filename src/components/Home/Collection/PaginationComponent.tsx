@@ -19,7 +19,6 @@ export const PaginationComponent = (props: any) => {
                 count={pages.length} 
                 onChange={handlePageChange} 
                 className="pagination"
-
             />
         </Stack>
     )

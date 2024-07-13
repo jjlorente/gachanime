@@ -9,19 +9,20 @@ const CardFilter = (props:any) => {
 
   const filterImages = (anime:any, collection:any, rarity:any, imgs:any) => {
     let filteredImages = imgs;
+    props.setCurrentPage(1);
 
     if (anime) {
       filteredImages = filteredImages.filter((img:any) => img.anime_name === anime);
     }
-    console.log(rarity)
+
     if(rarity) {
       filteredImages = filteredImages.filter((img:any) => img.rarity === rarity);
     } 
 
     if (collection === 'Cartas obtenidas') {
-      filteredImages = filteredImages.filter((img:any) => props.userCards.includes(img._id));
+      filteredImages = filteredImages.filter((img:any) => props.userCards?.includes(img._id)) ;
     } else if (collection === 'Cartas no obtenidas') {
-      filteredImages = filteredImages.filter((img:any) => !props.userCards.includes(img._id));
+      filteredImages = filteredImages.filter((img:any) => !props.userCards?.includes(img._id));
     }
 
     return filteredImages;

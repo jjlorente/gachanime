@@ -8,6 +8,7 @@
     box-sizing: border-box;
     overflow: auto;
     max-height: calc(100vh - 70px);
+
 }
 
 .container-select {
@@ -27,7 +28,7 @@
 
 .cards-container {
     width: 100%;
-    background-color: #0c2461;
+    background-color: #0e2e85;
     box-sizing: border-box;
     padding: 25px 10px;
     height: auto;
@@ -43,10 +44,10 @@
 .cards {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
     box-sizing: border-box;
 }
 
@@ -89,7 +90,6 @@
     top: -24px;
     font-size: 1.15rem;
     padding: 0 24px;
-    z-index: 5;
     box-sizing: border-box;
     clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
     border-top: 2px solid rgba(0, 0, 0, 0.295);
@@ -117,7 +117,7 @@
 }
 
 .container-name-card {
-    width: 100%;
+    width: 101%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -126,16 +126,17 @@
     box-sizing: border-box;
     padding: 5px 0;
     position: absolute;
-    bottom: 0;
-    border-top: 2px solid rgba(0, 0, 0, 0.329);
+    bottom: -1px;
+    left: -1px;
+    border: 2px solid rgba(0, 0, 0, 0.329);
 }
 
 .card-user {
-    transition: ease all .1s;
+    transition: ease all .14s;
 }
 
 .card-user:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
     cursor: pointer;
     z-index: 1;
 }
@@ -145,7 +146,7 @@
 }
 
 .card-not-user {  
-    filter: grayscale(100%) blur(2px);
+    filter: grayscale(100%) blur(3px);
 }
   
 

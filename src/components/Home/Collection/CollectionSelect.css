@@ -1,6 +1,6 @@
 .filter {
     width: 100%;
-    background-color: #0c2461;
+    background-color: #0e2e85;
     padding: 10px;
     display: flex;
     box-sizing: border-box;
@@ -23,11 +23,19 @@
     font-weight: 400 !important;
     font-style: normal !important;
     font-size: 1.2rem;
-    border-radius: 8px;
-    background-color: #3c86e7;
+    background-color: #01A4FF;
     color: white;
     text-align: center;
     display: flex;
+    border: none;
+}
+
+.select-anime:hover {
+    cursor: pointer;
+}
+
+.select-option:checked {
+    cursor: pointer !important;
 }
 
 .select-anime option:checked {
@@ -42,13 +50,13 @@
     font-style: normal !important;
     padding: 2px 15px;
     font-size: 1.2rem;
-    background-color: #3c86e7;
+    background-color: #FEAA2A;
     color: white;
-    border-radius: 8px;
     transition: ease all .3s;
+    border:none;
 }
 
 .clear-filter:hover{
-    background-color: #71acfa;
+    background-color: #ffc979;
     cursor: pointer;
 }

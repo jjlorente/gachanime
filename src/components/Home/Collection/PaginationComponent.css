@@ -4,10 +4,19 @@
 
 svg {
     color: white;
+    font-family: "Jaro", sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
 }
 
 .MuiButtonBase-root {
     color: white !important;
+    font-family: "Jaro", sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-size: 1.2rem !important;
 }
 .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
     background-color: rgb(8, 133, 250) !important;
