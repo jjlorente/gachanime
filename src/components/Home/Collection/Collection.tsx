@@ -1,11 +1,19 @@
 import './Collection.css'
 import {useEffect, useState} from 'react'
 import CollectionSelect from './CollectionSelect'
+import { PaginationComponent } from './PaginationComponent';
 
 export const Collection = () => {
   const [imgs, setImgs] = useState<any>([]);
   const [imgsSelected, setImgsSelected] = useState<any>([]);
   const [userCards, setUserCards] = useState<any>([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage, setCardsPerPage] = useState(10);
+
+  const lastPostIndex = currentPage * cardsPerPage;
+  const firstPostIndex = lastPostIndex - cardsPerPage;
+  const currentCards = imgsSelected.slice(firstPostIndex,lastPostIndex);
 
   const findCards = async () => {
     try {
@@ -54,8 +62,15 @@ export const Collection = () => {
     const fetchData = async () => {
       try {
         const data = await findCards();
+
+        const rarityOrder = ["S+", "S", "A", "B"];
+        data.sort((a:any, b:any) => {
+          return rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity);
+        });
+        
         setImgs(data)
         setImgsSelected(data)
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -67,11 +82,11 @@ export const Collection = () => {
   const getBorderColor = (rarity: string): string => {
     switch (rarity) {
       case "S":
-        return "#00a4ff 3px solid";
+        return "3px solid #00a4ff";
       case "A":
-        return "#c74cdf 3px solid";
+        return "3px solid #c74cdf";
       case "S+":
-        return "#ff3939 3px solid";
+        return "3px solid #ff3939";
       default:
         return "gray 3px solid";
     }
@@ -81,62 +96,89 @@ export const Collection = () => {
     return userCards.some((card: any) => card === _id);
   };
 
+  const getBackgroundColor = (rarity:any) => {
+    switch (rarity) {
+      case "S+":
+        return "#ff3939";
+      case "S":
+        return "#00a4ff";
+      case "A":
+        return "#c74cdf";
+      default:
+        return "gray";
+    }
+  };
+
   return (
     <div className="Collection">
       <div className='section-collection'>
         <CollectionSelect imgsSelected={imgsSelected} setImgsSelected={setImgsSelected} imgs={imgs} userCards={userCards}/>
-        <div className="cards">
-          {imgsSelected.length > 0 ? (
-            imgsSelected.map((img:any, index:any) => {
-              const borderColor = getBorderColor(img.rarity);
-              const userCard = userContainCard(img._id);
-              
-              const cardClassName = userCard
-                ? "card-user"
-                : "card-not-user";
+        <div className="cards-container">
+          <div className="cards">
+            {currentCards.length > 0 ? (
+              currentCards.map((img:any, index:any) => {
+                const borderColor = getBorderColor(img.rarity);
+                const userCard = userContainCard(img._id);
+                const backgroundColor = getBackgroundColor(img.rarity);
+                const cardClassName = userCard
+                  ? "card-user"
+                  : "card-not-user";
 
-              return (
-                <div key={index+"container-card"} className={'container-card '+ cardClassName}>
-                  <img 
-                    key={index} 
-                    src={img.base64_image} 
-                    alt={`Imagen ${index + 1}`} 
-                    style={{ border: borderColor }}
-                    className={"card-collection "}
-                  />
-                  <span 
-                    style={{
-                      backgroundColor: 
-                        img.rarity === "S+" ? "#ff3939" :
-                        img.rarity === "S" ? "#00a4ff" :
-                        img.rarity === "A" ? "#c74cdf" :
-                        "gray"
-                    }}
-                    className={'rarity-card'}
-                    key={index+"rarity-span"}
-                  >
-                    {img.rarity}
-                  </span>
-
-                  <span 
-                    style={{
-                      backgroundColor: 
-                        img.rarity === "S+" ? "#ff3939" :
-                        img.rarity === "S" ? "#00a4ff" :
-                        img.rarity === "A" ? "#c74cdf" :
-                        "gray"
-                    }}
-                    key={index+"name-span"} 
-                    className='name-card'
+                return (
+                  <div key={index+"container-card"} style={{ border: borderColor }} className={'container-card '+ cardClassName}>
+                    <img 
+                      key={index} 
+                      src={img.base64_image} 
+                      alt={`Imagen ${index + 1}`} 
+                      className={"card-collection "}
+                    />
+                    <span 
+                      style={{ backgroundColor }}
+                      className={'rarity-card'}
+                      key={index+"rarity-span"}
                     >
-                      {img.name}
-                  </span>
-                </div>
-              );
-            })
-          ) : (
-            <p>No hay cartas...</p>
-          )}
+                      {img.rarity}
+                    </span>
+
+                    <span 
+                      style={{ backgroundColor }}
+                      className={'power-card'}
+                      key={index+"power-span"}
+                    >
+                      {img.power} P
+                    </span>
+
+                    <div 
+                      style={{ backgroundColor }}
+                      className='container-name-card'
+                    >  
+                      <span 
+                        style={{ backgroundColor }}
+                        key={index+"name-span"} 
+                        className='name-card'
+                        >
+                          {img.name}
+                      </span>
+                      <span 
+                        key={index+"anime-span"} 
+                        className='anime-name-card'
+                        >
+                          {img.anime_name}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p>No hay cartas...</p>
+            )}     
+          </div>
+          <PaginationComponent 
+            totalPosts={imgsSelected.length} 
+            cardsPerPage={cardsPerPage}
+            setCurrentPage={setCurrentPage}
+          />
+          
         </div>
       </div>
     </div>

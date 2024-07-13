@@ -1,0 +1,14 @@
+.pagination {
+    color: white;
+}
+
+svg {
+    color: white;
+}
+
+.MuiButtonBase-root {
+    color: white !important;
+}
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: rgb(8, 133, 250) !important;
+}
