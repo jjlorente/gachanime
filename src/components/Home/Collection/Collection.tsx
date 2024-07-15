@@ -107,7 +107,7 @@ export const Collection = () => {
   const getBackgroundColor = (rarity:any) => {
     switch (rarity) {
       case "S+":
-        return "#ff3939";
+        return "#FF3939";
       case "S":
         return "#00a4ff";
       case "A":
@@ -116,6 +116,7 @@ export const Collection = () => {
         return "gray";
     }
   };
+  
 
   return (
     <div className="Collection">
@@ -141,7 +142,7 @@ export const Collection = () => {
                       className={"card-collection "}
                     />
                     <span 
-                      style={{ backgroundColor }}
+                      style={{ background: backgroundColor }}
                       className={'rarity-card'}
                       key={index+"rarity-span"}
                     >
@@ -149,7 +150,7 @@ export const Collection = () => {
                     </span>
 
                     <span 
-                      style={{ backgroundColor }}
+                      style={{ background: backgroundColor }}
                       className={'power-card'}
                       key={index+"power-span"}
                     >
@@ -157,11 +158,11 @@ export const Collection = () => {
                     </span>
 
                     <div 
-                      style={{ backgroundColor }}
+                      style={{ background: backgroundColor }}
                       className='container-name-card'
                     >  
                       <span 
-                        style={{ backgroundColor }}
+                        style={{ background: backgroundColor }}
                         key={index+"name-span"} 
                         className='name-card'
                         >

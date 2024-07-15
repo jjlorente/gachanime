@@ -1,55 +1,84 @@
-import {useEffect, useState} from 'react'
-import './Summon.css'
+import { useEffect, useState } from 'react';
+import { PaginationComponent } from '../Collection/PaginationComponent';
+import './Summon.css';
 
 export const Summon = () => {
-  const [imgs, setImgs] = useState<any>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
 
-  const findCards = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/cards/findAll`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      });
-
-      if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Unknown error');
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error:', error);
-      throw error;
+  const lastPostIndex = currentPage * page;
+  const firstPostIndex = lastPostIndex - page;
+  
+  const sections = [
+    {
+      type:"normal",
+      title: 'INVOCACIÓN GENERAL',
+      backgroundImage:"url('../pp.png')",
+      typeTitle: 'DESEO ESTÁNDAR',
+      descriptions: [
+        'Cada 10 deseos tienes garantizada una carta de rareza A o superior.',
+        'Los deseos estándar no tienen límite.'
+      ]
+    },
+    {
+      type:"special",
+      title: 'INVOCACIÓN ESPECIAL',
+      backgroundImage:"url('../bg-banner.jpg')",
+      typeTitle: 'DESEO ESPECIAL',
+      descriptions: [
+        'Cada 10 deseos tienes garantizada una carta de rareza A o superior del anime especial del banner!',
+        'Los deseos especiales tienen límite de 100 deseos.'
+      ]
     }
-  };
+  ];
 
-  useEffect(()=> {
-    const fetchData = async () => {
-      try {
-        const data = await findCards();
-        setImgs(data)
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  },[])
+  const currentSection = sections.slice(firstPostIndex,lastPostIndex);
 
   return (
     <div className="Summon">
-      <div className='section'>
-        {imgs.length > 0 ? (
-          imgs.map((img: any, index: any) => (
-            <img style={{backgroundColor:"white", borderRadius:"10px"}} className='card' key={index} src={img.base64_image} alt={`Imagen ${index + 1}`} />
-          ))
-        ) : (
-          <p>Cargando cartas...</p>
-        )}
-      </div>
+      {currentSection.length > 0 ? (
+        currentSection.map((section:any, index:any) => {
+          return (
+            <div className='section-summon' style={{ backgroundImage: section.backgroundImage}}>
+
+              <span className='title-summon'>{section.title}</span>
+
+              <div className='container-type-summon'>
+                <span className='title-type'>{section.typeTitle}</span>
+                <span className='description-type'>{section.descriptions[0]}</span>
+                <span className='description-type'>{section.descriptions[1]}</span>
+              </div>
+
+              <div className='container-gachas'>
+                <div className='gacha-button-container'>
+                  <div className='t'>
+                    <img src='../home/summon-o.png' alt="Logo Summon" className='logo-summon-gacha' />
+                    <span>x</span>
+                    <span>10</span>
+                  </div>
+                </div>
+                <div className='gacha-button-container'>
+                  <div className='t'>
+                    <img src='../home/summon-o.png' alt="Logo Summon" className='logo-summon-gacha' />
+                    <span>x</span>
+                    <span>100</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          );
+        })
+      ) : (
+        <p>No hay banners...</p>
+      )} 
+      {/* <div className='container-pagination'>
+        <PaginationComponent
+          totalPosts={sections.length} 
+          cardsPerPage={page}
+          setCurrentPage={setCurrentPage} 
+        />
+      </div> */}
     </div>
-  )
-}
+  );
+};

@@ -1,14 +1,14 @@
 .filter {
     width: 100%;
     background-color: #0e2e85;
-    padding: 10px;
+    padding: 10px 15px;
     display: flex;
     box-sizing: border-box;
     border-radius: 5px;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     flex-wrap: wrap;
     border: 3px solid rgba(0, 0, 0, 0.486);
 }
@@ -25,38 +25,90 @@
     font-size: 1.2rem;
     background-color: #01A4FF;
     color: white;
-    text-align: center;
     display: flex;
     border: none;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid #071845;
+    border-radius: 5px;
+    transition: ease all .2s;
 }
 
 .select-anime:hover {
+    background-color: #0083ca;
     cursor: pointer;
 }
 
-.select-option:checked {
+option:checked {
     cursor: pointer !important;
 }
 
 .select-anime option:checked {
-    background-color: #002442 !important;
+    background-color: #005296 !important;
     color: white;
 }
 
-.clear-filter{
+.search-input {
+    font-size: 1rem;
+    box-sizing: border-box;
     font-family: "Jaro", sans-serif !important;
     font-optical-sizing: auto !important;
     font-weight: 400 !important;
     font-style: normal !important;
-    padding: 2px 15px;
+    border: 2px solid #01A4FF;
+    background-color: #051641;
     font-size: 1.2rem;
-    background-color: #FEAA2A;
-    color: white;
-    transition: ease all .3s;
-    border:none;
+    transition: ease all .2s;
+    height: 40px;
+    padding: 5px 15px;
+    text-align: center;
+    width: fit-content;
 }
 
-.clear-filter:hover{
-    background-color: #ffc979;
+.search-input:focus {
+    border: 2px solid #fdfdfd;
+    background-color: #00509b;
+}
+.search-input:hover {
+    border: 2px solid #d4d4d4;
+}
+
+.search-button {
+    height: 100%;
+    border: 2px solid #071845;
+    background-color: #01A4FF;
+    padding: 8px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: ease all .2s;
+}
+
+.container-search-input {
+    height: 40px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-clear {
+    background-color: #051641;
+    border: none;
+    height: 40px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+    border: 2px solid #01A4FF;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: ease all .3s;
+}
+
+.button-clear:hover {
     cursor: pointer;
+    background-color: #122a64;
+    border: 2px solid #ffffffc4;
 }

@@ -136,9 +136,9 @@
 }
 
 .card-user:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
     cursor: pointer;
-    z-index: 1;
+    z-index: 1000;
 }
 
 .card-not-user:hover {

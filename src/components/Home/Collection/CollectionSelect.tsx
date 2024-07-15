@@ -5,7 +5,9 @@ const CardFilter = (props:any) => {
   const [selectedAnime, setSelectedAnime] = useState('');
   const [selectedCol, setSelectedCol] = useState('');
   const [selectedRarity, setSelectedRarity] = useState('');
-  const [animeNames, setAnimeNames] = useState(['Frieren: Beyond Journeys End', 'One Piece']);
+  const [nameCard, setNameCard] = useState('');
+
+  const [animeNames, setAnimeNames] = useState<string[]>([]);
 
   const filterImages = (anime:any, collection:any, rarity:any, imgs:any) => {
     let filteredImages = imgs;
@@ -25,6 +27,13 @@ const CardFilter = (props:any) => {
       filteredImages = filteredImages.filter((img:any) => !props.userCards?.includes(img._id));
     }
 
+    if (nameCard) {
+      filteredImages = filteredImages.filter((img:any) => {
+        let name = img.name.toLowerCase();
+        return name.includes(nameCard.toLowerCase());
+      });
+    }
+    
     return filteredImages;
   };
 
@@ -50,23 +59,44 @@ const CardFilter = (props:any) => {
 
     const filteredImages = filterImages(value, selectedCol, selectedRarity, props.imgs);
     props.setImgsSelected(filteredImages);
+  }; 
+
+  const handleChangeCardName = (event:any) => {
+    const { value } = event.target;
+    const filteredValue = value.replace(/[^a-zA-Z0-9]/g, '');
+    setNameCard(filteredValue);
   };
 
-  const clearAllValues = () => {
-    setSelectedAnime('');
-    setSelectedCol('');
-    setSelectedRarity('');
+  const handleClickClearAll = () => {
+    setSelectedAnime("")
+    setSelectedCol("")
+    setSelectedRarity("")
+    setNameCard("")
   };
 
   useEffect(() => {
     const filteredImages = filterImages(selectedAnime, selectedCol, selectedRarity, props.imgs);
     props.setImgsSelected(filteredImages);
+  }, [nameCard]);
+
+  useEffect(() => {
+    const filteredImages = filterImages(selectedAnime, selectedCol, selectedRarity, props.imgs);
+
+    if (props.imgs) {
+      const newAnimeNamesSet = new Set(animeNames);
+      props.imgs.forEach((img:any) => {
+        newAnimeNamesSet.add(img.anime_name);
+      });
+      setAnimeNames(Array.from(newAnimeNamesSet));
+    }
+    
+    props.setImgsSelected(filteredImages);
+
   }, [selectedAnime, selectedCol, selectedRarity, props.imgs]);
 
   return (
     <div className="filter">
       <div className='container-select'>
-        <span className='title-select-anime'>Anime:</span>
         <div>
           <select className='select-anime' value={selectedAnime} onChange={handleAnimeChange}>
             <option className='select-option' value="">Todos los animes</option>
@@ -77,7 +107,6 @@ const CardFilter = (props:any) => {
         </div>
       </div>
       <div className='container-select'>
-        <span className='title-select-anime'>Colección:</span>
         <select className='select-anime' value={selectedCol} onChange={handleCollectionChange}>
           <option className='select-option' value="Todas las cartas">Todas las cartas</option>
           <option className='select-option' value="Cartas obtenidas">Cartas obtenidas</option>
@@ -85,7 +114,6 @@ const CardFilter = (props:any) => {
         </select>
       </div>
       <div className='container-select'>
-        <span className='title-select-anime'>Rareza:</span>
         <select className='select-anime' value={selectedRarity} onChange={handleRarityChange}>
           <option className='select-option' value="">Todas las rarezas</option>
           <option className='select-option' value="S+">S+</option>
@@ -94,7 +122,8 @@ const CardFilter = (props:any) => {
           <option className='select-option' value="B">B</option>
         </select>
       </div>
-      <button className='clear-filter' onClick={clearAllValues}>Limpiar filtro</button>
+      <input className='search-input' type="text" placeholder='Nombre de la carta...' onChange={handleChangeCardName} value={nameCard}></input>
+      <button className='button-clear' onClick={handleClickClearAll}><img src='../paper.png'/></button>
     </div>
   );
 };
