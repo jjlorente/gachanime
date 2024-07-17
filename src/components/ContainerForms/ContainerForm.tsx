@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import "./ContainerForm.css"
 
-export const ContainerForm = () => {
+export const ContainerForm = (props:any) => {
   return (
     <div className='container-app'>
       <div className='background-login-img'></div>

@@ -1,18 +1,30 @@
 import './Home.css'
 import { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Nav } from './Nav/Nav';
 import { Header } from './Header/Header';
 import { findGacha } from '../../services/gacha';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 export const Home = () => {
 
   const [_id, set_Id] = useState<string>('');
   const [googleAccount, setGoogleAccount] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>();
   const [userGachas, setUserGachas] = useState<any>(0);
-  const [activeIndex, setActiveIndex] = useState<any>("main");
+  const [userThrows, setUserThrows] = useState<any>(0);
 
+  const [activeIndex, setActiveIndex] = useState<any>("main");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname;
+    const parts = path.split('/'); // Divide la ruta por '/'
+    const lastPart = parts[parts.length - 1]; 
+    setActiveIndex(lastPart)
+  }, [location])
+
 
   useEffect(() => {
     if(localStorage.getItem("_id")) {
@@ -32,7 +44,7 @@ export const Home = () => {
   useEffect(() => {
     const idUser = localStorage.getItem("_id");
     if (idUser) {
-      getGachas(idUser);
+      getGachasAndThrows(idUser);
       set_Id(idUser);
       fetch(`http://localhost:3000/api/users/findById?id=${idUser}`, {
         method: 'GET',
@@ -51,12 +63,13 @@ export const Home = () => {
         console.error('Error:', error);
       });
     }
-  }, []);
+  }, [activeIndex]);
 
-  const getGachas = async (userid: string) => {
+  const getGachasAndThrows = async (userid: string) => {
     const dataGacha = await findGacha(userid);
     if (dataGacha) {
       setUserGachas(dataGacha.gachas)
+      setUserThrows(dataGacha.throws)
     }
   }
 

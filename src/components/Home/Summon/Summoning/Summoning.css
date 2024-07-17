@@ -1,0 +1,392 @@
+.Summoning {
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: center; 
+    background-image: url('../home/sky.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    box-sizing: border-box;
+    z-index: 1000;
+    padding: 1rem;
+    overflow: auto;
+    position: relative;
+    align-items: center;
+    margin-top: -4rem;
+}
+
+@media (max-height: 800px) {
+    .Summoning {
+        align-items: normal;
+        margin-top: 0rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .container-cards-summon {
+        justify-content: center !important;
+    }
+    .container-buttons-summon {
+        justify-content: center !important;
+    }
+}
+
+.container-summons {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    max-width: 1400px;
+    gap: 3rem;
+    flex-direction: column;
+}
+
+.container-cards-summon {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 3rem;
+}
+
+.justifyS {
+    justify-content: space-between;
+}
+
+.justifyC {
+    justify-content: center;
+}
+
+.justifyE {
+    justify-content: end;
+}
+
+.back-front {
+    position: relative;
+    width: 210px;
+    height: 310px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-card-summon {
+    transition: transform .8s ease;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 5px
+}
+
+.inactive-card {
+    transform: rotateY(0deg);
+}
+
+.active-card {
+    transform: rotateY(180deg);
+}
+
+.card-summoned {
+    background-color: aliceblue;
+    color: black;
+    border: 3px solid black;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 1rem;
+}
+
+.card-not-showed {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    transition: ease all .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rarity-span {
+    font-size: 5rem;
+}
+.back-front {
+    transition: ease all .3s;
+}
+.inactive-back-front {
+    filter: blur(0.6px);
+}
+.back-front:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    z-index: 9;
+    filter: blur(0px);
+}
+
+.card-not-showed-s-plus {
+    background-color: rgba(255, 0, 0, 0.979);
+    filter: drop-shadow(0px 0px 10px rgb(255, 0, 0));
+}
+
+.card-not-showed-s {
+    background-color: rgb(0, 102, 255);
+    filter: drop-shadow(0px 0px 5px rgb(0, 102, 255));
+}
+
+.card-not-showed-a {
+    filter: drop-shadow(0px 0px 1px rgb(174, 0, 255));
+}
+
+.card-not-showed-b {
+    filter: drop-shadow(0px 0px 1px rgb(53, 53, 53));
+}
+
+.logo-summon-card {
+    width: 150px;
+    transition: transform .5s ease;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.back-front:hover .logo-summon-card {
+    animation: spin 8s linear infinite;
+}
+
+.btn-exit {
+    background-color: rgb(2, 0, 90);
+    border: none;
+    padding: 5px 0;
+    width: 210px;    
+    border-radius: 5px;
+    font-size: 2rem;
+    color: white;
+    border: 2px solid #0084ff;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.3em #0084ff, 0 0.6em rgba(0, 0, 0, 0.527);
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-exit:hover {
+    background-color:rgb(20, 18, 189); 
+    color: white;
+    width: 210px;    
+    border: 2px solid #7bbfff;
+    box-shadow: 0 0.3em #7bbfff, 0 0.6em rgba(0, 0, 0, 0.527);
+}
+
+.btn-skip {
+    background-color: #080c1d;
+    width: 210px;
+    padding: 15px 30px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+    border: #FEAA2A solid 2px;
+    background-color: #002277;
+    font-size: 2rem;
+    gap: .3rem;
+    top: 0;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.3em #FEAA2A, 0 0.6em rgba(0, 0, 0, 0.527);
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+    color: #FEAA2A;
+}
+
+.btn-skip:hover {
+    background-color: #051235;
+    border: #FFAA2A solid 2px;
+    top: 0.2em;
+    box-shadow: 0 0em #BF8738, 0 0.3em rgba(0, 0, 0, 0.4);
+}
+
+.container-buttons-summon {
+    display: flex;
+    width: 100%;
+}
+
+.border-s-plus {
+    border: 2px solid rgb(255, 255, 255);
+    position: absolute;
+    z-index: -9;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 
+        0px 0px 30px #e50000,
+        0px 0px 40px #e50000,
+        0px 0px 60px #e50000;
+    background: linear-gradient(to right, 
+    #e50000 0%, 
+    #e50000 3%, 
+    #db0000 6%, 
+    #d20000 9%, 
+    #c80000 12%, 
+    #bf0000 15%, 
+    #b50000 18%, 
+    #ac0000 21%, 
+    #a20000 24%, 
+    #990000 27%, 
+    #8f0000 30%, 
+    #860000 33%, 
+    #7c0000 36%, 
+    #730000 39%, 
+    #690000 42%, 
+    #600000 45%, 
+    #560000 48%, 
+    #530101 50%, 
+    #560000 52%, 
+    #600000 55%, 
+    #690000 58%, 
+    #730000 61%, 
+    #7c0000 64%, 
+    #860000 67%, 
+    #8f0000 70%, 
+    #990000 73%, 
+    #a20000 76%, 
+    #ac0000 79%, 
+    #b50000 82%, 
+    #bf0000 85%, 
+    #c80000 88%, 
+    #d20000 91%, 
+    #db0000 94%, 
+    #e50000 97%, 
+    #e50000 100%);
+    background-size: 200% auto;
+    animation: shine 6s linear infinite, shadowPulse 3s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+    0%, 100% {
+        box-shadow: 
+            0px 0px 30px #e50000,
+            0px 0px 40px #e50000,
+            0px 0px 50px #e50000;
+    }
+    50% {
+        box-shadow: 
+            0px 0px 60px #e50000,
+            0px 0px 70px #e50000,
+            0px 0px 90px #e50000;
+    }
+}
+
+.border-a {
+    position: absolute;
+    box-sizing: border-box;    
+    z-index: -9;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    background: linear-gradient(to right, 
+    #ff00ff 0%, 
+    #cc00cc 50%,
+    #ff00ff 100%);
+    box-shadow: 0px 0px 20px rgb(225, 0, 255);
+    box-sizing: border-box;
+    border: 2px solid rgb(255, 255, 255);
+    background-size: 200% auto;
+    animation: shine 6s linear infinite, shadowPulse-a 3s ease-in-out infinite;
+}
+@keyframes shadowPulse-a {
+    0%, 100% {
+        box-shadow: 
+            0px 0px 20px #cc00cc,
+            0px 0px 20px #cc00cc,
+            0px 0px 20px #cc00cc;
+    }
+    50% {
+        box-shadow: 
+            0px 0px 20px #ff00ff,
+            0px 0px 20px #ff00ff,
+            0px 0px 20px #ff00ff;
+    }
+}
+.border-s {
+    position: absolute;
+    z-index: -9;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: 
+        0px 0px 20px rgba(0, 47, 255, 1),
+        0px 0px 30px rgba(0, 47, 255, 0.7),
+        0px 0px 40px rgba(0, 47, 255, 0.5);
+    background: linear-gradient(to right, 
+    #003c97 0%, 
+    #0066ff 50%,
+    #003c97 100%);
+    background-size: 200% auto;
+    animation: shine 6s linear infinite, shadowPulse-s 3s ease-in-out infinite;
+}
+@keyframes shadowPulse-s {
+    0%, 100% {
+        box-shadow: 
+            0px 0px 20px #0066ff,
+            0px 0px 30px #0066ff,
+            0px 0px 40px #0066ff;
+    }
+    50% {
+        box-shadow: 
+            0px 0px 30px #0066ff,
+            0px 0px 40px #0066ff,
+            0px 0px 50px #0066ff;
+    }
+}
+.border-b {
+    position: absolute;
+    box-sizing: border-box;
+    z-index: -9;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    background: gray;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+@keyframes shine {
+    to {
+        background-position: 400% center;
+    }
+}
+
+.shadow {
+    box-shadow: 
+    0px 0px 20px #ffffff1f,
+    0px 0px 30px #ffffff17,
+    0px 0px 40px #ffffff62;
+    transition: ease all .3s;
+}

@@ -6,6 +6,7 @@ import validator from 'validator'
 import { registerUser } from '../../services/user';
 import { registerGacha } from '../../services/gacha';
 import GoogleLogin from '../Login/GoogleLogin/GoogleLogin';
+import { registerUserCard } from '../../services/userCards';
 
 export const Register = () => {
 
@@ -42,6 +43,7 @@ export const Register = () => {
         const data = await registerUser(username, password, email, googleAccount);
         if(data._id) {
           const dataGacha = await registerGacha(data._id, 100);
+          const userCard = await registerUserCard(data._id);
           console.log(dataGacha)
           localStorage.setItem("_id", data._id)
           localStorage.setItem("googleAccount", data.googleAccount)

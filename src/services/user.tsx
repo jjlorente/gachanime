@@ -71,10 +71,10 @@ export const registerUser = async (username: string, password: string, email: st
 export const findUserById = async (id: string) => {
   try {
       const response = await fetch(`http://localhost:3000/api/users/findById?id=${id}`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-          },
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
       });
 
       if (!response.ok) {

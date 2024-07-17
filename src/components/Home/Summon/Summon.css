@@ -15,7 +15,7 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 3rem;
     background-color: rgb(231, 231, 231);
     position: relative;
     background-size: 555px;
@@ -30,6 +30,10 @@
 
 .title-summon {
     font-size: 6rem;
+    stroke-width:1px;
+    stroke: black;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.904);
 }
 
 .container-type-summon {
@@ -41,15 +45,17 @@
     gap: 2rem;
     max-width: 460px;
     font-size: 2rem;
-    border-left: .5rem solid #FFAA2A;
+    border-left: .2rem solid #ec9419;
     background-color: #051641de;
     border-radius: 5px ;
+    box-shadow: 0 0.1em #ec9419, 0 0.3em rgba(0, 0, 0, 0.432);
 }
 
 .title-type {
     color: #FFAA2A;
-    font-size: 4.4rem;
+    font-size: 4rem;
 }
+
 .description-type{
     border-radius: 5px;
     box-sizing: border-box;
@@ -57,44 +63,49 @@
 }
 
 .container-gachas {
-    max-width: 460px;
-    padding: 10px;
+    max-width: 485px;
+    padding-bottom: 10px;
     justify-content: space-between;
     display: flex;
     flex-direction: row;
 }
+
 .gacha-button-container {
     background-color: #080c1d;
-    width: 180px;
+    width: 150px;
     padding: 15px 30px;
     display: flex;
-    border-radius: 5px;
-    flex-direction: column;
+    border-radius: 10px;
+    flex-direction: row;
     justify-content: center;
     box-sizing: border-box;
-    border: #BF8738 solid 2px;
-    background-color: #06153f;
+    border: #FEAA2A solid 2px;
+    background-color: #0c235c;
     font-size: 1.6rem;
     gap: .3rem;
-    transition: ease all .3s;
-}
-.gacha-button-container:hover {
-    background-color: #030f2e;
-    border: #BF8738 solid 2px;
+    top: 0;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.3em #FEAA2A, 0 0.6em rgba(0, 0, 0, 0.527);
+    position: relative;
     cursor: pointer;
-    transform: scale(1.1);
-}
-.logo-summon-gacha {
-    width: 35px;
-}
-
-.t {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .3rem;
-    color: #FFAA2A;
+    color: #FEAA2A;
 }
+  
+.gacha-button-container:hover {
+    background-color: #051235;
+    border: #FFAA2A solid 2px;
+    top: 0.2em;
+    box-shadow: 0 0em #BF8738, 0 0.3em rgba(0, 0, 0, 0.4);
+}
+
+.logo-summon-gacha {
+    width: 35px;
+}
+
 
 .pagination-banners {
     display: flex;
@@ -113,6 +124,31 @@
     padding: 10px;
     box-sizing: border-box;
     justify-content: center;
+}
+
+.progress-container {
+    display: flex;
+    width: 100%;
+    max-width: 485px;
+    border-radius: 5px;
+    gap: .5rem;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.6rem;
+}
+
+.progress-values {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress{
+    flex:1;
+    height: 30px;
 }
 
 @media (max-width: 700px) {
@@ -138,6 +174,9 @@
     .description-type{
         font-size: 1.4rem;
     }
+    .info-throws {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width: 610px) {
@@ -149,8 +188,9 @@
         font-size: 3rem;
     }
     .title-summon {
-        font-size:3rem;
+        font-size:5rem;
     }
+
 }
 
 @media (max-width: 510px) {
@@ -161,7 +201,7 @@
         font-size: 1.6rem;
     }
     .title-summon {
-        font-size:2rem;
+        font-size:3.5rem;
     }
     .gacha-button-container {
         font-size: 1.2rem;
@@ -173,19 +213,22 @@
     .logo-summon-gacha {
         width: 25px;
     }
+    .info-throws {
+        font-size: 1.2rem;
+    }
 }
 
 @media (max-width: 400px) {
     .section-summon {
         text-align: center;
         gap: 2rem;
-        background-image: none;
+        background-size: 222px;
     }
     .title-type {
         font-size: 1.6rem;
     }
     .title-summon {
-        font-size:1.8rem;
+        font-size:2rem;
     }
     .gacha-button-container {
         font-size: 1.2rem;
@@ -198,4 +241,55 @@
     .logo-summon-gacha {
         width: 25px;
     }
+    .info-throws {
+        font-size: 1rem;
+    }
+    .throws {
+        font-size: 1rem;
+    }
+}
+
+.MuiBox-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.btn-modal-cancel {
+    background-color: rgb(194, 0, 16);
+    border: none;
+    padding: 5px 15px;
+    width: 120px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: white;
+    border: 2px solid #FFA500;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.3em #BF8738, 0 0.6em rgba(0, 0, 0, 0.527);
+    cursor: pointer;
+}
+
+.btn-modal-confirm {
+    background-color: rgb(4, 155, 11);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    width: 120px;
+    font-size: 1rem;
+    color: white;
+    border: 2px solid #FFA500;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.3em #BF8738, 0 0.6em rgba(0, 0, 0, 0.527);
+    cursor: pointer;
+}
+
+.btn-modal-confirm:hover {
+    background-color: rgb(17, 175, 25);
+    transform: scale(1.05);
+}
+.btn-modal-cancel:hover {
+    background-color: rgb(221, 48, 63);
+    transform: scale(1.05);
 }

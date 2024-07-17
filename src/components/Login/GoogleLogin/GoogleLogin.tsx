@@ -4,6 +4,8 @@ import { jwtDecode } from 'jwt-decode';
 import './GoogleLogin.css';
 import { findGoogleUser } from '../../../services/user';
 import { findGacha, registerGacha } from '../../../services/gacha';
+import { registerUserCard } from '../../../services/userCards';
+
 import { useState, useEffect } from 'react';
 
 const Login = () => {
@@ -25,7 +27,7 @@ const Login = () => {
                     console.log("usuario existente");
                 } catch (gachaError) {
                     const gacha = await registerGacha(data._id, 100);
-                    console.log("Gachas creados:",gacha);
+                    const userCard = await registerUserCard(data._id)
                 }
                 localStorage.setItem("_id", data._id)
                 localStorage.setItem("googleAccount", data.googleAccount)

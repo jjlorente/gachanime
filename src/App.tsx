@@ -12,6 +12,7 @@ import { Settings } from './components/Home/Settings/Settings';
 import { Main } from './components/Home/Main/Main';
 import { Summon } from './components/Home/Summon/Summon';
 import { Collection } from './components/Home/Collection/Collection';
+import { Summoning } from './components/Home/Summon/Summoning/Summoning';
 
 function App() {
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="*" element={<Navigate to="auth" replace />}/>
+        <Route path="summoning" element={<Summoning />} />
       </Routes>
     </div>
   );

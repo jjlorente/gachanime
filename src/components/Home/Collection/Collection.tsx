@@ -2,8 +2,10 @@ import './Collection.css'
 import {useEffect, useState} from 'react'
 import CollectionSelect from './CollectionSelect'
 import { PaginationComponent } from './PaginationComponent';
+import { findUserCards } from '../../../services/userCards';
+import { findCards } from '../../../services/cards';
 
-export const Collection = () => {
+export const Collection = (props:any) => {
   const [imgs, setImgs] = useState<any>([]);
   const [imgsSelected, setImgsSelected] = useState<any>([]);
   const [userCards, setUserCards] = useState<any>([]);
@@ -15,50 +17,26 @@ export const Collection = () => {
   const firstPostIndex = lastPostIndex - cardsPerPage;
   const currentCards = imgsSelected.slice(firstPostIndex,lastPostIndex);
 
-  const findCards = async () => {
+  const findAllCardsUser = async (id:any) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/cards/findAll`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      });
-
-      if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Unknown error');
+      const data = await findUserCards(id)
+      if (data) {
+        setUserCards(data.cards);
+        localStorage.setItem("userData", JSON.stringify(data));
       }
 
-      const data = await response.json();
-      return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error:', error);
-      throw error;
     }
   };
 
-  useEffect(() => {
-    const idUser = localStorage.getItem("_id");
-    if (idUser) {
-      fetch(`http://localhost:3000/api/userCards/findById?id=${idUser}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data) {
-          setUserCards(data.cards)
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    }
-  }, []);
-
   useEffect(()=> {
+    const idUser = localStorage.getItem("_id");
+
+    if (idUser) {
+      findAllCardsUser(idUser);
+    }
+
     const fetchData = async () => {
       try {
         const data = await findCards();
@@ -117,7 +95,6 @@ export const Collection = () => {
     }
   };
   
-
   return (
     <div className="Collection">
       <div className='section-collection'>
@@ -179,9 +156,10 @@ export const Collection = () => {
                 );
               })
             ) : (
-              <p>No hay cartas...</p>
+              <h2>Cargando cartas...</h2>
             )}     
           </div>
+
           <PaginationComponent 
             totalPosts={imgsSelected.length} 
             cardsPerPage={cardsPerPage}
