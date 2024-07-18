@@ -18,7 +18,14 @@
     margin-top: -4rem;
 }
 
-@media (max-height: 800px) {
+@media (max-height: 950px) {
+    .Summoning {
+        align-items: normal;
+        margin-top: 0rem;
+    }
+}
+
+@media (max-width: 1200px) {
     .Summoning {
         align-items: normal;
         margin-top: 0rem;
@@ -68,18 +75,16 @@
 .back-front {
     position: relative;
     width: 210px;
-    height: 310px;
+    height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .container-card-summon {
-    transition: transform .8s ease;
     top: 0;
     bottom: 0;
     width: 100%;
-    height: 100%;
     position: absolute;
     backface-visibility: hidden;
     border-radius: 5px
@@ -123,7 +128,7 @@
     transition: ease all .3s;
 }
 .inactive-back-front {
-    filter: blur(0.6px);
+    filter: blur(0px);
 }
 .back-front:hover {
     cursor: pointer;
@@ -143,6 +148,7 @@
 }
 
 .card-not-showed-a {
+    background-color: rgb(174, 0, 255);
     filter: drop-shadow(0px 0px 1px rgb(174, 0, 255));
 }
 
@@ -206,7 +212,6 @@
     gap: .3rem;
     top: 0;
     transition: all 300ms ease-in-out;
-    box-shadow: 0 0.3em #FEAA2A, 0 0.6em rgba(0, 0, 0, 0.527);
     position: relative;
     cursor: pointer;
     display: flex;
@@ -217,10 +222,9 @@
 }
 
 .btn-skip:hover {
-    background-color: #051235;
+    background-color: #0d37a8;
     border: #FFAA2A solid 2px;
-    top: 0.2em;
-    box-shadow: 0 0em #BF8738, 0 0.3em rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
 }
 
 .container-buttons-summon {
@@ -278,21 +282,21 @@
     #e50000 97%, 
     #e50000 100%);
     background-size: 200% auto;
-    animation: shine 6s linear infinite, shadowPulse 3s ease-in-out infinite;
+    animation: shine 6s linear infinite, shadowPulse 1.5s ease-in-out infinite;
 }
 
 @keyframes shadowPulse {
     0%, 100% {
         box-shadow: 
+            0px 0px 20px #e50000,
             0px 0px 30px #e50000,
-            0px 0px 40px #e50000,
-            0px 0px 50px #e50000;
+            0px 0px 40px #e50000;
     }
     50% {
         box-shadow: 
-            0px 0px 60px #e50000,
-            0px 0px 70px #e50000,
-            0px 0px 90px #e50000;
+            0px 0px 80px #e50000,
+            0px 0px 90px #e50000,
+            0px 0px 100px #e50000;
     }
 }
 
@@ -313,22 +317,9 @@
     box-sizing: border-box;
     border: 2px solid rgb(255, 255, 255);
     background-size: 200% auto;
-    animation: shine 6s linear infinite, shadowPulse-a 3s ease-in-out infinite;
+    animation: shine 3s linear infinite, shadowPulse-a 2s ease-in-out infinite;
 }
-@keyframes shadowPulse-a {
-    0%, 100% {
-        box-shadow: 
-            0px 0px 20px #cc00cc,
-            0px 0px 20px #cc00cc,
-            0px 0px 20px #cc00cc;
-    }
-    50% {
-        box-shadow: 
-            0px 0px 20px #ff00ff,
-            0px 0px 20px #ff00ff,
-            0px 0px 20px #ff00ff;
-    }
-}
+
 .border-s {
     position: absolute;
     z-index: -9;
@@ -340,28 +331,24 @@
     box-sizing: border-box;
     border: 2px solid rgb(255, 255, 255);
     box-shadow: 
-        0px 0px 20px rgba(0, 47, 255, 1),
-        0px 0px 30px rgba(0, 47, 255, 0.7),
-        0px 0px 40px rgba(0, 47, 255, 0.5);
-    background: linear-gradient(to right, 
-    #003c97 0%, 
-    #0066ff 50%,
-    #003c97 100%);
+        0px 0px 10px rgba(0, 47, 255, 1),
+        0px 0px 20px rgba(0, 47, 255, 0.7),
+        0px 0px 30px rgba(0, 47, 255, 0.5);
+
     background-size: 200% auto;
-    animation: shine 6s linear infinite, shadowPulse-s 3s ease-in-out infinite;
 }
-@keyframes shadowPulse-s {
+@keyframes shadowPulse-a {
     0%, 100% {
         box-shadow: 
-            0px 0px 20px #0066ff,
-            0px 0px 30px #0066ff,
-            0px 0px 40px #0066ff;
+            0px 0px 10px #C74CDF,
+            0px 0px 20px #C74CDF,
+            0px 0px 30px #C74CDF;
     }
     50% {
         box-shadow: 
-            0px 0px 30px #0066ff,
-            0px 0px 40px #0066ff,
-            0px 0px 50px #0066ff;
+            0px 0px 40px #C74CDF,
+            0px 0px 50px #C74CDF,
+            0px 0px 60px #C74CDF;
     }
 }
 .border-b {
@@ -390,3 +377,16 @@
     0px 0px 40px #ffffff62;
     transition: ease all .3s;
 }
+
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+  }

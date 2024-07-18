@@ -13,6 +13,8 @@ export const Collection = (props:any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(10);
 
+  const [copiesCard, setCopiesCard] = useState<{ [key: string]: number } >({});
+
   const lastPostIndex = currentPage * cardsPerPage;
   const firstPostIndex = lastPostIndex - cardsPerPage;
   const currentCards = imgsSelected.slice(firstPostIndex,lastPostIndex);
@@ -29,6 +31,21 @@ export const Collection = (props:any) => {
       console.error('Error:', error);
     }
   };
+
+  useEffect(()=> {
+    const counts: { [key: string]: number } = {};
+      userCards.forEach((card: any) => {
+        const cardId = card;
+        if (counts[cardId]) {
+          counts[cardId] += 1;
+        } else {
+          counts[cardId] = 1;
+        }
+      });
+    if(counts) {
+      setCopiesCard(counts);
+    }
+  },[userCards])
 
   useEffect(()=> {
     const idUser = localStorage.getItem("_id");
@@ -65,9 +82,9 @@ export const Collection = (props:any) => {
   
   const getBorderColor = (rarity: string): string => {
     switch (rarity) {
-      case "S":
-        return "3px solid #00a4ff";
       case "A":
+        return "3px solid #00a4ff";
+      case "S":
         return "3px solid #c74cdf";
       case "S+":
         return "3px solid #ff3939";
@@ -86,9 +103,9 @@ export const Collection = (props:any) => {
     switch (rarity) {
       case "S+":
         return "#FF3939";
-      case "S":
-        return "#00a4ff";
       case "A":
+        return "#00a4ff";
+      case "S":
         return "#c74cdf";
       default:
         return "gray";
@@ -112,6 +129,7 @@ export const Collection = (props:any) => {
 
                 return (
                   <div key={index+"container-card"} style={{ border: borderColor }} className={'container-card '+ cardClassName}>
+                    <span className='copies' style={{ border: borderColor }}>x {copiesCard[img._id] ? copiesCard[img._id] : "0"}</span>
                     <img 
                       key={index} 
                       src={img.base64_image} 
@@ -156,15 +174,19 @@ export const Collection = (props:any) => {
                 );
               })
             ) : (
-              <h2>Cargando cartas...</h2>
+              <h2>No hay cartas disponibles.</h2>
             )}     
           </div>
+          {imgsSelected.length > 0 ? 
+            <PaginationComponent 
+              totalPosts={imgsSelected.length} 
+              cardsPerPage={cardsPerPage}
+              setCurrentPage={setCurrentPage}
+            /> 
+            : 
+            <></>
+          }
 
-          <PaginationComponent 
-            totalPosts={imgsSelected.length} 
-            cardsPerPage={cardsPerPage}
-            setCurrentPage={setCurrentPage}
-          />
           
         </div>
       </div>

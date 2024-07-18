@@ -24,7 +24,6 @@ const Login = () => {
             if(data._id) {
                 try {
                     const dataGacha = await findGacha(data._id);
-                    console.log("usuario existente");
                 } catch (gachaError) {
                     const gacha = await registerGacha(data._id, 100);
                     const userCard = await registerUserCard(data._id)

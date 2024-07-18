@@ -1,14 +1,22 @@
 .Collection {
     display: flex;
-    height: fit-content;
+    height: auto;
     max-width: 1200px;
     width: 100%;
     padding: 20px;
     padding-right: 35px;
     box-sizing: border-box;
     overflow: auto;
+    display: flex;
+    align-items: center;
     max-height: calc(100vh - 70px);
+    justify-content: center;
+}
 
+@media (max-height: 950px) {
+    .Collection {
+        align-items: normal;
+    }
 }
 
 .container-select {
@@ -29,7 +37,9 @@
 .cards-container {
     width: 100%;
     background-color: #0e2e85;
+    min-height: 724px;
     box-sizing: border-box;
+    justify-content: space-between;
     padding: 25px 10px;
     height: auto;
     border-radius: 5px;
@@ -95,6 +105,25 @@
     border-top: 2px solid rgba(0, 0, 0, 0.295);
 }
 
+.copies {
+    position: absolute;
+    z-index: 1;
+    background-color: #1f1f1e;
+    box-sizing: border-box;
+    right: -25px;
+    bottom:45%;
+    width: fit-content;
+    height: fit-content;
+    color: rgb(255, 255, 255);
+    padding: 5px 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
 .container-card {
     width: 200px;
     height: 290px;
@@ -146,7 +175,7 @@
 }
 
 .card-not-user {  
-    filter: grayscale(100%) blur(3px);
+    filter: grayscale(100%) blur(1px);
 }
   
 

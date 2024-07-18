@@ -14,7 +14,6 @@ export const ModalConfirm = (props: any) => {
     };
 
     const handleConfirm = (numberCards : any) => {
-        console.log(props.gachas)
         if(numberCards == 1 && props.gachas < 10) {
             setMessage("Necesitas x10 gachas para poder tirar!")
         } else if (numberCards == 10 && props.gachas < 100) {
@@ -72,7 +71,7 @@ export const ModalConfirm = (props: any) => {
                             Al gastar 10 gachas recibirás una carta de cualquier rareza.
                         </Typography>
                         <div style={{display:"flex", justifyContent:"center", width:"100%", gap:"1rem", marginTop:"1.5rem",flexWrap:"wrap-reverse",height:"fit-content"}}>
-                            <button className='btn-modal-cancel jaro-regular' onClick={()=>{handleClose}}>Cancelar</button>
+                            <button className='btn-modal-cancel jaro-regular' onClick={()=>{props.setOpenModalConfirm(false)}}>Cancelar</button>
                             <button className='btn-modal-confirm jaro-regular' onClick={() => handleConfirm(1)}>Confirmar</button>
                         </div>
                     </>

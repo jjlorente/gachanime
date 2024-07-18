@@ -6,8 +6,16 @@
     padding-right: 35px;
     box-sizing: border-box;
     overflow: auto;
+    display: flex;
+    align-items: center;
     max-height: calc(100vh - 70px);
     justify-content: center;
+}
+
+@media (max-height: 950px) {
+    .Summon {
+        align-items: normal;
+    }
 }
 
 .section-summon {

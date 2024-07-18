@@ -1,0 +1,79 @@
+/* src/App.css */
+.fullscreen-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 9;
+}
+  
+.video-ended {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+    background-color: black;
+    font-size: 24px;
+}
+.Video{
+    position: absolute;
+}
+
+.btn-skip-video {
+    background-color: #080c1d;
+    position: absolute;
+    width: fit-content;
+    padding: 15px 30px;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+    border: #FEAA2A solid 2px;
+    background-color: #002277;
+    font-size: 2rem;
+    gap: .3rem;
+    top: 10%;
+    right: 5%;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+    color: #FEAA2A;
+    z-index: 9999;
+}
+
+.btn-skip-video:hover {
+    background-color: #051235;
+    border: #FFAA2A solid 2px;
+}
+
+.anima {
+    display: block;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 9999;
+    background-color: #051641b9;
+    transition: ease all 2s;
+    z-index: -1;
+}
+  
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        background-color: #051641b9;
+        z-index: -1;
+    }
+}
