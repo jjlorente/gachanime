@@ -41,6 +41,16 @@
     }
 }
 
+.card-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.979);
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+}
+
 .container-summons {
     display: flex;
     width: 100%;
@@ -101,7 +111,7 @@
 .card-summoned {
     background-color: aliceblue;
     color: black;
-    border: 3px solid black;
+    border: 4px solid black;
     box-sizing: border-box;
     text-align: center;
     margin: 1rem;
@@ -136,7 +146,9 @@
     z-index: 9;
     filter: blur(0px);
 }
-
+.back-front:hover .power-card {
+    top: -1px;
+}
 .card-not-showed-s-plus {
     background-color: rgba(255, 0, 0, 0.979);
     filter: drop-shadow(0px 0px 10px rgb(255, 0, 0));
@@ -233,7 +245,7 @@
 }
 
 .border-s-plus {
-    border: 2px solid rgb(255, 255, 255);
+    border: 4px solid rgb(255, 255, 255);
     position: absolute;
     z-index: -9;
     height: 100%;
@@ -315,7 +327,7 @@
     #ff00ff 100%);
     box-shadow: 0px 0px 20px rgb(225, 0, 255);
     box-sizing: border-box;
-    border: 2px solid rgb(255, 255, 255);
+    border: 4px solid rgb(255, 255, 255);
     background-size: 200% auto;
     animation: shine 3s linear infinite, shadowPulse-a 2s ease-in-out infinite;
 }
@@ -329,7 +341,7 @@
     overflow: hidden;
     border-radius: 5px;
     box-sizing: border-box;
-    border: 2px solid rgb(255, 255, 255);
+    border: 4px solid rgb(255, 255, 255);
     box-shadow: 
         0px 0px 10px rgba(0, 47, 255, 1),
         0px 0px 20px rgba(0, 47, 255, 0.7),
@@ -361,7 +373,7 @@
     overflow: hidden;
     border-radius: 5px;
     background: gray;
-    border: 2px solid rgb(255, 255, 255);
+    border: 4px solid rgb(255, 255, 255);
 }
 
 @keyframes shine {
@@ -387,6 +399,199 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.2);
+    background-color: #000000a2;
     z-index: -1;
-  }
+}
+
+.anima {
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: ease all 2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-anima {
+    width: 450px;
+    animation: logoFade 6s forwards ease, spinSummon 4s linear forwards;
+    max-width: 450px;
+}
+
+@keyframes spinSummon {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.ss-anima {
+	animation: fadeOutSS 6s forwards;
+}
+
+.s-anima {
+    animation: fadeOutS 6s forwards;
+}
+
+.a-anima {
+    animation: fadeOutA 6s forwards;
+}
+
+.b-anima {
+    animation: fadeOutB 6s forwards;
+}
+
+@keyframes logoFade {
+    0% {
+        opacity: 1;
+    }
+    10% {
+        opacity: 1;
+    }
+    40% {
+        width: 0px;
+    }
+    60% {
+        width: 0px;
+        opacity: 0;
+    }
+    65% {
+        width: 450px;
+        opacity: 1;
+    }
+    75% {
+        width: 450px;
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes fadeOutSS {
+    0% {
+        background-color: #051641;
+        z-index: 1;
+    }
+    5% {
+        background-color: #051641;
+    }
+    60% {
+        background-color: #e2e2e2;
+
+    }
+    70% {
+        background-color: #ff0000;
+
+    }
+    75% {
+        background-color: #ff0000;
+    }
+    90% {
+        background-color: #ff0000;
+        z-index: 1;
+    }
+    100% {
+        background-color: #000000a2;
+        z-index: -9999;
+    }
+}
+@keyframes fadeOutS {
+    0% {
+        background-color: #051641;
+        z-index: 1;
+    }
+    5% {
+        background-color: #051641;
+    }
+    60% {
+        background-color: #e2e2e2;
+
+    }
+    70% {
+        background-color: rgb(199, 0, 199);
+
+    }
+    75% {
+        background-color: rgb(199, 0, 199);
+    }
+    90% {
+        background-color: rgb(199, 0, 199);
+        z-index: 1;
+    }
+    100% {
+        background-color: #000000a2;
+        z-index: -9999;
+    }
+}
+@keyframes fadeOutA {
+    0% {
+        background-color: #051641;
+        z-index: 1;
+    }
+    5% {
+        background-color: #051641;
+    }
+    60% {
+        background-color: #e2e2e2;
+
+    }
+    70% {
+        background-color: rgb(0, 110, 255);
+
+    }
+    75% {
+        background-color: rgb(0, 110, 255);
+    }
+    90% {
+        background-color: rgb(0, 110, 255);
+        z-index: 1;
+    }
+    100% {
+        background-color: #000000a2;
+        z-index: -9999;
+    }
+}
+@keyframes fadeOutB {
+    0% {
+        background-color: #051641;
+        z-index: 1;
+    }
+    5% {
+        background-color: #051641;
+    }
+    60% {
+        background-color: #e2e2e2;
+
+    }
+    70% {
+        background-color: gray;
+
+    }
+    75% {
+        background-color: gray;
+    }
+    90% {
+        background-color: gray;
+        z-index: 1;
+    }
+    100% {
+        background-color: #000000a2;
+        z-index: -9999;
+    }
+}

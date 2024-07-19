@@ -10,11 +10,13 @@
     align-items: center;
     max-height: calc(100vh - 70px);
     justify-content: center;
+    flex-direction: column;
 }
 
 @media (max-height: 950px) {
     .Summon {
         align-items: normal;
+        display: block;
     }
 }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './Summon.css';
 import { findGacha } from '../../../services/gacha';
 import { ModalConfirm } from './Modals/ModalConfirm';
+import { PaginationComponent } from '../Collection/PaginationComponent';
 
 export const Summon = (props:any) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -112,15 +113,13 @@ export const Summon = (props:any) => {
         <h3>Cargando banner...</h3>
       )} 
       {
-        /* 
-          <div className='container-pagination'>
-            <PaginationComponent
-              totalPosts={sections.length} 
-              cardsPerPage={page}
-              setCurrentPage={setCurrentPage} 
-            />
-          </div> 
-        */
+          // <div className='container-pagination'>
+          //   <PaginationComponent
+          //     totalPosts={sections.length} 
+          //     cardsPerPage={page}
+          //     setCurrentPage={setCurrentPage} 
+          //   />
+          // </div> 
       }
     </div>
   );

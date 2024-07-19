@@ -141,6 +141,7 @@ export const Summoning = () => {
     });
   }
 
+  const [videoRarity, setVideoRarity] = useState("");
   useEffect(() => {
     if (!cardSummoned || cardSummoned.length <= 1) {
       setVideoPlayed(true);
@@ -149,154 +150,218 @@ export const Summoning = () => {
     }
   }, [cardSummoned]);
 
-  return (
-    <div className='Summoning' >
-      <div className='container-summons'>
-        {/* {cardSummoned && cardSummoned.length > 1 ?
-          <Video setVideoPlayed={setVideoPlayed} cardSummoned={cardSummoned}/>
-            : 
-          <></>
-        } */}
-        <div className={`container-buttons-summon ${cardSummoned && cardSummoned.length > 1 ? 'justifyE' : 'justifyC'}`}> 
-          {cardSummoned && cardSummoned.length > 0 ?
-            cardSummoned.length === countCardsShowed ?
-            <span className='btn-skip' onClick={handleClear}>SALIR</span>
-            :
-            <span className='btn-skip' onClick={handleSkip}>SKIP</span>
-            :
-            <></>
-          }
-        </div>
-        <div className={`container-cards-summon ${cardSummoned && cardSummoned.length > 1 ? 'justifyS' : 'justifyC'}`}>
-        {cardSummoned && cardSummoned.length > 0 ? <div className='anima' ></div> : <></>}
+  useEffect(() => {
+    let rarity = "b";
 
-          {cardSummoned && cardSummoned.length > 0 ? cardSummoned.map((card:any, index:any) => ( 
-            <div className={`back-front ${!show[index] ? 'inactive-back-front' : ''}`} key={index+"-back-front"} >
-              <div 
-                className={`container-card-summon ${!show[index] ? 'inactive-card' : 'active-card'}`}
-                key={index+"show-card"} 
-                onClick={() => showCard(index)}
-                style={{
-                  transition: card.rarity === "S+" ? "transform 1s ease" :
-                  card.rarity === "A" ? "transform 1s ease" :
-                  card.rarity === "S" ? "transform 1s ease" :
-                  card.rarity === "B" ? "transform 1s ease" :
-                  ""
-                }} 
-              >
-                <div 
-                  key={index+"img"} 
-                  className={
-                    card.rarity === "S+" ? "card-not-showed card-not-showed-s-plus" :
-                    card.rarity === "S" ? "card-not-showed card-not-showed-a" :
-                    card.rarity === "A" ? "card-not-showed card-not-showed-s" :
-                    card.rarity === "B" ? "box card-not-showed card-not-showed-b" :
-                    ""
-                  }
-                >
-                  <div 
-                    className={
-                      card.rarity === "S+" ? "border border-s-plus" :
-                      card.rarity === "S" ? "border border-a" :
-                      card.rarity === "A" ? "border border-s" :
-                      card.rarity === "B" ? "border border-b" :
-                      ""
-                  }>
-                  </div>
-                  <img src='../home/summon-w.png' alt="Logo Summon" className='logo-summon-card'></img>
-                </div>
-              </div> 
-              
-              <div className={`container-card-summon ${show[index] ? 'inactive-card' : 'active-card'}`} 
-                style={{ border: card.rarity === "S+" ? "3px solid #ff3939" :
-                  card.rarity === "S" ? "3px solid #c74cdf" :
-                  card.rarity === "A" ? "3px solid #00a4ff" :
-                  card.rarity === "B" ? "gray 3px solid" :
-                  "",
-                  transition: card.rarity === "S+" ? "transform 1s ease" :
-                  card.rarity === "A" ? "transform 1s ease" :
-                  card.rarity === "S" ? "transform 1s ease" :
-                  card.rarity === "B" ? "transform 1s ease" :
-                  ""
-                }} 
-          
-                key={index+"card"}
-              >
-                <div 
-                  className={
-                    card.rarity === "S+" ? "border border-s-plus" :
-                    card.rarity === "S" ? "border border-a" :
-                    card.rarity === "A" ? "border border-s" :
-                    card.rarity === "B" ? "border border-b" :
-                    ""
-                }>
-                </div>
-                <img 
-                  key={index+"img"} 
-                  src={card.base64_image} 
-                  alt={`Imagen ${index + 1}`} 
-                  className={"card-collection"}
-                />
-                <span 
-                  style={{ background: card.rarity === "S+" ? "#FF3939" :
-                  card.rarity === "S" ? "#c74cdf" :
-                  card.rarity === "A" ? "#00a4ff" :
-                  card.rarity === "B" ? "gray" :
-                  "" }}
-                  className={'rarity-card'}
-                  key={index+"rarity-span"}
-                >
-                  {card.rarity}
-                </span>
-
-                <span 
-                  style={{ background: card.rarity === "S+" ? "#FF3939" :
-                  card.rarity === "S" ? "#c74cdf" :
-                  card.rarity === "A" ? "#00a4ff" :
-                  card.rarity === "B" ? "gray" :
-                  "" }}
-                  className={'power-card'}
-                  key={index+"power-span"}
-                >
-                  {card.power} P
-                </span>
-
-                <div 
-                  style={{ background: card.rarity === "S+" ? "#FF3939" :
-                  card.rarity === "S" ? "#c74cdf" :
-                  card.rarity === "A" ? "#00a4ff" :
-                  card.rarity === "B" ? "gray" :
-                  "" }}
-                  className='container-name-card'
-                >  
-                  <span 
-                    style={{ background: card.rarity === "S+" ? "#FF3939" :
-                    card.rarity === "S" ? "#c74cdf" :
-                    card.rarity === "A" ? "#00a4ff" :
-                    card.rarity === "B" ? "gray" :
-                    "" }}
-                    key={index+"name-span"} 
-                    className='name-card'
-                    >
-                      {card.name}
-                  </span>
-                  <span 
-                    key={index+"anime-span"} 
-                    className='anime-name-card'
-                    >
-                      {card.anime_name}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )) 
-        :
-          <div className='loading-container'>
-            <l-trefoil size="400" stroke="33" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
-          </div>
+    if (cardSummoned) {
+      for (const card of cardSummoned) {
+        if (card.rarity === "S+") {
+          rarity = "ss";
+          break;
+        } else if (card.rarity === "S" && rarity !== "ss") {
+          rarity = "s";
+        } else if (card.rarity === "A" && rarity !== "ss" && rarity !== "s") {
+          rarity = "a";
+        }
       }
+    }
+
+    setVideoRarity(rarity);
+  }, [cardSummoned]);
+
+  const getBackgroundColor = (rarity:any) => {
+    switch (rarity) {
+      case "S+":
+        return "s-plus";
+      case "A":
+        return "s";
+      case "S":
+        return "a";
+      default:
+        return "b";
+    }
+  };
+
+  const getBorderColor = (rarity:any) => {
+    switch (rarity) {
+      case "S+":
+        return "#FF3939";
+      case "A":
+        return "#00a4ff";
+      case "S":
+        return "#c74cdf";
+      default:
+        return "gray";
+    }
+  };
+
+  return (
+    <div className='Summoning'>
+
+      <div className='container-summons'>
+
+        <div className={`container-buttons-summon ${cardSummoned && cardSummoned.length > 1 ? 'justifyE' : 'justifyC'}`}>
+
+          {cardSummoned && cardSummoned.length > 0 ? (
+
+            cardSummoned.length === countCardsShowed ? (
+
+              <span 
+                className='btn-skip' 
+                onClick={handleClear}>
+                  SALIR
+              </span>
+
+            ) : (
+
+              <span 
+                className='btn-skip' 
+                onClick={handleSkip}>
+                  SKIP
+              </span>
+
+            )
+
+          ) : (
+            <></>
+          )}
+
+        </div>
+
+        <div className={`container-cards-summon ${cardSummoned && cardSummoned.length > 1 ? 'justifyS' : 'justifyC'}`}>
+
+          {cardSummoned && cardSummoned.length > 0 && videoRarity ? (
+
+            <div className={`anima ${videoRarity + '-anima'}`}>
+
+              <img 
+                src='../home/summon-w.png' 
+                alt="Logo Summon" 
+                className='logo-anima' 
+              />
+
+            </div>
+
+          ) : (
+
+            <></>
+
+          )}
+
+          {cardSummoned && cardSummoned.length > 0 && videoRarity ? (
+
+            cardSummoned.map((card:any, index:any) => {
+
+              const backgroundColor = getBackgroundColor(card.rarity);
+
+              const borderColor = getBorderColor(card.rarity);
+
+              return (
+                <div 
+                  className={`back-front ${!show[index] ? 'inactive-back-front' : ''}`} 
+                  key={index + '-back-front'}
+                >
+
+                  <div
+                    className={`container-card-summon ${!show[index] ? 'inactive-card' : 'active-card'}`}
+                    key={index + 'show-card'}
+                    onClick={() => showCard(index)}
+                    style={{ transition: 'transform 1s ease' }}
+                  >
+
+                    <div
+                      key={index + 'img'}
+                      className={`card-not-showed card-not-showed-${backgroundColor}`}
+                    >
+                      <div className={`border border-${backgroundColor}`}></div>
+
+                      <img 
+                        src='../home/summon-w.png' 
+                        alt="Logo Summon" 
+                        className='logo-summon-card'
+                      />
+                    
+                    </div>
+                  
+                  </div>
+
+                  <div
+                    className={`container-card-summon ${show[index] ? 'inactive-card' : 'active-card'}`}
+                    style={{
+                      border:`4px solid ${borderColor}`,
+                      transition:'transform 1s ease'
+                    }}
+                    key={index + 'card'}
+                  >
+                    <div className={`border border-${backgroundColor}`}></div>
+                    
+                    <img 
+                      key={index + 'img'} 
+                      src={card.base64_image} alt={`Imagen ${index + 1}`} 
+                      className={'card-img'} 
+                    />
+                    
+                    <span
+                      style={{
+                        background: borderColor
+                      }}
+                      className={'rarity-card'}
+                      key={index + 'rarity-span'}
+                    >
+                      {card.rarity}
+                    </span>
+
+                    <span
+                      style={{background: borderColor}}
+                      className={'power-card'}
+                      key={index + 'power-span'}
+                    >
+                      {card.power} P
+                    </span>
+
+                    <div
+                      style={{background: borderColor}}
+                      className='container-name-card'
+                    >
+                      <span
+                        style={{background: borderColor}}
+                        key={index + 'name-span'}
+                        className='name-card'
+                      >
+                        {card.name}
+                      </span>
+
+                      <span 
+                        key={index + 'anime-span'} 
+                        className='anime-name-card'
+                      >
+                        {card.anime_name}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              );
+              
+            })
+
+          ) : (
+
+            <div className='loading-container'>
+
+              <l-trefoil size="400" stroke="33" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+
+            </div>
+
+          )}
+
+        </div>
+
       </div>
-      </div>
+
     </div>
   );
 }

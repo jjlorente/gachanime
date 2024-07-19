@@ -1,11 +1,14 @@
 import './Collection.css'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useRef} from 'react'
 import CollectionSelect from './CollectionSelect'
 import { PaginationComponent } from './PaginationComponent';
 import { findUserCards } from '../../../services/userCards';
 import { findCards } from '../../../services/cards';
+import { trefoil } from 'ldrs';
 
 export const Collection = (props:any) => {
+  trefoil.register();
+
   const [imgs, setImgs] = useState<any>([]);
   const [imgsSelected, setImgsSelected] = useState<any>([]);
   const [userCards, setUserCards] = useState<any>([]);
@@ -83,13 +86,13 @@ export const Collection = (props:any) => {
   const getBorderColor = (rarity: string): string => {
     switch (rarity) {
       case "A":
-        return "3px solid #00a4ff";
+        return "4px solid #00a4ff";
       case "S":
-        return "3px solid #c74cdf";
+        return "4px solid #c74cdf";
       case "S+":
-        return "3px solid #ff3939";
+        return "4px solid #ff3939";
       default:
-        return "gray 3px solid";
+        return "gray 4px solid";
     }
   };
 
@@ -111,7 +114,20 @@ export const Collection = (props:any) => {
         return "gray";
     }
   };
-  
+
+  const getRarityClassName = (rarity:any) => {
+    switch (rarity) {
+      case "S+":
+        return "-s-plus";
+      case "A":
+        return "-a";
+      case "S":
+        return "-s";
+      default:
+        return "-b";
+    }
+  };
+
   return (
     <div className="Collection">
       <div className='section-collection'>
@@ -121,6 +137,7 @@ export const Collection = (props:any) => {
             {currentCards.length > 0 ? (
               currentCards.map((img:any, index:any) => {
                 const borderColor = getBorderColor(img.rarity);
+                const rarityClass = getRarityClassName(img.rarity);
                 const userCard = userContainCard(img._id);
                 const backgroundColor = getBackgroundColor(img.rarity);
                 const cardClassName = userCard
@@ -128,7 +145,7 @@ export const Collection = (props:any) => {
                   : "card-not-user";
 
                 return (
-                  <div key={index+"container-card"} style={{ border: borderColor }} className={'container-card '+ cardClassName}>
+                  <div key={index+"container-card"} className={'container-card '+ cardClassName + ' border-collection'+rarityClass}>
                     <span className='copies' style={{ border: borderColor }}>x {copiesCard[img._id] ? copiesCard[img._id] : "0"}</span>
                     <img 
                       key={index} 
@@ -170,11 +187,15 @@ export const Collection = (props:any) => {
                           {img.anime_name}
                       </span>
                     </div>
+                    
                   </div>
+                  
                 );
               })
             ) : (
-              <h2>No hay cartas disponibles.</h2>
+              <div style={{margin:"13rem 0 0 0"}}>
+                <l-trefoil size="200" stroke="33" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+              </div>
             )}     
           </div>
           {imgsSelected.length > 0 ? 
