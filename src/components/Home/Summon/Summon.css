@@ -6,20 +6,16 @@
     padding-right: 35px;
     box-sizing: border-box;
     overflow: auto;
-    display: flex;
-    align-items: center;
     max-height: calc(100vh - 70px);
-    justify-content: center;
     flex-direction: column;
+    display: grid;
+    align-items: center;
 }
-
-@media (max-height: 950px) {
+@media (max-width: 400px) {
     .Summon {
-        align-items: normal;
-        display: block;
+        display: flex;
     }
 }
-
 .section-summon {
     width: 100%;
     border-radius: 5px;

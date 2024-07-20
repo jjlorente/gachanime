@@ -2,8 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { findCardsSummoned } from '../../../../services/cards';
 import { trefoil } from 'ldrs';
-import './Summoning.css'
-import Video from './Video/Video';
+import './Summoning.css';
 
 export const Summoning = () => {
   trefoil.register();
@@ -286,9 +285,10 @@ export const Summoning = () => {
                   </div>
 
                   <div
-                    className={`container-card-summon ${show[index] ? 'inactive-card' : 'active-card'}`}
+                    className={
+                      `background-border border-rarity-${getBackgroundColor(card.rarity)} container-card-summon ${show[index] ? 'inactive-card' : 'active-card'}`
+                    }
                     style={{
-                      border:`4px solid ${borderColor}`,
                       transition:'transform 1s ease'
                     }}
                     key={index + 'card'}

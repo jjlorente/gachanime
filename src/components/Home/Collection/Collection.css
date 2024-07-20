@@ -1,5 +1,4 @@
 .Collection {
-    display: flex;
     height: auto;
     max-width: 1200px;
     width: 100%;
@@ -7,17 +6,11 @@
     padding-right: 35px;
     box-sizing: border-box;
     overflow: auto;
-    display: flex;
-    align-items: center;
+    display: inline-block;
+    align-self: center;
     max-height: calc(100vh - 70px);
     justify-content: center;
     overflow-x: hidden;
-}
-
-@media (max-height: 950px) {
-    .Collection {
-        align-items: normal;
-    }
 }
 
 .container-select {
@@ -82,7 +75,7 @@
     box-sizing: border-box;
     font-size: 1.1rem;
     text-align: center;
-    right: 0px;
+    right: -.5px;
     padding: 0 10px;
     top: 0px;
     border-radius: 0 1px 0 5px;
@@ -141,8 +134,8 @@
 
 .border-collection-s-plus {
     background: 
-    linear-gradient(black, #222) padding-box,
-    linear-gradient(to bottom,red,orange,rgb(255, 251, 0),red,orange,rgb(255, 251, 0),red) border-box;
+        linear-gradient(black, #222) padding-box,
+        linear-gradient(to bottom,red,orange,rgb(255, 251, 0),red,orange,rgb(255, 251, 0),red) border-box;
 }
 
 .border-collection-s {
@@ -185,7 +178,7 @@
 }
 
 .container-name-card {
-    width: 100.3%;
+    width: 101%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -195,7 +188,7 @@
     padding: 5px 0;
     position: absolute;
     bottom: -1px;
-    left: 0px;
+    left: -1px;
     border: 4px solid rgba(0, 0, 0, 0.329);
     border-radius:2px 2px;
 }
@@ -211,6 +204,7 @@
 }
 .card-user:hover .power-card{
     top: -1px;
+    right: -0.4px;
 }
 
 .card-not-user:hover {

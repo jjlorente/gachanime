@@ -18,14 +18,14 @@
     margin-top: -4rem;
 }
 
-@media (max-height: 950px) {
+@media (max-height: 1300px) {
     .Summoning {
         align-items: normal;
         margin-top: 0rem;
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     .Summoning {
         align-items: normal;
         margin-top: 0rem;
@@ -97,7 +97,7 @@
     width: 100%;
     position: absolute;
     backface-visibility: hidden;
-    border-radius: 5px
+    border-radius: 5px;
 }
 
 .inactive-card {
@@ -134,21 +134,26 @@
 .rarity-span {
     font-size: 5rem;
 }
+
 .back-front {
     transition: ease all .3s;
 }
+
 .inactive-back-front {
     filter: blur(0px);
 }
+
 .back-front:hover {
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.4);
     z-index: 9;
     filter: blur(0px);
 }
+
 .back-front:hover .power-card {
     top: -1px;
 }
+
 .card-not-showed-s-plus {
     background-color: rgba(255, 0, 0, 0.979);
     filter: drop-shadow(0px 0px 10px rgb(255, 0, 0));
@@ -185,6 +190,43 @@
 .back-front:hover .logo-summon-card {
     animation: spin 8s linear infinite;
 }
+
+.background-border {
+    width: 200px;
+    height: 290px;
+    max-height: 290px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 4px solid #0000;
+}
+
+.border-rarity-s-plus {
+    background: 
+        linear-gradient(black, #222) padding-box,
+        linear-gradient(to bottom,red,orange,rgb(255, 251, 0),red,orange,rgb(255, 251, 0),red) border-box;
+}
+
+.border-rarity-a {
+    background: 
+        linear-gradient(black, #222) padding-box,
+        linear-gradient(to bottom, #c74cdf, #f9daff, #c74cdf, #f9daff, #c74cdf, #f9daff, #c74cdf) border-box;
+}
+
+.border-rarity-s {
+    background: 
+        linear-gradient(black, #222) padding-box,
+        linear-gradient(to bottom, #00a4ff, #0026ff, #00a4ff) border-box;
+}
+
+.border-rarity-b {
+    background: 
+        linear-gradient(black, #222) padding-box,
+        linear-gradient(to bottom,gray,gray) border-box;
+}
+
 
 .btn-exit {
     background-color: rgb(2, 0, 90);

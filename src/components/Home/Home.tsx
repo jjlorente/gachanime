@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Nav } from './Nav/Nav';
 import { Header } from './Header/Header';
 import { findGacha } from '../../services/gacha';
+import { findUserById } from '../../services/user';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Home = () => {
@@ -20,7 +21,7 @@ export const Home = () => {
 
   useEffect(() => {
     const path = location.pathname;
-    const parts = path.split('/'); // Divide la ruta por '/'
+    const parts = path.split('/');
     const lastPart = parts[parts.length - 1]; 
     setActiveIndex(lastPart)
   }, [location])
@@ -46,25 +47,17 @@ export const Home = () => {
     if (idUser) {
       getGachasAndThrows(idUser);
       set_Id(idUser);
-      fetch(`http://localhost:3000/api/users/findById?id=${idUser}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data) {
-          setUserData(data);
-          localStorage.setItem("userData", JSON.stringify(data));
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+      getUserData(idUser);
     }
   }, [activeIndex]);
 
+  const getUserData = async (userid: string) => {
+    const user = await findUserById(userid);
+    if (user) {
+      setUserData(user);
+      localStorage.setItem("userData", JSON.stringify(user));
+    }
+  }
   const getGachasAndThrows = async (userid: string) => {
     const dataGacha = await findGacha(userid);
     if (dataGacha) {

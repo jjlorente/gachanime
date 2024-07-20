@@ -42,7 +42,7 @@
 
 .nav-section {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
@@ -106,7 +106,7 @@
 
 .span-section-nav-active {
     display: block;
-    animation: vanish .5s;
+    animation: vanish .25s;
     font-size: 1.2rem;
 }
 
@@ -179,7 +179,7 @@
 }
 .span-active-logout {
     display: block;
-    animation: vanish .5s;
+    animation: vanish .25s;
 }
 
 
@@ -229,7 +229,7 @@
     gap: 1rem;
     box-sizing: border-box;
     padding: 5px 10px;
-    transition: ease all .3s;
+    transition: ease all .2s;
     margin-bottom:1.8rem;
     border-radius: 5px;
     cursor: pointer;

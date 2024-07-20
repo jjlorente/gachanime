@@ -28,7 +28,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Function to start gapi client
     function start() {
       gapi.client.init({
         clientId: clientId,
