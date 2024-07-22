@@ -1,20 +1,54 @@
 .Games {
-    display: flex;
-    height: auto;
-    max-height: calc(100vh - 70px);
-    max-width: 1200px;
+    height: 100%;
+    max-width: 800px;
     width: 100%;
     padding: 20px;
     padding-right: 35px;
     box-sizing: border-box;
+    overflow: auto;
+    justify-content: start;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.section {
+.section-games {
+    border: 4px solid #080C1D;
     width: 100%;
-    background-color: rgb(206, 206, 206);
-    height: fit-content;
+    min-height: fit-content;
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: #0E2257;
+    border-radius: 5px;
+    display: flex;
+}
+.nav-games {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 50px;
+    background-color: #0E2257;
+    border: 4px solid #080C1D;
+    border-radius: 5px 5px;
+    gap: 15px;
+    box-sizing: border-box;
+    padding: 5px;
+    min-height: 50px;
 }
 
+.link-game{
+    text-align: center;
+    width: 100%;
+    background-color: #01A4FF;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 5px;
+}
 @media (max-width: 700px) {
     .Games {
         padding-right: 25px;

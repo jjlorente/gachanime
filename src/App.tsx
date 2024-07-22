@@ -13,6 +13,8 @@ import { Main } from './components/Home/Main/Main';
 import { Summon } from './components/Home/Summon/Summon';
 import { Collection } from './components/Home/Collection/Collection';
 import { Summoning } from './components/Home/Summon/Summoning/Summoning';
+import { NameGame } from './components/Home/Games/NameGame/NameGame';
+import { ImageGame } from './components/Home/Games/ImageGame/ImageGame';
 
 function App() {
   const navigate = useNavigate();
@@ -58,7 +60,13 @@ function App() {
           <Route index element={<Navigate to="main" />} />
           <Route path="*" element={<Navigate to="/main" replace />}/>
           <Route path='main' element={<Main />} />
-          <Route path='games' element={<Games />} />
+
+          <Route path='games' element={<Games />} >
+            <Route index element={<Navigate to="name" />} />
+            <Route path='name' element={<NameGame />} />
+            <Route path='image' element={<ImageGame />} />
+          </Route>
+
           <Route path="summon" element={<Summon />} />
           <Route path="collection" element={<Collection />} />
           <Route path="quests" element={<Quests />} />

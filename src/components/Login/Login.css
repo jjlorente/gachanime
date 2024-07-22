@@ -1,14 +1,3 @@
-.container-app {
-    width: 100%;
-    height: fit-content;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 6rem 0;
-    gap: 2rem;
-}
-  
 .container-title {
     width: 100%;
     display: flex;

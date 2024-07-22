@@ -22,14 +22,20 @@ export const Nav = (props: any) => {
   useEffect(() => {
     const userData = localStorage.getItem('userData');
     if (userData) {
+      console.log(userData)
       const parsedUserData: User = JSON.parse(userData);
       setUser(parsedUserData);
     }
-  }, []);
+  }, [classNav]);
 
   const onToggleMenu = () => {
     setClassNav(!classNav);
   }
+
+  useEffect(() => {
+    console.log(user)
+    console.log(classNav)
+  }, [user,classNav]);
 
   const svgMenu = (
     <svg 
