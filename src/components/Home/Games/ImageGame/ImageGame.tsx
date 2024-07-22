@@ -29,7 +29,7 @@ export const ImageGame = () => {
             </div>
 
             <div className='container-imagegame-input'>
-                <span style={{fontSize:"1.1rem"}}>Cada intento fallido aleja un poco la imágen y pierdes 10 gachas de la recompensa final.</span>
+                <span style={{fontSize:"1.2rem"}}>Cada intento fallido aleja un poco la imágen y pierdes 10 gachas de la recompensa final.</span>
                 <input type="text" className='input-imagegame jaro-regular' maxLength={50} placeholder='Nombre del anime...'/>
             </div>
 
