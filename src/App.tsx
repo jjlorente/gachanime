@@ -50,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <div className='App jaro-regular' style={{backgroundImage:"url('./home/image.jpg')"}}>
+    <div className='App jaro-regular' style={{backgroundImage:"url('../home/image.jpg')"}}>
       <Routes>
         <Route path="auth" element={<ContainerForm />}>
           <Route index element={<Login />} />
@@ -62,7 +62,7 @@ function App() {
           <Route path='main' element={<Main />} />
 
           <Route path='games' element={<Games />} >
-            <Route index element={<Navigate to="name" />} />
+            <Route index element={<Navigate to="image" />} />
             <Route path='name' element={<NameGame />} />
             <Route path='image' element={<ImageGame />} />
           </Route>

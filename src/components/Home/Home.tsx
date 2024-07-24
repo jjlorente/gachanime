@@ -1,11 +1,20 @@
 import './Home.css'
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom';
+import { Outlet, useOutletContext } from "react-router-dom";
 import { Nav } from './Nav/Nav';
 import { Header } from './Header/Header';
 import { findGacha } from '../../services/gacha';
 import { findUserById } from '../../services/user';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+type ContextType = { 
+  userGachas: Number | null;
+  setUserGachas: React.Dispatch<React.SetStateAction<number | null>>;
+};
+
+export function useUserGachas() {
+  return useOutletContext<ContextType>();
+}
 
 export const Home = () => {
 
@@ -70,7 +79,7 @@ export const Home = () => {
     <div className='Home'>
       <Header userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
       <Nav userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
-      <Outlet />
+      <Outlet context={{ userGachas, setUserGachas }}/>
     </div>
   )
 }

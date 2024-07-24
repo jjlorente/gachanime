@@ -22,7 +22,6 @@ export const Nav = (props: any) => {
   useEffect(() => {
     const userData = localStorage.getItem('userData');
     if (userData) {
-      console.log(userData)
       const parsedUserData: User = JSON.parse(userData);
       setUser(parsedUserData);
     }
@@ -31,11 +30,6 @@ export const Nav = (props: any) => {
   const onToggleMenu = () => {
     setClassNav(!classNav);
   }
-
-  useEffect(() => {
-    console.log(user)
-    console.log(classNav)
-  }, [user,classNav]);
 
   const svgMenu = (
     <svg 
@@ -84,7 +78,7 @@ export const Nav = (props: any) => {
       <div className='container-btn-logout'>
         <button onClick={logOut} className="logout-btn">
           {classNav ? <span className='span-active-logout'>Cerrar sesión</span> : <span className='span-inactive-logout'>Cerrar sesión</span>}
-          <img className='svg-logout' src='../home/logout.svg' alt="logout" />
+          <img className='svg-logout' src='../../home/logout.svg' alt="logout" />
         </button>
       </div>
     </div>

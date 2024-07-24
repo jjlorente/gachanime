@@ -66,9 +66,9 @@
     align-items: center;
     justify-content: center;
     padding: 2.7rem;
-    -webkit-box-shadow: 10px 10px 115px 150px rgba(0,0,0,0.7);
-    -moz-box-shadow: 10px 10px 115px 150px rgba(0,0,0,0.7);
-    box-shadow: 10px 10px 115px 150px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 10px 10px 115px 90px rgba(0,0,0,0.7);
+    -moz-box-shadow: 10px 10px 115px 90px rgba(0,0,0,0.7);
+    box-shadow: 10px 10px 115px 90px rgba(0,0,0,0.7);
 }
 
 /* FONTS */  

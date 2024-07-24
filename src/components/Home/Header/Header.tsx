@@ -1,13 +1,16 @@
 import './Header.css'
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleLogout  } from '@react-oauth/google';
 import { navItems, icons } from '../Nav/navConfig';
 
 export const Header = (props: any) => {
-
   const [menu, setMenu] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log("HEADER")
+  },[])
 
   const toggleMenu = () => {
     setMenu(prevState => !prevState);
@@ -70,7 +73,7 @@ export const Header = (props: any) => {
           onClick={handleSetActiveIndex("summon")}
         >
           <span>{props.userGachas}</span>
-          <img src='../home/summon-o.png' alt="Logo Summon" className='logo-summon'></img>
+          <img src='../../home/summon-o.png' alt="Logo Summon" className='logo-summon'></img>
         </Link>
 
       </div>
