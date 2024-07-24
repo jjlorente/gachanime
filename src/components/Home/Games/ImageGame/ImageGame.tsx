@@ -99,9 +99,9 @@ export const ImageGame = () => {
     const handleClickAnime = (e: React.MouseEvent<HTMLInputElement>) => {
         const value = e.currentTarget.textContent;
         if(value === animeNameImage) {
-            console.log("SIIIIII"); 
+            console.log("SI"); 
         } else {
-            console.log("NOOOO"); 
+            console.log("NO"); 
         }
     };
 
