@@ -218,7 +218,6 @@ export const ImageGame = (props: any) => {
     const [statusReward, setStatusReward] = useState<number>();
 
     useEffect(()=> {
-        //USECONTEXT TEST
         let arrayErrors = localStorage.getItem("arrayErrorsImage");
         if(!arrayErrors) {
             localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
@@ -237,7 +236,6 @@ export const ImageGame = (props: any) => {
         try {
             const data = await findGameImageById(id)
             if (data) {
-                //UPDATE DATA IN GAME WITH DB DATA
                 setAnimeNameImage(data.anime_name);
                 setGameImageData(data);
                 if(userGamesData) {
@@ -398,7 +396,6 @@ export const ImageGame = (props: any) => {
     }
 
     return (
-
         <div className='container-imagegame'>
             <div className='header-imagegame'>
                 <h1 className='title-imagegame'>
@@ -407,13 +404,12 @@ export const ImageGame = (props: any) => {
                 <span className={resets === 0 || finishedImageGame === true ? "resets-empty" : "gachas-resets"} onClick={resets === 0 || finishedImageGame ? undefined : resetGameClick}>
                     <>
                         {resets} / 5
-                        <FontAwesomeIcon icon={faRotateRight} className={resets === 0 || finishedImageGame === true? "" : "refresh"} />  
+                        <FontAwesomeIcon icon={faRotateRight} className={resets === 0 || finishedImageGame === true ? "" : "refresh"} />  
                     </>
                 </span>     
             </div>
-
             <div className='container-image-center'>
-                <div className='section-image-center image-center-game' >        
+                <div className='section-image-center image-center-game'>        
                     {imgSelected !== undefined ? 
                         <img className='img-game' width={zoomImage} height={"auto"} src={ gameImageData?.image_game[imgSelected] } alt="" />
                         :
@@ -426,22 +422,19 @@ export const ImageGame = (props: any) => {
                             Intentos fallidos: {imageTries === 0 ? 0 : imageTries}
                         </>
                     </span>  
-                    {
-                        (gachasRecompensa && (statusReward === 1 || statusReward === 0)) ? (
-                            <span onClick={finishedImageGame === true && statusReward === 1 ? claimReward : undefined} className={finishedImageGame === true ? 'gachas-recompensa-active-click' : 'gachas-recompensa-inactive'}>
-                                {"Reclamar recompensa: " + gachasRecompensa}
-                                <img src='../../home/summon-w.png' alt="Logo Summon" className='logo-summon-w' />
-                                {statusReward === 1 ? (
-                                    <span className='reward-icon'></span>
-                                ) : null}
-                            </span>
-                        ) : statusReward === 2 ? (
-                            <span className='gachas-recompensa-active'>
-                                {"Recompensa reclamada"}
-                            </span>
-                        ) : null
-                    }
-
+                    {(gachasRecompensa && (statusReward === 1 || statusReward === 0)) ? (
+                        <span onClick={finishedImageGame === true && statusReward === 1 ? claimReward : undefined} className={finishedImageGame === true ? 'gachas-recompensa-active-click' : 'gachas-recompensa-inactive'}>
+                            {"Reclamar recompensa: " + gachasRecompensa}
+                            <img src='../../home/summon-w.png' alt="Logo Summon" className='logo-summon-w' />
+                            {statusReward === 1 ? (
+                                <span className='reward-icon'></span>
+                            ) : null}
+                        </span>
+                    ) : statusReward === 2 ? (
+                        <span className='gachas-recompensa-active'>
+                            {"Recompensa reclamada"}
+                        </span>
+                    ) : null}
                 </div>
             </div>
             <div className='container-imagegame-input'>
@@ -449,43 +442,43 @@ export const ImageGame = (props: any) => {
                 {finishedImageGame !== undefined && (
                     finishedImageGame === false ? (
                         <>
-                        <input
-                            type="text"
-                            className="input-imagegame jaro-regular"
-                            maxLength={50}
-                            placeholder="Nombre del anime..."
-                            onChange={changeInputName}
-                            value={valueInput}
-                        />
-                        {animesSuggested && animesSuggested.length > 0 ? (
-                            <div className="container-suggested">
-                            {animesSuggested.map((anime, index) => (
-                                <span
-                                className="anime-suggested anime-name"
-                                key={index}
-                                onClick={handleClickAnime}
-                                >
-                                {anime}
-                                </span>
-                            ))}
-                            </div>
-                        ) : valueInput !== "" ? (
-                            <div className="container-suggested">
-                            <span className="anime-suggested">
-                                No hay animes con este nombre...
-                            </span>
-                            </div>
-                        ) : null}
+                            <input
+                                type="text"
+                                className="input-imagegame jaro-regular"
+                                maxLength={50}
+                                placeholder="Nombre del anime..."
+                                onChange={changeInputName}
+                                value={valueInput}
+                            />
+                            {animesSuggested && animesSuggested.length > 0 ? (
+                                <div className="container-suggested">
+                                    {animesSuggested.map((anime, index) => (
+                                        <span
+                                            className="anime-suggested anime-name"
+                                            key={index}
+                                            onClick={handleClickAnime}
+                                        >
+                                            {anime}
+                                        </span>
+                                    ))}
+                                </div>
+                            ) : valueInput !== "" ? (
+                                <div className="container-suggested">
+                                    <span className="anime-suggested">
+                                        No hay animes con este nombre...
+                                    </span>
+                                </div>
+                            ) : null}
                         </>
                     ) : finishedImageGame === true ? (
                         <span className="anime-correct">{animeNameImage}</span>
                     ) : null
-                    )}
-            </div> 
+                )}
+            </div>
             {animesErrors && finishedImageGame === false ? 
                 <div className='errors-imagegame'>
                     {animesErrors.slice().reverse().map((anime, index) => (
-                        <span key={index+"error"} className='error-span-image' style={{fontSize:"1.3rem"}}>{anime}</span>
+                        <span key={index + "error"} className='error-span-image' style={{fontSize:"1.3rem"}}>{anime}</span>
                     ))}
                 </div>
                 :
