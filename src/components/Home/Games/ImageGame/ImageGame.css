@@ -56,14 +56,16 @@
     align-items: center;
     gap: .5rem;
     width: fit-content;
-    padding: 8px 15px;
+    padding: 4px 15px;
     border-radius: 10px;
     border: 2px solid #FEAA2A;
     background-color: #14244C;
     text-align: center;
     font-size: 1.5rem;
     color: #FEAA2A;
+    min-height: 45px;
 }
+
 .gachas-resets{
     display: flex;
     justify-content: center;
@@ -77,7 +79,43 @@
     text-align: center;
     font-size: 1.5rem;
     color: #FEAA2A;
+    cursor: pointer;
+    transition: ease all .3s;
+    
+    width: 80px;
 }
+
+.gachas-resets:hover{ 
+    border: 2px solid #FEAA2A;
+    background-color: #183783;
+}
+
+.refresh {
+    transition: ease all .5s;
+}
+
+.gachas-resets:hover .refresh{ 
+    transform: rotate(360deg);
+}
+
+.resets-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    width: fit-content;
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 2px solid #FEAA2A;
+    background-color: #14244C;
+    text-align: center;
+    font-size: 1.5rem;
+    transition: ease all .3s;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    width: 80px;
+}
+
 .title-imagegame {
     font-size: 2.5rem;
     letter-spacing: .5px;
@@ -149,7 +187,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: .5rem;
+    gap: .2rem;
+    transition: ease all .2s;
 }
 
 .svg-inline--fa {
@@ -165,8 +204,8 @@
     box-sizing: border-box;
     border-radius: 5px;
     border: 2px solid black;
-
 }
+
 .container-tries-image {
     display: flex;
     gap: 1rem;
@@ -185,11 +224,11 @@
     top: 84px;
     max-height: 150px;
     overflow-y: scroll;
+    z-index: 9999;
 }
 
 .anime-suggested {
     background-color: #051641;
-    color: #FFAA2A;
     width: 100%;
     border-radius: 5px;
     border: 2px solid white;
@@ -198,9 +237,83 @@
     font-size: 1.5rem;
     transition: .3s ease all;
 }
+
 .anime-name:hover {
     background-color: #0681b3;
     color: #ffffff;
     font-size: 1.7rem;
     cursor: pointer;
+}
+
+.anime-correct {
+    background-color: rgba(24, 255, 3, 0.733);
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: #ffffff 2px solid;
+    font-size: 2rem;
+    animation: .5s spin forwards;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.gachas-recompensa-active-click {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 4px 15px;
+    border-radius: 10px;
+    border: 2px solid white;
+    background-color: #0389e2;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    transition: ease all .3s;
+    position: relative;
+    height: 100%;
+    min-height: 45px;
+}
+
+.gachas-recompensa-active-click:hover {
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #1417b6;
+    animation: 0s scale infinite;
+    transform: scale(1.05);
+}
+.reward-icon {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    top: -7px;
+    right: -7px;
+    border: white 1.5px solid;
+    animation: 1.2s scale infinite;
+}
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.logo-summon-w{
+    width: 40px;
 }

@@ -28,7 +28,7 @@
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    
+    position: relative;
 }
 
 .nav-items-active {
@@ -38,6 +38,7 @@
     flex-direction: column;
     gap: 1.8rem;
     box-sizing: border-box;
+    position: relative;
 }
 
 .nav-section {
@@ -48,6 +49,7 @@
     box-sizing: border-box;
     padding: 5px 10px;
     gap: 1rem;
+    position: relative;
 }
 
 .nav-items-active > .nav-section {
@@ -256,4 +258,15 @@
     .Nav {
         display: none;
     }
+}
+
+.alert-nav {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    top: -5px;
+    right: -5px;
+    border: white 1.5px solid;
 }

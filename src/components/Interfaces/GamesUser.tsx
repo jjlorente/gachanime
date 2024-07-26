@@ -4,6 +4,12 @@ export interface GameData {
     imageid: string;
     triesname: number;
     triesimage: number;
+    finishedImage: boolean,
+    finishedName: boolean,
+    resets: number,
+    statusRewardImage: number,
+    statusRewardName: number,
+    imageSelected: number
 }
 
 export interface Game {

@@ -4,7 +4,7 @@ export const NameGame = () => {
   return (
 
     <div className='container-namegame'>
-        NameGame
+      GAME
     </div>
 
   )

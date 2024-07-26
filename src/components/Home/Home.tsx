@@ -9,7 +9,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 type ContextType = { 
   userGachas: Number | null;
-  setUserGachas: React.Dispatch<React.SetStateAction<number | null>>;
+  setUserGachas: React.Dispatch<React.SetStateAction<number | []>>;
+  alerts: Array<string> | null;
+  setAlerts: React.Dispatch<React.SetStateAction<Array<string> | []>>;
 };
 
 export function useUserGachas() {
@@ -17,16 +19,36 @@ export function useUserGachas() {
 }
 
 export const Home = () => {
-
+  //const [rewardAdvise, setRewardAdvise] = useState<Array<any>>([]);
   const [_id, set_Id] = useState<string>('');
   const [googleAccount, setGoogleAccount] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>();
   const [userGachas, setUserGachas] = useState<any>(0);
   const [userThrows, setUserThrows] = useState<any>(0);
+  const [alerts, setAlerts] = useState<Array<string>>([]);
 
   const [activeIndex, setActiveIndex] = useState<any>("main");
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    //UPDATE PAGE AT 00:00
+    let now = new Date();
+    const localTime = localStorage.getItem("time");
+    let local = getYearMonthDay(now)
+    if(!localTime) {
+      localStorage.setItem("time", local.toString())
+    } else {
+      let localStorageTime = localTime.split(",").map(str => parseInt(str, 10));
+      if(localStorageTime[0] < local[0] || localStorageTime[1] < local[1] || localStorageTime[2] < local[2]) {
+        localStorage.setItem("time", local.toString())
+        localStorage.removeItem("userData")
+        localStorage.removeItem("arrayErrorsImage")
+        localStorage.removeItem("imgSelected")
+        localStorage.removeItem("alerts")
+      } 
+    }
+  }, [location]);
 
   useEffect(() => {
     const path = location.pathname;
@@ -58,7 +80,15 @@ export const Home = () => {
       set_Id(idUser);
       getUserData(idUser);
     }
+
   }, [activeIndex]);
+
+  function getYearMonthDay(date: Date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return [ year, month, day ];
+}
 
   const getUserData = async (userid: string) => {
     const user = await findUserById(userid);
@@ -75,11 +105,19 @@ export const Home = () => {
     }
   }
 
+  useEffect(()=>{
+    let alertsNav = localStorage.getItem("alerts");
+    if(alertsNav){
+      let alertsArray = JSON.parse(alertsNav); 
+      setAlerts(alertsArray);
+    }
+  },[]);
+
   return (
     <div className='Home'>
       <Header userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
-      <Nav userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
-      <Outlet context={{ userGachas, setUserGachas }}/>
+      <Nav userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex} alerts={alerts} setAlerts={setAlerts}/>
+      <Outlet context={{ userGachas, setUserGachas, alerts, setAlerts }}/>
     </div>
   )
 }

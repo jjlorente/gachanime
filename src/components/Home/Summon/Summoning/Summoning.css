@@ -3,7 +3,7 @@
     width: 100%;
     height: auto;
     justify-content: center; 
-    background-image: url('./home/sky.jpg');
+    background-image: url('../home/sky.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -178,7 +178,7 @@
     transition: transform .5s ease;
 }
 
-@keyframes spin {
+@keyframes spinCard {
     from {
         transform: rotate(0deg);
     }
@@ -188,7 +188,7 @@
 }
 
 .back-front:hover .logo-summon-card {
-    animation: spin 8s linear infinite;
+    animation: spinCard 5s linear infinite;
 }
 
 .background-border {
