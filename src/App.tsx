@@ -15,7 +15,7 @@ import { Collection } from './components/Home/Collection/Collection';
 import { Summoning } from './components/Home/Summon/Summoning/Summoning';
 import { NameGame } from './components/Home/Games/NameGame/NameGame';
 import { ImageGame } from './components/Home/Games/ImageGame/ImageGame';
-
+import backgroundImage from './assets/image.jpg'
 function App() {
   const navigate = useNavigate();
   const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
@@ -50,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <div className='App jaro-regular' style={{backgroundImage:"url('../home/image.jpg')"}}>
+    <div className='App jaro-regular' style={{backgroundImage:"url('/images/image.jpg')"}}>
       <Routes>
         <Route path="auth" element={<ContainerForm />}>
           <Route index element={<Login />} />

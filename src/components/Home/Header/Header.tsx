@@ -33,7 +33,7 @@ export const Header = (props: any) => {
   return (
     <div className='Header'>
       <div className='container-header'>
-        <img src={menu ? "../../home/close.png" : "../../home/menu-header.svg"} alt="Logo" className="logo-menu" onClick={toggleMenu} />
+        <img src={menu ? "/home/close.png" : "/home/menu-header.svg"} alt="Logo" className="logo-menu" onClick={toggleMenu} />
         {menu ? 
           <div className='vertical-nav'>
             {navItems.map((item, index) => {
@@ -52,7 +52,7 @@ export const Header = (props: any) => {
             <div className='container-btn-logout'>
               <button onClick={logOut} className="logout-btn">
                 <span className='span-active-logout'>Cerrar sesión</span>
-                <img className='svg-logout' src='../home/logout.svg'></img>
+                <img className='svg-logout' src='/home/logout.svg'></img>
               </button>
             </div>
           </div>
@@ -73,7 +73,7 @@ export const Header = (props: any) => {
           onClick={handleSetActiveIndex("summon")}
         >
           <span>{props.userGachas}</span>
-          <img src='../../home/summon-o.png' alt="Logo Summon" className='logo-summon'></img>
+          <img src='/home/summon-o.png' alt="Logo Summon" className='logo-summon'></img>
         </Link>
 
       </div>

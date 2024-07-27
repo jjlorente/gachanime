@@ -90,7 +90,7 @@ export const Nav = (props: any) => {
       <div className='container-btn-logout'>
         <button onClick={logOut} className="logout-btn">
           {classNav ? <span className='span-active-logout'>Cerrar sesión</span> : <span className='span-inactive-logout'>Cerrar sesión</span>}
-          <img className='svg-logout' src='../../home/logout.svg' alt="logout" />
+          <img className='svg-logout' src='/home/logout.svg' alt="logout" />
         </button>
       </div>
     </div>

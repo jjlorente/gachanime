@@ -234,7 +234,7 @@ export const Summoning = () => {
             <div className={`anima ${videoRarity + '-anima'}`}>
 
               <img 
-                src='../home/summon-w.png' 
+                src='/home/summon-w.png' 
                 alt="Logo Summon" 
                 className='logo-anima' 
               />
@@ -275,7 +275,7 @@ export const Summoning = () => {
                       <div className={`border border-${backgroundColor}`}></div>
 
                       <img 
-                        src='../home/summon-w.png' 
+                        src='/home/summon-w.png' 
                         alt="Logo Summon" 
                         className='logo-summon-card'
                       />

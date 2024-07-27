@@ -92,13 +92,13 @@ export const Summon = (props:any) => {
               <div className='container-gachas'>
 
                 <div className='gacha-button-container' onClick={() => {setOpenModalConfirm(true); setModalConfirmType(0); setAnimeType(section.anime)}}>
-                  <img src='../home/summon-o.png' alt="Logo Summon" className='logo-summon-gacha' />
+                  <img src='/home/summon-o.png' alt="Logo Summon" className='logo-summon-gacha' />
                   <span>x</span>
                   <span>10</span>
                 </div>
 
                 <div className='gacha-button-container' onClick={() => {setOpenModalConfirm(true); setModalConfirmType(1); setAnimeType(section.anime)}}>
-                  <img src='../home/summon-o.png' alt="Logo Summon" className='logo-summon-gacha' />
+                  <img src='/home/summon-o.png' alt="Logo Summon" className='logo-summon-gacha' />
                   <span>x</span>
                   <span>100</span>
                 </div>

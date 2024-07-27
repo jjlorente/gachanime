@@ -123,7 +123,7 @@ const CardFilter = (props:any) => {
         </select>
       </div>
       <input className='search-input' type="text" placeholder='Nombre de la carta...' onChange={handleChangeCardName} value={nameCard}></input>
-      <button className='button-clear' onClick={handleClickClearAll}><img src='../paper.png'/></button>
+      <button className='button-clear' onClick={handleClickClearAll}><img src='/paper.png'/></button>
     </div>
   );
 };
