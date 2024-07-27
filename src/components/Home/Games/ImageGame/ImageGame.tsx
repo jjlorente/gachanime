@@ -438,7 +438,7 @@ export const ImageGame = (props: any) => {
                 </div>
             </div>
             <div className='container-imagegame-input'>
-                <span style={{fontSize:"1.2rem"}}>Cada intento fallido aleja un poco la imágen y pierdes 20 gachas de la recompensa final.</span>
+                <span className='span-info-image'>Cada intento fallido aleja un poco la imágen y pierdes 20 gachas de la recompensa final.</span>
                 {finishedImageGame !== undefined && (
                     finishedImageGame === false ? (
                         <>

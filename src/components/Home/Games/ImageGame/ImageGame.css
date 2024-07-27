@@ -314,6 +314,105 @@
         transform: scale(1);
     }
 }
+
 .logo-summon-w{
     width: 40px;
+}
+
+.span-info-image {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 840px) {
+    .title-imagegame {
+        font-size: 2rem;
+    }
+    .span-info-image {
+        font-size: 1rem;
+    }
+    .anime-correct {
+        padding: 1rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 750px) {
+    .title-imagegame {
+        font-size: 2rem;
+    }
+    .span-info-image {
+        font-size: .8rem;
+        text-align: center;
+    }
+    .gachas-recompensa-inactive {
+        padding: 2px 15px;
+        font-size: 1rem;
+        word-spacing: 0px;
+    }
+    .gachas-recompensa-active {
+        padding: 2px 15px;
+        font-size: 1rem;
+        word-spacing: 0px;
+    }
+    .gachas-resets{
+        gap: .5rem;
+        padding: 4px 8px;
+        font-size: 1rem;
+        width: 80px;
+    }
+    .svg-inline--fa {
+        width: 25px;
+    }
+    .gachas-recompensa-active-click {
+        padding: 4px 10px !important;
+        font-size: 1rem !important; 
+        color: white;
+        height: 15px !important;
+        padding: 2px 15px;
+        font-size: 1rem;
+        word-spacing: 0px;
+    }
+}
+
+
+@media (max-width: 750px) {
+    .title-imagegame {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-imagegame {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap-reverse;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .container-tries-image {
+        display: flex;
+        gap: 1rem;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .image-center-game {
+        min-height: 260px;
+    }
+}
+
+@media (max-width: 490px) {
+    .title-imagegame {
+        font-size: 1.5rem;
+        text-align: center;
+    }
 }

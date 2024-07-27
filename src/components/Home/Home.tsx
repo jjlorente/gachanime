@@ -52,9 +52,8 @@ export const Home = () => {
 
   useEffect(() => {
     const path = location.pathname;
-    const parts = path.split('/');
-    const lastPart = parts[parts.length - 1]; 
-    setActiveIndex(lastPart)
+    const parts = path.split('/')[2];
+    setActiveIndex(parts)
   }, [location])
 
 

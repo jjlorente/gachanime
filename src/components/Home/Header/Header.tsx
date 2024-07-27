@@ -33,7 +33,7 @@ export const Header = (props: any) => {
   return (
     <div className='Header'>
       <div className='container-header'>
-        <img src={menu ? "../home/close.png" : "../home/menu-header.svg"} alt="Logo" className="logo-menu" onClick={toggleMenu} />
+        <img src={menu ? "../../home/close.png" : "../../home/menu-header.svg"} alt="Logo" className="logo-menu" onClick={toggleMenu} />
         {menu ? 
           <div className='vertical-nav'>
             {navItems.map((item, index) => {
@@ -42,7 +42,7 @@ export const Header = (props: any) => {
                   to={item.link} 
                   key={index} 
                   className={`item-nav-vertical link-reset ${item.link === props.activeIndex ? 'nav-active' : ''}`} 
-                  onClick={() => props.setActiveIndex(item.link)}
+                  onClick={() => handleSetActiveIndex(item.link)}
                 >
                   {icons[item.link as keyof typeof icons]}
                   <span className={props.activeIndex === item.link ? "span-section-nav-active color-active" : "span-section-nav-active color-inactive"}>{item.label}</span>
