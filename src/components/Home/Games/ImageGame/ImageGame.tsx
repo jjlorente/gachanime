@@ -243,7 +243,7 @@ export const ImageGame = (props: any) => {
                     if(userGamesData.finishedImage === true) {
                         setZoomImage("100%")
                     } else {
-                        let zoom = userGamesData.triesimage * 25;
+                        let zoom = userGamesData.triesimage * 50;
                         if (zoom >= 400) {
                             setZoomImage("100%")
                         } else {
@@ -252,7 +252,7 @@ export const ImageGame = (props: any) => {
                         }
                     }
 
-                    let dataTries = userGamesData.triesimage * 20
+                    let dataTries = userGamesData.triesimage * 40
                     if(dataTries>= 400) {
                         setGachasRecompensa(100)
                     } else {
@@ -325,7 +325,7 @@ export const ImageGame = (props: any) => {
                 if (data) {
                     setImageTries(data.triesimage);
                     let zoomActual = parseInt(zoomImage.split("%")[0]);
-                    let zoomRest = data.triesimage * 25;
+                    let zoomRest = data.triesimage * 50;
                     if (zoomRest <= 400) {
                         zoomActual = 500 - zoomRest;
                         setZoomImage(zoomActual+"%");
@@ -333,7 +333,7 @@ export const ImageGame = (props: any) => {
                         setZoomImage("100%");
                     }
 
-                    let dataTries = data.triesimage * 20
+                    let dataTries = data.triesimage * 40
                     if(dataTries>= 400) {
                         setGachasRecompensa(100)
                     } else {
