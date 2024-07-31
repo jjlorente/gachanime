@@ -12,6 +12,11 @@
     min-height: 100vh;
     box-sizing: border-box;
     padding-top: 70px;
-    padding-left: 70px;
     z-index: 1000;
+}
+
+@media (max-width: 915px ) {
+    .Home {
+        padding-left: 70px;
+    }
 }
