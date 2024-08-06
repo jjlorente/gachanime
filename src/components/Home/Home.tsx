@@ -5,6 +5,7 @@ import { Nav } from './Nav/Nav';
 import { Header } from './Header/Header';
 import { findGacha } from '../../services/gacha';
 import { findUserById } from '../../services/user';
+import { deleteAll } from '../../services/userGames';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 type ContextType = { 
@@ -41,6 +42,7 @@ export const Home = () => {
     } else {
       let localStorageTime = localTime.split(",").map(str => parseInt(str, 10));
       if(localStorageTime[0] < local[0] || localStorageTime[1] < local[1] || localStorageTime[2] < local[2]) {
+        resetDaily();
         localStorage.setItem("time", local.toString())
         localStorage.removeItem("userData")
         localStorage.removeItem("arrayErrorsImage")
@@ -96,12 +98,17 @@ export const Home = () => {
       localStorage.setItem("userData", JSON.stringify(user));
     }
   }
+
   const getGachasAndThrows = async (userid: string) => {
     const dataGacha = await findGacha(userid);
     if (dataGacha) {
       setUserGachas(dataGacha.gachas)
       setUserThrows(dataGacha.throws)
     }
+  }
+
+  const resetDaily = async () => {
+    await deleteAll();
   }
 
   useEffect(()=>{
