@@ -9,7 +9,6 @@
     max-height: calc(100vh - 70px);
     flex-direction: column;
     display: grid;
-    align-items: center;
 }
 
 @media (max-width: 400px) {
@@ -24,14 +23,13 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    background-color: rgb(231, 231, 231);
     position: relative;
     background-size: 555px;
     height:fit-content;
     background-repeat: no-repeat;
     background-position: right bottom;
-    background-color: #0e2257;
-    border: 4px solid #080c1d;
+    background-color: #0E2E85;
+    border: 4px solid rgba(0, 0, 0, 0.486);
     padding: 20px 30px;
     box-sizing: border-box;
 }
