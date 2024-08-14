@@ -15,6 +15,10 @@ export const Main = (props:any) => {
           <div className='subsection-main'>ROAD MAP</div>
           <div className='subsection-main'>CONTÁCTANOS</div>
         </div>
+        <div style={{display:"flex", flexDirection:"row", gap:"2rem"}}>
+          <div className='subsection-main'>MISIONES</div>
+          <div className='subsection-main'>JUEGOS</div>
+        </div>
       </div>
     </div>
   )
