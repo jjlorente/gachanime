@@ -8,10 +8,6 @@ import { navItems, icons } from '../Nav/navConfig';
 export const Header = (props: any) => {
   const [menu, setMenu] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("HEADER")
-  },[])
-
   const toggleMenu = () => {
     setMenu(prevState => !prevState);
   };
@@ -22,7 +18,6 @@ export const Header = (props: any) => {
 
   const logOut = () => {
     googleLogout();
-    console.log("Logout succes")
     localStorage.setItem("_id", "")
     localStorage.setItem("googleAccount", "")
     localStorage.setItem("userData", "")

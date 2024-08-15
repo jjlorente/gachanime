@@ -33,7 +33,6 @@ export const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
-    //UPDATE PAGE AT 00:00
     let now = new Date();
     const localTime = localStorage.getItem("time");
     let local = getYearMonthDay(now)
