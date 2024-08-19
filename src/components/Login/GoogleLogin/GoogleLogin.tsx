@@ -5,7 +5,6 @@ import './GoogleLogin.css';
 import { findGoogleUser } from '../../../services/user';
 import { findGacha, registerGacha } from '../../../services/gacha';
 import { registerUserCard } from '../../../services/userCards';
-
 import { useState, useEffect } from 'react';
 
 const Login = () => {
@@ -13,30 +12,31 @@ const Login = () => {
     const [widthGoogle, setWidthGoogle] = useState("500px");
 
     const handleLoginSuccess = async (credentialResponse: any) => {
-        let googleAccount = true;
+        const googleAccount = true;
         const token = credentialResponse.credential;
         const decoded: any = jwtDecode(token);
 
-        let email = decoded.email;
-        let username = decoded.name;
+        const email = decoded.email;
+        const username = decoded.name;
+
         try {
             const data = await findGoogleUser(username, email, googleAccount);
-            if(data._id) {
+            if (data._id) {
                 try {
-                    const dataGacha = await findGacha(data._id);
+                    await findGacha(data._id);
                 } catch (gachaError) {
-                    const gacha = await registerGacha(data._id, 100);
-                    const userCard = await registerUserCard(data._id)
+                    await registerGacha(data._id, 100);
+                    await registerUserCard(data._id);
                 }
-                localStorage.setItem("_id", data._id)
-                localStorage.setItem("googleAccount", data.googleAccount)
+                localStorage.setItem("_id", data._id);
+                localStorage.setItem("googleAccount", data.googleAccount);
                 navigate('/home');
             }
         } catch (error) {
             console.error('Error during Google user find:', error);
         }
     };
-    
+
     const handleLoginError = () => {
         console.error("Login Failed");
     };
@@ -61,19 +61,16 @@ const Login = () => {
     }, []);
 
     return (
-        <>
-            <GoogleLogin
-                onSuccess={handleLoginSuccess}
-                onError={handleLoginError}
-                useOneTap
-                text="continue_with"
-                width={widthGoogle}
-                size="medium"
-                logo_alignment='center'
-            />
-        </>
+        <GoogleLogin
+            onSuccess={handleLoginSuccess}
+            onError={handleLoginError}
+            useOneTap
+            text="continue_with"
+            width={widthGoogle}
+            size="medium"
+            logo_alignment='center'
+        />
     );
 };
 
 export default Login;
-

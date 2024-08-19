@@ -41,7 +41,6 @@ function App() {
       });
     }
 
-    // Ensure gapi is loaded before attempting to initialize
     if (gapi && gapi.load) {
       gapi.load('client:auth2', start);
     } else {
@@ -52,10 +51,12 @@ function App() {
   return (
     <div className='App jaro-regular' style={{backgroundImage:"url('/images/image.jpg')"}}>
       <Routes>
+
         <Route path="auth" element={<ContainerForm />}>
           <Route index element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
+
         <Route path="home" element={<Home />} >
           <Route index element={<Navigate to="main" />} />
           <Route path="*" element={<Navigate to="/main" replace />}/>
@@ -72,8 +73,10 @@ function App() {
           <Route path="quests" element={<Quests />} />
           <Route path="settings" element={<Settings />} />
         </Route>
+
         <Route path="*" element={<Navigate to="auth" replace />}/>
         <Route path="summoning" element={<Summoning />} />
+
       </Routes>
     </div>
   );
