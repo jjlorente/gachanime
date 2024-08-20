@@ -90,7 +90,7 @@ export const Games = (props: any) => {
           className={index === "silueta" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
           onClick={() => { setIndex("silueta"); }}
         >
-          GAME
+          SILUETA
         </Link>
         <Link
           to="adivinanza"

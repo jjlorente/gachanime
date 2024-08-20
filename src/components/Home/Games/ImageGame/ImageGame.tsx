@@ -8,6 +8,7 @@ import { GameData, Game } from '../../../Interfaces/GamesUser';
 import { trefoil } from 'ldrs';
 import { useUserGachas } from "../../Home";
 import { useUserGames } from '../Games';
+import { Resets } from '../ResetsComponent/Resets';
 
 export const ImageGame = (props: any) => {
     const { userGachas, setUserGachas } = useUserGachas();
@@ -354,6 +355,7 @@ export const ImageGame = (props: any) => {
     },[userGamesData])
 
     const { alerts, setAlerts } = useUserGachas();
+    
     const claimReward = async () => {
         if(userGamesData && gachasRecompensa) {
             const data = await updateReward(userGamesData.userid, gachasRecompensa, 2)
@@ -375,38 +377,15 @@ export const ImageGame = (props: any) => {
         }
     }
 
-
-    const resetGameClick = async () => {
-        if(userGamesData) {
-            const data = await resetGame(userGamesData.userid, "image");
-            if(data) {
-                setResets(data.resets);
-                const dataImg = await findGameImageById(data.imageid)
-                if(dataImg) {
-                    const randomIndex = Math.floor(Math.random() * dataImg.image_game.length);
-                    localStorage.setItem("imgSelected", randomIndex.toString());
-                    const dataImage = await updateImageSelected(userGamesData.userid, randomIndex);
-                    if(dataImage) {
-                        setUserGamesData(dataImage);
-                        findImageGame(dataImage.imageid)
-                    }
-                }
-            }
-        }
-    }
-
     return (
         <div className='container-imagegame'>
             <div className='header-imagegame'>
                 <h1 className='title-imagegame'>
                     ¿De que anime es la imagen?
                 </h1>
-                <span className={resets === 0 || finishedImageGame === true ? "resets-empty" : "gachas-resets"} onClick={resets === 0 || finishedImageGame ? undefined : resetGameClick}>
-                    <>
-                        {resets} / 5
-                        <FontAwesomeIcon icon={faRotateRight} className={resets === 0 || finishedImageGame === true ? "" : "refresh"} />  
-                    </>
-                </span>     
+
+                <Resets game={"image"} finishedGame={finishedImageGame} findImageGame={findImageGame}/>
+
             </div>
             <div className='container-image-center'>
                 <div className='section-image-center image-center-game'>        
