@@ -22,4 +22,5 @@ export interface Game {
     anime_name: string;
     image_game: Array<string>;
     silueta_game: Array<string>;
+    silueta_solution: Array<string>;
 }

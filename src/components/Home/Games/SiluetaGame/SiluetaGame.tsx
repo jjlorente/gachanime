@@ -68,7 +68,7 @@ export const SiluetaGame = (props: any) => {
             <div className='container-image-center'>
                 <div className='section-image-center image-center-game' style={{backgroundColor:"white"}}>        
                     {siluetaSelected !== undefined ? 
-                        <img className='img-game' width={"auto"} height={"100%"} src={ gameData?.silueta_game[siluetaSelected] } alt="" />
+                        <img className='img-game' width={"auto"} height={"100%"} src={finishedSiluetaGame ? gameData?.silueta_solution[siluetaSelected] : gameData?.silueta_game[siluetaSelected]} alt="" />
                         :
                         <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                     }       
