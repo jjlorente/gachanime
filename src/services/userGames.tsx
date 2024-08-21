@@ -19,7 +19,7 @@ export const findUserGames = async (id: string) => {
     }
 };
 
-export const findGameImageById = async (id: string) => {
+export const findGameById = async (id: string) => {
     try {
         const response = await fetch(`http://localhost:3000/api/userGames/findGameImageById?id=${id}`, {
             method: 'GET',
@@ -64,14 +64,14 @@ export const registerNewGameUser = async (userId: string) => {
     }
 };
 
-export const updateGameUser = async (userid: string, finishedImage: boolean, triesimage: Number, resets: Number, statusRewardImage: Number) => {
+export const updateGameUser = async (userid: string, finished: boolean, tries: Number, resets: Number, statusReward: Number, game: string) => {
     try {
         const response = await fetch('http://localhost:3000/api/userGames/update', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ userid, finishedImage, triesimage, resets, statusRewardImage}),
+            body: JSON.stringify({ userid, finished, tries, resets, statusReward, game}),
         });
 
         if (!response.ok) {
@@ -87,14 +87,14 @@ export const updateGameUser = async (userid: string, finishedImage: boolean, tri
     }
 };
 
-export const updateImageSelected = async (userid: string,  numImage: Number) => {
+export const updateSelected = async (userid: string,  num: Number, game: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/updateImageSelected', {
+        const response = await fetch('http://localhost:3000/api/userGames/updateSelected', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ userid, numImage }),
+            body: JSON.stringify({ userid, num, game }),
         });
 
         if (!response.ok) {
@@ -110,14 +110,14 @@ export const updateImageSelected = async (userid: string,  numImage: Number) => 
     }
 };
 
-export const updateReward = async (userid: string, gachas: Number, status: Number) => {
+export const updateReward = async (userid: string, gachas: Number, status: Number, game: string) => {
     try {
         const response = await fetch('http://localhost:3000/api/userGames/updateReward', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ userid, gachas, status }),
+            body: JSON.stringify({ userid, gachas, status, game }),
         });
 
         if (!response.ok) {
