@@ -246,7 +246,6 @@ export const Input = (props: any) => {
     const handleClickAnime = async (e: React.MouseEvent<HTMLInputElement>) => {
         const value = e.currentTarget.textContent;
         setAnimesSuggested([])
-        console.log(props.solution)
         if(value === props.solution) {
             if(userGamesData) {
                 const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game);
