@@ -35,10 +35,17 @@ export const ImageGame = () => {
     },[userGamesData])
 
     useEffect(()=>{
-        if(animesErrors && animesErrors.length > 0) {
+        if(animesErrors && animesErrors.length > 0 ) {
             localStorage.setItem("arrayErrorsImage", JSON.stringify(animesErrors));
         }
     }, [animesErrors])
+
+    useEffect(()=>{
+        if(userGamesData) {
+            findImageGame(userGamesData.imageid)
+            setImgSelected(userGamesData.imageSelected)
+        }
+    }, [userGamesData])
 
     const findImageGame = async (id:any) => {
         try {
@@ -84,14 +91,6 @@ export const ImageGame = () => {
             console.error('Error:', error);
         }
     };
-
-    useEffect(()=>{
-        if(userGamesData) {
-            findImageGame(userGamesData.imageid)
-
-            setImgSelected(userGamesData.imageSelected)
-        }
-    },[userGamesData])
 
     return (
         <div className='container-imagegame'>

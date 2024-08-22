@@ -11,7 +11,7 @@ export const Resets = (props: any) => {
             const data = await resetGame(userGamesData.userid, props.game);
             if(data) {
                 setResets(data.resets);
-                if(props.game === "image") {
+                if (props.game === "image") {
                     const dataImg = await findGameById(data.imageid)
                     if(dataImg) {
                         const randomIndex = Math.floor(Math.random() * dataImg.image_game.length);
@@ -23,6 +23,7 @@ export const Resets = (props: any) => {
                         }
                     }
                 } else if (props.game === "silueta") {
+                    console.log("entro1")
                     const dataSil = await findGameById(data.siluetaid)
                     if(dataSil) {
                         const randomIndex = Math.floor(Math.random() * dataSil.silueta_game.length);

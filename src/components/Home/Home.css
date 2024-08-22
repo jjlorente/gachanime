@@ -15,7 +15,7 @@
     z-index: 1000;
 }
 
-@media (max-width: 925px ) {
+@media (max-width: 1300px ) {
     .Home {
         padding-left: 70px;
     }

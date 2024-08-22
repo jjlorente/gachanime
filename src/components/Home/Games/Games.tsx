@@ -41,11 +41,15 @@ export const Games = (props: any) => {
         setResets(data.resets);
         if (data.triesimage === 0) {
           localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
+        } else if (data.triessilueta === 0) {
+          localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
         }
       } else {
         localStorage.setItem("imgSelected", "");
         localStorage.setItem("siluetaSelected", "");
         localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
+
         try {
           const data = await registerNewGameUser(id);
           if (data) {

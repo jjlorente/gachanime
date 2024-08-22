@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useUserGames } from '../Games';
-import { updateGameUser } from '../../../../services/userGames';
+import { updateGameUser, findCharacters } from '../../../../services/userGames';
 import { useUserGachas } from "../../Home";
 
 export const Input = (props: any) => {
@@ -195,14 +195,32 @@ export const Input = (props: any) => {
         "Rebirth",
         "Hoshikuzu Telepath"
     ];
-    
+
     const [valueInput, setValueInput] = useState<string>("");
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
+    const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
+
     const { setImageTries, setSiluetaTries, userGamesData } = useUserGames();
     const { alerts, setAlerts } = useUserGachas();
 
-    const changeInputName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    useEffect(() => {
+        if(props.game === "silueta") fetchData();
+    }, []);
 
+    const fetchData = async () => {
+        const data = await findCharacters();
+        if(data) {
+            data.map((anime : any) => {
+                let names = anime.names_game;
+                names.map((element:any) => {
+                    setArrayCharacters(prevCharacters => [...prevCharacters, element])
+                });
+                
+            })   
+        }     
+    };
+
+    const changeInputName = (e: React.ChangeEvent<HTMLInputElement>) => {
         const regex = /^[a-zA-Z0-9\s]*$/; 
         if (regex.test(e.target.value)) {
             setValueInput(e.target.value)
@@ -211,16 +229,24 @@ export const Input = (props: any) => {
                 return
             }
             const inputValue = e.target.value.toLowerCase();
-            const results = animeArray.filter((anime) =>
-            anime.toLowerCase().includes(inputValue)
-            );
-            setAnimesSuggested(results);
+            if(props.game === "image") {
+                const results = animeArray.filter((anime) =>
+                    anime.toLowerCase().includes(inputValue)
+                );
+                setAnimesSuggested(results);
+            } else if (props.game === "silueta") {
+                const results = arrayCharacters.filter((anime) =>
+                    anime.toLowerCase().includes(inputValue)
+                );
+                setAnimesSuggested(results);
+            }
         }
     };
 
     const handleClickAnime = async (e: React.MouseEvent<HTMLInputElement>) => {
         const value = e.currentTarget.textContent;
         setAnimesSuggested([])
+        console.log(props.solution)
         if(value === props.solution) {
             if(userGamesData) {
                 const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game);
@@ -311,7 +337,10 @@ export const Input = (props: any) => {
                         ) : valueInput !== "" ? (
                             <div className="container-suggested">
                                 <span className="anime-suggested">
-                                    No hay animes con este nombre...
+                                    
+                                    {
+                                        props.game === "image" ? "No hay animes con este nombre..." : "No hay personajes con este nombre..."
+                                    }
                                 </span>
                             </div>
                         ) : null}
