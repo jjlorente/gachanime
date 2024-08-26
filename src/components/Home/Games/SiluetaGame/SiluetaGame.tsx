@@ -7,10 +7,10 @@ import { useUserGachas } from "../../Home";
 import { Input } from '../InputComponent/Input';
 import { findGameById, updateSelected } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
+import { useLocation } from 'react-router-dom';
 
 export const SiluetaGame = (props: any) => {
     const [finishedSiluetaGame, setFinishedSiluetaGame] = useState<boolean>();
-    // const { userGachas, setUserGachas } = useUserGachas();
     const { userGamesData, setUserGamesData } = useUserGames();
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>(0);
@@ -18,15 +18,18 @@ export const SiluetaGame = (props: any) => {
     const [pjName, setPjName] = useState<string>();
     const [siluetaSelected, setSiluetaSelected] = useState<number>();
     const [gameData, setGameData] = useState<Game>();
+    const location = useLocation();
 
     useEffect(()=> {
         let arrayErrors = localStorage.getItem("arrayErrorsSilueta");
         if(!arrayErrors) {
             localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
         } else {
-            if (finishedSiluetaGame === false) setAnimesErrors(JSON.parse(arrayErrors))
+            if (finishedSiluetaGame === false || finishedSiluetaGame === undefined) {
+                setAnimesErrors(JSON.parse(arrayErrors))
+            }
         }
-    },[userGamesData])
+    },[location])
 
     useEffect(()=>{
         if(animesErrors && animesErrors.length > 0 && finishedSiluetaGame === false) {
@@ -51,7 +54,6 @@ export const SiluetaGame = (props: any) => {
         try {
             const data = await findGameById(id)
             if (data) {
-
                 setGameData(data);
                 if(userGamesData) {
                     setFinishedSiluetaGame(userGamesData.finishedSilueta);

@@ -317,7 +317,7 @@ export const Input = (props: any) => {
                             type="text"
                             className="input-imagegame jaro-regular"
                             maxLength={50}
-                            placeholder="Nombre del anime..."
+                            placeholder={ props.game === "image" ? "Escribe el nombre del anime..." : "Escribe el nombre del personaje..." }
                             onChange={changeInputName}
                             value={valueInput}
                         />
@@ -336,7 +336,6 @@ export const Input = (props: any) => {
                         ) : valueInput !== "" ? (
                             <div className="container-suggested">
                                 <span className="anime-suggested">
-                                    
                                     {
                                         props.game === "image" ? "No hay animes con este nombre..." : "No hay personajes con este nombre..."
                                     }

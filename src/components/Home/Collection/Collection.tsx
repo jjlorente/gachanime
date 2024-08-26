@@ -145,13 +145,18 @@ export const Collection = (props:any) => {
                   : "card-not-user";
 
                 return (
-                  <div key={index+"container-card"} className={'container-card '+ cardClassName + ' border-collection'+rarityClass}>
+                  <div key={index+"container-card"} className={userCard ? 'container-card-obtained container-card '+ cardClassName + ' border-collection'+rarityClass : 'container-card '+ cardClassName + ' border-collection'+rarityClass}>
+                    <span className='not-adquired'>a</span>
                     <span className='copies' style={{ border: borderColor }}>x {copiesCard[img._id] ? copiesCard[img._id] : "0"}</span>
                     <img 
                       key={index} 
                       src={img.base64_image} 
                       alt={`Imagen ${index + 1}`} 
-                      className={"card-collection "}
+                      className={
+                        userCard
+                          ? "card-collection"
+                          : "img-not card-collection"
+                        }
                     />
                     <span 
                       style={{ background: backgroundColor }}

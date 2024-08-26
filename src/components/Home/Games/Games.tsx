@@ -12,6 +12,8 @@ type ContextType = {
   setImageTries: React.Dispatch<React.SetStateAction<number | null>>;
   siluetaTries: number | null;
   setSiluetaTries: React.Dispatch<React.SetStateAction<number | null>>;
+  nameTries: number | null;
+  setNameTries: React.Dispatch<React.SetStateAction<number | null>>;
   resets: number | null;
   setResets: React.Dispatch<React.SetStateAction<number | null>>;
 };
@@ -26,6 +28,7 @@ export const Games = (props: any) => {
   const [userGamesData, setUserGamesData] = useState<GameData>();
   const [imageTries, setImageTries] = useState<number>(0);
   const [siluetaTries, setSiluetaTries] = useState<number>(0);
+  const [nameTries, setNameTries] = useState<number>(0);
 
   const [resets, setResets] = useState<number>(5);
 
@@ -38,17 +41,22 @@ export const Games = (props: any) => {
         setUserGamesData(data);
         setImageTries(data.triesimage);
         setSiluetaTries(data.triessilueta);
+        setNameTries(data.triesname);
         setResets(data.resets);
         if (data.triesimage === 0) {
           localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
         } else if (data.triessilueta === 0) {
           localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
+        } else if (data.triesname === 0) {
+          localStorage.setItem("arrayErrorsName", JSON.stringify([]));
         }
       } else {
         localStorage.setItem("imgSelected", "");
         localStorage.setItem("siluetaSelected", "");
+        localStorage.setItem("nameSelected", "");
         localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
         localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsName", JSON.stringify([]));
 
         try {
           const data = await registerNewGameUser(id);
@@ -56,6 +64,7 @@ export const Games = (props: any) => {
             setUserGamesData(data);
             setImageTries(data.triesimage);
             setSiluetaTries(data.triessilueta);
+            setNameTries(data.triesname);
             setResets(data.resets);
           }
         } catch (error: any) {
@@ -91,20 +100,20 @@ export const Games = (props: any) => {
           ANIME
         </Link>
         <Link
-          to="name"
-          key={"name"}
-          className={index === "name" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
-          onClick={() => { setIndex("name"); }}
-        >
-          GAME
-        </Link>
-        <Link
           to="silueta"
           key={"silueta"}
           className={index === "silueta" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
           onClick={() => { setIndex("silueta"); }}
         >
           SILUETA
+        </Link>
+        <Link
+          to="name"
+          key={"name"}
+          className={index === "name" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+          onClick={() => { setIndex("name"); }}
+        >
+          WORDLE
         </Link>
         <Link
           to="adivinanza"
@@ -116,7 +125,7 @@ export const Games = (props: any) => {
         </Link>
       </div>
       <div className='section-games'>
-        <Outlet context={{ userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, imageTries, setImageTries, siluetaTries, setSiluetaTries, alerts, setAlerts }} />
+        <Outlet context={{ userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, alerts, setAlerts }} />
       </div>
     </div>
   );

@@ -14,7 +14,8 @@ export interface GameData {
     statusRewardName: number,
     statusRewardSilueta: number,
     imageSelected: number,
-    siluetaSelected: number
+    siluetaSelected: number,
+    nameSelected: number
 }
 
 export interface Game {

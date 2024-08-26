@@ -23,7 +23,6 @@ export const Resets = (props: any) => {
                         }
                     }
                 } else if (props.game === "silueta") {
-                    console.log("entro1")
                     const dataSil = await findGameById(data.siluetaid)
                     if(dataSil) {
                         const randomIndex = Math.floor(Math.random() * dataSil.silueta_game.length);
@@ -32,6 +31,17 @@ export const Resets = (props: any) => {
                         if(dataSilueta) {
                             setUserGamesData(dataSilueta);
                             props.findGame(dataSilueta.siluetaid)
+                        }
+                    }
+                } else if (props.game === "name") {
+                    const dataName = await findGameById(data.nameid)
+                    if(dataName) {
+                        const randomIndex = Math.floor(Math.random() * dataName.names_game.length);
+                        localStorage.setItem("nameSelected", randomIndex.toString());
+                        const dataNameGame = await updateSelected(userGamesData.userid, randomIndex, props.game);
+                        if(dataNameGame) {
+                            setUserGamesData(dataNameGame);
+                            props.findGame(dataNameGame.nameid)
                         }
                     }
                 }
