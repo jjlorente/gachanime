@@ -86,13 +86,17 @@ export const NameGame = () => {
   }, [pjName]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const newInputValues = [...inputValue];
-    newInputValues[index] = e.target.value;
-    setInputValue(newInputValues); 
+    const regex = /^[a-zA-Z]*$/;
 
-    const nextIndex = index + 1;
-    if(e.target.value !== "") {
-      document.getElementById(`${nextIndex}${nameTriesComp}inputName`)?.focus();
+    if (regex.test(e.target.value)) {    
+      const newInputValues = [...inputValue];
+      newInputValues[index] = e.target.value;
+      setInputValue(newInputValues); 
+
+      const nextIndex = index + 1;
+      if(e.target.value !== "") {
+        document.getElementById(`${nextIndex}${nameTriesComp}inputName`)?.focus();
+      }
     }
   };
 
@@ -124,6 +128,7 @@ export const NameGame = () => {
     }
 
     let word = inputValue.join("").toUpperCase();
+
     if(isWordCompleted && pjName){
       if(word === pjName?.toUpperCase() && userGamesData) {
 
@@ -168,7 +173,6 @@ export const NameGame = () => {
         setInputValue(newInputValues);
       }
     }
-
   };
 
   function wordle(word:string, pjName:string) {
@@ -181,7 +185,7 @@ export const NameGame = () => {
 
     wordArr.forEach((letter, index) => {
         if (letter === pjNameArr[index]) {
-          result.push('green');
+          result.push('#1AB616');
           pjNameCopy[index] = "";
         } else {
           result.push("");
@@ -195,7 +199,7 @@ export const NameGame = () => {
             result[index] = 'orange';
             pjNameCopy[letterIndex] = "";
           } else {
-            result[index] = 'red';
+            result[index] = '#ff3636';
           }
         }
     });
@@ -218,40 +222,48 @@ export const NameGame = () => {
     return result;
   }
 
-  useEffect(()=>{
-    console.log(arrayColors)
-  },[arrayColors])
+  useEffect(()=> {
+    const elementId = 1 + "" + nameTriesComp + "inputName";
+    const element = document.getElementById(elementId);
+
+    if (element) {
+      element.focus();
+    } 
+
+  }, [nameTriesComp])
 
   return (
-    <div className='container-imagegame'>      
+    <div className='container-imagegame'>
+
       <Resets 
-        title={"¡Adivina el personaje del día!"} 
-        game={"name"} 
+        title={"¡Adivina el personaje del día!"}
+        game={"name"}
         setNameTriesComp={setNameTriesComp}
-        finishedGame={false} 
+        finishedGame={finishedNameGame}
         findGame={findNameGame}
         setArrayColors={setArrayColors}
       />
-      <div style={{display:"flex", flexDirection:"column",gap:".5rem"}}>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: ".6rem" }}>
         {Array.from({ length: 6 }, (_, indexArray) => (
-          nameTriesComp === indexArray ? (
+          nameTriesComp === indexArray && finishedNameGame === false ? (
             <form onSubmit={handleSubmit} className='name-container-game'>
               {pjName ? 
                 pjName.split('').map((char, index) => (
-                  index === 0 ?
+                  index === 0 ? 
                   <div 
-                    id={index+"inputName"}
-                    key={index} 
-                    className="name-input-game jaro-regular correct-letter" 
+                    id={index + "inputName"}
+                    key={index}
+                    className="name-input-game jaro-regular correct-letter"
                   >
                     {pjName[0]}
                   </div>
                   :
                   <input 
                     type="text"
-                    id={index+""+indexArray+"inputName"}
-                    key={index} 
-                    className="name-input-game active-row-input jaro-regular" 
+                    id={index + "" + indexArray + "inputName"}
+                    key={index}
+                    className="name-input-game active-row-input jaro-regular"
                     maxLength={1}
                     value={inputValue[index] ? inputValue[index].toUpperCase() : ""}
                     onChange={(e) => handleInputChange(e, index)}
@@ -259,39 +271,47 @@ export const NameGame = () => {
                     autoComplete="off"
                   />
                 )) 
-                : 
-                null
+                : null
               }
-              <button style={{display:"none"}} type="submit"></button>
+              <button style={{ display: "none" }} type="submit"></button>
             </form>
           ) : (
             <div className='name-container-game'>
               {pjName && errorsArray[indexArray] ? 
                 errorsArray[indexArray].split('').map((char, index) => (
                   <div 
-                    id={index+"inputName"}
-                    key={index} 
+                    id={index + "inputName"}
+                    key={index}
                     className="name-input-game jaro-regular correct-letter"
-                    style={{backgroundColor: arrayColors.length === errorsArray.length ? arrayColors[indexArray][index] : ""}}
+                    style={{ backgroundColor: arrayColors.length === errorsArray.length ? arrayColors[indexArray][index] : "" }}
                   >
                     {char}
                   </div>
                 )) 
-                : 
-                pjName?.split('').map((char, index) => (
+                : pjName?.split('').map((char, index) => (
                   pjName && index === 0 ?
                   <div 
-                    id={index+"inputName"}
-                    key={index} 
-                    className="name-input-game jaro-regular correct-letter" 
+                    id={index + "inputName"}
+                    key={index}
+                    className="name-input-game jaro-regular correct-letter"
                   >
                     {pjName[0]}
                   </div>
                   :
+                  finishedNameGame === true && indexArray === nameTriesComp ?
                   <div 
-                    id={index+"inputName"}
-                    key={index} 
-                    className="name-input-game jaro-regular" 
+                    id={index + "inputName"}
+                    key={index}
+                    className="name-input-game jaro-regular"
+                    style={{ backgroundColor: "#1AB616" }}
+                  >
+                    {char.toUpperCase()}
+                  </div>
+                  :
+                  <div 
+                    id={index + "inputName"}
+                    key={index + "close"}
+                    className="name-input-game jaro-regular"
                   />
                 ))
               }
@@ -299,10 +319,48 @@ export const NameGame = () => {
           )
         ))}
       </div>
-      <div className='container-imagegame-input'>
-        <span className='span-info-image'>¡Adivina el personaje diario y recibe 200 gachas!</span>  
+      
+      {nameTriesComp >= 3 ? 
+        <div className='container-imagegame-input'>
+          <span className='span-info-image' style={{backgroundColor:nameTriesComp >= 6 && finishedNameGame === false ? "red" : "#1AB616", padding:"5px 20px", borderRadius:"5px", fontSize:"1.5rem",border:"2px solid white"}}>
+            {nameTriesComp >= 6 && finishedNameGame === false && pjName ? pjName.toUpperCase() + " de " + gameData?.anime_name  : gameData?.anime_name}
+          </span>
+        </div>
+        :
+        <></>
+      }
+
+      <div className='container-imagegame-colors'>
+        <div className='div-info-color'>
+          <span className='color-green'></span>
+          <span>Posición correcta</span>
+        </div>
+        <div className='div-info-color'>
+          <span className='color-orange'></span>
+          <span>Posición incorrecta</span>
+        </div>
+        <div className='div-info-color'>
+          <span className='color-red'></span>
+          <span>No contiene la letra</span>    
+        </div>
       </div>
-      <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedNameGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"name"}/>
+
+      <div className='container-imagegame-input'>
+        <span className='span-info-image'>
+          A los 3 fallos se muestra el anime del personaje. Recibe 200 gachas al acertar.
+        </span>
+      </div>
+
+      <TriesReward 
+        statusReward={statusReward}
+        setStatusReward={setStatusReward}
+        finishedGame={finishedNameGame}
+        setGachasRecompensa={setGachasRecompensa}
+        gachasRecompensa={gachasRecompensa}
+        game={"name"}
+      />
+
     </div>
   );
+  
 }

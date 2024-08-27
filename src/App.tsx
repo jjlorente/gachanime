@@ -17,6 +17,7 @@ import { NameGame } from './components/Home/Games/NameGame/NameGame';
 import { ImageGame } from './components/Home/Games/ImageGame/ImageGame';
 import backgroundImage from './assets/image.jpg'
 import { SiluetaGame } from './components/Home/Games/SiluetaGame/SiluetaGame';
+import { OpeningGame } from './components/Home/Games/OpeningGame/OpeningGame';
 function App() {
   const navigate = useNavigate();
   const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
@@ -68,6 +69,7 @@ function App() {
             <Route path='name' element={<NameGame />} />
             <Route path='image' element={<ImageGame />} />
             <Route path='silueta' element={<SiluetaGame />} />
+            <Route path='opening' element={<OpeningGame />} />
           </Route>
 
           <Route path="summon" element={<Summon />} />

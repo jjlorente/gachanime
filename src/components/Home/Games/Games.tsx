@@ -120,12 +120,12 @@ export const Games = (props: any) => {
           WORDLE
         </Link>
         <Link
-          to="adivinanza"
-          key={"adivinanza"}
+          to="opening"
+          key={"opening"}
           className={index === "adivinanza" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
           onClick={() => { setIndex("adivinanza"); }}
         >
-          GAME
+          OPENING
         </Link>
       </div>
       <div className='section-games'>

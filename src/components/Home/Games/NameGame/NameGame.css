@@ -9,7 +9,7 @@
 
 .name-container-game {
     display: flex;
-    gap: .5rem;
+    gap: .2rem;
     font-size: 2rem;
     flex-direction: row;
 }
@@ -49,4 +49,48 @@
 
 .incorrect-letter {
     background-color: red;
+}
+
+.name-input-game:focus {
+    background-color: rgb(175, 226, 255);
+}
+
+.container-imagegame-colors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background-color: #14244C;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid white;
+    box-sizing: border-box;
+}
+.div-info-color{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+.color-orange {
+    width: 30px;
+    height: 30px;
+    background-color: orange;
+    border-radius: 5px;
+    border: 2px white solid;
+}
+.color-red {
+    width: 30px;
+    height: 30px;
+    background-color: #FF3636;
+    border-radius: 5px;
+    border: 2px white solid;
+}
+.color-green {
+    border: 2px white solid;
+    width: 30px;
+    height: 30px;
+    background-color: #1AB616;
+    border-radius: 5px;
 }
