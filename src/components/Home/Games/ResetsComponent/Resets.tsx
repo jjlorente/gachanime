@@ -5,6 +5,7 @@ import { findGameById, resetGame, updateSelected} from '../../../../services/use
 
 export const Resets = (props: any) => {
     const { resets, setResets, userGamesData, setUserGamesData } = useUserGames();
+    const { setNameTries } = useUserGames();
 
     const resetGameClick = async () => {
         if(userGamesData) {
@@ -36,6 +37,11 @@ export const Resets = (props: any) => {
                 } else if (props.game === "name") {
                     const dataName = await findGameById(data.nameid)
                     if(dataName) {
+                        localStorage.setItem("arrayTriesName", "[]");
+                        localStorage.setItem("localArrayColors", "[]");
+
+                        setNameTries(0);
+                        props.setArrayColors([])
                         const randomIndex = Math.floor(Math.random() * dataName.names_game.length);
                         localStorage.setItem("nameSelected", randomIndex.toString());
                         const dataNameGame = await updateSelected(userGamesData.userid, randomIndex, props.game);

@@ -49,12 +49,16 @@ export const Games = (props: any) => {
           localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
         } else if (data.triesname === 0) {
           localStorage.setItem("arrayErrorsName", JSON.stringify([]));
+          localStorage.setItem("arrayTriesName", JSON.stringify([]));
+          localStorage.setItem("localArrayColors", JSON.stringify([]));
         }
       } else {
         localStorage.setItem("imgSelected", "");
         localStorage.setItem("siluetaSelected", "");
         localStorage.setItem("nameSelected", "");
         localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
+        localStorage.setItem("arrayTriesName", JSON.stringify([]));
+        localStorage.setItem("localArrayColors", JSON.stringify([]));
         localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
         localStorage.setItem("arrayErrorsName", JSON.stringify([]));
 
