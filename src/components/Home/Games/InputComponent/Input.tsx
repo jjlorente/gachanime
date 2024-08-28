@@ -200,7 +200,7 @@ export const Input = (props: any) => {
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
     const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
 
-    const { setImageTries, setSiluetaTries, userGamesData } = useUserGames();
+    const { setOpeningTries, setImageTries, setSiluetaTries, userGamesData } = useUserGames();
     const { alerts, setAlerts } = useUserGachas();
 
     useEffect(() => {
@@ -229,7 +229,7 @@ export const Input = (props: any) => {
                 return
             }
             const inputValue = e.target.value.toLowerCase();
-            if(props.game === "image") {
+            if(props.game === "image" || props.game === "opening") {
                 const results = animeArray.filter((anime) =>
                     anime.toLowerCase().includes(inputValue)
                 );
@@ -249,13 +249,16 @@ export const Input = (props: any) => {
         if(value === props.solution) {
             if(userGamesData) {
                 const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game);
-                if(props.game === "image") {
+                if (props.game === "image") {
                     props.setFinishedGame(data.finishedImage);
                     props.setStatusReward(data.statusRewardImage);
                     props.setZoomImage("100%");
-                } else if(props.game === "silueta") {
+                } else if (props.game === "silueta") {
                     props.setFinishedGame(data.finishedSilueta);
                     props.setStatusReward(data.statusRewardSilueta);
+                } else if (props.game === "opening") {
+                    props.setFinishedGame(data.finishedOpening);
+                    props.setStatusReward(data.statusRewardOpening);
                 }
 
                 let alertGame = localStorage.getItem("alerts");
@@ -277,7 +280,7 @@ export const Input = (props: any) => {
             if(userGamesData) {
                 const data = await updateGameUser(userGamesData.userid, false, 1, 0, 0, props.game);
                 if (data) {
-                    if(props.game==="image") {
+                    if (props.game==="image") {
                         setImageTries(data.triesimage);
                         let zoomActual = parseInt(props.zoomImage.split("%")[0]);
                         let zoomRest = data.triesimage * 50;
@@ -296,6 +299,14 @@ export const Input = (props: any) => {
                     } else if (props.game ==="silueta") {
                         setSiluetaTries(data.triessilueta);
                         let dataTries = data.triessilueta * 40
+                        if(dataTries>= 400) {
+                            props.setGachasRecompensa(100)
+                        } else {
+                            props.setGachasRecompensa(500-dataTries)
+                        }
+                    } else if (props.game==="opening") {
+                        setOpeningTries(data.triesopening);
+                        let dataTries = data.triesopening * 40
                         if(dataTries>= 400) {
                             props.setGachasRecompensa(100)
                         } else {

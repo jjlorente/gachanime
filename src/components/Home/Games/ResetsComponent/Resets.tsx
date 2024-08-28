@@ -1,13 +1,14 @@
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUserGames } from '../Games';
-import { findGameById, resetGame, updateSelected} from '../../../../services/userGames';
+import { findGameById, resetGame, updateSelected } from '../../../../services/userGames';
 
 export const Resets = (props: any) => {
     const { resets, setResets, userGamesData, setUserGamesData } = useUserGames();
     const { setNameTries } = useUserGames();
 
     const resetGameClick = async () => {
+
         if(userGamesData) {
             const data = await resetGame(userGamesData.userid, props.game);
             if(data) {
@@ -23,6 +24,7 @@ export const Resets = (props: any) => {
                             props.findGame(dataImage.imageid)
                         }
                     }
+                    localStorage.setItem("arrayErrorsImage", JSON.stringify([]));  
                 } else if (props.game === "silueta") {
                     const dataSil = await findGameById(data.siluetaid)
                     if(dataSil) {
@@ -34,6 +36,19 @@ export const Resets = (props: any) => {
                             props.findGame(dataSilueta.siluetaid)
                         }
                     }
+                    localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));  
+                } else if (props.game === "opening") {
+                    const dataOpening = await findGameById(data.openingid)
+                    if(dataOpening) {
+                        const randomIndex = Math.floor(Math.random() * dataOpening.opening.length);
+                        localStorage.setItem("openingSelected", randomIndex.toString());
+                        const dataOp = await updateSelected(userGamesData.userid, randomIndex, props.game);
+                        if(dataOp) {
+                            setUserGamesData(dataOp);
+                            props.findGame(dataOp.openingid)
+                        }
+                    }
+                    localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));  
                 } else if (props.game === "name") {
                     const dataName = await findGameById(data.nameid)
                     if(dataName) {
@@ -50,6 +65,7 @@ export const Resets = (props: any) => {
                             props.findGame(dataNameGame.nameid)
                         }
                     }
+                    localStorage.setItem("arrayErrorsName", JSON.stringify([]));  
                 }
             }
         }

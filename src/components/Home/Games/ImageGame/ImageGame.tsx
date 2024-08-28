@@ -79,7 +79,7 @@ export const ImageGame = () => {
                 const randomIndex = Math.floor(Math.random() * data.image_game.length);
                 const imageLocal = localStorage.getItem("imgSelected");
 
-                if (userGamesData && userGamesData.imageSelected) {
+                if (userGamesData && userGamesData.imageSelected && imageLocal) {
                     localStorage.setItem("imgSelected", userGamesData.imageSelected.toString())
                 } else if (userGamesData && userGamesData.imageSelected === undefined && !imageLocal) {
                     const dataImageSelected = await updateSelected(userGamesData.userid, randomIndex, "image");

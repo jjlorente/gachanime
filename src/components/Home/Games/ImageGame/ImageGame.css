@@ -82,7 +82,7 @@
     cursor: pointer;
     transition: ease all .3s;
     
-    width: 80px;
+    width:115px;
 }
 
 .gachas-resets:hover{ 
@@ -113,7 +113,7 @@
     transition: ease all .3s;
     cursor: not-allowed;
     filter: grayscale(100%);
-    width: 80px;
+    width: 115px;
 }
 
 .title-imagegame {

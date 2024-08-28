@@ -10,14 +10,14 @@
 .name-container-game {
     display: flex;
     gap: .2rem;
-    font-size: 2rem;
+    font-size: 3rem;
     flex-direction: row;
 }
 
 .name-input-game {
     padding: 0 !important;
     margin: 0 !important;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 .name-input-game {
@@ -27,12 +27,29 @@
     background-color: #010029;
     text-align: center;
     color: white;
-    width: 60px;
-    height: 60px;
+flex: 1;
     border-radius: 10px;
     border: 2px solid rgb(255, 255, 255);
     box-sizing: border-box;
 }
+ @media (max-width:800px) {
+    .name-input-game {
+        height: 50px;
+        font-size: 2rem;
+    }
+}
+@media (max-width:540px) {
+    .name-input-game {
+        height: 40px;
+        font-size: 2rem;
+    }
+} 
+@media (max-width:400px) {
+    .name-input-game {
+        height: 35px;
+        font-size:1rem;
+    }
+} 
 .active-row-input {
     background-color: #f3f3f3;
     color: black;
@@ -58,20 +75,28 @@
 .container-imagegame-colors {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     gap: 2rem;
     background-color: #14244C;
     padding: 5px 10px;
     border-radius: 10px;
     border: 2px solid white;
-    box-sizing: border-box;
 }
 .div-info-color{
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: .5rem;
+    text-align: center;
+}
+@media (max-width:400px) {
+    .div-info-color {
+        font-size: .54rem;
+    }
 }
 .color-orange {
     width: 30px;

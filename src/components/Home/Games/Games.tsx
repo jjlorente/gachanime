@@ -14,6 +14,8 @@ type ContextType = {
   setSiluetaTries: React.Dispatch<React.SetStateAction<number | null>>;
   nameTries: number | null;
   setNameTries: React.Dispatch<React.SetStateAction<number | null>>;
+  openingTries: number | null;
+  setOpeningTries: React.Dispatch<React.SetStateAction<number | null>>;
   resets: number | null;
   setResets: React.Dispatch<React.SetStateAction<number | null>>;
 };
@@ -29,6 +31,7 @@ export const Games = (props: any) => {
   const [imageTries, setImageTries] = useState<number>(0);
   const [siluetaTries, setSiluetaTries] = useState<number>(0);
   const [nameTries, setNameTries] = useState<number>(0);
+  const [openingTries, setOpeningTries] = useState<number>(0);
 
   const [resets, setResets] = useState<number>(5);
 
@@ -38,10 +41,12 @@ export const Games = (props: any) => {
     try {
       const data = await findUserGames(id);
       if (data) {
+
         setUserGamesData(data);
         setImageTries(data.triesimage);
         setSiluetaTries(data.triessilueta);
         setNameTries(data.triesname);
+        setOpeningTries(data.triesopening);
         setResets(data.resets);
         if (data.triesimage === 0) {
           localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
@@ -51,17 +56,21 @@ export const Games = (props: any) => {
           localStorage.setItem("arrayErrorsName", JSON.stringify([]));
           localStorage.setItem("arrayTriesName", JSON.stringify([]));
           localStorage.setItem("localArrayColors", JSON.stringify([]));
+        } else if (data.triesopening === 0) {
+          localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
         }
+
       } else {
         localStorage.setItem("imgSelected", "");
         localStorage.setItem("siluetaSelected", "");
         localStorage.setItem("nameSelected", "");
+        localStorage.setItem("openingSelected", "");
         localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
         localStorage.setItem("arrayTriesName", JSON.stringify([]));
         localStorage.setItem("localArrayColors", JSON.stringify([]));
         localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
         localStorage.setItem("arrayErrorsName", JSON.stringify([]));
-
+        localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));  
         try {
           const data = await registerNewGameUser(id);
           if (data) {
@@ -69,6 +78,7 @@ export const Games = (props: any) => {
             setImageTries(data.triesimage);
             setSiluetaTries(data.triessilueta);
             setNameTries(data.triesname);
+            setOpeningTries(data.triesopening);
             setResets(data.resets);
           }
         } catch (error: any) {
@@ -129,7 +139,7 @@ export const Games = (props: any) => {
         </Link>
       </div>
       <div className='section-games'>
-        <Outlet context={{ userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, alerts, setAlerts }} />
+        <Outlet context={{ userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, alerts, setAlerts }} />
       </div>
     </div>
   );

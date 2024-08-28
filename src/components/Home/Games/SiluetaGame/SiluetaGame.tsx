@@ -29,7 +29,7 @@ export const SiluetaGame = (props: any) => {
                 setAnimesErrors(JSON.parse(arrayErrors))
             }
         }
-    },[location])
+    },[userGamesData])
 
     useEffect(()=>{
         if(animesErrors && animesErrors.length > 0 && finishedSiluetaGame === false) {
@@ -71,6 +71,8 @@ export const SiluetaGame = (props: any) => {
 
                 if (userGamesData && userGamesData.siluetaSelected) {
                     localStorage.setItem("siluetaSelected", userGamesData.siluetaSelected.toString())
+                    console.log(userGamesData.siluetaSelected)
+                    await updateSelected(userGamesData.userid, userGamesData.siluetaSelected, "silueta");
                 } else if (userGamesData && userGamesData.siluetaSelected === undefined && !siluetaLocal) {
                     const dataSiluetaSelected = await updateSelected(userGamesData.userid, randomIndex, "silueta");
                     setUserGamesData(dataSiluetaSelected);
@@ -89,7 +91,7 @@ export const SiluetaGame = (props: any) => {
 
             <div className='container-image-center'>
                 
-                <div className='section-image-center image-center-game' style={{backgroundColor:"white"}}>        
+                <div className='section-image-center image-center-game' style={{backgroundColor:"white", border:"solid black 2px"}}>        
                     {siluetaSelected !== undefined ? 
                         <img className='img-game' width={"auto"} height={"100%"} src={finishedSiluetaGame ? gameData?.silueta_solution[siluetaSelected] : gameData?.silueta_game[siluetaSelected]} alt="" />
                         :

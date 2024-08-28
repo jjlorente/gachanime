@@ -5,7 +5,7 @@ import { updateReward } from '../../../../services/userGames';
 import { useState, useEffect } from 'react';
 
 export const TriesReward = (props: any) => {
-    const { imageTries, userGamesData, siluetaTries, nameTries } = useUserGames();
+    const { imageTries, userGamesData, siluetaTries, nameTries, openingTries } = useUserGames();
     const { userGachas, setUserGachas } = useUserGachas();
 
     const { alerts, setAlerts } = useUserGachas();
@@ -19,8 +19,10 @@ export const TriesReward = (props: any) => {
             setTries(siluetaTries)
         } else if ( props.game==="name" && nameTries!=null ) {
             setTries(nameTries)
+        } else if ( props.game==="opening" && openingTries!=null ) {
+            setTries(openingTries)
         }
-    },[imageTries,siluetaTries, nameTries])
+    },[imageTries,siluetaTries, nameTries, openingTries])
 
     const claimReward = async () => {
         if(userGamesData && props.gachasRecompensa) {
@@ -32,9 +34,10 @@ export const TriesReward = (props: any) => {
                     props.setStatusReward(data[0].statusRewardImage);
                 } else if (props.game==="silueta") {
                     props.setStatusReward(data[0].statusRewardSilueta);
-                }else if (props.game==="name") {
-                    console.log("hola")
+                } else if (props.game==="name") {
                     props.setStatusReward(data[0].statusRewardName);
+                } else if (props.game==="opening") {
+                    props.setStatusReward(data[0].statusRewardOpening);
                 }
             }
         }

@@ -28,7 +28,7 @@ export const NameGame = () => {
 
   const findNameGame = async (id:any) => {
     try {
-      const data = await findGameById(id)
+      const data = await findGameById(id);
       if (data) {
         setGameData(data);
         if(userGamesData) {
@@ -38,9 +38,9 @@ export const NameGame = () => {
         }
         const randomIndex = Math.floor(Math.random() * data.names_game.length);
         const nameLocal = localStorage.getItem("nameSelected");
-        
         if (userGamesData && userGamesData.nameSelected) {
           localStorage.setItem("nameSelected", userGamesData.nameSelected.toString())
+          await updateSelected(userGamesData.userid, userGamesData.nameSelected, "name");
         } else if (userGamesData && userGamesData.nameSelected === undefined && !nameLocal) {
           const dataNameSelected = await updateSelected(userGamesData.userid, randomIndex, "name");
           setUserGamesData(dataNameSelected);
@@ -72,7 +72,14 @@ export const NameGame = () => {
 
   useEffect(()=>{
     if(gameData && userGamesData) {
-      const formattedName = gameData.names_game[userGamesData.nameSelected]?.replace(/\s+/g, '');
+      let nameSelectedLocal = localStorage.getItem("nameSelected");
+      let formattedName: string = ""
+      if(nameSelectedLocal) {
+        let numero = parseInt(nameSelectedLocal, 10);
+        formattedName = gameData.names_game[numero]?.replace(/\s+/g, '');
+      } else {
+        formattedName = gameData.names_game[userGamesData.nameSelected]?.replace(/\s+/g, '');
+      }
       setPjName(formattedName)
     }
   },[gameData])
@@ -247,7 +254,7 @@ export const NameGame = () => {
       <div style={{ display: "flex", flexDirection: "column", gap: ".6rem" }}>
         {Array.from({ length: 6 }, (_, indexArray) => (
           nameTriesComp === indexArray && finishedNameGame === false ? (
-            <form onSubmit={handleSubmit} className='name-container-game'>
+            <form onSubmit={handleSubmit} className='name-container-game' key={"form-"+indexArray}>
               {pjName ? 
                 pjName.split('').map((char, index) => (
                   index === 0 ? 
@@ -273,10 +280,10 @@ export const NameGame = () => {
                 )) 
                 : null
               }
-              <button style={{ display: "none" }} type="submit"></button>
+              <button key={"button-form-"+indexArray} style={{ display: "none" }} type="submit"></button>
             </form>
           ) : (
-            <div className='name-container-game'>
+            <div className='name-container-game' key={"name-container-"+indexArray}>
               {pjName && errorsArray[indexArray] ? 
                 errorsArray[indexArray].split('').map((char, index) => (
                   <div 
@@ -310,7 +317,7 @@ export const NameGame = () => {
                   :
                   <div 
                     id={index + "inputName"}
-                    key={index + "close"}
+                    key={`${index} close`}
                     className="name-input-game jaro-regular"
                   />
                 ))

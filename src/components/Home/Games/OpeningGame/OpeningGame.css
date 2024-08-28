@@ -1,0 +1,11 @@
+
+/* Customize the advanced audio player's appearance here */
+.audio-player {
+    width: 100%;
+    margin: 20px;
+    background-color: #051641;
+    border-radius:40px;
+    border: solid 7px #020d29;
+    box-sizing: border-box;
+}
+

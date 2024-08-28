@@ -53,26 +53,23 @@ export const Nav = (props: any) => {
           {classNav ? user?.username : ""}{svgMenu}
         </div>
         <div className={classNav ? "nav-items-active" : "nav-items"}>
-          
+            
         {navItems.map((item, index) => (
-          <>
           <Link 
             to={item.link} 
-            key={index} 
+            key={item.link} 
             className={`nav-section link-reset ${item.link === activeIndex ? 'nav-active' : ''}`} 
             onClick={() => setActiveIndex(item.link)}
           >
-            
-            {props.alerts.length > 0 ? 
-              props.alerts.map((alert:string) => {
-                return alert === item.link ? 
+            {
+              props.alerts.length > 0 && 
+              props.alerts.map((alert:string) => (
+                alert === item.link ? 
                   <span className='alert-nav' key={alert}></span> 
                   :
-                  <></>
-              })
-              :
-              <></>
-            } 
+                  null
+              ))
+            }
 
             {icons[item.link as keyof typeof icons]}
             {classNav ? (
@@ -83,8 +80,8 @@ export const Nav = (props: any) => {
               <span key={index+"span-nav-inactive"} className='span-section-nav-inactive'>{item.label}</span>
             )}
           </Link>
-          </>
         ))}
+
         </div>
       </div>
       <div className='container-btn-logout'>
