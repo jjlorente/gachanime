@@ -12,6 +12,8 @@ type ContextType = {
   setUserGachas: React.Dispatch<React.SetStateAction<number | []>>;
   alerts: Array<string> | null;
   setAlerts: React.Dispatch<React.SetStateAction<Array<string> | []>>;
+  activeIndex: string | null;
+  setActiveIndex: React.Dispatch<React.SetStateAction<string>>
 };
 
 export function useUserGachas() {
@@ -79,6 +81,11 @@ export const Home = () => {
   const clearLocalStorage = () => {
     localStorage.removeItem("userData");
     localStorage.removeItem("arrayErrorsImage");
+    localStorage.removeItem("arrayErrorsSilueta");
+    localStorage.removeItem("arrayErrorsOpening");
+    localStorage.removeItem("nameSelected");
+    localStorage.removeItem("siluetaSelected");
+    localStorage.removeItem("openingSelected");
     localStorage.removeItem("imgSelected");
     localStorage.removeItem("alerts");
   };
@@ -107,7 +114,7 @@ export const Home = () => {
     <div className='Home'>
       <Header userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
       <Nav userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex} alerts={alerts} setAlerts={setAlerts}/>
-      <Outlet context={{ userGachas, setUserGachas, alerts, setAlerts }}/>
+      <Outlet context={{ userGachas, setUserGachas, alerts, setAlerts, setActiveIndex }}/>
     </div>
   );
 };

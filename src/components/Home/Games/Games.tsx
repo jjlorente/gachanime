@@ -1,4 +1,4 @@
-import { Link, Outlet, useOutletContext } from 'react-router-dom';
+import { Link, Outlet, useLocation, useOutletContext } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Games.css';
 import { useUserGachas } from "../Home";
@@ -18,6 +18,7 @@ type ContextType = {
   setOpeningTries: React.Dispatch<React.SetStateAction<number | null>>;
   resets: number | null;
   setResets: React.Dispatch<React.SetStateAction<number | null>>;
+  findAllGamesUser: (id: any) => Promise<void>;
 };
 
 export function useUserGames() {
@@ -33,7 +34,7 @@ export const Games = (props: any) => {
   const [nameTries, setNameTries] = useState<number>(0);
   const [openingTries, setOpeningTries] = useState<number>(0);
 
-  const [resets, setResets] = useState<number>(5);
+  const [resets, setResets] = useState<number>(10);
 
   const [index, setIndex] = useState("image");
 
@@ -41,7 +42,6 @@ export const Games = (props: any) => {
     try {
       const data = await findUserGames(id);
       if (data) {
-
         setUserGamesData(data);
         setImageTries(data.triesimage);
         setSiluetaTries(data.triessilueta);
@@ -81,6 +81,7 @@ export const Games = (props: any) => {
             setOpeningTries(data.triesopening);
             setResets(data.resets);
           }
+        
         } catch (error: any) {
           console.error('Error:', error);
         }
@@ -93,14 +94,14 @@ export const Games = (props: any) => {
     }
   };
 
+  const location = useLocation();
   useEffect(() => {
-    const idUser = localStorage.getItem("_id");
-
-    if (idUser) {
-      findAllGamesUser(idUser);
+    if(location) {
+      let path = location.pathname.split("/")[3];
+      setIndex(path)
     }
 
-  }, [index]);
+  }, [location]);
 
   return (
     <div className="Games">
@@ -132,14 +133,14 @@ export const Games = (props: any) => {
         <Link
           to="opening"
           key={"opening"}
-          className={index === "adivinanza" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+          className={index === "opening" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
           onClick={() => { setIndex("adivinanza"); }}
         >
           OPENING
         </Link>
       </div>
       <div className='section-games'>
-        <Outlet context={{ userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, alerts, setAlerts }} />
+        <Outlet context={{ findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, alerts, setAlerts }} />
       </div>
     </div>
   );

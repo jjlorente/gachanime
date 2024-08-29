@@ -16,12 +16,11 @@ export const Resets = (props: any) => {
                 if (props.game === "image") {
                     const dataImg = await findGameById(data.imageid)
                     if(dataImg) {
-                        const randomIndex = Math.floor(Math.random() * dataImg.image_game.length);
-                        localStorage.setItem("imgSelected", randomIndex.toString());
-                        const dataImage = await updateSelected(userGamesData.userid, randomIndex, props.game);
+                        const dataImage = await updateSelected(userGamesData.userid, props.game);
+                        localStorage.setItem("imgSelected", dataImage.imageSelected);
                         if(dataImage) {
                             setUserGamesData(dataImage);
-                            props.findGame(dataImage.imageid)
+                            //props.findGame(dataImage.imageid)
                         }
                     }
                     localStorage.setItem("arrayErrorsImage", JSON.stringify([]));  
@@ -30,10 +29,10 @@ export const Resets = (props: any) => {
                     if(dataSil) {
                         const randomIndex = Math.floor(Math.random() * dataSil.silueta_game.length);
                         localStorage.setItem("siluetaSelected", randomIndex.toString());
-                        const dataSilueta = await updateSelected(userGamesData.userid, randomIndex, props.game);
+                        const dataSilueta = await updateSelected(userGamesData.userid, props.game);
                         if(dataSilueta) {
                             setUserGamesData(dataSilueta);
-                            props.findGame(dataSilueta.siluetaid)
+                            //props.findGame(dataSilueta.siluetaid)
                         }
                     }
                     localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));  
@@ -42,10 +41,10 @@ export const Resets = (props: any) => {
                     if(dataOpening) {
                         const randomIndex = Math.floor(Math.random() * dataOpening.opening.length);
                         localStorage.setItem("openingSelected", randomIndex.toString());
-                        const dataOp = await updateSelected(userGamesData.userid, randomIndex, props.game);
+                        const dataOp = await updateSelected(userGamesData.userid, props.game);
                         if(dataOp) {
                             setUserGamesData(dataOp);
-                            props.findGame(dataOp.openingid)
+                            //props.findGame(dataOp.openingid)
                         }
                     }
                     localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));  
@@ -57,12 +56,13 @@ export const Resets = (props: any) => {
 
                         setNameTries(0);
                         props.setArrayColors([])
+
                         const randomIndex = Math.floor(Math.random() * dataName.names_game.length);
                         localStorage.setItem("nameSelected", randomIndex.toString());
-                        const dataNameGame = await updateSelected(userGamesData.userid, randomIndex, props.game);
+                        const dataNameGame = await updateSelected(userGamesData.userid, props.game);
                         if(dataNameGame) {
                             setUserGamesData(dataNameGame);
-                            props.findGame(dataNameGame.nameid)
+                            //props.findGame(dataNameGame.nameid)
                         }
                     }
                     localStorage.setItem("arrayErrorsName", JSON.stringify([]));  
@@ -80,7 +80,7 @@ export const Resets = (props: any) => {
 
             <span className={resets === 0 || props.finishedGame === true ? "resets-empty" : "gachas-resets"} onClick={resets === 0 || props.finishedGame ? undefined : resetGameClick}>
                 <>
-                    {resets} / 5
+                    {resets} / 10
                     <FontAwesomeIcon icon={faRotateRight} className={resets === 0 || props.finishedGame === true ? "" : "refresh"} />  
                 </>
             </span> 

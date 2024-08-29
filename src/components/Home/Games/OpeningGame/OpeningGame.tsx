@@ -6,127 +6,126 @@ import { Game } from '../../../Interfaces/GamesUser';
 import { Resets } from '../ResetsComponent/Resets';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { Input } from '../InputComponent/Input';
-import "@madzadev/audio-player/dist/index.css";
 import ReactAudioPlayer from 'react-audio-player';
 
 export const OpeningGame = () => {
-  const { userGamesData, setUserGamesData } = useUserGames();
+    const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
 
-  const [finishedOpeningGame, setFinishedOpeningGame] = useState<boolean>();
-  const [gameOpeningData, setGameOpeningData] = useState<Game>();
-  const [openingSelected, setOpeningSelected] = useState<number>();
-  const [animeNameImage, setAnimeNameImage] = useState<string>();
-  const [base64Audio, setBase64Audio] = useState<string>();
-  const [openingErrors, setOpeningErrors] = useState<Array<string>>([]);
-  const [gachasRecompensa, setGachasRecompensa] = useState<number>();
-  const [statusReward, setStatusReward] = useState<number>();
+    const [finishedOpeningGame, setFinishedOpeningGame] = useState<boolean>();
+    const [gameOpeningData, setGameOpeningData] = useState<Game>();
+    const [openingSelected, setOpeningSelected] = useState<number>();
+    const [animeNameImage, setAnimeNameImage] = useState<string>();
+    const [base64Audio, setBase64Audio] = useState<string>();
+    const [openingErrors, setOpeningErrors] = useState<Array<string>>([]);
+    const [gachasRecompensa, setGachasRecompensa] = useState<number>();
+    const [statusReward, setStatusReward] = useState<number>();
 
-  useEffect(()=> {
-    let arrayErrors = localStorage.getItem("arrayErrorsOpening");
-    if(!arrayErrors) {
-        localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
-    } else {
-        setOpeningErrors(JSON.parse(arrayErrors))
-    }
-  },[userGamesData])
+    useEffect(() => {
+        const idUser = localStorage.getItem("_id");
+        if (idUser) {
+          findAllGamesUser(idUser);
+        }
+      }, []);
 
-  useEffect(()=>{
-    if(openingErrors && openingErrors.length > 0 ) {
-        localStorage.setItem("arrayErrorsOpening", JSON.stringify(openingErrors));
-    }
-  }, [openingErrors])
+    useEffect(()=> {
+        let arrayErrors = localStorage.getItem("arrayErrorsOpening");
+        if(!arrayErrors) {
+            localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
+        } else {
+            setOpeningErrors(JSON.parse(arrayErrors))
+        }
+    },[userGamesData])
 
-  useEffect(()=>{
-    if(userGamesData) {
-        findOpeningGame(userGamesData.openingid)
-        setOpeningSelected(userGamesData.openingSelected)
-    }
-  }, [userGamesData])
+    useEffect(()=>{
+        if(openingErrors && openingErrors.length > 0 ) {
+            localStorage.setItem("arrayErrorsOpening", JSON.stringify(openingErrors));
+        }
+    }, [openingErrors])
 
-  const findOpeningGame = async (id:any) => {
-    try {
-        const data = await findGameById(id);
-        if (data) {
-            setAnimeNameImage(data.anime_name);
-            setGameOpeningData(data);
-            setBase64Audio("data:audio/wav;base64,"+data.opening);
-            if(userGamesData) {
-                setFinishedOpeningGame(userGamesData.finishedOpening);
-                let dataTries = userGamesData.triesopening * 40
-                if(dataTries>= 400) {
-                    setGachasRecompensa(100)
-                } else {
-                    setGachasRecompensa(500-dataTries)
+    useEffect(()=>{
+        if(userGamesData) {
+            findOpeningGame(userGamesData.openingid)
+            setOpeningSelected(userGamesData.openingSelected)
+        }
+    }, [userGamesData])
+
+    const findOpeningGame = async (id:any) => {
+        try {
+            const data = await findGameById(id);
+            if (data) {
+                setAnimeNameImage(data.anime_name);
+                setGameOpeningData(data);
+                setBase64Audio("data:audio/wav;base64,"+data.opening);
+                if(userGamesData) {
+                    setFinishedOpeningGame(userGamesData.finishedOpening);
+                    let dataTries = userGamesData.triesopening * 10
+                    if(dataTries>= 100) {
+                        setGachasRecompensa(100)
+                    } else {
+                        setGachasRecompensa(200-dataTries)
+                    }
+
+                    setStatusReward(userGamesData.statusRewardOpening)
                 }
 
-                setStatusReward(userGamesData.statusRewardOpening)
+                const openingLocal = localStorage.getItem("openingSelected");
+                if (userGamesData && userGamesData.openingSelected) {
+                    localStorage.setItem("openingSelected", userGamesData.openingSelected.toString());
+                } else if (userGamesData && !openingLocal) {
+                    const dataOpeningSelected = await updateSelected(userGamesData.userid, "opening");
+                    setUserGamesData(dataOpeningSelected);
+                    localStorage.setItem("openingSelected", dataOpeningSelected.openingSelected)
+                }
             }
-            const randomIndex = Math.floor(Math.random() * data.opening.length);
-            const openingLocal = localStorage.getItem("openingSelected");
+        } catch (error: any) {
+            console.error('Error:', error);
+        }
+    };
 
-            if (userGamesData && userGamesData.openingSelected) {
-                localStorage.setItem("openingSelected", userGamesData.openingSelected.toString());
-                await updateSelected(userGamesData.userid, userGamesData.openingSelected, "opening");
-            } else if (userGamesData && userGamesData.openingSelected === undefined && !openingLocal) {
-                const dataOpeningSelected = await updateSelected(userGamesData.userid, randomIndex, "opening");
-                setUserGamesData(dataOpeningSelected);
-                localStorage.setItem("openingSelected", randomIndex.toString())
+    return (
+        <div className='container-imagegame'>
+
+        <Resets title={"¿De que anime es el opening?"} game={"opening"} finishedGame={finishedOpeningGame} findGame={findOpeningGame}/>
+            <div className='container-image-center'>
+                {gameOpeningData !== undefined && base64Audio !== undefined ? 
+                    <ReactAudioPlayer
+                        id="audio"
+                        src={base64Audio}
+                        className="audio-player"
+                        controls
+                    />
+                    :
+                    <></>
+                }       
+            </div>
+
+            {
+                finishedOpeningGame === true ?    
+                    <span className='span-info-image'>¡Enhorabuena! Recoge tu recompensa y vuelve mañana para un nuevo opening.</span>
+                    :
+                    null
             }
-        }
-    } catch (error: any) {
-        console.error('Error:', error);
-    }
-  };
 
-  const [isPlaying, setIsPlaying] = useState(false)
-  const toggleAudio = () => {
-    const audio = document.getElementById("audio") as HTMLAudioElement;;
-    const playPauseButton = document.getElementById("play-pause-button");
-
-    if (isPlaying && audio && playPauseButton) {
-        audio.pause();
-        playPauseButton.textContent = "Play";
-    } else {
-        if (audio && playPauseButton) {
-            audio.play();
-            playPauseButton.textContent = "Pause";
-        }
-    }
-    setIsPlaying(!isPlaying);
-  }
-
-  return (
-    <div className='container-imagegame'>
-
-      <Resets title={"¿De que anime es el opening?"} game={"opening"} finishedGame={finishedOpeningGame} findGame={findOpeningGame}/>
-        <div className='container-image-center'>
-            {gameOpeningData !== undefined && base64Audio !== undefined ? 
-                <ReactAudioPlayer
-                    id="audio"
-                    src={base64Audio}
-                    className="audio-player"
-                    controls
-                />
-                :
-                <></>
-            }       
+            <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedOpeningGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"opening"}/>
+        
+        <div className='container-imagegame-input'>
+            {
+                    finishedOpeningGame === true ?  
+                        null  
+                        :
+                        <span className='span-info-image'>Cada intento fallido pierdes 10 gachas de la recompensa final.</span>
+            }
+            <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
         </div>
-
-        <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedOpeningGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"opening"}/>
-      
-      <div className='container-imagegame-input'>
-        <span className='span-info-image'>Cada intento fallido pierdes 20 gachas de la recompensa final.</span>
-        <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
-      </div>
-      {openingErrors && finishedOpeningGame === false ? 
-          <div className='errors-imagegame'>
-              {openingErrors.slice().reverse().map((anime, index) => (
-                  <span key={index + "error"} className='error-span-image' style={{fontSize:"1.3rem"}}>{anime}</span>
-              ))}
-          </div>
-          :
-          <></>
-      }
-    </div>
-  )
+        {openingErrors && finishedOpeningGame === false ? 
+            <div className='errors-imagegame'>
+                {openingErrors.slice().reverse().map((anime, index) => (
+                    <span key={index + "error"} className='error-span-image' style={{fontSize:"1.3rem"}}>{anime}</span>
+                ))}
+            </div>
+            :
+            <></>
+        }
+        </div>
+    )
 }

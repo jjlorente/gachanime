@@ -9,6 +9,7 @@ import { Input } from '../InputComponent/Input';
 import { Game } from '../../../Interfaces/GamesUser';
 import { useLocation } from 'react-router-dom';
 import { updateGameUser, findCharacters } from '../../../../services/userGames';
+import { trefoil } from 'ldrs';
 
 export const NameGame = () => {
   const [gameData, setGameData] = useState<Game>();
@@ -22,9 +23,18 @@ export const NameGame = () => {
   const [errorsArray, setErrorsArray] = useState<Array<string>>([]);
   const [nameTriesComp, setNameTriesComp] = useState<number>(0);
 
-  const { userGamesData, setUserGamesData } = useUserGames();
+  const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
   const { alerts, setAlerts } = useUserGachas();
   const { nameTries, setNameTries } = useUserGames();
+
+  trefoil.register();
+
+  useEffect(() => {
+    const idUser = localStorage.getItem("_id");
+    if (idUser) {
+      findAllGamesUser(idUser);
+    }
+  }, []);
 
   const findNameGame = async (id:any) => {
     try {
@@ -36,17 +46,17 @@ export const NameGame = () => {
           setGachasRecompensa(200)
           setStatusReward(userGamesData.statusRewardName)
         }
-        const randomIndex = Math.floor(Math.random() * data.names_game.length);
+
         const nameLocal = localStorage.getItem("nameSelected");
         if (userGamesData && userGamesData.nameSelected) {
           localStorage.setItem("nameSelected", userGamesData.nameSelected.toString())
-          await updateSelected(userGamesData.userid, userGamesData.nameSelected, "name");
-        } else if (userGamesData && userGamesData.nameSelected === undefined && !nameLocal) {
-          const dataNameSelected = await updateSelected(userGamesData.userid, randomIndex, "name");
+        } else if (userGamesData && !nameLocal) {
+          const dataNameSelected = await updateSelected(userGamesData.userid, "name");
           setUserGamesData(dataNameSelected);
-          localStorage.setItem("nameSelected", randomIndex.toString())
+          localStorage.setItem("nameSelected", dataNameSelected.nameSelected)
         }
       }
+
     } catch (error: any) {
         console.error('Error:', error);
     }
@@ -251,7 +261,7 @@ export const NameGame = () => {
         setArrayColors={setArrayColors}
       />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: ".6rem" }}>
+      <div className='container-name-game' style={{ display: "flex", flexDirection: "column", gap: ".6rem", width:"100%",justifyContent:"center" }}>
         {Array.from({ length: 6 }, (_, indexArray) => (
           nameTriesComp === indexArray && finishedNameGame === false ? (
             <form onSubmit={handleSubmit} className='name-container-game' key={"form-"+indexArray}>
@@ -278,7 +288,8 @@ export const NameGame = () => {
                     autoComplete="off"
                   />
                 )) 
-                : null
+                :                         
+                <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
               }
               <button key={"button-form-"+indexArray} style={{ display: "none" }} type="submit"></button>
             </form>
@@ -327,9 +338,9 @@ export const NameGame = () => {
         ))}
       </div>
       
-      {nameTriesComp >= 3 ? 
+      {nameTriesComp >= 3 && finishedNameGame === false ? 
         <div className='container-imagegame-input'>
-          <span className='span-info-image' style={{backgroundColor:nameTriesComp >= 6 && finishedNameGame === false ? "red" : "#1AB616", padding:"5px 20px", borderRadius:"5px", fontSize:"1.5rem",border:"2px solid white"}}>
+          <span className='span-info-clue' style={{backgroundColor:nameTriesComp >= 6 && finishedNameGame === false ? "red" : "#1AB616"}}>
             {nameTriesComp >= 6 && finishedNameGame === false && pjName ? pjName.toUpperCase() + " de " + gameData?.anime_name  : gameData?.anime_name}
           </span>
         </div>
@@ -337,25 +348,42 @@ export const NameGame = () => {
         <></>
       }
 
-      <div className='container-imagegame-colors'>
-        <div className='div-info-color'>
-          <span className='color-green'></span>
-          <span>Posición correcta</span>
+      {finishedNameGame === true ? 
+        <div className='container-imagegame-input'>
+          <span className='span-info-clue' style={{backgroundColor:"#1AB616", padding:"5px 20px", borderRadius:"5px", fontSize:"1.5rem",border:"2px solid white"}}>
+            {pjName ? pjName.toUpperCase() + " de " + gameData?.anime_name  : gameData?.anime_name}
+          </span>
         </div>
-        <div className='div-info-color'>
-          <span className='color-orange'></span>
-          <span>Posición incorrecta</span>
+
+        :
+
+        <div className='container-imagegame-colors'>
+          <div className='div-info-color'>
+            <span className='color-green'></span>
+            <span>Posición correcta</span>
+          </div>
+          <div className='div-info-color'>
+            <span className='color-orange'></span>
+            <span>Posición incorrecta</span>
+          </div>
+          <div className='div-info-color'>
+            <span className='color-red'></span>
+            <span>No contiene la letra</span>    
+          </div>
         </div>
-        <div className='div-info-color'>
-          <span className='color-red'></span>
-          <span>No contiene la letra</span>    
-        </div>
-      </div>
+      }
 
       <div className='container-imagegame-input'>
-        <span className='span-info-image'>
-          A los 3 fallos se muestra el anime del personaje. Recibe 200 gachas al acertar.
-        </span>
+        {
+          finishedNameGame === true ? 
+          <span className='span-info-image'>
+            ¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva palabra.
+          </span>
+          :
+          <span className='span-info-image'>
+            A los 3 fallos se muestra el anime del personaje. Recibe 200 gachas al acertar.
+          </span>
+        }
       </div>
 
       <TriesReward 

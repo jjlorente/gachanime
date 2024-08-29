@@ -2,7 +2,7 @@ import './ImageGame.css'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import { findGameById, updateSelected} from '../../../../services/userGames';
+import { findGameById, updateSelected } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
 import { trefoil } from 'ldrs';
 import { useUserGames } from '../Games';
@@ -11,7 +11,7 @@ import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { Input } from '../InputComponent/Input';
 
 export const ImageGame = () => {
-    const { userGamesData, setUserGamesData } = useUserGames();
+    const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
 
     library.add(faRotateRight);
     trefoil.register();
@@ -24,6 +24,13 @@ export const ImageGame = () => {
     const [zoomImage, setZoomImage] = useState<string>("500%");
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>();
+
+    useEffect(() => {
+        const idUser = localStorage.getItem("_id");
+        if (idUser) {
+          findAllGamesUser(idUser);
+        }
+    }, []);
 
     useEffect(()=> {
         let arrayErrors = localStorage.getItem("arrayErrorsImage");
@@ -67,24 +74,23 @@ export const ImageGame = () => {
                         }
                     }
 
-                    let dataTries = userGamesData.triesimage * 40
-                    if(dataTries>= 400) {
+                    let dataTries = userGamesData.triesimage * 10
+                    if(dataTries>= 100) {
                         setGachasRecompensa(100)
                     } else {
-                        setGachasRecompensa(500-dataTries)
+                        setGachasRecompensa(200-dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardImage)
                 }
-                const randomIndex = Math.floor(Math.random() * data.image_game.length);
                 const imageLocal = localStorage.getItem("imgSelected");
 
                 if (userGamesData && userGamesData.imageSelected && imageLocal) {
                     localStorage.setItem("imgSelected", userGamesData.imageSelected.toString())
-                } else if (userGamesData && userGamesData.imageSelected === undefined && !imageLocal) {
-                    const dataImageSelected = await updateSelected(userGamesData.userid, randomIndex, "image");
+                } else if (userGamesData && !imageLocal) {
+                    const dataImageSelected = await updateSelected(userGamesData.userid, "image");
                     setUserGamesData(dataImageSelected);
-                    localStorage.setItem("imgSelected", randomIndex.toString())
+                    localStorage.setItem("imgSelected", dataImageSelected.imageSelected)
                 }
             }
         } catch (error: any) {
@@ -105,13 +111,23 @@ export const ImageGame = () => {
                         <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                     }       
                 </div>
-
+                
+                {
+                    finishedImageGame === false ?    
+                        null            
+                        :
+                        <span className='span-info-image'>¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva imagen.</span>
+                }
                 <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedImageGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"image"}/>
             
             </div>
             <div className='container-imagegame-input'>
-                <span className='span-info-image'>Cada intento fallido aleja un poco la imágen y pierdes 20 gachas de la recompensa final.</span>
-
+                {
+                    finishedImageGame === false ?                
+                        <span className='span-info-image'>Cada intento fallido aleja un poco la imágen y pierdes 10 gachas de la recompensa final.</span>
+                        :
+                        null
+                }
                 <Input zoomImage={zoomImage} setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setAnimesErrors} finishedGame={finishedImageGame} solution={animeNameImage} game={"image"} setFinishedGame={setFinishedImageGame} setStatusReward={setStatusReward} setZoomImage={setZoomImage}/>
             </div>
             {animesErrors && finishedImageGame === false ? 

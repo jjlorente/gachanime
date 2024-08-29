@@ -12,12 +12,23 @@
     gap: .2rem;
     font-size: 3rem;
     flex-direction: row;
+    justify-content: center;
 }
 
 .name-input-game {
     padding: 0 !important;
     margin: 0 !important;
     font-size: 3rem;
+}
+
+.span-info-clue {
+    padding:5px 20px;
+    border-radius:5px; 
+    font-size:1.5rem !important;
+    border:2px solid white;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
 }
 
 .name-input-game {
@@ -27,7 +38,7 @@
     background-color: #010029;
     text-align: center;
     color: white;
-flex: 1;
+    flex: 1;
     border-radius: 10px;
     border: 2px solid rgb(255, 255, 255);
     box-sizing: border-box;
@@ -83,6 +94,7 @@ flex: 1;
     padding: 5px 10px;
     border-radius: 10px;
     border: 2px solid white;
+    box-sizing: border-box;
 }
 .div-info-color{
     display: flex;

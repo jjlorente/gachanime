@@ -25,7 +25,7 @@
     border-radius: 10px;
     border: 2px solid orange;
     background-color: rgb(0, 89, 255);
-    width: 80px;
+    width: 100px;
     text-align: center;
 }
 .gachas-recompensa-inactive{
@@ -82,7 +82,7 @@
     cursor: pointer;
     transition: ease all .3s;
     
-    width:115px;
+    width:100px;
 }
 
 .gachas-resets:hover{ 
@@ -113,7 +113,7 @@
     transition: ease all .3s;
     cursor: not-allowed;
     filter: grayscale(100%);
-    width: 115px;
+    width: 100px;
 }
 
 .title-imagegame {
@@ -358,7 +358,7 @@
         gap: .5rem;
         padding: 4px 8px;
         font-size: 1rem;
-        width: 80px;
+        width: 100px;
     }
     .svg-inline--fa {
         width: 25px;
@@ -381,7 +381,7 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
     .header-imagegame {
         width: 100%;
         display: flex;

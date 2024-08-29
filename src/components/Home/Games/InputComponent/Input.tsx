@@ -290,27 +290,27 @@ export const Input = (props: any) => {
                         } else {
                             props.setZoomImage("100%");
                         }
-                        let dataTries = data.triesimage * 40
-                        if(dataTries>= 400) {
+                        let dataTries = data.triesimage * 10
+                        if(dataTries>= 100) {
                             props.setGachasRecompensa(100)
                         } else {
-                            props.setGachasRecompensa(500-dataTries)
+                            props.setGachasRecompensa(200-dataTries)
                         }
                     } else if (props.game ==="silueta") {
                         setSiluetaTries(data.triessilueta);
-                        let dataTries = data.triessilueta * 40
-                        if(dataTries>= 400) {
+                        let dataTries = data.triessilueta * 10
+                        if(dataTries>= 100) {
                             props.setGachasRecompensa(100)
                         } else {
-                            props.setGachasRecompensa(500-dataTries)
+                            props.setGachasRecompensa(200-dataTries)
                         }
                     } else if (props.game==="opening") {
                         setOpeningTries(data.triesopening);
-                        let dataTries = data.triesopening * 40
-                        if(dataTries>= 400) {
+                        let dataTries = data.triesopening * 10
+                        if(dataTries>= 100) {
                             props.setGachasRecompensa(100)
                         } else {
-                            props.setGachasRecompensa(500-dataTries)
+                            props.setGachasRecompensa(200-dataTries)
                         }
                     }
                 }
@@ -328,7 +328,7 @@ export const Input = (props: any) => {
                             type="text"
                             className="input-imagegame jaro-regular"
                             maxLength={50}
-                            placeholder={ props.game === "image" ? "Escribe el nombre del anime..." : "Escribe el nombre del personaje..." }
+                            placeholder={ props.game === "image" || props.game === "opening" ? "Escribe el nombre del anime..." : "Escribe el nombre del personaje..." }
                             onChange={changeInputName}
                             value={valueInput}
                         />

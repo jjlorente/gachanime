@@ -87,14 +87,14 @@ export const updateGameUser = async (userid: string, finished: boolean, tries: N
     }
 };
 
-export const updateSelected = async (userid: string,  num: Number, game: string) => {
+export const updateSelected = async (userid: string, game: string) => {
     try {
         const response = await fetch('http://localhost:3000/api/userGames/updateSelected', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ userid, num, game }),
+            body: JSON.stringify({ userid, game }),
         });
 
         if (!response.ok) {
