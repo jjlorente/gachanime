@@ -61,12 +61,8 @@ export const Quests = (props:any) => {
         </div>
         {section === "daily" ? 
           <section className='section-quest-comp'>
-            {/* <div style={{display:"flex",width:"100%", justifyContent:"end",alignItems:"center"}}>
-              <span>TIMER</span>
-            </div> */}
             <div className='container-quests'>
-
-
+              
               <div className='container-quest'>
                 <div className='progress-quest'>
                   <span>Progreso</span>
