@@ -265,11 +265,12 @@ export const Input = (props: any) => {
                 if (alertGame) {
                   let arrayAlerts = JSON.parse(alertGame);
                   arrayAlerts.push("games");
+                  arrayAlerts.push("quests");
                   localStorage.setItem("alerts", JSON.stringify(arrayAlerts));
                   setAlerts(arrayAlerts);
                 } else {
-                  localStorage.setItem("alerts", JSON.stringify(["games"]));
-                  setAlerts(["games"]);
+                  localStorage.setItem("alerts", JSON.stringify(["games","quests"]));
+                  setAlerts(["games","quests"]);
                 }
 
             }
@@ -290,27 +291,27 @@ export const Input = (props: any) => {
                         } else {
                             props.setZoomImage("100%");
                         }
-                        let dataTries = data.triesimage * 10
-                        if(dataTries>= 100) {
-                            props.setGachasRecompensa(100)
+                        let dataTries = data.triesimage * 5
+                        if(dataTries>= 50) {
+                            props.setGachasRecompensa(50)
                         } else {
-                            props.setGachasRecompensa(200-dataTries)
+                            props.setGachasRecompensa(100-dataTries)
                         }
                     } else if (props.game ==="silueta") {
                         setSiluetaTries(data.triessilueta);
-                        let dataTries = data.triessilueta * 10
-                        if(dataTries>= 100) {
-                            props.setGachasRecompensa(100)
+                        let dataTries = data.triessilueta * 5
+                        if(dataTries>= 50) {
+                            props.setGachasRecompensa(50)
                         } else {
-                            props.setGachasRecompensa(200-dataTries)
+                            props.setGachasRecompensa(100-dataTries)
                         }
                     } else if (props.game==="opening") {
                         setOpeningTries(data.triesopening);
-                        let dataTries = data.triesopening * 10
-                        if(dataTries>= 100) {
-                            props.setGachasRecompensa(100)
+                        let dataTries = data.triesopening * 5
+                        if(dataTries>= 50) {
+                            props.setGachasRecompensa(50)
                         } else {
-                            props.setGachasRecompensa(200-dataTries)
+                            props.setGachasRecompensa(100-dataTries)
                         }
                     }
                 }

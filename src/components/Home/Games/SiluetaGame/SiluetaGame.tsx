@@ -61,11 +61,11 @@ export const SiluetaGame = (props: any) => {
                 setGameData(data);
                 if(userGamesData) {
                     setFinishedSiluetaGame(userGamesData.finishedSilueta);
-                    let dataTries = userGamesData.triessilueta * 10;
-                    if(dataTries>= 100) {
-                        setGachasRecompensa(100)
+                    let dataTries = userGamesData.triessilueta * 5;
+                    if(dataTries>= 50) {
+                        setGachasRecompensa(50)
                     } else {
-                        setGachasRecompensa(200-dataTries)
+                        setGachasRecompensa(100-dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardSilueta)
@@ -115,7 +115,7 @@ export const SiluetaGame = (props: any) => {
 
                 {
                     finishedSiluetaGame === false ?    
-                        <span className='span-info-image'>Cada intento fallido pierdes 10 gachas de la recompensa final.</span>
+                        <span className='span-info-image'>Cada intento fallido pierdes 5 gachas de la recompensa final.</span>
                         :
                         null
                 }

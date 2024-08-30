@@ -43,7 +43,7 @@ export const NameGame = () => {
         setGameData(data);
         if(userGamesData) {
           setFinishedNameGame(userGamesData.finishedName);
-          setGachasRecompensa(200)
+          setGachasRecompensa(100)
           setStatusReward(userGamesData.statusRewardName)
         }
 
@@ -157,11 +157,12 @@ export const NameGame = () => {
         if (alertGame) {
           let arrayAlerts = JSON.parse(alertGame);
           arrayAlerts.push("games");
+          arrayAlerts.push("quests");
           localStorage.setItem("alerts", JSON.stringify(arrayAlerts));
           setAlerts(arrayAlerts);
         } else {
-          localStorage.setItem("alerts", JSON.stringify(["games"]));
-          setAlerts(["games"]);
+          localStorage.setItem("alerts", JSON.stringify(["games", "quests"]));
+          setAlerts(["games", "quests"]);
         }
 
       } else {
@@ -381,7 +382,7 @@ export const NameGame = () => {
           </span>
           :
           <span className='span-info-image'>
-            A los 3 fallos se muestra el anime del personaje. Recibe 200 gachas al acertar.
+            A los 3 fallos se muestra el anime del personaje. Recibe 100 gachas al acertar.
           </span>
         }
       </div>

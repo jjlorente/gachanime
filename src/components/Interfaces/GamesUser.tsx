@@ -31,3 +31,18 @@ export interface Game {
     silueta_solution: Array<string>;
     opening: Array<string>;
 }
+
+export interface UserQuests {
+    userid: string;
+    statusQuestImage: number;
+    statusQuestSilueta: number;
+    statusQuestName: number;
+    statusQuestOpening: number;
+    statusQuestAllGames: number;
+}
+
+export interface QuestsData {
+    name: string;
+    reward: number;
+    type: string;
+}

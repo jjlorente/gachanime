@@ -4,6 +4,8 @@ import './Games.css';
 import { useUserGachas } from "../Home";
 import { findUserGames, findGameById, registerNewGameUser } from '../../../services/userGames';
 import { GameData, Game } from '../../Interfaces/GamesUser';
+import { Quests } from '../Quests/Quests';
+import { findAllQuestUser } from '../../../services/userQuests';
 
 type ContextType = { 
   userGamesData: GameData | null;
@@ -27,7 +29,6 @@ export function useUserGames() {
 
 export const Games = (props: any) => {
   const { userGachas, setUserGachas, alerts, setAlerts } = useUserGachas();
-
   const [userGamesData, setUserGamesData] = useState<GameData>();
   const [imageTries, setImageTries] = useState<number>(0);
   const [siluetaTries, setSiluetaTries] = useState<number>(0);
@@ -73,6 +74,7 @@ export const Games = (props: any) => {
         localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));  
         try {
           const data = await registerNewGameUser(id);
+          await findAllQuestUser(id);
           if (data) {
             setUserGamesData(data);
             setImageTries(data.triesimage);

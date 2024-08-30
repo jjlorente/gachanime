@@ -108,7 +108,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
 }
@@ -121,7 +121,7 @@
     align-items: center;
     background-color: #036fd4;   
     width: 100%;
-    max-width: 200px;
+    max-width: 190px;
     border-radius: 5px;
     box-sizing: border-box;
     border: solid 2px rgba(0, 0, 0, 0.425);
@@ -215,4 +215,39 @@
 .link-quest-btn:hover {
     transform: scale(1.05);
     background-color: #2a4c8b;
+}
+
+.reward {
+    background-color: rgb(20, 134, 29) !important;
+    cursor: pointer;
+}
+
+.reward-obtained {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border-radius: 10px;
+    border: 2px solid #FEAA2A;
+    background-color: #14244C;
+    text-align: center;
+    color: #FEAA2A;
+    padding: 5px 20px;
+}
+
+.quest-recompensa-active-click {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 4px 15px;
+    border-radius: 10px;
+    border: 2px solid white;
+    background-color: #0389e2;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: ease all .3s;
+    position: relative;
 }

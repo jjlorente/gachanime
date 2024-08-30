@@ -74,11 +74,11 @@ export const ImageGame = () => {
                         }
                     }
 
-                    let dataTries = userGamesData.triesimage * 10
-                    if(dataTries>= 100) {
-                        setGachasRecompensa(100)
+                    let dataTries = userGamesData.triesimage * 5
+                    if(dataTries>= 50) {
+                        setGachasRecompensa(50)
                     } else {
-                        setGachasRecompensa(200-dataTries)
+                        setGachasRecompensa(100-dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardImage)
@@ -124,7 +124,7 @@ export const ImageGame = () => {
             <div className='container-imagegame-input'>
                 {
                     finishedImageGame === false ?                
-                        <span className='span-info-image'>Cada intento fallido aleja un poco la imágen y pierdes 10 gachas de la recompensa final.</span>
+                        <span className='span-info-image'>Cada intento fallido aleja un poco la imágen y pierdes 5 gachas de la recompensa final.</span>
                         :
                         null
                 }

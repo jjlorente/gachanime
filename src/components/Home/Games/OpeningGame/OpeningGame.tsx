@@ -58,11 +58,11 @@ export const OpeningGame = () => {
                 setBase64Audio("data:audio/wav;base64,"+data.opening);
                 if(userGamesData) {
                     setFinishedOpeningGame(userGamesData.finishedOpening);
-                    let dataTries = userGamesData.triesopening * 10
-                    if(dataTries>= 100) {
-                        setGachasRecompensa(100)
+                    let dataTries = userGamesData.triesopening * 5
+                    if(dataTries>= 50) {
+                        setGachasRecompensa(50)
                     } else {
-                        setGachasRecompensa(200-dataTries)
+                        setGachasRecompensa(100-dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardOpening)
@@ -113,7 +113,7 @@ export const OpeningGame = () => {
                     finishedOpeningGame === true ?  
                         null  
                         :
-                        <span className='span-info-image'>Cada intento fallido pierdes 10 gachas de la recompensa final.</span>
+                        <span className='span-info-image'>Cada intento fallido pierdes 5 gachas de la recompensa final.</span>
             }
             <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
         </div>
