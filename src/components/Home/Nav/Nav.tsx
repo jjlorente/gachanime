@@ -61,15 +61,17 @@ export const Nav = (props: any) => {
             className={`nav-section link-reset ${item.link === activeIndex ? 'nav-active' : ''}`} 
             onClick={() => setActiveIndex(item.link)}
           >
-            {/* {
-              props.alerts.length > 0 && 
-              props.alerts.map((alert:string) => (
-                alert === item.link ? 
-                  <span className='alert-nav' key={alert}></span> 
-                  :
-                  null
-              ))
-            } */}
+            {
+              /* {
+                props.alerts.length > 0 && 
+                props.alerts.map((alert:string) => (
+                  alert === item.link ? 
+                    <span className='alert-nav' key={alert}></span> 
+                    :
+                    null
+                ))
+              } */
+            }
 
             {icons[item.link as keyof typeof icons]}
             {classNav ? (
