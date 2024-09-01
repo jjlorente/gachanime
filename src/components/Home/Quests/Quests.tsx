@@ -5,6 +5,7 @@ import { findAllQuestUser, findQuests, updateReward } from '../../../services/us
 import { QuestsData, UserQuests } from '../../Interfaces/GamesUser';
 import { useUserGachas } from '../Home';
 import RelativeTimeElement from './relative-time-element-define.js'
+import { findDay } from '../../../services/day';
 
 export {RelativeTimeElement}
 export default RelativeTimeElement
@@ -36,9 +37,19 @@ export const Quests = (props:any) => {
       if (idUser) {
         const data = await findAllQuestUser(idUser);
         const dataQuest = await findQuests();
+        const day = await findDay();
+
+        let lastReset = new Date(day.lastReset);
+        lastReset.setDate(lastReset.getDate() + 1);
+        let year = lastReset.getFullYear();
+        let month = String(lastReset.getMonth() + 1);
+        let dayOfMonth = String(lastReset.getDate());
+        let formattedDate = `${year},${month},${dayOfMonth}`;
+        // setDailyTime(formattedDate)
+
         if(data) {
           setUserQuestsData(data);
-          setQuests(dataQuest)
+          setQuests(dataQuest);
         }
       }
     };
@@ -167,17 +178,17 @@ export const Quests = (props:any) => {
         <div className='title-quest-container'>
           <span onClick={() => {setSection("daily")}} className={section === "daily" ? 'daily-quest active-quest' : "daily-quest inactive-quest-daily"}>
             <p className='title-quest'>DIARIAS</p>
-            <p className='timer-quest'>
-              {/* { dailyTime ? 
+            {/* <p className='timer-quest'>
+              { dailyTime ? 
                 <relative-time datetime={dailyTime} format="elapsed" precision='minute' lang="es">
                 </relative-time>
                 :
                 null
-              } */}
-            </p>
+              }
+            </p> */}
           </span>
           <span onClick={() => {setSection("week")}} className={section === "week" ? 'daily-quest active-quest' : "daily-quest inactive-quest-week"}>
-            SEMANALES
+            <p className='title-quest'>SEMANALES</p>
           </span>
         </div>
         {section === "daily" && quests ? 

@@ -270,9 +270,18 @@
 
 .title-quest {
     display: flex;
-    justify-content: end;
-    flex: 2;
-    margin-left: 1rem;
+    justify-content: center;
     box-sizing: border-box;
+}
 
+@media (max-width: 500px) {
+    .title-quest {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .title-quest {
+        font-size: 1.5rem;
+    }
 }

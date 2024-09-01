@@ -169,7 +169,7 @@ export const NameGame = () => {
         if (userGamesData) {
           await updateGameUser(userGamesData.userid, false, 1, 0, 0, "name");
           setNameTriesComp(nameTriesComp + 1)
-          setGachasRecompensa(200)
+          setGachasRecompensa(100)
           setStatusReward(userGamesData.statusRewardName)
         }
         if (arrayTries) {
