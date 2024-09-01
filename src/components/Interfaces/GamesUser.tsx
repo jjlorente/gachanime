@@ -39,6 +39,9 @@ export interface UserQuests {
     statusQuestName: number;
     statusQuestOpening: number;
     statusQuestAllGames: number;
+    statusWeek: number;
+    statusSummonsWeek: number;
+    statusLogInWeek: number;
 }
 
 export interface QuestsData {

@@ -110,7 +110,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.3rem;
 }
 
 .container-quest{
@@ -250,4 +250,29 @@
     cursor: pointer;
     transition: ease all .3s;
     position: relative;
+}
+
+.daily-quest {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.timer-quest {
+    display: flex;
+    justify-content: end;
+    flex: 1;
+    align-items: center;
+    margin-right: 1rem;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+}
+
+.title-quest {
+    display: flex;
+    justify-content: end;
+    flex: 2;
+    margin-left: 1rem;
+    box-sizing: border-box;
+
 }

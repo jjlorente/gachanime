@@ -108,3 +108,26 @@ export const updateReward = async (userid: string, gachas: Number, game: string)
         throw error;
     }
 };
+
+export const updateWeekQuests = async (userid: string, numWeek: Number, login: Number, summon: Number) => {
+    try {
+        const response = await fetch('http://localhost:3000/api/userQuests/updateWeekQuests', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+            body: JSON.stringify({ userid, numWeek, login, summon }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Unknown error');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};

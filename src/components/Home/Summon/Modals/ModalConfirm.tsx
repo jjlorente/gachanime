@@ -3,7 +3,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+import { updateWeekQuests
+ } from '../../../../services/userQuests';
 export const ModalConfirm = (props: any) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -29,6 +30,10 @@ export const ModalConfirm = (props: any) => {
           gachas: props.gachas 
         } 
       });
+      let userid = localStorage.getItem("_id");
+      if(userid && numberCards === 10) {
+        updateWeekQuests(userid, 0, 0, 1);
+      }
     }
   };
 

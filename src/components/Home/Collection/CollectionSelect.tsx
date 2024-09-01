@@ -89,7 +89,6 @@ const CardFilter = (props:any) => {
       });
       setAnimeNames(Array.from(newAnimeNamesSet));
     }
-    
     props.setImgsSelected(filteredImages);
 
   }, [selectedAnime, selectedCol, selectedRarity, props.imgs]);

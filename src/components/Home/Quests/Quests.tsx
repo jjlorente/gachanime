@@ -4,11 +4,17 @@ import { Link, useLocation } from 'react-router-dom';
 import { findAllQuestUser, findQuests, updateReward } from '../../../services/userQuests';
 import { QuestsData, UserQuests } from '../../Interfaces/GamesUser';
 import { useUserGachas } from '../Home';
+import RelativeTimeElement from './relative-time-element-define.js'
+
+export {RelativeTimeElement}
+export default RelativeTimeElement
+export * from './relative-time-element-define.js'
 
 export const Quests = (props:any) => {
   const [section, setSection] = useState("daily");
   const [userQuestsData, setUserQuestsData] = useState<UserQuests>();
   const [quests, setQuests] = useState<QuestsData[]>([]);
+  const [dailyTime, setDailyTime] = useState<string>();
 
   const { alerts, setAlerts } = useUserGachas();
   const { userGachas, setUserGachas } = useUserGachas();
@@ -31,7 +37,6 @@ export const Quests = (props:any) => {
         const data = await findAllQuestUser(idUser);
         const dataQuest = await findQuests();
         if(data) {
-          console.log(data)
           setUserQuestsData(data);
           setQuests(dataQuest)
         }
@@ -40,10 +45,6 @@ export const Quests = (props:any) => {
 
     loadQuests();
   }, []);
-
-  useEffect(() => {
-    console.log(userQuestsData)
-  }, [userQuestsData]);
 
   const claimReward = async (amount:number, game: string) => {
     if(userQuestsData) {
@@ -73,7 +74,49 @@ export const Quests = (props:any) => {
   };
   
   const renderQuestButton = (questStatus: number, quest:string, amount: number) => {
-    if (questStatus === 0 && quest !== "all") {
+    if(quest === "summon") {
+      if(questStatus < 10) {
+        return (
+          <Link className='link-quest-btn' to={`/home/summon`}>
+            Ir a invocar 🢂
+          </Link>
+        );
+      } else if(questStatus === 10) {
+        return (
+          <span className='quest-recompensa-active-click' onClick={(event) => handleClick(amount, quest, event)}>
+            Reclamar recompensa
+            <span className="reward-icon"></span>
+          </span>
+        );
+      } else if(questStatus > 10) {
+        return (
+          <span className='reward-obtained'>
+            Reclamado
+          </span>
+        );
+      }
+    } else if(quest === "log") {
+      if(questStatus < 7) {
+        return (
+          <span className='link-quest-btn'>
+            No completada
+          </span>
+        );
+      } else if(questStatus === 7) {
+        return (
+          <span className='quest-recompensa-active-click' onClick={(event) => handleClick(amount, quest, event)}>
+            Reclamar recompensa
+            <span className="reward-icon"></span>
+          </span>
+        );
+      } else if(questStatus > 7) {
+        return (
+          <span className='reward-obtained'>
+            Reclamado
+          </span>
+        );
+      }
+    } else if (questStatus === 0 && quest !== "all") {
       return (
         <Link className='link-quest-btn' to={`/home/games/${quest}`}>
           Ir al juego 🢂
@@ -123,7 +166,15 @@ export const Quests = (props:any) => {
       <div className='section-quest'>
         <div className='title-quest-container'>
           <span onClick={() => {setSection("daily")}} className={section === "daily" ? 'daily-quest active-quest' : "daily-quest inactive-quest-daily"}>
-            DIARIAS
+            <p className='title-quest'>DIARIAS</p>
+            <p className='timer-quest'>
+              {/* { dailyTime ? 
+                <relative-time datetime={dailyTime} format="elapsed" precision='minute' lang="es">
+                </relative-time>
+                :
+                null
+              } */}
+            </p>
           </span>
           <span onClick={() => {setSection("week")}} className={section === "week" ? 'daily-quest active-quest' : "daily-quest inactive-quest-week"}>
             SEMANALES
@@ -132,8 +183,8 @@ export const Quests = (props:any) => {
         {section === "daily" && quests ? 
           <section className='section-quest-comp'>
             <div className='container-quests'>
-
               <div className='container-quest'>
+
                 <div className='progress-quest'>
                   <span>Progreso</span>
                   <span>{userQuestsData && userQuestsData.statusQuestImage > 0 ? 1 : 0} / 1</span>
@@ -297,9 +348,87 @@ export const Quests = (props:any) => {
 
           </section>
           :
-          <section className='section-quest-comp' style={{height:"354px", justifyContent:"center", alignItems:"center"}}>
-            <h1 style={{textAlign:"center", fontSize:"3rem"}}>NO HAY MISIONES SEMANALES DISPONIBLES</h1>
+          section === "week" ? 
+          <section className='section-quest-comp'>
+            <div className='container-quests'>
+
+              <div className='container-quest'>
+                <div className='progress-quest'>
+                  <span>Progreso</span>
+                  <span>
+                    {userQuestsData 
+                      ? (userQuestsData.statusSummonsWeek > 10 
+                          ? 10 
+                          : userQuestsData.statusSummonsWeek)
+                      : 0} 
+                    / 10
+                  </span>
+                </div>
+                <div className='info-quest'>
+                  <span style={{display:"flex", justifyContent:"center", alignItems:"center", flexWrap:"wrap",fontSize:"1.1rem", textAlign:"center"}}>Haz 10 invocaciones de 10 cartas</span>
+                  <div className='reward-quest'>
+                    <img
+                      src='/home/summon-o.png'
+                      alt="Logo Summon"
+                      className='logo-quest'
+                    />
+                    <div className='reward-quest-num'>
+                      <span style={{fontSize:"1.3rem"}}>+ 150</span>
+                      <span style={{fontSize:".9rem"}}>Gachas</span>
+                    </div>
+                  </div>
+                </div>
+                <div className='link-quest'>
+                  {userQuestsData ? 
+                    renderQuestButton(userQuestsData.statusSummonsWeek, "summon", 150) 
+                    : 
+                    <Link className='link-quest-btn' to={`/home/summon`}>
+                      Ir a invocar 🢂
+                    </Link>
+                  }
+                </div>
+              </div>
+
+              <div className='container-quest'>
+                <div className='progress-quest'>
+                  <span>Progreso</span>
+                  <span>
+                    {userQuestsData 
+                      ? (userQuestsData.statusLogInWeek > 7 
+                          ? 7 
+                          : userQuestsData.statusLogInWeek)
+                      : 0} 
+                    / 7
+                  </span>
+                </div>
+                <div className='info-quest'>
+                  <span style={{display:"flex", justifyContent:"center", alignItems:"center", flexWrap:"wrap",fontSize:"1.1rem", textAlign:"center"}}>Conéctate a GACHANIME durante 7 días</span>
+                  <div className='reward-quest'>
+                    <img
+                      src='/home/summon-o.png'
+                      alt="Logo Summon"
+                      className='logo-quest'
+                    />
+                    <div className='reward-quest-num'>
+                      <span style={{fontSize:"1.3rem"}}>+ 300</span>
+                      <span style={{fontSize:".9rem"}}>Gachas</span>
+                    </div>
+                  </div>
+                </div>
+                <div className='link-quest'>
+                  {userQuestsData ? 
+                    renderQuestButton(userQuestsData.statusLogInWeek, "log", 300) 
+                    : 
+                    <Link className='link-quest-btn' to={`/home/summon`}>
+                      Ir a invocar 🢂
+                    </Link>
+                  }
+                </div>
+              </div>
+            </div>
           </section>
+          :
+          null
         }
       </div>
     </div>

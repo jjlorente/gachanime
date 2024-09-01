@@ -5,7 +5,9 @@ import { Nav } from './Nav/Nav';
 import { Header } from './Header/Header';
 import { findUserById } from '../../services/user';
 import { deleteAll } from '../../services/userGames';
+import { updateWeekQuests } from '../../services/userQuests';
 import { findGacha } from '../../services/gacha';
+import { findDay, createDay, updateDay } from '../../services/day';
 
 type ContextType = { 
   userGachas: number | null;
@@ -33,20 +35,35 @@ export const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const now = new Date();
-    const localTime = localStorage.getItem("time");
-    const local = getYearMonthDay(now);
+    const checkDay = async () => {
+      try {
+        const day = await findDay();
+        return day.lastReset;
+      } catch (error) {
+        console.error('Error al obtener el día:', error);
+        return null;
+      }
+    };
 
-    if (!localTime) {
-      localStorage.setItem("time", local.toString());
-    } else {
-      const localStorageTime = localTime.split(",").map(str => parseInt(str, 10));
-      if (isDateOutdated(localStorageTime, local)) {
-        resetDaily();
-        localStorage.setItem("time", local.toString());
-        clearLocalStorage();
-      } 
-    }
+    const fetchData = async () => {
+      const now = new Date();
+      now.setDate(now.getDate());
+      let dayDB = await checkDay();
+      const local = getYearMonthDay(now);
+
+      if (dayDB) {      
+        dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
+        localStorage.setItem("time", dayDB.toString());
+        if (isDateOutdated(dayDB, local)) {
+          resetDaily();
+          let day = await updateDay();
+          localStorage.setItem("time", day.toString());
+          clearLocalStorage();
+        } 
+      }
+    };
+
+    fetchData();
   }, [location]);
 
   useEffect(() => {
@@ -108,6 +125,10 @@ export const Home = () => {
 
   const resetDaily = async () => {
     await deleteAll();
+    let userid = localStorage.getItem("_id");
+    if(userid) {
+      await updateWeekQuests(userid, 1, 1, 0);
+    }
   };
 
   return (
