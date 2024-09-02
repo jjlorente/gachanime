@@ -28,6 +28,7 @@
     padding: 20px 30px;
     box-sizing: border-box;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 .subsection-main {

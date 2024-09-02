@@ -256,27 +256,67 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
+    box-sizing: border-box;
 }
 
 .timer-quest {
     display: flex;
     justify-content: end;
-    flex: 1;
     align-items: center;
-    margin-right: 1rem;
     box-sizing: border-box;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    flex: 1;
+    margin-right: 1rem;
 }
 
 .title-quest {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     box-sizing: border-box;
+    flex: 2;
+}
+
+@media (max-width: 850px) {
+    .title-quest {
+        margin-left: 1rem;
+        font-size: 2.3rem;
+    }
+    .timer-quest {
+        font-size: .8rem;
+    }
 }
 
 @media (max-width: 500px) {
+    .title-quest-container {
+        flex-direction: column-reverse;
+    }
     .title-quest {
         font-size: 2rem;
+        flex: 0;
+    }
+    .timer-quest {
+        flex: 0;
+        min-width:80px;
+    }
+    .inactive-quest-daily {
+        background-color: #0c1e4e;
+        border-radius: 0;
+        box-sizing: border-box;
+        border: none;
+        border-top: 2px solid #041031;
+        border-bottom: 2px solid #041031;
+        cursor: pointer;
+    }
+    .inactive-quest-week {
+        background-color: #0c1e4e;
+        border-radius: 0;
+        box-sizing: border-box;
+        border: none;
+        border-bottom: 2px solid #041031;
+        cursor: pointer;
+    }
+    .daily-quest {
+        justify-content: space-around;
     }
 }
 

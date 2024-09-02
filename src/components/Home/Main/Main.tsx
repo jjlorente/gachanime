@@ -1,11 +1,16 @@
 import './Main.css'
+import { ModalMain } from './ModalMain/ModalMain'
+import { useEffect, useState } from 'react';
 
 export const Main = (props: any) => {
+  const [md,setMd] = useState<boolean>(false);
+
   return (
     <div className="Main">
       <div className='section-main'>
+        <h1>¡Bienvenido a <span style={{color:"#FEAA2A"}}>GACHANIME</span>!</h1>
         <div style={{display:"flex", flexDirection:"row", gap:"2rem"}}>
-          <div className='subsection-main'>NOTICIAS</div>
+          <div className='subsection-main' onClick={() => {setMd(true)}}>¡Bienvenido a GACHANIME!</div>
           <div className='subsection-main'>PARCHES</div>
         </div>
         <div className='subsection-main'>
@@ -20,6 +25,8 @@ export const Main = (props: any) => {
           <div className='subsection-main'>JUEGOS</div>
         </div>
       </div>
+      
+      <ModalMain md={md} setMd={setMd}/>
     </div>
   )
 }

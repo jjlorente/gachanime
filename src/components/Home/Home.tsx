@@ -7,7 +7,7 @@ import { findUserById } from '../../services/user';
 import { deleteAll } from '../../services/userGames';
 import { updateWeekQuests } from '../../services/userQuests';
 import { findGacha } from '../../services/gacha';
-import { findDay, createDay, updateDay } from '../../services/day';
+import { findDay, createDay, updateDay, updateWeek } from '../../services/day';
 
 type ContextType = { 
   userGachas: number | null;
@@ -45,20 +45,40 @@ export const Home = () => {
       }
     };
 
-    const fetchData = async () => {
-      const now = new Date();
-      now.setDate(now.getDate());
-      let dayDB = await checkDay();
-      const local = getYearMonthDay(now);
+    const checkWeek = async () => {
+      try {
+        const day = await findDay();
+        return day.resetWeek;
+      } catch (error) {
+        console.error('Error al obtener el día:', error);
+        return null;
+      }
+    };
 
-      if (dayDB) {      
+    const fetchData = async () => {
+      const now = new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" });
+      const dateInSpain = new Date(now);
+
+      let dayDB = await checkDay();
+      const local = getYearMonthDay(dateInSpain);
+
+      if (dayDB) {
         dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
         localStorage.setItem("time", dayDB.toString());
         if (isDateOutdated(dayDB, local)) {
+          console.log(dayDB, local)
           resetDaily();
           let day = await updateDay();
           localStorage.setItem("time", day.toString());
           clearLocalStorage();
+        } 
+      }
+
+      let weekDB = await checkWeek();
+      if (weekDB) {
+        weekDB = weekDB.split(",").map((str: any) => parseInt(str, 10));
+        if (isDateOutdated(weekDB, local)) {
+          await resetWeek()
         } 
       }
     };
@@ -128,6 +148,14 @@ export const Home = () => {
     let userid = localStorage.getItem("_id");
     if(userid) {
       await updateWeekQuests(userid, 1, 1, 0);
+    }
+  };
+
+  const resetWeek = async () => {
+    let userid = localStorage.getItem("_id");
+    if(userid) {
+      const data = await updateWeek();
+      console.log(data)
     }
   };
 

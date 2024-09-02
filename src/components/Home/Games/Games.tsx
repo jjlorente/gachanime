@@ -7,6 +7,12 @@ import { GameData, Game } from '../../Interfaces/GamesUser';
 import { Quests } from '../Quests/Quests';
 import { findAllQuestUser } from '../../../services/userQuests';
 
+import { BiImage } from "react-icons/bi";
+import { BiSolidMusic } from "react-icons/bi";
+import { BiSolidPencil } from "react-icons/bi";
+import { ImAccessibility } from "react-icons/im";
+import { IoEye } from "react-icons/io5";
+
 type ContextType = { 
   userGamesData: GameData | null;
   setUserGamesData: React.Dispatch<React.SetStateAction<number | null>>;
@@ -114,7 +120,7 @@ export const Games = (props: any) => {
           className={index === "image" ? "active-game link-reset link-game" : "link-reset link-game"}
           onClick={() => { setIndex("image"); }}
         >
-          ANIME
+          <BiImage fontSize={"2rem"}/>
         </Link>
         <Link
           to="silueta"
@@ -122,7 +128,7 @@ export const Games = (props: any) => {
           className={index === "silueta" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
           onClick={() => { setIndex("silueta"); }}
         >
-          SILUETA
+          <ImAccessibility fontSize={"1.4rem"}/>
         </Link>
         <Link
           to="name"
@@ -130,7 +136,7 @@ export const Games = (props: any) => {
           className={index === "name" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
           onClick={() => { setIndex("name"); }}
         >
-          WORDLE
+          <BiSolidPencil fontSize={"1.4rem"}/>
         </Link>
         <Link
           to="opening"
@@ -138,8 +144,14 @@ export const Games = (props: any) => {
           className={index === "opening" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
           onClick={() => { setIndex("adivinanza"); }}
         >
-          OPENING
+          <BiSolidMusic fontSize={"1.4rem"}/>
         </Link>
+        <span
+          key={"eyes"}
+          className={"link-reset inactive-game not-disponible"}
+        >
+          <IoEye fontSize={"1.4rem"}/>
+        </span>
       </div>
       <div className='section-games'>
         <Outlet context={{ findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, alerts, setAlerts }} />

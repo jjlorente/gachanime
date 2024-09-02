@@ -16,6 +16,7 @@ export const Quests = (props:any) => {
   const [userQuestsData, setUserQuestsData] = useState<UserQuests>();
   const [quests, setQuests] = useState<QuestsData[]>([]);
   const [dailyTime, setDailyTime] = useState<string>();
+  const [weekTime, setWeekTime] = useState<string>();
 
   const { alerts, setAlerts } = useUserGachas();
   const { userGachas, setUserGachas } = useUserGachas();
@@ -31,6 +32,32 @@ export const Quests = (props:any) => {
     </svg>
   );
 
+  // useEffect(() => {
+  //   const loadQuests = async () => {
+  //     const idUser = localStorage.getItem("_id");
+  //     if (idUser) {
+  //       const data = await findAllQuestUser(idUser);
+  //       const dataQuest = await findQuests();
+  //       const day = await findDay();
+
+  //       let lastReset = new Date(day.lastReset);
+  //       lastReset.setDate(lastReset.getDate() + 1);
+  //       let year = lastReset.getFullYear();
+  //       let month = String(lastReset.getMonth() + 1);
+  //       let dayOfMonth = String(lastReset.getDate());
+  //       let formattedDate = `${year},${month},${dayOfMonth}`;
+  //       setDailyTime(formattedDate)
+
+  //       if(data) {
+  //         setUserQuestsData(data);
+  //         setQuests(dataQuest);
+  //       }
+  //     }
+  //   };
+
+  //   loadQuests();
+  // }, []);
+
   useEffect(() => {
     const loadQuests = async () => {
       const idUser = localStorage.getItem("_id");
@@ -38,22 +65,34 @@ export const Quests = (props:any) => {
         const data = await findAllQuestUser(idUser);
         const dataQuest = await findQuests();
         const day = await findDay();
-
+  
         let lastReset = new Date(day.lastReset);
-        lastReset.setDate(lastReset.getDate() + 1);
-        let year = lastReset.getFullYear();
-        let month = String(lastReset.getMonth() + 1);
-        let dayOfMonth = String(lastReset.getDate());
+        let lastResetInSpain = new Date(lastReset.toLocaleString("en-US", { timeZone: "Europe/Madrid" }));
+        lastResetInSpain.setDate(lastResetInSpain.getDate() + 1);
+  
+        let year = lastResetInSpain.getFullYear();
+        let month = String(lastResetInSpain.getMonth() + 1).padStart(2, '0');
+        let dayOfMonth = String(lastResetInSpain.getDate()).padStart(2, '0');
         let formattedDate = `${year},${month},${dayOfMonth}`;
-        // setDailyTime(formattedDate)
+        setDailyTime(formattedDate);
+  
 
-        if(data) {
+        let weekReset = new Date(day.resetWeek);
+        let weekResetInSpain = new Date(weekReset.toLocaleString("en-US", { timeZone: "Europe/Madrid" }));
+        weekResetInSpain.setDate(weekResetInSpain.getDate());
+  
+        let yearWeek = weekResetInSpain.getFullYear();
+        let monthWeek = String(weekResetInSpain.getMonth() + 1).padStart(2, '0');
+        let dayOfMonthWeek = String(weekResetInSpain.getDate()).padStart(2, '0');
+        let formattedDateWeek = `${yearWeek},${monthWeek},${dayOfMonthWeek}`;
+        setWeekTime(formattedDateWeek);
+        if (data) {
           setUserQuestsData(data);
           setQuests(dataQuest);
         }
       }
     };
-
+  
     loadQuests();
   }, []);
 
@@ -178,17 +217,25 @@ export const Quests = (props:any) => {
         <div className='title-quest-container'>
           <span onClick={() => {setSection("daily")}} className={section === "daily" ? 'daily-quest active-quest' : "daily-quest inactive-quest-daily"}>
             <p className='title-quest'>DIARIAS</p>
-            {/* <p className='timer-quest'>
+            <p className='timer-quest'>
               { dailyTime ? 
                 <relative-time datetime={dailyTime} format="elapsed" precision='minute' lang="es">
                 </relative-time>
                 :
                 null
               }
-            </p> */}
+            </p>
           </span>
           <span onClick={() => {setSection("week")}} className={section === "week" ? 'daily-quest active-quest' : "daily-quest inactive-quest-week"}>
             <p className='title-quest'>SEMANALES</p>
+            <p className='timer-quest'>
+              { weekTime ? 
+                <relative-time datetime={weekTime} format="elapsed" precision='minute' lang="es">
+                </relative-time>
+                :
+                null
+              }
+            </p>
           </span>
         </div>
         {section === "daily" && quests ? 
