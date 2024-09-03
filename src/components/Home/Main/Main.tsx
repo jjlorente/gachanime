@@ -106,18 +106,9 @@ export const Main = (props: any) => {
               <div className='subsection-main-survey'>
                 <span>La comunidad escoge la siguiente colección de cartas de GACHANIME</span>
                 <span>¡Gracias por votar!</span>
-
-                <div className="btn-vote-container">
-                  <span className="span-anime-survey" style={{backgroundColor:"#051641"}}>
-                    Death Note
-                  </span>
-
-                  <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "black"}}>
-                    Fullmetal Alchemist
-                  </span>
-                </div>
                 <div className='progress-container-survey'>
                   <span style={{color:"#051641"}}>{percentage} %</span>
+                  
                   <span
                     className='proggres-bar-survey'
                     style={
@@ -126,7 +117,18 @@ export const Main = (props: any) => {
                       : { display: `none` }
                     }>
                   </span>
+                  
                   <span>{percentage2} %</span>
+                </div>
+                
+                <div className="btn-vote-container" >
+                  <span className="span-anime-survey" style={{backgroundColor:"#051641"}}>
+                    Death Note
+                  </span>
+
+                  <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "black"}}>
+                    Fullmetal Alchemist
+                  </span>
                 </div>
               </div>
           }
