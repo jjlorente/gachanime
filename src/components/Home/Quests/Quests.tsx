@@ -256,14 +256,14 @@ export const Quests = (props:any) => {
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
-                      <span style={{fontSize:"1.3rem"}}>+ 25</span>
+                      <span style={{fontSize:"1.3rem"}}>+ 20</span>
                       <span style={{fontSize:".9rem"}}>Gachas</span>
                     </div>
                   </div>
                 </div>
                 <div className='link-quest'>
                   {userQuestsData ? 
-                    renderQuestButton(userQuestsData.statusQuestImage, "image", 25) 
+                    renderQuestButton(userQuestsData.statusQuestImage, "image", 20) 
                     : 
                     <Link className='link-quest-btn' to={`/home/games/image`}>
                       Ir al juego 🢂
@@ -286,14 +286,14 @@ export const Quests = (props:any) => {
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
-                      <span style={{fontSize:"1.3rem"}}>+ 25</span>
+                      <span style={{fontSize:"1.3rem"}}>+ 20</span>
                       <span style={{fontSize:".9rem"}}>Gachas</span>
                     </div>
                   </div>
                 </div>
                 <div className='link-quest'>
                   {userQuestsData ? 
-                    renderQuestButton(userQuestsData.statusQuestSilueta, "silueta", 25) 
+                    renderQuestButton(userQuestsData.statusQuestSilueta, "silueta", 20) 
                     : 
                     <Link className='link-quest-btn' to={`/home/games/silueta`}>
                       Ir al juego 🢂
@@ -316,14 +316,14 @@ export const Quests = (props:any) => {
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
-                      <span style={{fontSize:"1.3rem"}}>+ 25</span>
+                      <span style={{fontSize:"1.3rem"}}>+ 20</span>
                       <span style={{fontSize:".9rem"}}>Gachas</span>
                     </div>
                   </div>
                 </div>
                 <div className='link-quest'>
                   {userQuestsData ? 
-                    renderQuestButton(userQuestsData.statusQuestName, "name", 25) 
+                    renderQuestButton(userQuestsData.statusQuestName, "name", 20) 
                     : 
                     <Link className='link-quest-btn' to={`/home/games/name`}>
                       Ir al juego 🢂
@@ -346,7 +346,7 @@ export const Quests = (props:any) => {
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
-                      <span style={{fontSize:"1.3rem"}}>+ 25</span>
+                      <span style={{fontSize:"1.3rem"}}>+ 20</span>
                       <span style={{fontSize:".9rem"}}>Gachas</span>
                     </div>
                   </div>
@@ -354,7 +354,7 @@ export const Quests = (props:any) => {
                 <div className='link-quest'>
                 <div>
                   {userQuestsData ? 
-                    renderQuestButton(userQuestsData.statusQuestOpening, "opening", 25) 
+                    renderQuestButton(userQuestsData.statusQuestOpening, "opening", 20) 
                     : 
                     <Link className='link-quest-btn' to={`/home/games/opening`}>
                       Ir al juego 🢂

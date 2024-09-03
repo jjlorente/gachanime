@@ -43,7 +43,7 @@ export const NameGame = () => {
         setGameData(data);
         if(userGamesData) {
           setFinishedNameGame(userGamesData.finishedName);
-          setGachasRecompensa(100)
+          setGachasRecompensa(50)
           setStatusReward(userGamesData.statusRewardName)
         }
 
@@ -169,7 +169,7 @@ export const NameGame = () => {
         if (userGamesData) {
           await updateGameUser(userGamesData.userid, false, 1, 0, 0, "name");
           setNameTriesComp(nameTriesComp + 1)
-          setGachasRecompensa(100)
+          setGachasRecompensa(50)
           setStatusReward(userGamesData.statusRewardName)
         }
         if (arrayTries) {
@@ -382,7 +382,7 @@ export const NameGame = () => {
           </span>
           :
           <span className='span-info-image'>
-            A los 3 fallos se muestra el anime del personaje. Recibe 100 gachas al acertar.
+            A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.
           </span>
         }
       </div>

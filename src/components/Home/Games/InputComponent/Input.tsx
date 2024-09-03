@@ -295,7 +295,7 @@ export const Input = (props: any) => {
                         if(dataTries>= 50) {
                             props.setGachasRecompensa(50)
                         } else {
-                            props.setGachasRecompensa(100-dataTries)
+                            props.setGachasRecompensa(50)
                         }
                     } else if (props.game ==="silueta") {
                         setSiluetaTries(data.triessilueta);
@@ -303,7 +303,7 @@ export const Input = (props: any) => {
                         if(dataTries>= 50) {
                             props.setGachasRecompensa(50)
                         } else {
-                            props.setGachasRecompensa(100-dataTries)
+                            props.setGachasRecompensa(50)
                         }
                     } else if (props.game==="opening") {
                         setOpeningTries(data.triesopening);
@@ -311,7 +311,7 @@ export const Input = (props: any) => {
                         if(dataTries>= 50) {
                             props.setGachasRecompensa(50)
                         } else {
-                            props.setGachasRecompensa(100-dataTries)
+                            props.setGachasRecompensa(50)
                         }
                     }
                 }

@@ -65,7 +65,7 @@ export const SiluetaGame = (props: any) => {
                     if(dataTries>= 50) {
                         setGachasRecompensa(50)
                     } else {
-                        setGachasRecompensa(100-dataTries)
+                        setGachasRecompensa(50)
                     }
 
                     setStatusReward(userGamesData.statusRewardSilueta)
@@ -115,7 +115,7 @@ export const SiluetaGame = (props: any) => {
 
                 {
                     finishedSiluetaGame === false ?    
-                        <span className='span-info-image'>Cada intento fallido pierdes 5 gachas de la recompensa final.</span>
+                        <span className='span-info-image'>Al adivinar la silueta recibes 50 gachas como recompensa.</span>
                         :
                         null
                 }

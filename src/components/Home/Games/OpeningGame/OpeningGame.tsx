@@ -62,7 +62,7 @@ export const OpeningGame = () => {
                     if(dataTries>= 50) {
                         setGachasRecompensa(50)
                     } else {
-                        setGachasRecompensa(100-dataTries)
+                        setGachasRecompensa(50)
                     }
 
                     setStatusReward(userGamesData.statusRewardOpening)
@@ -113,7 +113,7 @@ export const OpeningGame = () => {
                     finishedOpeningGame === true ?  
                         null  
                         :
-                        <span className='span-info-image'>Cada intento fallido pierdes 5 gachas de la recompensa final.</span>
+                        <span className='span-info-image'>Al adivinar el anime del opening recibes 50 gachas como recompensa.</span>
             }
             <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
         </div>
