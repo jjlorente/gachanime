@@ -302,14 +302,7 @@
     .btn-vote-container {
         gap: 1rem;
     }
-    .send-vote{
-        max-width: 300px;
-        width: 100%;
-    }
-    .send-vote-inactive {
-        max-width: 300px;
-        width: 100%;
-    }
+
     .span-anime-survey {
         font-size: 1rem;
     }
@@ -343,12 +336,20 @@
     .span-anime-survey {
         font-size: .8rem;
     }
-}
-
-@media (max-width:450px) {
     .btn-vote-container {
         flex-direction: column;
     }
+    .send-vote-inactive {
+        max-width: 300px;
+        width: 100%;
+    }
+    .send-vote{
+        max-width: 300px;
+        width: 100%;
+    }
+}
+
+@media (max-width:450px) {
     .span-anime-survey {
         font-size: 1rem;
     }
