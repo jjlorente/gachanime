@@ -91,7 +91,7 @@ export const Main = (props: any) => {
                     disabled={!selectedOption}
                     className={selectedOption ? "send-vote jaro-regular" : "send-vote-inactive jaro-regular"}
                   >
-                    Votar
+                    Enviar voto
                   </button>
 
                   <button
@@ -126,7 +126,7 @@ export const Main = (props: any) => {
                     Death Note
                   </span>
 
-                  <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "black"}}>
+                  <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "#bcbcbc",boxShadow: "rgb(219 219 219) 4px 4px 0px 0px"}}>
                     Fullmetal Alchemist
                   </span>
                 </div>
