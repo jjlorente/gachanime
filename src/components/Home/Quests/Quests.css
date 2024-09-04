@@ -1,6 +1,6 @@
 .Quests {
     height: 100%;
-    max-width: 1200px;
+    max-width: 1247px;
     width: 100%;
     padding: 20px;
     padding-right: 35px;
@@ -110,7 +110,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1.3rem;
+    gap: 1.8rem;
 }
 
 .container-quest{

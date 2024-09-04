@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useUserGames } from '../Games';
 import { updateGameUser, findCharacters } from '../../../../services/userGames';
 import { useUserGachas } from "../../Home";
+import { updateLevel } from '../../../../services/user';
 
 export const Input = (props: any) => {
 
@@ -248,6 +249,7 @@ export const Input = (props: any) => {
         setAnimesSuggested([])
         if(value === props.solution) {
             if(userGamesData) {
+                await updateLevel(userGamesData.userid, 40)
                 const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game);
                 if (props.game === "image") {
                     props.setFinishedGame(data.finishedImage);

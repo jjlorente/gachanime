@@ -89,3 +89,26 @@ export const findUserById = async (id: string) => {
       throw error;
   }
 };
+
+export const updateLevel = async (userid: string, exp: number) => {
+  try {
+      const response = await fetch(`http://localhost:3000/api/users/updateLevel`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body : JSON.stringify({ userid, exp }),
+      });
+
+      if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Unknown error');
+      }
+
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      console.error('Error:', error);
+      throw error;
+  }
+};

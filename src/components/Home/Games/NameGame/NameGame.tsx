@@ -10,6 +10,7 @@ import { Game } from '../../../Interfaces/GamesUser';
 import { useLocation } from 'react-router-dom';
 import { updateGameUser, findCharacters } from '../../../../services/userGames';
 import { trefoil } from 'ldrs';
+import { updateLevel } from '../../../../services/user';
 
 export const NameGame = () => {
   const [gameData, setGameData] = useState<Game>();
@@ -150,6 +151,7 @@ export const NameGame = () => {
       if(word === pjName?.toUpperCase() && userGamesData) {
 
         const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, "name");
+        await updateLevel(userGamesData.userid, 40)
         setFinishedNameGame(data.finishedName);
         setStatusReward(data.statusRewardName);
 

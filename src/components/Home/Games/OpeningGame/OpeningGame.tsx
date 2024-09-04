@@ -91,7 +91,7 @@ export const OpeningGame = () => {
                     <ReactAudioPlayer
                         id="audio"
                         src={base64Audio}
-                        className="audio-player"
+                        className="audio-player jaro-regular"
                         controls
                     />
                     :
