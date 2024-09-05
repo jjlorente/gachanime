@@ -95,14 +95,14 @@ export const updateLevel = async (userid: string, exp: number) => {
       const response = await fetch(`http://localhost:3000/api/users/updateLevel`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body : JSON.stringify({ userid, exp }),
       });
 
       if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Unknown error');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Unknown error');
       }
 
       const data = await response.json();
@@ -112,3 +112,49 @@ export const updateLevel = async (userid: string, exp: number) => {
       throw error;
   }
 };
+
+export const updateUser = async (userid: string, picture: string, username: string, sound: number) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/users/updateUser`, {
+      method: 'PUT',
+      headers : {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({userid, picture, username, sound}),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Unknown error');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+export const updateUserLan = async (userid: string, lan: string) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/users/updateUserLan`, {
+      method: 'PUT',
+      headers : {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({userid, lan}),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Unknown error');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}

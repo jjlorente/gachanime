@@ -8,6 +8,7 @@ import { IoSend } from "react-icons/io5";
 import { findUserById } from '../../../services/user';
 import { calculatePower } from '../../../services/userCards';
 import { ProfileCard } from './ProfileCard/ProfileCard';
+import { useTranslation } from 'react-i18next';
 
 export const Main = (props: any) => {
   const [voted, setVoted] = useState<boolean>()
@@ -18,7 +19,8 @@ export const Main = (props: any) => {
   const [percentage2, setPercentage2] = useState<number>();
   const [dataUser, setDataUser] = useState<any>();
   const [power, setPower] = useState<number>();
-
+  const { i18n, t } = useTranslation();
+  
   useEffect(() => {
 
     const findSurvey = async () => {
@@ -77,10 +79,10 @@ export const Main = (props: any) => {
     <div className="Main">
       <div className='section-main'>
         <div className='container-links-sections-main'>
-          <Link to={"/home/games"} className='link-main'>JUEGOS</Link>
-          <Link to={"/home/quests"} className='link-main'>MISIONES</Link>
-          <Link to={"/home/summon"} className='link-main'>INVOCAR</Link>
-          <Link to={"/home/collection"} className='link-main'>COLECCIÓN</Link>
+          <Link to={"/home/games"} className='link-main'>{t('links.games')}</Link>
+          <Link to={"/home/quests"} className='link-main'>{t('links.quests')}</Link>
+          <Link to={"/home/summon"} className='link-main'>{t('links.summon')}</Link>
+          <Link to={"/home/collection"} className='link-main'>{t('links.collection')}</Link>
         </div>
 
         <div className='sections-container-community height-standar'>
@@ -90,9 +92,9 @@ export const Main = (props: any) => {
             !voted ? (
 
               <div className='subsection-main-survey'>
-                <span style={{fontSize: "1.9rem"}}>La comunidad elige la próxima colección de cartas de GACHANIME</span>
+                <span style={{fontSize: "1.9rem"}}>{t('survey.infoTitle')}</span>
                 <span style={{fontSize: "1.8rem"}}>
-                  {selectedAnime ? `${selectedAnime}` : "Elige uno de los dos animes"}
+                  {selectedAnime ? `${selectedAnime}` : t('survey.infoChoose')}
                 </span>
                 <div className='progress-container-survey'>
                   <span>{percentage} %</span>
@@ -120,7 +122,7 @@ export const Main = (props: any) => {
                     disabled={!selectedOption}
                     className={selectedOption ? "send-vote jaro-regular" : "send-vote-inactive jaro-regular"}
                   >
-                    Votar <IoSend />
+                    {t('survey.btnVote')} <IoSend />
                   </button>
                   <button
                     onClick={() => handleButtonClick(2, dataSurvey.name[1])}
@@ -134,8 +136,8 @@ export const Main = (props: any) => {
             ) : (
 
               <div className='subsection-main-survey'>
-                <span style={{fontSize:"1.9rem"}}>La comunidad elige la próxima colección de cartas de GACHANIME</span>
-                <span style={{fontSize:"1.8rem"}}>¡Gracias por votar!</span>
+                <span style={{fontSize:"1.9rem"}}>{t('survey.infoTitle')}</span>
+                <span style={{fontSize:"1.8rem"}}>{t('survey.msgThanks')}</span>
                 <div className='progress-container-survey'>
                   <span>{percentage} %</span>
                   <span
@@ -162,7 +164,7 @@ export const Main = (props: any) => {
             )
           ) : (
             <div className='subsection-main-survey'>
-              <span>Próximamente habrá una nueva encuesta para decidir la siguiente colección de cartas</span>
+              <span>{t('survey.nextSurvey')}</span>
             </div>
           )}
         </div>

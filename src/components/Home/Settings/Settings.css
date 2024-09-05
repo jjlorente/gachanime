@@ -27,7 +27,6 @@
     padding: 20px 30px;
     box-sizing: border-box;
     flex-wrap: wrap;
-    text-align: center;
 }
 
 .container-picture-profile {
@@ -52,6 +51,20 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    box-shadow: 3px 3px 0px 0px rgb(9, 35, 73);
+}
+
+.edit-username-cnt {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    background-color: #346ce4;
+    border: 2px solid #051641;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    box-shadow: 3px 3px 0px 0px rgb(9, 35, 73);
 }
 
 .container-edit-picture {
@@ -60,15 +73,17 @@
     align-items: start;
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
 }
 
 .container-edit-username{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     min-height: 50px;
     gap: 1rem;
+    width: 100%;
+    justify-content: start;
 }
 
 .edit-username {
@@ -77,9 +92,9 @@
     background-color: rgb(5, 25, 63);
     border-radius: 5px;
     font-size: 1.2rem;
-    width: 300px;
     justify-content: space-between;
 }
+
 .input-username{
     width: 100%;
     font-size: 1.2rem;
@@ -89,6 +104,11 @@
     padding: 5px 10px;
     border-radius: 5px;
 }
+
+.input-username:focus{
+    background-color: #1744a5 !important;
+}
+
 .btn-edit {
     display: flex;
     justify-content: center;
@@ -117,15 +137,78 @@
     width: 130px;
     font-size: 1.3rem;
     border-radius: 5px;
-    border: 2px solid black;
+    border: 2px solid rgb(2, 15, 61);
     box-sizing: border-box;
     cursor: pointer;
     justify-content: center;
+    transition: ease all .2s;
     align-items: center;
+}
+
+.container-buttons-edit-picture {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+}
+
+.btn-edit-click {
+    max-width: 265px !important;
+}
+
+.cnt-buttons-flex-1 {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+.edit-language:hover {
+    transform: scale(1.1);
+}
+@media (max-width: 600px) {
+    .container-buttons-edit-picture {
+        flex-direction: column;
+    }
+
+    .btn-edit-click {
+        width: 100%;
+        max-width: none !important;
+    }
+
+    .btn-flex-1 {
+        flex: 1 !important;
+    }
+    
+    .cnt-buttons-flex-1 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 475px) {
+    .edit-picture {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 }
 
 @media (max-width: 700px) {
     .Settings {
         padding-right: 25px;
+    }
+}
+
+@media (max-width: 570px) {
+    .edit-username {
+        width: 100%;
+    }
+    .edit-username-cnt {
+        flex-direction: column;
+    }
+    .container-edit-username {
+        flex-direction: column;
     }
 }

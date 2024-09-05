@@ -8,6 +8,7 @@ import { deleteAll } from '../../services/userGames';
 import { updateWeekQuests } from '../../services/userQuests';
 import { findGacha } from '../../services/gacha';
 import { findDay, createDay, updateDay, updateWeek } from '../../services/day';
+import { useTranslation } from 'react-i18next';
 
 type ContextType = { 
   userGachas: number | null;
@@ -23,6 +24,8 @@ export function useUserGachas() {
 }
 
 export const Home = () => {
+  const { i18n, t } = useTranslation();
+
   const [_id, set_Id] = useState<string>('');
   const [googleAccount, setGoogleAccount] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>();
@@ -131,6 +134,7 @@ export const Home = () => {
     const user = await findUserById(userid);
     if (user) {
       setUserData(user);
+      i18n.changeLanguage(user.codeLan);
       localStorage.setItem("userData", JSON.stringify(user));
     }
   };
