@@ -1,6 +1,8 @@
+import config from "../config";
+
 export const registerGacha = async (userId: string, gachas: number) => {
     try {
-        const response = await fetch('http://localhost:3000/api/gachas/create', {
+        const response = await fetch(`${config.apiUrl}/gachas/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -23,7 +25,7 @@ export const registerGacha = async (userId: string, gachas: number) => {
 
 export const findGacha = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/gachas/findById?id=${id}`, {
+        const response = await fetch(`${config.apiUrl}/gachas/findById?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

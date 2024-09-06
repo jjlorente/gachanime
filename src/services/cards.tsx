@@ -1,6 +1,8 @@
+import config from '../config';
+
 export const findCards = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/api/cards/findAll`, {
+        const response = await fetch(`${config.apiUrl}/cards/findAll`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ export const findCards = async () => {
 
 export const findCardsSummoned = async (id: string, raritys: Array<string>, throws:number, gachas:number, type: number) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/cards/findCardSummoned`, {
+        const response = await fetch(`${config.apiUrl}/cards/findCardSummoned`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

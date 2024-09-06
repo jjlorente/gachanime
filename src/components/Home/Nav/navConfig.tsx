@@ -1,10 +1,10 @@
 export const navItems = [
-  { label: 'Inicio', link: 'main' },
-  { label: 'Juegos', link: 'games' },
-  { label: 'Misiones', link: 'quests' },
-  { label: 'Invocar', link: 'summon' },
-  { label: 'Colección', link: 'collection' },
-  { label: 'Ajustes', link: 'settings' }
+  { labelEs: 'Inicio', labelEn: 'Home', link: 'main' },
+  { labelEs: 'Juegos', labelEn: 'Games', link: 'games' },
+  { labelEs: 'Misiones', labelEn: 'Quests', link: 'quests' },
+  { labelEs: 'Invocar', labelEn: 'Summon', link: 'summon' },
+  { labelEs: 'Colección', labelEn: 'Collection', link: 'collection' },
+  { labelEs: 'Ajustes', labelEn: 'Settings', link: 'settings' }
 ];
 
 type NavItemLink = 'main' | 'games' | 'summon' | 'collection' | 'quests' | 'settings';

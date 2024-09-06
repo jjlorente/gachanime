@@ -3,11 +3,13 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { updateWeekQuests
- } from '../../../../services/userQuests';
+import { updateWeekQuests } from '../../../../services/userQuests';
+import { useTranslation } from 'react-i18next';
+
 export const ModalConfirm = (props: any) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  const {i18n, t} = useTranslation();
 
   const handleClose = () => {
     props.setOpenModalConfirm(false);
@@ -16,9 +18,9 @@ export const ModalConfirm = (props: any) => {
 
   const handleConfirm = (numberCards: any) => {
     if (numberCards === 1 && props.gachas < 10) {
-      setMessage("Necesitas x10 gachas para poder tirar!");
+      setMessage(t('summon.need10'));
     } else if (numberCards === 10 && props.gachas < 100) {
-      setMessage("Necesitas x100 gachas para poder tirar!");
+      setMessage(t('summon.need100'));
     } else {
       props.setOpenModalConfirm(false);
       navigate('/summoning', { 
@@ -72,20 +74,20 @@ export const ModalConfirm = (props: any) => {
                 ? (
                   <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                     <span className='jaro-regular' style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>{message}</span>
-                    <button className='btn-modal-confirm jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>De acuerdo</button>
+                    <button className='btn-modal-confirm jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>{t('summon.confirm')}</button>
                   </div>
                 )
                 : (
                   <>
                     <Typography className='jaro-regular' style={{ fontSize: "1.5rem" }} id="modal-modal-title" variant="h6" component="h2">
-                      ¿Estás seguro en gastar x10 gachas?
+                      {t('summon.confirm10')}
                     </Typography>
                     <Typography className='jaro-regular' style={{ marginTop: "1rem" }} id="modal-modal-description" sx={{ mt: 2 }}>
-                      Al gastar 10 gachas recibirás una carta de cualquier rareza.
+                      {t('summon.info10')}                    
                     </Typography>
                     <div style={{ display: "flex", justifyContent: "center", width: "100%", gap: "1rem", marginTop: "1.5rem", flexWrap: "wrap-reverse", height: "fit-content" }}>
-                      <button className='btn-modal-cancel jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>Cancelar</button>
-                      <button className='btn-modal-confirm jaro-regular' onClick={() => handleConfirm(1)}>Confirmar</button>
+                      <button className='btn-modal-cancel jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>{t('summon.cancel')}</button>
+                      <button className='btn-modal-confirm jaro-regular' onClick={() => handleConfirm(1)}>{t('summon.confirm2')}</button>
                     </div>
                   </>
                 )}
@@ -105,20 +107,20 @@ export const ModalConfirm = (props: any) => {
               ? (
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                   <span className='jaro-regular' style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>{message}</span>
-                  <button className='btn-modal-confirm jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>De acuerdo</button>
+                  <button className='btn-modal-confirm jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>{t('summon.confirm')}</button>
                 </div>
               )
               : (
                 <>
                   <Typography className='jaro-regular' style={{ fontSize: "1.5rem" }} id="modal-modal-title" variant="h6" component="h2">
-                    ¿Estás seguro en gastar x100 gachas?
+                    {t('summon.confirm100')}
                   </Typography>
                   <Typography className='jaro-regular' style={{ marginTop: "1rem" }} id="modal-modal-description" sx={{ mt: 2 }}>
-                    Al gastar 100 gachas recibirás 10 cartas y una carta de rareza A o superior.
+                    {t('summon.info100')}
                   </Typography>
                   <div style={{ display: "flex", justifyContent: "center", width: "100%", gap: "1rem", marginTop: "1.5rem", flexWrap: "wrap-reverse", height: "fit-content" }}>
-                    <button className='btn-modal-cancel jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>Cancelar</button>
-                    <button className='btn-modal-confirm jaro-regular' onClick={() => handleConfirm(10)}>Confirmar</button>
+                    <button className='btn-modal-cancel jaro-regular' onClick={() => { props.setOpenModalConfirm(false) }}>{t('summon.cancel')}</button>
+                    <button className='btn-modal-confirm jaro-regular' onClick={() => handleConfirm(10)}>{t('summon.confirm2')}</button>
                   </div>
                 </>
               )}

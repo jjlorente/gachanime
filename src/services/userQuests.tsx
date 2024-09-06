@@ -1,6 +1,8 @@
+import config from "../config";
+
 export const findUserQuests = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/userQuests/findById?id=${id}`, {
+        const response = await fetch(`${config.apiUrl}/userQuests/findById?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +23,7 @@ export const findUserQuests = async (id: string) => {
 
 export const findQuests = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/api/userQuests/findQuestsById`, {
+        const response = await fetch(`${config.apiUrl}/userQuests/findQuestsById`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +44,7 @@ export const findQuests = async () => {
 
 export const registerNewQuestUser = async (userId: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userQuests/create', {
+        const response = await fetch(`${config.apiUrl}/userQuests/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -88,7 +90,7 @@ export const findAllQuestUser = async (id: any) => {
 
 export const updateReward = async (userid: string, gachas: Number, game: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userQuests/updateReward', {
+        const response = await fetch(`${config.apiUrl}/userQuests/updateReward`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -111,7 +113,7 @@ export const updateReward = async (userid: string, gachas: Number, game: string)
 
 export const updateWeekQuests = async (userid: string, numWeek: Number, login: Number, summon: Number) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userQuests/updateWeekQuests', {
+        const response = await fetch(`${config.apiUrl}/userQuests/updateWeekQuests`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

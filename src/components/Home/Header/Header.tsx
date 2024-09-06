@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
 import { navItems, icons } from '../Nav/navConfig';
+import { useTranslation } from 'react-i18next';
 
 export const Header = (props: any) => {
   const [menu, setMenu] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { i18n, t } = useTranslation();
 
   const toggleMenu = () => {
     setMenu(prevState => !prevState);
@@ -45,13 +47,13 @@ export const Header = (props: any) => {
               >
                 {icons[item.link as keyof typeof icons]}
                 <span className={props.activeIndex === item.link ? "span-section-nav-active color-active" : "span-section-nav-active color-inactive"}>
-                  {item.label}
+                  {i18n.language === "en" ? item.labelEn :  item.labelEs}
                 </span>
               </Link>
             ))}
             <div className='container-btn-logout'>
               <button onClick={logOut} className="logout-btn">
-                <span className='span-active-logout'>Cerrar sesión</span>
+                <span className='span-active-logout'>{t('links.logOut')}</span>
                 <img className='svg-logout' src='/home/logout.svg' alt="logout" />
               </button>
             </div>

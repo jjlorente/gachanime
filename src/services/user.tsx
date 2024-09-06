@@ -1,6 +1,8 @@
+import config from "../config";
+
 export const findGoogleUser = async (username: any, email: any, googleAccount: any) => {
   try {
-    const response = await fetch('http://localhost:3000/api/users/findGoogle', {
+    const response = await fetch(`${config.apiUrl}/users/findGoogle`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +26,7 @@ export const findGoogleUser = async (username: any, email: any, googleAccount: a
 
 export const findUser = async (username: string, password: string, googleAccount: boolean) => {
   try {
-    const response = await fetch('http://localhost:3000/api/users/find', {
+    const response = await fetch(`${config.apiUrl}/users/find`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +49,7 @@ export const findUser = async (username: string, password: string, googleAccount
 
 export const registerUser = async (username: string, password: string, email: string, googleAccount:boolean) => {
   try {
-    const response = await fetch('http://localhost:3000/api/users/create', {
+    const response = await fetch(`${config.apiUrl}/users/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +72,7 @@ export const registerUser = async (username: string, password: string, email: st
 
 export const findUserById = async (id: string) => {
   try {
-      const response = await fetch(`http://localhost:3000/api/users/findById?id=${id}`, {
+      const response = await fetch(`${config.apiUrl}/users/findById?id=${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -92,7 +94,7 @@ export const findUserById = async (id: string) => {
 
 export const updateLevel = async (userid: string, exp: number) => {
   try {
-      const response = await fetch(`http://localhost:3000/api/users/updateLevel`, {
+      const response = await fetch(`${config.apiUrl}/users/updateLevel`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +117,7 @@ export const updateLevel = async (userid: string, exp: number) => {
 
 export const updateUser = async (userid: string, picture: string, username: string, sound: number) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/users/updateUser`, {
+    const response = await fetch(`${config.apiUrl}/users/updateUser`, {
       method: 'PUT',
       headers : {
         'Content-Type': 'application/json',
@@ -138,7 +140,7 @@ export const updateUser = async (userid: string, picture: string, username: stri
 
 export const updateUserLan = async (userid: string, lan: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/users/updateUserLan`, {
+    const response = await fetch(`${config.apiUrl}/users/updateUserLan`, {
       method: 'PUT',
       headers : {
         'Content-Type': 'application/json',

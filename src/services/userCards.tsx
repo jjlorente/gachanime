@@ -1,6 +1,8 @@
+import config from "../config";
+
 export const findUserCards = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/userCards/findById?id=${id}`, {
+        const response = await fetch(`${config.apiUrl}/userCards/findById?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ export const findUserCards = async (id: string) => {
 
 export const calculatePower = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/userCards/calculatePower?userId=${id}`, {
+        const response = await fetch(`${config.apiUrl}/userCards/calculatePower?userId=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +46,7 @@ export const calculatePower = async (id: string) => {
 
 export const registerUserCard = async (userId: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userCards/create', {
+        const response = await fetch(`${config.apiUrl}/userCards/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

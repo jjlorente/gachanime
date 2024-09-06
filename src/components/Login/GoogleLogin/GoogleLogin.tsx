@@ -6,11 +6,12 @@ import { findGoogleUser } from '../../../services/user';
 import { findGacha, registerGacha } from '../../../services/gacha';
 import { registerUserCard } from '../../../services/userCards';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
     const navigate = useNavigate();
     const [widthGoogle, setWidthGoogle] = useState("500px");
-
+    const {i18n,t} = useTranslation();
     const handleLoginSuccess = async (credentialResponse: any) => {
         const googleAccount = true;
         const token = credentialResponse.credential;
@@ -65,10 +66,11 @@ const Login = () => {
             onSuccess={handleLoginSuccess}
             onError={handleLoginError}
             useOneTap
-            text="continue_with"
+            text="signin"
             width={widthGoogle}
             size="medium"
             logo_alignment='center'
+            locale={i18n.language}
         />
     );
 };

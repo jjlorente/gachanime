@@ -4,8 +4,10 @@ import { useUserGames } from '../Games';
 import { updateGameUser, findCharacters } from '../../../../services/userGames';
 import { useUserGachas } from "../../Home";
 import { updateLevel } from '../../../../services/user';
+import { useTranslation } from 'react-i18next';
 
 export const Input = (props: any) => {
+    const { i18n, t } = useTranslation();
 
     const animeArray = [
         "Frieren: Beyond Journeys End",
@@ -331,7 +333,7 @@ export const Input = (props: any) => {
                             type="text"
                             className="input-imagegame jaro-regular"
                             maxLength={50}
-                            placeholder={ props.game === "image" || props.game === "opening" ? "Escribe el nombre del anime..." : "Escribe el nombre del personaje..." }
+                            placeholder={ props.game === "image" || props.game === "opening" ? t('games.inputAnime') : t('games.inputCharacter') }
                             onChange={changeInputName}
                             value={valueInput}
                         />
@@ -351,7 +353,7 @@ export const Input = (props: any) => {
                             <div className="container-suggested">
                                 <span className="anime-suggested">
                                     {
-                                        props.game === "image" ? "No hay animes con este nombre..." : "No hay personajes con este nombre..."
+                                        props.game === "image" ? t('games.inputErrorAnime') : t('games.inputErrorCharacter')
                                     }
                                 </span>
                             </div>

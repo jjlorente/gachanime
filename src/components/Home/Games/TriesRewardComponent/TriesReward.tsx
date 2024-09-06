@@ -1,12 +1,13 @@
 import { useUserGames } from '../Games';
 import { useUserGachas } from "../../Home";
 import { updateReward } from '../../../../services/userGames';
-
+import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 
 export const TriesReward = (props: any) => {
     const { imageTries, userGamesData, siluetaTries, nameTries, openingTries } = useUserGames();
     const { userGachas, setUserGachas } = useUserGachas();
+    const { i18n, t } = useTranslation();
 
     const { alerts, setAlerts } = useUserGachas();
     
@@ -57,12 +58,12 @@ export const TriesReward = (props: any) => {
         <div className='container-tries-image'>
             <span className='gachas-recompensa-active'>
                 <>
-                    Intentos fallidos: {tries === 0 ? 0 : tries}
+                    {t('games.triesFailed')} {tries === 0 ? 0 : tries}
                 </>
             </span>  
             {(props.gachasRecompensa && (props.statusReward === 1 || props.statusReward === 0)) ? (
                 <span onClick={props.finishedGame === true && props.statusReward === 1 ? claimReward : undefined} className={props.finishedGame === true ? 'gachas-recompensa-active-click' : 'gachas-recompensa-inactive'}>
-                    {"Reclamar recompensa: " + props.gachasRecompensa}
+                    {t('games.claimReward') + props.gachasRecompensa}
                     <img src='/home/summon-w.png' alt="Logo Summon" className='logo-summon-w' />
                     {props.statusReward === 1 ? (
                         <span className='reward-icon'></span>
@@ -70,7 +71,7 @@ export const TriesReward = (props: any) => {
                 </span>
             ) : props.statusReward === 2 ? (
                 <span className='gachas-recompensa-active'>
-                    {"Recompensa reclamada"}
+                    {t('games.rewardClaimed')}
                 </span>
             ) : null}
         </div>

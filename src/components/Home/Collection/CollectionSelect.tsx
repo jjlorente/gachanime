@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import './CollectionSelect.css'
+import { useTranslation } from 'react-i18next';
 
 const CardFilter = (props:any) => {
   const [selectedAnime, setSelectedAnime] = useState('');
   const [selectedCol, setSelectedCol] = useState('');
   const [selectedRarity, setSelectedRarity] = useState('');
   const [nameCard, setNameCard] = useState('');
-
+  const {i18n, t} = useTranslation();
   const [animeNames, setAnimeNames] = useState<string[]>([]);
 
   const filterImages = (anime:any, collection:any, rarity:any, imgs:any) => {
@@ -98,7 +99,7 @@ const CardFilter = (props:any) => {
       <div className='container-select'>
         <div>
           <select className='select-anime' value={selectedAnime} onChange={handleAnimeChange}>
-            <option className='select-option' value="">Todos los animes</option>
+            <option className='select-option' value="">{t('collection.allAnimes')}</option>
             {animeNames.map((anime) => (
               <option className='select-option' key={anime} value={anime}>{anime}</option>
             ))}
@@ -107,21 +108,21 @@ const CardFilter = (props:any) => {
       </div>
       <div className='container-select'>
         <select className='select-anime' value={selectedCol} onChange={handleCollectionChange}>
-          <option className='select-option' value="Todas las cartas">Todas las cartas</option>
-          <option className='select-option' value="Cartas obtenidas">Cartas obtenidas</option>
-          <option className='select-option' value="Cartas no obtenidas">Cartas no obtenidas</option>
+          <option className='select-option' value="Todas las cartas">{t('collection.allCards')}</option>
+          <option className='select-option' value="Cartas obtenidas">{t('collection.obtainedCards')}</option>
+          <option className='select-option' value="Cartas no obtenidas">{t('collection.notObtained')}</option>
         </select>
       </div>
       <div className='container-select'>
         <select className='select-anime' value={selectedRarity} onChange={handleRarityChange}>
-          <option className='select-option' value="">Todas las rarezas</option>
+          <option className='select-option' value="">{t('collection.allRares')}</option>
           <option className='select-option' value="S+">S+</option>
           <option className='select-option' value="S">S</option>
           <option className='select-option' value="A">A</option>
           <option className='select-option' value="B">B</option>
         </select>
       </div>
-      <input className='search-input' type="text" placeholder='Nombre de la carta...' onChange={handleChangeCardName} value={nameCard}></input>
+      <input className='search-input' type="text" placeholder={t('collection.nameOfCard')} onChange={handleChangeCardName} value={nameCard}></input>
       <button className='button-clear' onClick={handleClickClearAll}><img src='/paper.png'/></button>
     </div>
   );

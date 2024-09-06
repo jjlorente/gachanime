@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { findCardsSummoned } from '../../../../services/cards';
 import { trefoil } from 'ldrs';
 import './Summoning.css';
+import { useTranslation } from 'react-i18next';
 
 export const Summoning = () => {
+  const {i18n, t} = useTranslation();
   trefoil.register();
   const [colorPulsar, setColorPulsar] = useState("gray");
   const navigate = useNavigate();
@@ -196,7 +198,7 @@ export const Summoning = () => {
               <span 
                 className='btn-skip' 
                 onClick={handleClear}>
-                SALIR
+                {t('summon.exit')}
               </span>
             ) : (
               <span 

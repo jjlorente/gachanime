@@ -9,9 +9,11 @@ import { useUserGames } from '../Games';
 import { Resets } from '../ResetsComponent/Resets';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { Input } from '../InputComponent/Input';
+import { useTranslation } from 'react-i18next';
 
 export const ImageGame = () => {
     const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
+    const { i18n, t } = useTranslation();
 
     library.add(faRotateRight);
     trefoil.register();
@@ -101,7 +103,7 @@ export const ImageGame = () => {
     return (
         <div className='container-imagegame'>
 
-            <Resets title={"¿De que anime es la imagen?"} game={"image"} finishedGame={finishedImageGame} findGame={findImageGame}/>
+            <Resets title={t('games.titleImage')} game={"image"} finishedGame={finishedImageGame} findGame={findImageGame}/>
 
             <div className='container-image-center'>
                 <div className='section-image-center image-center-game'>        
@@ -116,7 +118,7 @@ export const ImageGame = () => {
                     finishedImageGame === false ?    
                         null            
                         :
-                        <span className='span-info-image'>¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva imagen.</span>
+                        <span className='span-info-image'>{t('games.infoSpanWinImage')}</span>
                 }
                 <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedImageGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"image"}/>
             
@@ -124,7 +126,7 @@ export const ImageGame = () => {
             <div className='container-imagegame-input'>
                 {
                     finishedImageGame === false ?                
-                        <span className='span-info-image'>Cada intento fallido aleja un poco la imagen. Recibe 50 gachas al acertar.</span>
+                        <span className='span-info-image'>{t('games.infoSpanImage')}</span>
                         :
                         null
                 }

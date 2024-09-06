@@ -1,6 +1,8 @@
+import config from "../config";
+
 export const findDay = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/api/day/findById`, {
+        const response = await fetch(`${config.apiUrl}/day/findById`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ export const findDay = async () => {
 
 export const createDay = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/api/day/create`, {
+        const response = await fetch(`${config.apiUrl}/day/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +46,7 @@ export const createDay = async () => {
 
 export const updateDay = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/api/day/update`, {
+        const response = await fetch(`${config.apiUrl}/day/update`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +68,7 @@ export const updateDay = async () => {
 
 export const updateWeek = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/api/day/updateWeek`, {
+        const response = await fetch(`${config.apiUrl}/day/updateWeek`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

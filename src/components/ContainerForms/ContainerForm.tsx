@@ -1,7 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import "./ContainerForm.css"
+import { useTranslation } from 'react-i18next';
 
 export const ContainerForm = (props:any) => {
+  const {i18n, t} = useTranslation();
   return (
     <div className='container-app'>
       <div className='background-login-img'></div>
@@ -12,7 +14,7 @@ export const ContainerForm = (props:any) => {
           <img className='goku-up-img' src="../goku-sticker-1.png" alt="sticker goku" />
       </div>
       <div className='container-form'>
-        <h2 className="jaro-regular" id='title-form'>¡Bienvenido a <span style={{color:"rgb(255, 170, 42)", margin:"0", padding:"0"}}>GACHANIME</span>!</h2>
+        <h2 className="jaro-regular" id='title-form'>{t('login.titleLogin')} <span style={{color:"rgb(255, 170, 42)", margin:"0", padding:"0"}}>GACHANIME</span>!</h2>
         <Outlet />
       </div>
     </div>

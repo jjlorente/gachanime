@@ -5,7 +5,6 @@ import { findUserById, updateUser, updateUserLan } from '../../../services/user'
 import { MdEdit } from "react-icons/md";
 import EditProfilePicture from './EditProfilePicture/EditProfilePicture';
 import { useTranslation } from 'react-i18next';
-import { color } from '@mui/system';
 
 export const Settings = (props:any) => {
   const { userGamesData } = useUserGames();
@@ -73,7 +72,7 @@ export const Settings = (props:any) => {
   const handleLoginError = (error: any) => {
     switch (error.message) {
       case "Username already taken":
-        setErrorInput("Nombre de usuario existente");
+        setErrorInput(t('settings.errorName'));
         setValueInput("")
         document.getElementById("edit-username-input")?.focus()
         break;
@@ -95,10 +94,10 @@ export const Settings = (props:any) => {
           }
           {user ?
             <>
-              <span className='title-section-settings' style={{marginBottom:"-15px"}}>Configuración de usuario</span>
+              <span className='title-section-settings' style={{marginBottom:"-15px"}}>{t('settings.configUser')}</span>
               <div className='edit-username-cnt'>
                 <div className='container-edit-username'>
-                  <span style={{fontSize:"1.1rem"}}>Nombre de usuario </span>
+                  <span style={{fontSize:"1.1rem"}}>{t('settings.nameUser')}</span>
                   <div className='edit-username'>
                     <input 
                       className='input-username jaro-regular' 
@@ -120,8 +119,8 @@ export const Settings = (props:any) => {
                 </div>
                 {valueInput && (
                   <div className='cnt-buttons-flex-1'>
-                    <button style={{ backgroundColor: "#31ae31", maxHeight:"40px" }} className='link-main jaro-regular btn-flex-1' onClick={handleSaveUsername}>Aplicar</button>
-                    <button style={{ backgroundColor: "#ff4d4d", maxHeight:"40px" }} className='link-main jaro-regular btn-flex-1' onClick={()=>{setValueInput("")}}>Cancelar</button>
+                    <button style={{ backgroundColor: "#31ae31", maxHeight:"40px" }} className='link-main jaro-regular btn-flex-1' onClick={handleSaveUsername}>{t('settings.apply')}</button>
+                    <button style={{ backgroundColor: "#ff4d4d", maxHeight:"40px" }} className='link-main jaro-regular btn-flex-1' onClick={()=>{setValueInput("")}}>{t('settings.cancel')}</button>
                   </div>
                 )}
               </div>
@@ -130,7 +129,7 @@ export const Settings = (props:any) => {
             null
           }
           <>
-            <span className='title-section-settings' style={{marginBottom:"-15px"}}>Idiomas</span>
+            <span className='title-section-settings' style={{marginBottom:"-15px"}}>{t('settings.languages')}</span>
             <div className='edit-picture'>
               <div className='container-edit-username'>
                 <div 
@@ -143,7 +142,7 @@ export const Settings = (props:any) => {
                     src="http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg"
                     width={"50px"}
                   />
-                  <span>Inglés</span>
+                  <span>{t('settings.spanEnglish')}</span>
                 </div>
                 <div 
                   onClick={() => updateLan("es")}
@@ -155,7 +154,7 @@ export const Settings = (props:any) => {
                     src="http://purecatamphetamine.github.io/country-flag-icons/3x2/ES.svg"
                     width={"50px"}
                   />
-                  <span style={{fontSize:"1.2rem"}}>Español</span>
+                  <span style={{fontSize:"1.2rem"}}>{t('settings.spanSpanish')}</span>
                 </div>
               </div>
             </div>

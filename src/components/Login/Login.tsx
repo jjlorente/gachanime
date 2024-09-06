@@ -3,10 +3,11 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin/GoogleLogin';
 import { findUser } from '../../services/user';
+import { useTranslation } from 'react-i18next';
 
 export const Login: React.FC = () => {
     const navigate = useNavigate();
-
+    const {i18n, t} = useTranslation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [inputText, setInputText] = useState('');
@@ -33,13 +34,13 @@ export const Login: React.FC = () => {
     const handleLoginError = (error: any) => {
         switch (error.message) {
             case "Usuario no encontrado":
-                setShowErrorLogin("Nombre de usuario incorrecto");
+                setShowErrorLogin(t('login.errorUsername'));
                 setUsername("");
                 setPassword("");
                 document.getElementById("username")?.focus();
                 break;
             case "Credenciales inválidas":
-                setShowErrorLogin("Contraseña incorrecta");
+                setShowErrorLogin(t('login.errorPassword'));
                 setPassword("");
                 document.getElementById("password")?.focus();
                 break;
@@ -88,14 +89,14 @@ export const Login: React.FC = () => {
         <>
             <form className='form-user' onSubmit={submitUser}>
                 <div className='input-container'>
-                    {inputText === "username" && <span className='span-input-focus'>Nombre de usuario</span>}
+                    {inputText === "username" && <span className='span-input-focus'>{t('login.username')}</span>}
                     <input
                         type="text"
                         id="username"
                         value={username}
                         onChange={handleUsernameChange}
                         required
-                        placeholder={inputText === "username" ? "" : "Nombre de usuario"}
+                        placeholder={inputText === "username" ? "" : t('login.username')}
                         className='jaro-regular'
                         onFocus={handleFocus}
                         onBlur={handleBlur}
@@ -103,7 +104,7 @@ export const Login: React.FC = () => {
                     />
                 </div>
                 <div className='input-container'>
-                    {inputText === "password" && <span className='span-input-focus'>Contraseña</span>}
+                    {inputText === "password" && <span className='span-input-focus'>{t('login.password')}</span>}
                     <input
                         type={showPassword ? "text" : "password"}
                         id="password"
@@ -111,7 +112,7 @@ export const Login: React.FC = () => {
                         ref={passwordRef}
                         onChange={handlePasswordChange}
                         required
-                        placeholder={inputText === "password" ? "" : "Contraseña"}
+                        placeholder={inputText === "password" ? "" : t('login.password')}
                         className='jaro-regular'
                         onFocus={handleFocus}
                         onBlur={handleBlur}
@@ -125,12 +126,12 @@ export const Login: React.FC = () => {
                     />
                 </div>
                 {showErrorLogin && <span className='span-error-login'>{showErrorLogin}</span>}
-                <button className='btn-form jaro-regular' type='submit'>Iniciar sesión</button>
-                <span className='span-reg'>¿No tienes cuenta? <span className='reg-btn' onClick={registerUser}>Regístrate</span></span>
+                <button className='btn-form jaro-regular' type='submit'>{t('login.login')}</button>
+                <span className='span-reg'>{t('login.accNew')} <span className='reg-btn' onClick={registerUser}>{t('login.register')}</span></span>
             </form>
             <div className='container-spacer'>
                 <span className='span-spacer'></span>
-                <span className='span-text-spacer'>O</span>
+                <span className='span-text-spacer'>{t('login.or')}</span>
                 <span className='span-spacer'></span>
             </div>
             <GoogleLogin />

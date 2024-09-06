@@ -1,8 +1,10 @@
+import config from "../config";
+
 export const addVote = async (userId: string, vote: number) => {
     try {
         let voteUser = vote === 1 ? 0 : 1;
 
-        const response = await fetch('http://localhost:3000/api/surveys/update', {
+        const response = await fetch(`${config.apiUrl}/surveys/update`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +29,7 @@ export const addVote = async (userId: string, vote: number) => {
 
 export const find = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/surveys/find', {
+        const response = await fetch(`${config.apiUrl}/surveys/find`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

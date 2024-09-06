@@ -1,6 +1,8 @@
+import config from "../config";
+
 export const findUserGames = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/userGames/findById?id=${id}`, {
+        const response = await fetch(`${config.apiUrl}/userGames/findById?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +23,7 @@ export const findUserGames = async (id: string) => {
 
 export const findGameById = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/userGames/findGameImageById?id=${id}`, {
+        const response = await fetch(`${config.apiUrl}/userGames/findGameImageById?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +45,7 @@ export const findGameById = async (id: string) => {
 
 export const registerNewGameUser = async (userId: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/create', {
+        const response = await fetch(`${config.apiUrl}/userGames/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -66,7 +68,7 @@ export const registerNewGameUser = async (userId: string) => {
 
 export const updateGameUser = async (userid: string, finished: boolean, tries: Number, resets: Number, statusReward: Number, game: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/update', {
+        const response = await fetch(`${config.apiUrl}/userGames/update`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -89,7 +91,7 @@ export const updateGameUser = async (userid: string, finished: boolean, tries: N
 
 export const updateSelected = async (userid: string, game: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/updateSelected', {
+        const response = await fetch(`${config.apiUrl}/userGames/updateSelected`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -112,7 +114,7 @@ export const updateSelected = async (userid: string, game: string) => {
 
 export const updateReward = async (userid: string, gachas: Number, status: Number, game: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/updateReward', {
+        const response = await fetch(`${config.apiUrl}/userGames/updateReward`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -135,7 +137,7 @@ export const updateReward = async (userid: string, gachas: Number, status: Numbe
 
 export const findCharacters = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/findCharacters', {
+        const response = await fetch(`${config.apiUrl}/userGames/findCharacters`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -157,7 +159,7 @@ export const findCharacters = async () => {
 
 export const resetGame = async (userid: string, game: string) => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/resetGame', {
+        const response = await fetch(`${config.apiUrl}/userGames/resetGame`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -180,7 +182,7 @@ export const resetGame = async (userid: string, game: string) => {
 
 export const deleteAll = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/userGames/deleteAll', {
+        const response = await fetch(`${config.apiUrl}/userGames/deleteAll`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

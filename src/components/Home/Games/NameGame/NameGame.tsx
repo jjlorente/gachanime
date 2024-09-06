@@ -11,8 +11,10 @@ import { useLocation } from 'react-router-dom';
 import { updateGameUser, findCharacters } from '../../../../services/userGames';
 import { trefoil } from 'ldrs';
 import { updateLevel } from '../../../../services/user';
+import { useTranslation } from 'react-i18next';
 
 export const NameGame = () => {
+  const {i18n, t} = useTranslation();
   const [gameData, setGameData] = useState<Game>();
   const [finishedNameGame, setFinishedNameGame] = useState<boolean>();
   const [gachasRecompensa, setGachasRecompensa] = useState<number>();
@@ -256,7 +258,7 @@ export const NameGame = () => {
     <div className='container-imagegame'>
 
       <Resets 
-        title={"¡Adivina el personaje del día!"}
+        title={t('games.titleWordle')}
         game={"name"}
         setNameTriesComp={setNameTriesComp}
         finishedGame={finishedNameGame}
@@ -354,7 +356,7 @@ export const NameGame = () => {
       {finishedNameGame === true ? 
         <div className='container-imagegame-input'>
           <span className='span-info-clue' style={{backgroundColor:"#1AB616", padding:"5px 20px", borderRadius:"5px", fontSize:"1.5rem",border:"2px solid white"}}>
-            {pjName ? pjName.toUpperCase() + " de " + gameData?.anime_name  : gameData?.anime_name}
+            {pjName ? pjName.toUpperCase() + ": " + gameData?.anime_name  : gameData?.anime_name}
           </span>
         </div>
 
@@ -363,15 +365,15 @@ export const NameGame = () => {
         <div className='container-imagegame-colors'>
           <div className='div-info-color'>
             <span className='color-green'></span>
-            <span>Posición correcta</span>
+            <span>{t('games.wordleInfoCorrect')}</span>
           </div>
           <div className='div-info-color'>
             <span className='color-orange'></span>
-            <span>Posición incorrecta</span>
+            <span>{t('games.wordleInfoOrange')}</span>
           </div>
           <div className='div-info-color'>
             <span className='color-red'></span>
-            <span>No contiene la letra</span>    
+            <span>{t('games.wordleInfoIncorrect')}</span>    
           </div>
         </div>
       }
@@ -380,11 +382,11 @@ export const NameGame = () => {
         {
           finishedNameGame === true ? 
           <span className='span-info-image'>
-            ¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva palabra.
+            {t('games.infoSpanWordleCorrect')}
           </span>
           :
           <span className='span-info-image'>
-            A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.
+            {t('games.infoSpanWordle')}
           </span>
         }
       </div>

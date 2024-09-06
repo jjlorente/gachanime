@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { updateUser } from '../../../../services/user';
+import { useTranslation } from 'react-i18next';
 
 const EditProfilePicture = (props:any) => {
+  const {i18n,t} = useTranslation();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | undefined>(props.user.profilePicture);
   const fileInputRef = React.createRef<HTMLInputElement>();
@@ -41,7 +43,7 @@ const EditProfilePicture = (props:any) => {
 
   return (
     <>
-      <span className='title-section-settings' style={{ marginBottom: "-15px" }}>Foto de perfil</span>
+      <span className='title-section-settings' style={{ marginBottom: "-15px" }}>{t('settings.profilePicture')}</span>
       <div className='edit-picture'>
         <img className='img-marco' src={previewImage} alt="Profile Preview" />
         <div className='container-edit-picture'>
@@ -57,18 +59,18 @@ const EditProfilePicture = (props:any) => {
 
           <div className='container-buttons-edit-picture'>
             <button  onClick={handleButtonClick} className='link-main jaro-regular btn-edit-click'>
-                Editar foto de perfil
+              {t('settings.editPicture')}
             </button>
 
             {selectedImage && (
               <div className='cnt-buttons-flex-1'>
-                <button style={{ backgroundColor: "#31ae31" }} className='link-main jaro-regular btn-flex-1' onClick={handleSaveImage}>Aplicar</button>
-                <button style={{ backgroundColor: "#ff4d4d" }} className='link-main jaro-regular btn-flex-1' onClick={()=>{setSelectedImage(null), setPreviewImage(props.user.profilePicture)}}>Cancelar</button>
+                <button style={{ backgroundColor: "#31ae31" }} className='link-main jaro-regular btn-flex-1' onClick={handleSaveImage}>{t('settings.apply')}</button>
+                <button style={{ backgroundColor: "#ff4d4d" }} className='link-main jaro-regular btn-flex-1' onClick={()=>{setSelectedImage(null), setPreviewImage(props.user.profilePicture)}}>{t('settings.cancel')}</button>
               </div>
             )}
           </div>
 
-          <span>Debe ser JPEG, PNG o GIF y no puede exceder los 10 MB</span>
+          <span>{t('settings.infoPicture')}</span>
 
         </div>
       </div>

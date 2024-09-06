@@ -75,6 +75,8 @@ export const Main = (props: any) => {
     }
   }, [dataSurvey]);
 
+  const nextCommunity: Array<string> = t('survey.nextRoadMap', { returnObjects: true }); 
+
   return (
     <div className="Main">
       <div className='section-main'>
@@ -172,10 +174,10 @@ export const Main = (props: any) => {
 
         <div className='sections-container-community'>
           <div className='subsection-main'>
-            <span className='subtitle-main-section' style={{fontSize:"2rem",textAlign:"center", width:"100%"}}>UNETE A LA COMUNIDAD</span>
-            <span style={{textAlign:"center", width:"100%", fontSize:"1.3rem"}}>¡Nos encantaría saber tu opinión!</span>
-            <span style={{ fontSize:"1rem"}}>Si encontraste algún error, bug, o tienes alguna sugerencia para mejorar, por favor cuéntanos. Valoramos mucho tu feedback y cada comentario nos ayuda a mejorar GACHANIME.</span>
-            <span style={{fontSize:"1.3rem",textAlign:"center", width:"100%"}}>Próximamente estarán disponibles:</span>
+            <span className='subtitle-main-section' style={{fontSize:"2rem",textAlign:"center", width:"100%"}}>{t('survey.titleCommunity')}</span>
+            <span style={{textAlign:"center", width:"100%", fontSize:"1.3rem"}}> {t('survey.subTitleCommunity')} </span>
+            <span style={{ fontSize:"1rem"}}> {t('survey.infoCommunity')} </span>
+            <span style={{fontSize:"1.3rem",textAlign:"center", width:"100%"}}> {t('survey.nextCommunity')} </span>
 
             <div className='container-contact-type'>
               <SiDiscord style={{cursor:"not-allowed"}} />
@@ -183,14 +185,13 @@ export const Main = (props: any) => {
             </div>
           </div>
           <div className='subsection-main'>
-            <span className='subtitle-main-section'>PRÓXIMAMENTE EN GACHANIME</span>
+            <span className='subtitle-main-section'> {t('survey.titleRoadMap')}</span>
             <div className='container-roadmap'>
-              <span style={{fontSize:"1rem"}}>- Mercado de compra y venta de cartas entre jugadores por GACHAS</span>
-              <span style={{fontSize:"1rem"}}>- Banners para invocaciones especiales</span>
-              <span style={{fontSize:"1rem"}}>- Nuevo juego diario</span>
-              <span style={{fontSize:"1rem"}}>- Modo PVP diario</span>
-              <span style={{fontSize:"1rem"}}>- Ranking entre jugadores</span>
-              <span style={{fontSize:"1rem"}}>- Discord y Twitter para la comunidad</span>
+              {nextCommunity.map((item: any, index: number) => (
+                <span key={index} style={{ fontSize: "1rem" }}>
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
         </div>

@@ -3,8 +3,10 @@ import './Summon.css';
 import { findGacha } from '../../../services/gacha';
 import { ModalConfirm } from './Modals/ModalConfirm';
 import { PaginationComponent } from '../Collection/PaginationComponent';
+import { useTranslation } from 'react-i18next';
 
 export const Summon = (props: any) => {
+  const {i18n, t} = useTranslation()
   const [currentPage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(1);
   const [throws, setThrows] = useState(0);
@@ -57,11 +59,45 @@ export const Summon = (props: any) => {
     }
   ];
 
-  const currentSection = sections.slice(firstPostIndex, lastPostIndex);
+  const sectionsEn = [
+    {
+      type: "normal",
+      title: 'GENERAL SUMMON',
+      anime: "",
+      backgroundImage: "url('../pp.png')",
+      typeTitle: 'STANDARD PULLS',
+      descriptions: [
+        'Every 10 pulls guarantees a card of rarity A or higher.',
+        'Standard pulls have no limit.',
+        'Every 80 pulls guarantees an S+ card!'
+      ]
+    },
+    {
+      type: "special",
+      title: 'SPECIAL SUMMON',
+      anime: "One Piece",
+      backgroundImage: "url('../bg-banner.jpg')",
+      typeTitle: 'SPECIAL WISH',
+      descriptions: [
+        'Every 10 wishes guarantees a card of rarity A or higher from the special anime of the banner!',
+        'Special wishes have a limit of 100 wishes.'
+      ]
+    }
+  ];
+  
+  const [currentSection, setCurrentSection] = useState<any>()
+  useEffect(() => {
+      if(i18n.language === "en") {
+        setCurrentSection(sectionsEn.slice(firstPostIndex, lastPostIndex))
+      } else {
+        setCurrentSection(sections.slice(firstPostIndex, lastPostIndex))      
+      }
+
+  }, []);
 
   return (
     <div className="Summon">
-      {currentSection.length > 0 ? (
+      {currentSection && currentSection.length > 0 ? (
         currentSection.map((section: any, index: any) => (
           <div className='section-summon' key={index} style={{ backgroundImage: section.backgroundImage }}>
 
@@ -78,7 +114,7 @@ export const Summon = (props: any) => {
                 <progress className='progress' value={throws} max={80} />
                 <span className='throws'>{throws} / 80</span>
               </div>
-              <span className='info-throws'>Cada 80 tiradas te aseguras una carta S+</span>
+              <span className='info-throws'>{t('summon.infoSummon80')}</span>
             </div>
 
             <div className='container-gachas'>
@@ -106,7 +142,7 @@ export const Summon = (props: any) => {
           </div>
         ))
       ) : (
-        <h3>Cargando banner...</h3>
+        <h3>{t('summon.loadingBanner')}</h3>
       )}
       {/* 
       <div className='container-pagination'>

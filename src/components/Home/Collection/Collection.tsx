@@ -5,9 +5,11 @@ import { PaginationComponent } from './PaginationComponent';
 import { findUserCards } from '../../../services/userCards';
 import { findCards } from '../../../services/cards';
 import { trefoil } from 'ldrs';
+import { useTranslation } from 'react-i18next';
 
 export const Collection = (props:any) => {
   trefoil.register();
+  const {i18n, t} = useTranslation();
 
   const [imgs, setImgs] = useState<any>([]);
   const [imgsSelected, setImgsSelected] = useState<any>([]);
@@ -134,7 +136,7 @@ export const Collection = (props:any) => {
         <CollectionSelect imgsSelected={imgsSelected} setImgsSelected={setImgsSelected} imgs={imgs} userCards={userCards} setCurrentPage={setCurrentPage}/>
         <div className="cards-container">
           <div className="cards">
-            {currentCards.length > 0 ? (
+            {currentCards.length > 0  ? (
               currentCards.map((img:any, index:any) => {
                 const borderColor = getBorderColor(img.rarity);
                 const rarityClass = getRarityClassName(img.rarity);
@@ -146,7 +148,6 @@ export const Collection = (props:any) => {
 
                 return (
                   <div key={index+"container-card"} className={userCard ? 'container-card-obtained container-card '+ cardClassName + ' border-collection'+rarityClass : 'container-card '+ cardClassName + ' border-collection'+rarityClass}>
-                    <span className='not-adquired'>a</span>
                     <span className='copies' style={{ border: borderColor }}>x {copiesCard[img._id] ? copiesCard[img._id] : "0"}</span>
                     <img 
                       key={index} 
@@ -198,11 +199,17 @@ export const Collection = (props:any) => {
                 );
               })
             ) : (
+              imgs.length > 0 ?
+              <div style={{margin:"13rem 0 0 0"}}>
+                <span style={{fontSize:"3rem"}}>{t('collection.notOwned')}</span>
+              </div>
+              : 
               <div style={{margin:"13rem 0 0 0"}}>
                 <l-trefoil size="200" stroke="33" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
               </div>
             )}     
           </div>
+
           {imgsSelected.length > 0 ? 
             <PaginationComponent 
               totalPosts={imgsSelected.length} 

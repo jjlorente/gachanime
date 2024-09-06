@@ -7,9 +7,11 @@ import { Resets } from '../ResetsComponent/Resets';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { Input } from '../InputComponent/Input';
 import ReactAudioPlayer from 'react-audio-player';
+import { useTranslation } from 'react-i18next';
 
 export const OpeningGame = () => {
     const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
+    const {i18n, t} = useTranslation();
 
     const [finishedOpeningGame, setFinishedOpeningGame] = useState<boolean>();
     const [gameOpeningData, setGameOpeningData] = useState<Game>();
@@ -85,7 +87,7 @@ export const OpeningGame = () => {
     return (
         <div className='container-imagegame'>
 
-        <Resets title={"¿De que anime es el opening?"} game={"opening"} finishedGame={finishedOpeningGame} findGame={findOpeningGame}/>
+        <Resets title={t('games.titleOpening')} game={"opening"} finishedGame={finishedOpeningGame} findGame={findOpeningGame}/>
             <div className='container-image-center'>
                 {gameOpeningData !== undefined && base64Audio !== undefined ? 
                     <ReactAudioPlayer
@@ -101,7 +103,7 @@ export const OpeningGame = () => {
 
             {
                 finishedOpeningGame === true ?    
-                    <span className='span-info-image'>¡Enhorabuena! Recoge tu recompensa y vuelve mañana para un nuevo opening.</span>
+                    <span className='span-info-image'>{t('games.infoSpanOpeningCorrect')}</span>
                     :
                     null
             }
@@ -113,7 +115,7 @@ export const OpeningGame = () => {
                     finishedOpeningGame === true ?  
                         null  
                         :
-                        <span className='span-info-image'>Al adivinar el anime del opening recibes 50 gachas como recompensa.</span>
+                        <span className='span-info-image'>{t('games.infoSpanOpening')}</span>
             }
             <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
         </div>

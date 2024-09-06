@@ -6,6 +6,7 @@ import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { Input } from '../InputComponent/Input';
 import { findGameById, updateSelected } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
+import { useTranslation } from 'react-i18next';
 
 export const SiluetaGame = (props: any) => {
     const [finishedSiluetaGame, setFinishedSiluetaGame] = useState<boolean>();
@@ -16,6 +17,7 @@ export const SiluetaGame = (props: any) => {
     const [pjName, setPjName] = useState<string>();
     const [siluetaSelected, setSiluetaSelected] = useState<number>();
     const [gameData, setGameData] = useState<Game>();
+    const { i18n, t } = useTranslation();
 
     useEffect(() => {
         const idUser = localStorage.getItem("_id");
@@ -88,7 +90,7 @@ export const SiluetaGame = (props: any) => {
     return (
         <div className='container-imagegame'>      
 
-            <Resets title={"¿De que personaje es la silueta?"} game={"silueta"} finishedGame={finishedSiluetaGame} findGame={findSiluetaGame}/>
+            <Resets title={t('games.titleSilueta')} game={"silueta"} finishedGame={finishedSiluetaGame} findGame={findSiluetaGame}/>
 
             <div className='container-image-center'>
                 
@@ -104,7 +106,7 @@ export const SiluetaGame = (props: any) => {
                     finishedSiluetaGame === false ?    
                         null            
                         :
-                        <span className='span-info-image'>¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva silueta.</span>
+                        <span className='span-info-image'>{t('games.infoSpanWinSilueta')}</span>
                 }
 
                 <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedSiluetaGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"silueta"}/>
@@ -115,7 +117,7 @@ export const SiluetaGame = (props: any) => {
 
                 {
                     finishedSiluetaGame === false ?    
-                        <span className='span-info-image'>Al adivinar la silueta recibes 50 gachas como recompensa.</span>
+                        <span className='span-info-image'>{t('games.infoSpanSilueta')}</span>
                         :
                         null
                 }

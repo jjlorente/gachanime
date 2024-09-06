@@ -5,9 +5,10 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
 import { navItems, icons } from './navConfig';
 import { User } from '../../Interfaces/User';
+import { useTranslation } from 'react-i18next';
 
 export const Nav = (props: any) => {
-
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate(); 
   const location = useLocation();
   const [classNav, setClassNav] = useState(false);
@@ -76,10 +77,10 @@ export const Nav = (props: any) => {
             {icons[item.link as keyof typeof icons]}
             {classNav ? (
               <span key={index+"span-nav"} className={activeIndex === item.link ? "span-section-nav-active color-active" : "span-section-nav-active color-inactive"}>
-                {item.label}
+                {i18n.language === "en" ? item.labelEn :  item.labelEs}
               </span>
             ) : (
-              <span key={index+"span-nav-inactive"} className='span-section-nav-inactive'>{item.label}</span>
+              <span key={index+"span-nav-inactive"} className='span-section-nav-inactive'>{i18n.language === "en" ? item.labelEn :  item.labelEs}</span>
             )}
           </Link>
         ))}
@@ -88,7 +89,7 @@ export const Nav = (props: any) => {
       </div>
       <div className='container-btn-logout'>
         <button onClick={logOut} className="logout-btn">
-          {classNav ? <span className='span-active-logout'>Cerrar sesión</span> : <span className='span-inactive-logout'>Cerrar sesión</span>}
+          {classNav ? <span className='span-active-logout'>{t('links.logOut')}</span> : <span className='span-inactive-logout'>{t('links.logOut')}</span>}
           <img className='svg-logout' src='/home/logout.svg' alt="logout" />
         </button>
       </div>

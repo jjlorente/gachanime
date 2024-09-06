@@ -7,9 +7,10 @@ import { registerUser } from '../../services/user';
 import { registerGacha } from '../../services/gacha';
 import GoogleLogin from '../Login/GoogleLogin/GoogleLogin';
 import { registerUserCard } from '../../services/userCards';
+import { useTranslation } from 'react-i18next';
 
 export const Register = () => {
-
+  const {i18n, t} = useTranslation();
   const navigate = useNavigate();
   
   const [inputName, setInputName] = useState('');
@@ -31,11 +32,11 @@ export const Register = () => {
     event.preventDefault();
     let googleAccount = false;
     if (password !== passwordRepeat) {
-      setShowErrorLogin("Contraseña repetida incorrecta")
+      setShowErrorLogin(t('login.repeatedPassword'))
       setPasswordRepeat("")
       document.getElementById("passwordRepeat")?.focus()
     } else if(!emailCheck(email)) {
-      setShowErrorLogin("Correo electronico invalido")
+      setShowErrorLogin(t('login.errorMail'))
       setEmail("")
       document.getElementById("email")?.focus()
     } else {
@@ -51,18 +52,18 @@ export const Register = () => {
         }
       } catch (error: any) {
         if(error.message === "Nombre de usuario en uso") {
-          setShowErrorLogin("Nombre de usuario en uso")
+          setShowErrorLogin(t('login.repeatedUsername'))
           setUsername("")
           setPassword("")
           setPasswordRepeat("")
           document.getElementById("username")?.focus()
         } else if(error.message === "Credenciales inválidas") {
-          setShowErrorLogin("Contraseña incorrecta")
+          setShowErrorLogin(t('login.wrongPass'))
           setPassword("")
           setPasswordRepeat("")
           document.getElementById("password")?.focus()
         } else if(error.message === "Correo electrónico en uso") {
-          setShowErrorLogin("Correo electrónico en uso")
+          setShowErrorLogin(t('login.repeatedMail'))
           setEmail("")
           setPassword("")
           setPasswordRepeat("")
@@ -140,7 +141,7 @@ export const Register = () => {
   <>
     <form className='form-user' onSubmit={submitUser}>
       <div className='input-container'>
-        {inputText === "email" ? <span className='span-input-focus'>Correo electrónico</span> : ""}
+        {inputText === "email" ? <span className='span-input-focus'>{t('login.mail')}</span> : ""}
         <input
           type="email"
           name='email'
@@ -148,7 +149,7 @@ export const Register = () => {
           value={email}
           onChange={handleInputChange}
           required
-          placeholder={inputText === "email" ? "" : "Correo electrónico"}
+          placeholder={inputText === "email" ? "" : t('login.mail')}
           className='jaro-regular'
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -156,7 +157,7 @@ export const Register = () => {
         />
       </div>
       <div className='input-container'>
-        {inputText === "username" ? <span className='span-input-focus'>Nombre de usuario</span> : ""}
+        {inputText === "username" ? <span className='span-input-focus'>{t('login.username')}</span> : ""}
         <input
           type="text"
           id="username"
@@ -164,7 +165,7 @@ export const Register = () => {
           value={username}
           onChange={handleInputChange}
           required
-          placeholder={inputText === "username" ? "" : "Nombre de usuario"}
+          placeholder={inputText === "username" ? "" : t('login.username')}
           className='jaro-regular'
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -173,7 +174,7 @@ export const Register = () => {
         />
       </div>
       <div className='input-container'>
-        {inputText === "password" ? <span className='span-input-focus'>Contraseña</span> : ""}
+        {inputText === "password" ? <span className='span-input-focus'>{t('login.password')}</span> : ""}
         <input
           type={showPassword ? "text" : "password"}
           id="password"
@@ -182,7 +183,7 @@ export const Register = () => {
           ref={passwordRef}
           onChange={handleInputChange}
           required
-          placeholder={inputText === "password" ? "" : "Contraseña"}
+          placeholder={inputText === "password" ? "" : t('login.password')}
           className='jaro-regular'
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -192,7 +193,7 @@ export const Register = () => {
         <img id='passwordRef' className='btn-toggle-password' onClick={handlePasswordToggle} src={showPassword ? "../eye-2.png" : "../eye-1.png"} alt=""/>
       </div>
       <div className='input-container'>
-        {inputText === "passwordRepeat" ? <span className='span-input-focus'>Repite la contraseña</span> : ""}
+        {inputText === "passwordRepeat" ? <span className='span-input-focus'>{t('login.repeatPass')}</span> : ""}
         <input
           type={showPasswordRepeat ? "text" : "password"}
           id="passwordRepeat"
@@ -201,7 +202,7 @@ export const Register = () => {
           ref={passwordRepeatRef}
           onChange={handleInputChange}
           required
-          placeholder={inputText === "passwordRepeat" ? "" : "Repite la contraseña"}
+          placeholder={inputText === "passwordRepeat" ? "" : t('login.repeatPass')}
           className='jaro-regular'
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -213,12 +214,12 @@ export const Register = () => {
       {showErrorLogin ? 
         <span className='span-error-login'>{showErrorLogin}</span> : <></>
       }
-      <button className='btn-form jaro-regular' type='submit'>Registrarse</button>
-      <span className='span-reg'>¿Ya tienes una cuenta? <span className='reg-btn' onClick={logInUser}>Inicia sesión</span></span>
+      <button className='btn-form jaro-regular' type='submit'>{t('login.registerButton')}</button>
+      <span className='span-reg'>{t('login.alReadyAcc')} <span className='reg-btn' onClick={logInUser}>{t('login.login')}</span></span>
     </form>
     <div className='container-spacer'>
         <span className='span-spacer'></span>
-        <span className='span-text-spacer'>O</span>
+        <span className='span-text-spacer'>{t('login.or')}</span>
         <span className='span-spacer'></span>
     </div>
     <GoogleLogin />
