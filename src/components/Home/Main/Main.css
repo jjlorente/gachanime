@@ -331,7 +331,7 @@
     display:flex; 
     flex-Direction:row;
     gap:2rem;
-    
+    position: relative;
 }
 
 .container-links-sections-main{
@@ -535,4 +535,17 @@
 
 .link-settings-hover:hover .edit-route-image{
     display: block;
+}
+
+.timer-quest-survey {
+    display: flex;
+    position: absolute;
+    justify-content: end;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 1rem;
+    flex: 1;
+    margin-right: 1rem;
+    top: 10px;
+    right: 5px;
 }

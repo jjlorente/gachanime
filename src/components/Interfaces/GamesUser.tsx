@@ -42,6 +42,10 @@ export interface UserQuests {
     statusWeek: number;
     statusSummonsWeek: number;
     statusLogInWeek: number;
+    statusLevel5: number,
+    statusLevel20: number,
+    statusPower1: number,
+    statusPower10: number
 }
 
 export interface QuestsData {

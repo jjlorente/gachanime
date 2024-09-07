@@ -10,6 +10,11 @@ import { calculatePower } from '../../../services/userCards';
 import { ProfileCard } from './ProfileCard/ProfileCard';
 import { useTranslation } from 'react-i18next';
 
+import RelativeTimeElement from '../Quests/relative-time-element-define.js'
+export { RelativeTimeElement }
+export default RelativeTimeElement
+export * from '../Quests/relative-time-element-define.js'
+
 export const Main = (props: any) => {
   const [voted, setVoted] = useState<boolean>()
   const [selectedOption, setSelectedOption] = useState<number>();
@@ -20,7 +25,8 @@ export const Main = (props: any) => {
   const [dataUser, setDataUser] = useState<any>();
   const [power, setPower] = useState<number>();
   const { i18n, t } = useTranslation();
-  
+  const [dailyTime, setDailyTime] = useState<string>();
+
   useEffect(() => {
 
     const findSurvey = async () => {
@@ -30,6 +36,7 @@ export const Main = (props: any) => {
         if(userId){
           const userData = await findUserById(userId);
           setDataUser(userData)
+          setDailyTime(data.expirationdDate)
           setVoted(data.usersId.includes(userId))
           setDataSurvey(data)
           const cards = await calculatePower(userId);
@@ -90,14 +97,20 @@ export const Main = (props: any) => {
         <div className='sections-container-community height-standar'>
           <ProfileCard dataUser={dataUser} power={power} />
           {dataSurvey ? (
-
-            !voted ? (
-
+            !voted && !dataSurvey.finished ? (
               <div className='subsection-main-survey'>
-                <span style={{fontSize: "1.9rem"}}>{t('survey.infoTitle')}</span>
+                <span style={{fontSize: "1.8rem"}}>{t('survey.infoTitle')}</span>
                 <span style={{fontSize: "1.8rem"}}>
                   {selectedAnime ? `${selectedAnime}` : t('survey.infoChoose')}
                 </span>
+                { dailyTime ? 
+                  <p className='timer-quest-survey'>
+                    <relative-time datetime={dailyTime} format="elapsed" precision='minute' lang="es">
+                    </relative-time>
+                  </p>
+                  :
+                  null
+                }
                 <div className='progress-container-survey'>
                   <span>{percentage} %</span>
                   <span
@@ -135,11 +148,12 @@ export const Main = (props: any) => {
                 </div>
               </div>
 
-            ) : (
-
+            ) : dataSurvey.finished ? (
               <div className='subsection-main-survey'>
-                <span style={{fontSize:"1.9rem"}}>{t('survey.infoTitle')}</span>
-                <span style={{fontSize:"1.8rem"}}>{t('survey.msgThanks')}</span>
+                <span style={{fontSize: "3rem"}}>{t('survey.finishedPoll')}</span>
+                <span style={{fontSize: "1.8rem"}}>
+                {percentage && percentage2 && percentage > percentage2 || percentage === percentage2 ? `${dataSurvey.name[0]} gana con un ${percentage}%` : `${dataSurvey.name[1]} gana con un ${percentage2}%`}
+                </span>
                 <div className='progress-container-survey'>
                   <span>{percentage} %</span>
                   <span
@@ -150,20 +164,58 @@ export const Main = (props: any) => {
                         : { display: `none` }
                     }
                   >
-                    <img className='sticker-luffy' src='/luffy-sticker.png' alt="Luffy sticker"/>
                   </span>
                   <span>{percentage2} %</span>
                 </div>
                 <div className="btn-vote-container">
-                  <span className="span-anime-survey" style={{backgroundColor:"#051641"}}>
-                    {dataSurvey.name[0]}
-                  </span>
-                  <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "#bcbcbc"}}>
-                    {dataSurvey.name[1]}
-                  </span>
+                  {
+                  percentage && percentage2 && percentage > percentage2 || percentage === percentage2 ? 
+                    <span className="span-anime-survey" style={{backgroundColor:"#051641"}}>
+                      {dataSurvey.name[0]}
+                    </span>
+                    :
+                    <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "#bcbcbc"}}>
+                      {dataSurvey.name[1]}
+                    </span>
+                  }
                 </div>
               </div>
-            )
+          ) : (
+            <div className='subsection-main-survey'>
+              { dailyTime ? 
+                  <p className='timer-quest-survey'>
+                    <relative-time datetime={dailyTime} format="elapsed" precision='minute' lang="es">
+                    </relative-time>
+                  </p>
+                  :
+                  null
+              }
+              <span style={{fontSize:"1.8rem"}}>{t('survey.infoTitle')}</span>
+              <span style={{fontSize:"1.8rem"}}>{t('survey.msgThanks')}</span>
+              <div className='progress-container-survey'>
+                <span>{percentage} %</span>
+                <span
+                  className='proggres-bar-survey'
+                  style={
+                    percentage && percentage2 
+                      ? { background: `linear-gradient(to right, #051641 ${percentage}%, white  ${percentage}%)` }
+                      : { display: `none` }
+                  }
+                >
+                  <img className='sticker-luffy' src='/luffy-sticker.png' alt="Luffy sticker"/>
+                </span>
+                <span>{percentage2} %</span>
+              </div>
+              <div className="btn-vote-container">
+                <span className="span-anime-survey" style={{backgroundColor:"#051641"}}>
+                  {dataSurvey.name[0]}
+                </span>
+                <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "#bcbcbc"}}>
+                  {dataSurvey.name[1]}
+                </span>
+              </div>
+            </div>
+          )
           ) : (
             <div className='subsection-main-survey'>
               <span>{t('survey.nextSurvey')}</span>

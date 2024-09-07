@@ -48,3 +48,25 @@ export const find = async () => {
         throw error;
     }
 };
+
+export const finished = async () => {
+    try {
+        const response = await fetch(`${config.apiUrl}/surveys/finished`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Unknown error');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};

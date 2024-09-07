@@ -9,6 +9,7 @@ import { updateWeekQuests } from '../../services/userQuests';
 import { findGacha } from '../../services/gacha';
 import { findDay, createDay, updateDay, updateWeek } from '../../services/day';
 import { useTranslation } from 'react-i18next';
+import { find, finished } from '../../services/surveys';
 
 type ContextType = { 
   userGachas: number | null;
@@ -77,9 +78,19 @@ export const Home = () => {
         } 
       }
 
+      let daySurvey = await find(); 
+      if(daySurvey) {
+        let day = daySurvey.expirationdDate.split(",").map((str: any) => parseInt(str, 10));
+        day[2] = day[2]-1
+        if (isDateOutdated(day, local)) {
+          await finished();
+        } 
+      }
+
       let weekDB = await checkWeek();
       if (weekDB) {
         weekDB = weekDB.split(",").map((str: any) => parseInt(str, 10));
+        weekDB[2] = weekDB[2]-1
         if (isDateOutdated(weekDB, local)) {
           await resetWeek()
         } 

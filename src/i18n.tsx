@@ -43,7 +43,8 @@ i18n.use(initReactI18next).init({
                         '- Daily PVP mode',
                         '- Player ranking',
                         '- Discord and Twitter for the community'
-                    ]
+                    ],
+                    finishedPoll: "Poll finished!"
                 },
                 'games': {
                     titleImage: 'Which anime is the image from?',
@@ -93,8 +94,11 @@ i18n.use(initReactI18next).init({
                     openingQuest: "Guess which anime the opening is from",
                     allGamesQuest: "Complete all daily games!",
                     summonQuest: "Make 10 summons of 10 cards",
-                    connectionQuest: "Connect to GACHANIME for 7 days in a row"
-                    
+                    connectionQuest: "Connect to GACHANIME for 7 days in a row",
+                    level5Quest: "Reach account level 5",
+                    level20Quest: "Reach account level 20",
+                    power1Quest: "Reach 150,000 total power",
+                    power2Quest: "Reach 500,000 total power"
                 },
                 "summon": {
                     loadingBanner: "Loading banner...",
@@ -190,6 +194,7 @@ i18n.use(initReactI18next).init({
                         '- Ranking entre jugadores',
                         '- Discord y Twitter para la comunidad'
                     ],
+                    finishedPoll: "¡Votación finalizada!"
                 },
                 'games': {
                     titleImage: '¿De que anime es la imagen?',
@@ -237,7 +242,11 @@ i18n.use(initReactI18next).init({
                     openingQuest: "Adivina de que anime es el opening",
                     allGamesQuest: "¡Completa todos los juegos diarios!",
                     summonQuest: "Haz 10 invocaciones de 10 cartas",
-                    connectionQuest: "Conéctate a GACHANIME durante 7 días seguidos"
+                    connectionQuest: "Conéctate a GACHANIME durante 7 días seguidos",
+                    level5Quest: "Alcanza el nivel 5 de cuenta",
+                    level20Quest: "Alcanza el nivel 20 de cuenta",
+                    power1Quest: "Alcanza 150.000 de poder total",
+                    power2Quest: "Alcanza 500.000 de poder total"
                 },
                 "summon": {
                     loadingBanner: "Cargando banner...",
