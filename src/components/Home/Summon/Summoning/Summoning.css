@@ -462,7 +462,7 @@
 
 .logo-anima {
     width: 450px;
-    animation: logoFade 6s forwards ease, spinSummon 4s linear forwards;
+    animation: logoFade 8s forwards ease, spinSummon 5s linear forwards;
     max-width: 450px;
 }
 
@@ -479,19 +479,19 @@
 }
 
 .ss-anima {
-	animation: fadeOutSS 6s forwards;
+	animation: fadeOutSS 8s forwards;
 }
 
 .s-anima {
-    animation: fadeOutS 6s forwards;
+    animation: fadeOutS 8s forwards;
 }
 
 .a-anima {
-    animation: fadeOutA 6s forwards;
+    animation: fadeOutA 8s forwards;
 }
 
 .b-anima {
-    animation: fadeOutB 6s forwards;
+    animation: fadeOutB 8s forwards;
 }
 
 @keyframes logoFade {

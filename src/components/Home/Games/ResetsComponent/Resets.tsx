@@ -36,6 +36,17 @@ export const Resets = (props: any) => {
                         }
                     }
                     localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));  
+                } else if (props.game === "eye") {
+                    const dataEye = await findGameById(data.eyeid)
+                    if(dataEye) {
+                        const randomIndex = Math.floor(Math.random() * dataEye.eye_game.length);
+                        localStorage.setItem("eyeSelected", randomIndex.toString());
+                        const dataEyes = await updateSelected(userGamesData.userid, props.game);
+                        if(dataEyes) {
+                            setUserGamesData(dataEyes);
+                        }
+                    }
+                    localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
                 } else if (props.game === "opening") {
                     const dataOpening = await findGameById(data.openingid)
                     if(dataOpening) {

@@ -203,15 +203,17 @@ export const Input = (props: any) => {
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
     const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
 
-    const { setOpeningTries, setImageTries, setSiluetaTries, userGamesData } = useUserGames();
+    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, userGamesData } = useUserGames();
     const { alerts, setAlerts } = useUserGachas();
 
     useEffect(() => {
-        if(props.game === "silueta") fetchData();
+        console.log(props.game)
+        if(props.game === "silueta" || props.game === "eye") fetchData();
     }, []);
 
     const fetchData = async () => {
         const data = await findCharacters();
+        console.log("entro")
         if(data) {
             data.map((anime : any) => {
                 let names = anime.names_game;
@@ -237,7 +239,7 @@ export const Input = (props: any) => {
                     anime.toLowerCase().includes(inputValue)
                 );
                 setAnimesSuggested(results);
-            } else if (props.game === "silueta") {
+            } else if (props.game === "silueta" || props.game === "eye") {
                 const results = arrayCharacters.filter((anime) =>
                     anime.toLowerCase().includes(inputValue)
                 );
@@ -263,6 +265,9 @@ export const Input = (props: any) => {
                 } else if (props.game === "opening") {
                     props.setFinishedGame(data.finishedOpening);
                     props.setStatusReward(data.statusRewardOpening);
+                } else if (props.game === "eye") {
+                    props.setFinishedGame(data.finishedEye);
+                    props.setStatusReward(data.statusRewardEye);
                 }
 
                 let alertGame = localStorage.getItem("alerts");
@@ -304,6 +309,14 @@ export const Input = (props: any) => {
                     } else if (props.game ==="silueta") {
                         setSiluetaTries(data.triessilueta);
                         let dataTries = data.triessilueta * 5
+                        if(dataTries>= 50) {
+                            props.setGachasRecompensa(50)
+                        } else {
+                            props.setGachasRecompensa(50)
+                        }
+                    } else if (props.game ==="eye") {
+                        setEyeTries(data.trieseye);
+                        let dataTries = data.trieseye * 5
                         if(dataTries>= 50) {
                             props.setGachasRecompensa(50)
                         } else {

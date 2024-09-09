@@ -4,23 +4,28 @@ export interface GameData {
     imageid: string;
     openingid: string;
     siluetaid: string;
+    eyeid: string;
     triesname: number;
     triesimage: number;
     triesopening: number;
     triessilueta: number;
+    trieseye: number;
     finishedImage: boolean;
     finishedName: boolean;
     finishedSilueta: boolean;
     finishedOpening: boolean;
+    finishedEye: boolean;
     resets: number;
     statusRewardImage: number;
     statusRewardName: number;
     statusRewardSilueta: number;
     statusRewardOpening: number;
+    statusRewardEye: number;
     imageSelected: number;
     siluetaSelected: number;
     nameSelected: number;
     openingSelected: number;
+    eyeSelected: number;
 }
 
 export interface Game {
@@ -30,6 +35,8 @@ export interface Game {
     silueta_game: Array<string>;
     silueta_solution: Array<string>;
     opening: Array<string>;
+    eye_game: Array<string>;
+    eye_solution: Array<string>;
 }
 
 export interface UserQuests {

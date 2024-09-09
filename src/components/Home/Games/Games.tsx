@@ -20,6 +20,8 @@ type ContextType = {
   setImageTries: React.Dispatch<React.SetStateAction<number | null>>;
   siluetaTries: number | null;
   setSiluetaTries: React.Dispatch<React.SetStateAction<number | null>>;
+  eyeTries: number | null;
+  setEyeTries: React.Dispatch<React.SetStateAction<number | null>>;
   nameTries: number | null;
   setNameTries: React.Dispatch<React.SetStateAction<number | null>>;
   openingTries: number | null;
@@ -40,6 +42,7 @@ export const Games = (props: any) => {
   const [siluetaTries, setSiluetaTries] = useState<number>(0);
   const [nameTries, setNameTries] = useState<number>(0);
   const [openingTries, setOpeningTries] = useState<number>(0);
+  const [eyeTries, setEyeTries] = useState<number>(0);
 
   const [resets, setResets] = useState<number>(10);
 
@@ -54,6 +57,7 @@ export const Games = (props: any) => {
         setSiluetaTries(data.triessilueta);
         setNameTries(data.triesname);
         setOpeningTries(data.triesopening);
+        setEyeTries(data.trieseye);
         setResets(data.resets);
         if (data.triesimage === 0) {
           localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
@@ -65,6 +69,8 @@ export const Games = (props: any) => {
           localStorage.setItem("localArrayColors", JSON.stringify([]));
         } else if (data.triesopening === 0) {
           localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
+        } else if (data.trieseye === 0) {
+          localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
         }
 
       } else {
@@ -77,7 +83,8 @@ export const Games = (props: any) => {
         localStorage.setItem("localArrayColors", JSON.stringify([]));
         localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
         localStorage.setItem("arrayErrorsName", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));  
+        localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
         try {
           const data = await registerNewGameUser(id);
           await findAllQuestUser(id);
@@ -87,6 +94,7 @@ export const Games = (props: any) => {
             setSiluetaTries(data.triessilueta);
             setNameTries(data.triesname);
             setOpeningTries(data.triesopening);
+            setEyeTries(data.trieseye);
             setResets(data.resets);
           }
         
@@ -146,15 +154,17 @@ export const Games = (props: any) => {
         >
           <BiSolidMusic fontSize={"1.4rem"}/>
         </Link>
-        <span
+        <Link
+          to="eyes"
           key={"eyes"}
-          className={"link-reset inactive-game not-disponible"}
+          className={index === "eyes" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+          onClick={() => { setIndex("eyes"); }}
         >
           <IoEye fontSize={"1.4rem"}/>
-        </span>
+        </Link>
       </div>
       <div className='section-games'>
-        <Outlet context={{ findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, alerts, setAlerts }} />
+        <Outlet context={{ findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
       </div>
     </div>
   );

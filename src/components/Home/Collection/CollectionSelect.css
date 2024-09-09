@@ -112,3 +112,8 @@ option:checked {
     background-color: #122a64;
     border: 2px solid #ffffffc4;
 }
+
+.css-1v2lvtn-MuiPaginationItem-root {
+    color: white !important;
+    font-size: 1.2rem !important;
+}

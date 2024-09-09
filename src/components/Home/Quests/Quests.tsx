@@ -255,20 +255,20 @@ export const Quests = () => {
         </span>
       );
     } else if(quest === "all") {
-      if(questStatus < 4) {
+      if(questStatus < 5) {
         return (
           <Link className='link-quest-btn' to={`/home/games`}>
             {t('quest.goToGame')}
           </Link>
         );
-      } else if(questStatus === 4) {
+      } else if(questStatus === 5) {
         return (
           <span className='quest-recompensa-active-click' onClick={(event) => handleClick(amount, quest, event)}>
             {t('quest.claimReward')}
             <span className="reward-icon"></span>
           </span>
         );
-      } else if(questStatus > 4) {
+      } else if(questStatus > 5) {
         return (
           <span className='reward-obtained'>
             {t('quest.claimed')}
@@ -282,59 +282,59 @@ export const Quests = () => {
 
   return (
     <div className="Quests">
+      <div className='title-quest-container'>
+        <span 
+          onClick={() => {setSection("daily")}} 
+          className={section === "daily" ? 'daily-quest active-quest-day' : "daily-quest inactive-quest-daily"
+        }>
+          <p className='title-quest'>
+            {t('quest.dayQuest')}
+          </p>
+          <p className='timer-quest'>
+            { 
+              dailyTime ? 
+                <relative-time 
+                  datetime={dailyTime} 
+                  format="elapsed" 
+                  precision='minute' 
+                  lang="es">
+                </relative-time>
+              :
+                null
+            }
+          </p>
+        </span> 
+        <span 
+          onClick={() => {setSection("week")}} 
+          className={section === "week" ? 'daily-quest active-quest-day' : "daily-quest inactive-quest-daily"
+        }>
+          <p className='title-quest'>
+            {t('quest.weekQuest')}
+          </p>
+          <p className='timer-quest'>
+            { 
+              weekTime ? 
+                <relative-time 
+                  datetime={weekTime} 
+                  format="elapsed" 
+                  precision='minute' 
+                  lang="es">
+                </relative-time>
+              :
+                null
+            }
+          </p>
+        </span> 
+        <span 
+          onClick={() => {setSection("special")}} 
+          className={section === "special" ? 'daily-quest active-quest-day' : "daily-quest inactive-quest-daily"
+        }>
+          <p className='title-quest-special'>
+            {t('quest.special')}
+          </p>
+        </span>
+      </div>
       <div className='section-quest'>
-        <div className='title-quest-container'>
-          <span 
-            onClick={() => {setSection("daily")}} 
-            className={section === "daily" ? 'daily-quest active-quest-day' : "daily-quest inactive-quest-daily"
-          }>
-            <p className='title-quest'>
-              {t('quest.dayQuest')}
-            </p>
-            <p className='timer-quest'>
-              { 
-                dailyTime ? 
-                  <relative-time 
-                    datetime={dailyTime} 
-                    format="elapsed" 
-                    precision='minute' 
-                    lang="es">
-                  </relative-time>
-                :
-                  null
-              }
-            </p>
-          </span> 
-          <span 
-            onClick={() => {setSection("week")}} 
-            className={section === "week" ? 'daily-quest active-quest' : "daily-quest inactive-quest-week"
-          }>
-            <p className='title-quest'>
-              {t('quest.weekQuest')}
-            </p>
-            <p className='timer-quest'>
-              { 
-                weekTime ? 
-                  <relative-time 
-                    datetime={weekTime} 
-                    format="elapsed" 
-                    precision='minute' 
-                    lang="es">
-                  </relative-time>
-                :
-                  null
-              }
-            </p>
-          </span> 
-          <span 
-            onClick={() => {setSection("special")}} 
-            className={section === "special" ? 'special-quest active-quest-special' : "special-quest inactive-quest-special"
-          }>
-            <p className='title-quest-special'>
-              SPECIAL
-            </p>
-          </span>
-        </div>
         {section === "daily" && quests ? 
           <section className='section-quest-comp'>
             <div className='container-quests'>
@@ -506,11 +506,11 @@ export const Quests = () => {
                   </span>
                   <span>
                     {userQuestsData 
-                      ? (userQuestsData.statusQuestAllGames > 4 
-                          ? 4 
+                      ? (userQuestsData.statusQuestAllGames > 5
+                          ? 5 
                           : userQuestsData.statusQuestAllGames)
                       : 0} 
-                    / 4
+                    / 5
                   </span>
                 </div>
                 <div className='info-quest'>

@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { findCardsSummoned } from '../../../../services/cards';
 import { trefoil } from 'ldrs';
 import './Summoning.css';
@@ -59,7 +59,7 @@ export const Summoning = () => {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "B"]);
         } else if (random <= 0.9) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-        } else if (random <= 0.98) {
+        } else if (random <= 0.99) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
         } else {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
@@ -72,9 +72,10 @@ export const Summoning = () => {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
       shots += 1;
     }
-    if (random > 0.2) {
+
+    if (random > 0.1) {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-    } else if (random < 0.2 && random > 0.005) {
+    } else if (random < 0.1 && random > 0.005) {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
     } else {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
@@ -87,7 +88,7 @@ export const Summoning = () => {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "B"]);
       } else if (random <= 0.9) {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-      } else if (random <= 0.98) {
+      } else if (random <= 0.99) {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
       } else {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
@@ -138,14 +139,18 @@ export const Summoning = () => {
     });
   };
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   useEffect(() => {
-    if (!cardSummoned || cardSummoned.length <= 1) {
+    if (!cardSummoned || cardSummoned.length < 1) {
       setVideoPlayed(true);
+      audioRef.current = new Audio("/test.mp3");
+      audioRef.current.volume = 0.08;
+      audioRef.current.play();
     } else {
       setVideoPlayed(false);
     }
   }, [cardSummoned]);
-
+  
   useEffect(() => {
     let rarity = "b";
     if (cardSummoned) {
@@ -160,6 +165,7 @@ export const Summoning = () => {
         }
       }
     }
+
     setVideoRarity(rarity);
   }, [cardSummoned]);
 

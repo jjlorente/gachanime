@@ -10,9 +10,6 @@
 .title {
     width: 100%;
     font-size: 6rem;
-    background-color: rgb(31, 55, 116);
-    border-radius: 5px;
-    border: white 2px solid;
     margin: 0;
     color: rgb(255, 170, 42);
 }
@@ -244,7 +241,7 @@ input:focus {
 
     .goku-up-img {
         width: 100px;
-        right: -24.8%;
+        right: -25.5% !important;
         top: 5%;
         transform: rotate(90deg);
     }
@@ -294,6 +291,9 @@ input:focus {
         font-size: 1.3rem;
     }
     .span-reg{
+        font-size: 0.8rem;
+    }
+    .eslogan-title {
         font-size: 0.8rem;
     }
 }

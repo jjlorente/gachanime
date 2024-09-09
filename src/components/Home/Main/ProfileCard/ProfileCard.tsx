@@ -24,7 +24,7 @@ export const ProfileCard = (props:any) => {
                         <span className='name-profile'>{props.dataUser.username}</span>
                         <div style={{display:"flex",justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
                             <span className='power-profile'>{t('user-card.power')}</span>
-                            {props.power ? Number(props.power).toLocaleString('es-ES') : 'Calculating...'}
+                            {props.power ? Number(props.power).toLocaleString('es-ES') : '0'}
                         </div>
                     </div>
                 </div>

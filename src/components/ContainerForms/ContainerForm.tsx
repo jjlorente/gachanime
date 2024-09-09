@@ -11,10 +11,15 @@ export const ContainerForm = (props:any) => {
           <h1 className="title jaro-regular">
             GACHANIME
           </h1>
+          <span className="eslogan-title jaro-regular" style={{marginTop:"-.8rem"}}>
+            {t('login.eslogan')} 
+          </span>
           <img className='goku-up-img' src="../goku-sticker-1.png" alt="sticker goku" />
       </div>
       <div className='container-form'>
-        <h2 className="jaro-regular" id='title-form'>{t('login.titleLogin')} <span style={{color:"rgb(255, 170, 42)", margin:"0", padding:"0"}}>GACHANIME</span>!</h2>
+        <h2 className="jaro-regular" id='title-form'>
+          {t('login.titleLogin')} <span style={{color:"rgb(255, 170, 42)", margin:"0", padding:"0"}}>GACHANIME</span>!
+        </h2>
         <Outlet />
       </div>
     </div>

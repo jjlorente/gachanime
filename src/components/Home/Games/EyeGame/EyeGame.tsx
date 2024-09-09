@@ -1,5 +1,5 @@
-import { Resets } from '../ResetsComponent/Resets'
-import './SiluetaGame.css'
+import { Resets } from '../ResetsComponent/Resets';
+import './EyeGame.css';
 import { useUserGames } from '../Games';
 import { useState, useEffect } from 'react';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
@@ -8,17 +8,17 @@ import { findGameById, updateSelected } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
 import { useTranslation } from 'react-i18next';
 
-export const SiluetaGame = (props: any) => {
-    const [finishedSiluetaGame, setFinishedSiluetaGame] = useState<boolean>();
+export const EyeGame = (props: any) => {
+    const [finishedEyeGame, setFinishedEyeGame] = useState<boolean>();
     const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>(0);
     const [animesErrors, setAnimesErrors] = useState<Array<string>>([]);
     const [pjName, setPjName] = useState<string>();
-    const [siluetaSelected, setSiluetaSelected] = useState<number>();
+    const [eyeSelected, setEyeSelected] = useState<number>();
     const [gameData, setGameData] = useState<Game>();
     const { i18n, t } = useTranslation();
-    const { siluetaTries } = useUserGames();
+    const { eyeTries } = useUserGames();
 
     useEffect(() => {
         const idUser = localStorage.getItem("_id");
@@ -28,59 +28,59 @@ export const SiluetaGame = (props: any) => {
       }, []);
 
     useEffect(()=> {
-        let arrayErrors = localStorage.getItem("arrayErrorsSilueta");
+        let arrayErrors = localStorage.getItem("arrayErrorsEye");
         if(!arrayErrors) {
-            localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
+            localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
         } else {
-            if (finishedSiluetaGame === false || finishedSiluetaGame === undefined) {
+            if (finishedEyeGame === false || finishedEyeGame === undefined) {
                 setAnimesErrors(JSON.parse(arrayErrors))
             }
         }
     },[userGamesData])
 
     useEffect(()=>{
-        if(animesErrors && animesErrors.length > 0 && finishedSiluetaGame === false) {
-            localStorage.setItem("arrayErrorsSilueta", JSON.stringify(animesErrors));
+        if(animesErrors && animesErrors.length > 0 && finishedEyeGame === false) {
+            localStorage.setItem("arrayErrorsEye", JSON.stringify(animesErrors));
         }
     }, [animesErrors])
 
     useEffect(()=>{
         if(userGamesData) {
-            findSiluetaGame(userGamesData.siluetaid)
-            setSiluetaSelected(userGamesData.siluetaSelected)
+            findEyeGame(userGamesData.eyeid)
+            setEyeSelected(userGamesData.eyeSelected)
         }
     },[userGamesData])
 
     useEffect(()=>{
         if(gameData && userGamesData) {
-            setPjName(gameData.names_game[userGamesData.siluetaSelected])
+            setPjName(gameData.names_game[userGamesData.eyeSelected])
         }
     },[gameData])
 
-    const findSiluetaGame = async (id:any) => {
+    const findEyeGame = async (id:any) => {
         try {
             const data = await findGameById(id)
             if (data) {
                 setGameData(data);
                 if(userGamesData) {
-                    setFinishedSiluetaGame(userGamesData.finishedSilueta);
-                    let dataTries = userGamesData.triessilueta * 5;
+                    setFinishedEyeGame(userGamesData.finishedEye);
+                    let dataTries = userGamesData.trieseye * 5;
                     if(dataTries>= 50) {
                         setGachasRecompensa(50)
                     } else {
                         setGachasRecompensa(50)
                     }
 
-                    setStatusReward(userGamesData.statusRewardSilueta)
+                    setStatusReward(userGamesData.statusRewardEye)
                 }
 
-                const siluetaLocal = localStorage.getItem("siluetaSelected");
-                if (userGamesData && userGamesData.siluetaSelected) {
-                    localStorage.setItem("siluetaSelected", userGamesData.siluetaSelected.toString())
-                } else if (userGamesData && !siluetaLocal) {
-                    const dataSiluetaSelected = await updateSelected(userGamesData.userid, "silueta");
-                    setUserGamesData(dataSiluetaSelected);
-                    localStorage.setItem("siluetaSelected", dataSiluetaSelected.siluetaSelected)
+                const eyeLocal = localStorage.getItem("eyeSelected");
+                if (userGamesData && userGamesData.eyeSelected) {
+                    localStorage.setItem("eyeSelected", userGamesData.eyeSelected.toString())
+                } else if (userGamesData && !eyeLocal) {
+                    const dataEyeSelected = await updateSelected(userGamesData.userid, "eye");
+                    setUserGamesData(dataEyeSelected);
+                    localStorage.setItem("eyeSelected", dataEyeSelected.eyeSelected)
                 }
             }
         } catch (error: any) {
@@ -91,26 +91,26 @@ export const SiluetaGame = (props: any) => {
     return (
         <div className='container-imagegame'>      
 
-            <Resets title={t('games.titleSilueta')} game={"silueta"} finishedGame={finishedSiluetaGame} findGame={findSiluetaGame}/>
+            <Resets title={t('games.titleEye')} game={"eye"} finishedGame={finishedEyeGame} findGame={findEyeGame}/>
 
             <div className='container-image-center'>
                 
-                <div className='section-image-center image-center-game' style={{backgroundColor:"white", border:"solid black 2px"}}>        
-                    {siluetaSelected !== undefined ? 
-                        <img className='img-game' width={"auto"} height={"100%"} src={finishedSiluetaGame ? gameData?.silueta_solution[siluetaSelected] : gameData?.silueta_game[siluetaSelected]} alt="" />
+                <div className={finishedEyeGame ? 'section-image-center eye-center-game-solution' : 'section-image-center eye-center-game'} style={{backgroundColor:"white", border:"solid black 2px"}}>        
+                    {eyeSelected !== undefined ? 
+                        <img className={finishedEyeGame ? "eye_img_solution" : "eye_game"} src={finishedEyeGame ? gameData?.eye_solution[eyeSelected] : gameData?.eye_game[eyeSelected]} alt="" />
                         :
                         <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                     }       
                 </div>
 
                 {
-                    finishedSiluetaGame === false ?    
+                    finishedEyeGame === false ?    
                         null            
                         :
-                        <span className='span-info-image'>{t('games.infoSpanWinSilueta')}</span>
+                        <span className='span-info-image'>{t('games.infoSpanWinEye')}</span>
                 }
 
-                {siluetaTries && siluetaTries >= 3 && finishedSiluetaGame === false ? 
+                {eyeTries && eyeTries >= 3 && finishedEyeGame === false ? 
                     <div className='container-imagegame-input'>
                         <span className='span-info-clue' style={{backgroundColor:"#d98c16"}}>
                             {t('games.span3Errors') + gameData?.anime_name}
@@ -120,24 +120,24 @@ export const SiluetaGame = (props: any) => {
                     <></>
                 }
 
-                <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedSiluetaGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"silueta"}/>
+                <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedEyeGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"eye"}/>
             
             </div>
             
             <div className='container-imagegame-input'>
 
                 {
-                    finishedSiluetaGame === false ?    
-                        <span className='span-info-image'>{t('games.infoSpanSilueta')}</span>
+                    finishedEyeGame === false ?    
+                        <span className='span-info-image'>{t('games.infoSpanEye')}</span>
                         :
                         null
                 }
 
-                <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setAnimesErrors} finishedGame={finishedSiluetaGame} solution={pjName} game={"silueta"} setFinishedGame={setFinishedSiluetaGame} setStatusReward={setStatusReward} />
+                <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setAnimesErrors} finishedGame={finishedEyeGame} solution={pjName} game={"eye"} setFinishedGame={setFinishedEyeGame} setStatusReward={setStatusReward} />
             
             </div>
 
-            {animesErrors && finishedSiluetaGame === false ? 
+            {animesErrors && finishedEyeGame === false ? 
                 <div className='errors-imagegame'>
                     {animesErrors.slice().reverse().map((anime, index) => (
                         <span key={index + "error"} className='error-span-image' style={{fontSize:"1.3rem"}}>{anime}</span>

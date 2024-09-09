@@ -40,7 +40,6 @@ i18n.use(initReactI18next).init({
                         '- Marketplace for buying and selling cards between players using GACHAS',
                         '- Special summon banners',
                         '- New daily game',
-                        '- Daily PVP mode',
                         '- Player ranking',
                         '- Discord and Twitter for the community'
                     ],
@@ -51,14 +50,18 @@ i18n.use(initReactI18next).init({
                     titleSilueta: 'Which character is the silhouette from?',
                     titleWordle: 'Guess the character of the day!',
                     titleOpening: 'Which anime is the opening from?',
-                    
+                    titleEye: 'Whose eyes belong to this character?',
+
                     infoSpanWinImage: 'Congratulations! Collect your reward and come back tomorrow for a new image.',
-                    infoSpanImage: 'Each wrong attempt zooms out the image a bit. Earn 50 gachas when you guess correctly.',
+                    infoSpanImage: 'Each failed attempt moves the image further away. Earn 50 gachas for guessing correctly.',
                     
-                    infoSpanSilueta: "Guessing the silhouette earns you 50 gachas as a reward.",
-                    infoSpanWinSilueta: "Congratulations! Collect your reward and come back tomorrow for a new silhouette.",
-
-
+                    infoSpanSilueta: 'After 3 wrong guesses, the character anime is revealed. Earn 50 gachas for guessing right.',
+                    infoSpanWinSilueta: 'Congratulations! Collect your reward and come back tomorrow for a new silhouette.',
+                    
+                    infoSpanEye: 'After 3 wrong guesses, the character anime is revealed. Earn 50 gachas for guessing right.',
+                    infoSpanWinEye: 'Congratulations! Collect your reward and come back tomorrow for a new image.',
+                    span3Errors: 'Character from ',
+                    
                     inputAnime: 'Enter the name of the anime...',
                     inputCharacter: 'Enter the name of the character...',
                     inputErrorAnime: "There are no animes with that name...",
@@ -98,7 +101,8 @@ i18n.use(initReactI18next).init({
                     level5Quest: "Reach account level 5",
                     level20Quest: "Reach account level 20",
                     power1Quest: "Reach 150,000 total power",
-                    power2Quest: "Reach 500,000 total power"
+                    power2Quest: "Reach 500,000 total power",
+                    special: "SPECIAL"
                 },
                 "summon": {
                     loadingBanner: "Loading banner...",
@@ -154,7 +158,8 @@ i18n.use(initReactI18next).init({
                     repeatPass: "Repeat password",
                     registerButton: "Register",
                     alReadyAcc: "Already have an account?",
-                    titleLogin: "Welcome to"
+                    titleLogin: "Welcome to",
+                    eslogan: "Play, collect, and grow your anime world"
                 }               
             },
         },
@@ -190,7 +195,6 @@ i18n.use(initReactI18next).init({
                         '- Mercado de compra y venta de cartas entre jugadores por GACHAS',
                         '- Banners para invocaciones especiales',
                         '- Nuevo juego diario',
-                        '- Modo PVP diario',
                         '- Ranking entre jugadores',
                         '- Discord y Twitter para la comunidad'
                     ],
@@ -201,12 +205,18 @@ i18n.use(initReactI18next).init({
                     titleSilueta: '¿De que personaje es la silueta?',
                     titleWordle: '¡Adivina el personaje del día!',
                     titleOpening: '¿De que anime es el opening?',
+                    titleEye: '¿De que personaje son los ojos?',
+
                     infoSpanWinImage: '¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva imagen.',
                     infoSpanImage: 'Cada intento fallido aleja un poco la imagen. Recibe 50 gachas al acertar.',
                     
-                    infoSpanSilueta: "Al adivinar la silueta recibes 50 gachas como recompensa.",
+                    infoSpanSilueta: "A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.",
                     infoSpanWinSilueta: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva silueta.",
-                    
+
+                    infoSpanEye: "A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.",
+                    infoSpanWinEye: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una imagen nueva.",
+                    span3Errors: 'Personaje de ',
+
                     inputAnime: 'Escribe el nombre del anime...',
                     inputCharacter: "Escribe el nombre del personaje...",
                     inputErrorAnime: "No hay animes con este nombre...",
@@ -246,7 +256,8 @@ i18n.use(initReactI18next).init({
                     level5Quest: "Alcanza el nivel 5 de cuenta",
                     level20Quest: "Alcanza el nivel 20 de cuenta",
                     power1Quest: "Alcanza 150.000 de poder total",
-                    power2Quest: "Alcanza 500.000 de poder total"
+                    power2Quest: "Alcanza 500.000 de poder total",
+                    special: "ESPECIALES"
                 },
                 "summon": {
                     loadingBanner: "Cargando banner...",
@@ -302,7 +313,8 @@ i18n.use(initReactI18next).init({
                     repeatPass: "Repite la contraseña",
                     registerButton: "Registrarse",
                     alReadyAcc: "¿Ya tienes una cuenta?",
-                    titleLogin: "¡Bienvenido a"
+                    titleLogin: "¡Bienvenido a",
+                    eslogan: "Juega, colecciona y haz crecer tu mundo anime"
                 }
             },
         }

@@ -1,0 +1,50 @@
+.eye_game {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 180px;
+    width: 100%;
+}
+.eye_img_solution{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+.eye-center-game {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    background-color: rgb(1, 14, 49);
+    height: 180px;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 5px;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid #f8f8f8;
+    justify-content: center;
+    align-items: center;
+}
+
+.eye-center-game-solution {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    background-color: rgb(1, 14, 49);
+    min-height: 360px;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 5px;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid #f8f8f8;
+    justify-content: center;
+    align-items: center;
+}

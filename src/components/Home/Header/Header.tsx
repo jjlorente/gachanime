@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
 import { navItems, icons } from '../Nav/navConfig';
 import { useTranslation } from 'react-i18next';
+import { RiGamepadFill } from "react-icons/ri";
 
 export const Header = (props: any) => {
   const [menu, setMenu] = useState<boolean>(false);
@@ -45,7 +46,14 @@ export const Header = (props: any) => {
                 className={`item-nav-vertical link-reset ${item.link === props.activeIndex ? 'nav-active' : ''}`}
                 onClick={() => handleSetActiveIndex(item.link)}
               >
-                {icons[item.link as keyof typeof icons]}
+                { item.link === "games" ? 
+                  <RiGamepadFill style={{height:"30px", width: "30px"}}/>
+                  :
+                  item.link === "summon" ?
+                    <img src='/home/summon-ww.png' style={{width: "30px"}}/>
+                  :
+                    icons[item.link as keyof typeof icons]
+                }
                 <span className={props.activeIndex === item.link ? "span-section-nav-active color-active" : "span-section-nav-active color-inactive"}>
                   {i18n.language === "en" ? item.labelEn :  item.labelEs}
                 </span>

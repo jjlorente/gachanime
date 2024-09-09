@@ -139,13 +139,13 @@
     flex-direction: row;
     justify-content: center;
     box-sizing: border-box;
-    border: white solid 2px;
-    background-color: #051641;
-    font-size: 1.2rem;
+    border: #996311 solid 2px;
+    background-color: #e9a030;
+    font-size: 1.4rem;
     gap: .3rem;
     top: 0;
     transition: all 150ms ease-in-out;
-    box-shadow: 0 0.2em white, 0 0.3em rgba(0, 0, 0, 0.527);
+    box-shadow: 0 0.2em #996311, 0 0.3em rgba(0, 0, 0, 0.527);
     position: relative;
     cursor: pointer;
     display: flex;
@@ -164,7 +164,7 @@
     border-radius: 10px;
     flex-direction: row;
     box-sizing: border-box;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     top: 0;
     transition: all 150ms ease-in-out;
     position: relative;
@@ -180,11 +180,11 @@
 
 .btn-vote:hover {
     top: 0.2em;
-    box-shadow: 0 0.1em rgb(14, 14, 14), 0 0.2em rgba(0, 0, 0, 0.527);
+    box-shadow: 0 0.1em rgba(0, 0, 0, 0.26), 0 0.2em rgba(0, 0, 0, 0.527);
 }
 .btn-vote-secondary:hover {
     top: 0.2em;
-    box-shadow: 0 0.1em rgb(14, 14, 14), 0 0.2em rgba(0, 0, 0, 0.527);
+    box-shadow: 0 0.1em rgba(14, 14, 14, 0.445), 0 0.2em rgba(0, 0, 0, 0.527);
 }
 .secondary-color{
     color: rgb(14, 14, 14) !important;
@@ -196,14 +196,14 @@
     flex: 3;
     max-width: 300px;
     top: 0.2em;
-    box-shadow: 0 0.1em rgb(14, 14, 14), 0 0.2em rgba(0, 0, 0, 0.527);
+    box-shadow: 0 0.1em rgba(0, 0, 0, 0.103), 0 0.2em rgba(0, 0, 0, 0.527);
     padding: 5px 10px;
     display: flex;
     border-radius: 10px;
     flex-direction: row;
     justify-content: center;
     box-sizing: border-box;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     gap: .3rem;
     transition: all 300ms ease-in-out;
     position: relative;
@@ -212,8 +212,8 @@
     justify-content: center;
     align-items: center;
     gap: .3rem;
-    border: white solid 2px;
-    background-color: #051641;
+    border: #996311 solid 2px;
+    background-color: #e9a030;
     color: white;
 }
 
@@ -232,7 +232,7 @@
     color: white;
     cursor: pointer;
     transition: ease all .3s;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     box-shadow: 0 0.1em #28850e98, 0 0.3em rgba(17, 77, 2, 0.678);
 }
 
@@ -256,7 +256,7 @@
     color: white;
     cursor: pointer;
     transition: ease all .3s;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     box-shadow: 0 0.1em #28850e98, 0 0.3em rgba(17, 77, 2, 0.678);
     cursor: not-allowed;
     filter: grayscale(100%);
@@ -273,9 +273,9 @@
     flex-direction: row;
     justify-content: center;
     box-sizing: border-box;
-    border: #102e7a solid 2px;
+    border: #6e5e02 solid 2px;
     background-color: #0c235c;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     gap: .3rem;
     position: relative;
     display: flex;
@@ -313,7 +313,7 @@
     
 }
 .container-contact-type > svg {
-    color: #020c27 !important;
+    color: #00052b !important;
     cursor: pointer;
 }
 
@@ -344,6 +344,7 @@
     font-size: 2rem;
     text-align: center;
     width: 100%;
+    color: #fcfcfc;
 }
 
 @media (max-width:960px) {

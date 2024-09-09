@@ -6,6 +6,7 @@ import { googleLogout } from '@react-oauth/google';
 import { navItems, icons } from './navConfig';
 import { User } from '../../Interfaces/User';
 import { useTranslation } from 'react-i18next';
+import { RiGamepadFill } from "react-icons/ri";
 
 export const Nav = (props: any) => {
   const { i18n, t } = useTranslation();
@@ -73,8 +74,14 @@ export const Nav = (props: any) => {
                 ))
               } */
             }
-
-            {icons[item.link as keyof typeof icons]}
+            { item.link === "games" ? 
+                <RiGamepadFill style={{height:"30px", width: "30px"}}/>
+              :
+              item.link === "summon" ?
+                <img src='/home/summon-ww.png' style={{width: "30px"}}/>
+              :
+                icons[item.link as keyof typeof icons]
+            }
             {classNav ? (
               <span key={index+"span-nav"} className={activeIndex === item.link ? "span-section-nav-active color-active" : "span-section-nav-active color-inactive"}>
                 {i18n.language === "en" ? item.labelEn :  item.labelEs}

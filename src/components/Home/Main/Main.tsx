@@ -112,12 +112,12 @@ export const Main = (props: any) => {
                   null
                 }
                 <div className='progress-container-survey'>
-                  <span>{percentage} %</span>
+                  <span style={{color:"#e9a030"}}>{percentage} %</span>
                   <span
                     className='proggres-bar-survey'
                     style={
                       percentage && percentage2 
-                        ? { background: `linear-gradient(to right, #051641 ${percentage}%, white  ${percentage}%)` }
+                        ? { background: `linear-gradient(to right, #e9a030 ${percentage}%,#e9a030 ${percentage-1}%, white ${percentage+2}%, white  ${percentage}%)` }
                         : { display: `none` }
                     }
                   >
@@ -155,12 +155,12 @@ export const Main = (props: any) => {
                 {percentage && percentage2 && percentage > percentage2 || percentage === percentage2 ? `${dataSurvey.name[0]} gana con un ${percentage}%` : `${dataSurvey.name[1]} gana con un ${percentage2}%`}
                 </span>
                 <div className='progress-container-survey'>
-                  <span>{percentage} %</span>
+                  <span style={{color:"#e9a030"}}>{percentage} %</span>
                   <span
                     className='proggres-bar-survey'
                     style={
                       percentage && percentage2 
-                        ? { background: `linear-gradient(to right, #051641 ${percentage}%, white  ${percentage}%)` }
+                        ? { background: `linear-gradient(to right, #e9a030 ${percentage}%,#e9a030 ${percentage-1}%, white ${percentage+2}%, white  ${percentage}%)` }
                         : { display: `none` }
                     }
                   >
@@ -170,7 +170,7 @@ export const Main = (props: any) => {
                 <div className="btn-vote-container">
                   {
                   percentage && percentage2 && percentage > percentage2 || percentage === percentage2 ? 
-                    <span className="span-anime-survey" style={{backgroundColor:"#051641"}}>
+                    <span className="span-anime-survey" style={{backgroundColor:"#e9a030"}}>
                       {dataSurvey.name[0]}
                     </span>
                     :
@@ -193,12 +193,12 @@ export const Main = (props: any) => {
               <span style={{fontSize:"1.8rem"}}>{t('survey.infoTitle')}</span>
               <span style={{fontSize:"1.8rem"}}>{t('survey.msgThanks')}</span>
               <div className='progress-container-survey'>
-                <span>{percentage} %</span>
+                <span style={{color:"#F1A127"}}>{percentage} %</span>
                 <span
                   className='proggres-bar-survey'
                   style={
                     percentage && percentage2 
-                      ? { background: `linear-gradient(to right, #051641 ${percentage}%, white  ${percentage}%)` }
+                      ? { background: `linear-gradient(to right, #e9a030 ${percentage}%,#e9a030 ${percentage-1}%, white ${percentage+2}%, white  ${percentage}%)` }
                       : { display: `none` }
                   }
                 >
@@ -207,7 +207,7 @@ export const Main = (props: any) => {
                 <span>{percentage2} %</span>
               </div>
               <div className="btn-vote-container">
-                <span className="span-anime-survey" style={{backgroundColor:"#051641"}}>
+                <span className="span-anime-survey" style={{backgroundColor:"#e9a030"}}>
                   {dataSurvey.name[0]}
                 </span>
                 <span className="span-anime-survey" style={{backgroundColor:"white", color: "black", borderColor: "#bcbcbc"}}>

@@ -345,8 +345,8 @@ export const NameGame = () => {
       
       {nameTriesComp >= 3 && finishedNameGame === false ? 
         <div className='container-imagegame-input'>
-          <span className='span-info-clue' style={{backgroundColor:nameTriesComp >= 6 && finishedNameGame === false ? "red" : "#1AB616"}}>
-            {nameTriesComp >= 6 && finishedNameGame === false && pjName ? pjName.toUpperCase() + " de " + gameData?.anime_name  : gameData?.anime_name}
+          <span className='span-info-clue' style={{backgroundColor:nameTriesComp >= 6 && finishedNameGame === false ? "red" : "#d98c16"}}>
+            {nameTriesComp >= 6 && finishedNameGame === false && pjName ? pjName.toUpperCase() + " de " + gameData?.anime_name  :"Personaje de " + gameData?.anime_name}
           </span>
         </div>
         :

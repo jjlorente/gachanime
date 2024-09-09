@@ -19,6 +19,8 @@ export const PaginationComponent = (props: any) => {
                 count={pages.length} 
                 onChange={handlePageChange} 
                 className="pagination"
+                siblingCount={0}
+                boundaryCount={1}
             />
         </Stack>
     )

@@ -5,15 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 
 export const TriesReward = (props: any) => {
-    const { imageTries, userGamesData, siluetaTries, nameTries, openingTries } = useUserGames();
+    const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries } = useUserGames();
     const { userGachas, setUserGachas } = useUserGachas();
     const { i18n, t } = useTranslation();
-
     const { alerts, setAlerts } = useUserGachas();
-    
     const [tries, setTries] = useState<number>();
 
     useEffect(() => {
+
         if ( props.game==="image" && imageTries!=null ) {
             setTries(imageTries)
         } else if ( props.game==="silueta" && siluetaTries!=null ) {
@@ -22,8 +21,11 @@ export const TriesReward = (props: any) => {
             setTries(nameTries)
         } else if ( props.game==="opening" && openingTries!=null ) {
             setTries(openingTries)
+        } else if ( props.game==="eye" && eyeTries!=null ) {
+            setTries(eyeTries)
         }
-    },[imageTries,siluetaTries, nameTries, openingTries])
+
+    },[imageTries, siluetaTries, nameTries, openingTries, eyeTries])
 
     const claimReward = async () => {
         if(userGamesData && props.gachasRecompensa) {
@@ -39,6 +41,8 @@ export const TriesReward = (props: any) => {
                     props.setStatusReward(data[0].statusRewardName);
                 } else if (props.game==="opening") {
                     props.setStatusReward(data[0].statusRewardOpening);
+                } else if (props.game==="eye") {
+                    props.setStatusReward(data[0].statusRewardEye);
                 }
             }
         }
