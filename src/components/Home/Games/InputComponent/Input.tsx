@@ -341,7 +341,7 @@ export const Input = (props: any) => {
         <>
             {props.finishedGame !== undefined && (
                 props.finishedGame === false ? (
-                    <>
+                    <div className='container-input-suggested'>
                         <input
                             type="text"
                             className="input-imagegame jaro-regular"
@@ -371,7 +371,7 @@ export const Input = (props: any) => {
                                 </span>
                             </div>
                         ) : null}
-                    </>
+                    </div> 
                 ) : props.finishedGame === true ? (
                     <span className="anime-correct">{props.solution}</span>
                 ) : null
