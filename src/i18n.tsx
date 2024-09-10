@@ -33,7 +33,7 @@ i18n.use(initReactI18next).init({
                     nextSurvey: 'A new poll to decide the next card collection will be available soon',
                     titleCommunity: 'JOIN THE COMMUNITY',
                     subTitleCommunity: 'We would love to hear your opinion!',
-                    infoCommunity: 'If you found any errors, bugs, or have any suggestions for improvement, please let us know. We highly value your feedback, and every comment helps us improve GACHANIME.',
+                    infoCommunity: "Found any bugs or have suggestions? Let us know! We value your feedback. Join the GACHANIME community and share your achievements with everyone!",
                     nextCommunity: 'Coming soon:',
                     titleRoadMap: 'COMING SOON TO GACHANIME',
                     nextRoadMap: [
@@ -188,7 +188,7 @@ i18n.use(initReactI18next).init({
                     nextSurvey: 'Próximamente habrá una nueva encuesta para decidir la siguiente colección de cartas',
                     titleCommunity: 'UNETE A LA COMUNIDAD',
                     subTitleCommunity: "¡Nos encantaría saber tu opinión!",
-                    infoCommunity: "Si encontraste algún error, bug, o tienes alguna sugerencia para mejorar, por favor cuéntanos. Valoramos mucho tu feedback y cada comentario nos ayuda a mejorar GACHANIME.",
+                    infoCommunity: "¿Encontraste errores o tienes sugerencias? ¡Cuéntanos! Valoramos mucho tu opinión. Únete a la comunidad de GACHANIME y comparte tus logros con todos.",
                     nextCommunity: "Próximamente estarán disponibles:",
                     titleRoadMap: "PRÓXIMAMENTE EN GACHANIME",
                     nextRoadMap: [

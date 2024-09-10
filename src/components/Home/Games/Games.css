@@ -1,5 +1,5 @@
 .Games {
-    height: 100%;
+    height: fit-content;
     max-width: 800px;
     width: 100%;
     padding: 20px;
@@ -9,7 +9,6 @@
     display: flex;
     align-items: center;
     gap: .3rem;
-    overflow: auto;
 }
 
 

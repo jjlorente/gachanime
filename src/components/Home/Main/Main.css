@@ -1,13 +1,11 @@
 
 .Main {
-    height: 100%;
+    height: fit-content;
     max-width: 1247px;
     width: 100%;
     padding: 20px;
     padding-right: 35px;
     box-sizing: border-box;
-    overflow: auto;
-    max-height: calc(100vh - 70px);
     flex-direction: column;
     display: grid;
 }

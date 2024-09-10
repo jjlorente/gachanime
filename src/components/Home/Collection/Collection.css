@@ -1,12 +1,11 @@
 .Collection {
-    height: auto;
+    height: fit-content;
     max-width: 1247px;
     width: 100%;
     padding: 20px;
     padding-right: 35px;
     box-sizing: border-box;
     display: inline-block;
-    max-height: calc(100vh - 70px);
     justify-content: center;
 }
 
@@ -22,22 +21,22 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 .cards-container {
     width: 100%;
     background-color: #0e2e85;
-    min-height: 724px;
+    min-height: 680px;
     box-sizing: border-box;
     justify-content: space-between;
-    padding: 25px 10px;
+    padding: 22px 10px;
     height: auto;
     border-radius: 5px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.8rem;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.486);
 }
@@ -48,7 +47,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 2rem;
     box-sizing: border-box;
 }
 
