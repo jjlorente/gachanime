@@ -24,7 +24,6 @@ export const Settings = (props:any) => {
   };
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
     const value = event.target.value;
     if (/^[a-zA-Z0-9]*$/.test(value)) {
       setValueInput(event.target.value)

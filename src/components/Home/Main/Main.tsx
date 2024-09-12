@@ -64,8 +64,6 @@ export const Main = (props: any) => {
         const data = await addVote(userId, selectedOption);
         setVoted(true);
         setDataSurvey(data);
-      } else {
-        console.log("userId o selectedOption no está definido");
       }
     } catch (error) {
       console.error("Error al registrar el voto:", error);
@@ -92,6 +90,7 @@ export const Main = (props: any) => {
           <Link to={"/home/quests"} className='link-main'>{t('links.quests')}</Link>
           <Link to={"/home/summon"} className='link-main'>{t('links.summon')}</Link>
           <Link to={"/home/collection"} className='link-main'>{t('links.collection')}</Link>
+          <Link to={"/home/market"} className='link-main'>{t('links.market')}</Link>
         </div>
 
         <div className='sections-container-community height-standar'>

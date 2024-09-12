@@ -70,7 +70,6 @@ export const Home = () => {
         dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
         localStorage.setItem("time", dayDB.toString());
         if (isDateOutdated(dayDB, local)) {
-          console.log(dayDB, local)
           resetDaily();
           let day = await updateDay();
           localStorage.setItem("time", day.toString());
@@ -170,7 +169,6 @@ export const Home = () => {
     let userid = localStorage.getItem("_id");
     if(userid) {
       const data = await updateWeek();
-      console.log(data)
     }
   };
 

@@ -7,8 +7,9 @@ import { buyCard, cancelCard, getDataMarket } from '../../../services/market';
 
 
 export const ModalConfirmMarket = (props: any) => {
-  const {i18n, t} = useTranslation();
+  const { i18n, t } = useTranslation();
   const { userGachas, setUserGachas } = useUserGachas();
+  const [ haveGachas, setHaveGachas ] = useState<boolean>(false)
 
   const handleClose = () => {
     props.setOpenConfirm(false);
@@ -18,19 +19,21 @@ export const ModalConfirmMarket = (props: any) => {
     let userId = localStorage.getItem("_id")
     if(userId && props.idCard && props.price && props.userCardId && props.mode === true) {
         if(userGachas && userGachas - props.price >= 0) {
-            let data = await buyCard(userId, props.idCard, props.price, props.userCardId);
-            await getData();
-            setUserGachas(data.gachas)
-            props.setOpenConfirm(false)
+          let data = await buyCard(userId, props.idCard, props.price, props.userCardId);
+          await getData();
+          setUserGachas(data.gachas)
+          props.setOpenConfirm(false)
+        } else {
+          setHaveGachas(true)
         }
     } else {
-        if(userId && props.mode === false) {
-            if(userId && props.idCard && props.price) { 
-                props.setOpenConfirm(false)
-                await cancelCard(userId, props.idCard, props.price);
-                await getData();
-            }
+      if(userId && props.mode === false) {
+        if(userId && props.idCard && props.price) { 
+          props.setOpenConfirm(false)
+          await cancelCard(userId, props.idCard, props.price);
+          await getData();
         }
+      }
     }
   };
 
@@ -41,7 +44,6 @@ export const ModalConfirmMarket = (props: any) => {
         props.setDataMarket(data)
         props.setDataMarketSelected(data)
     } catch {
-        props.setDataMarket([])
         props.setDataMarketSelected([])
     }
   };
@@ -74,30 +76,45 @@ export const ModalConfirmMarket = (props: any) => {
     >
       <Box sx={style}>
         {
-            props.mode === true ? 
+            props.mode === true && haveGachas === false ? 
             <>
-                <span className='jaro-regular' style={{fontSize:"1rem"}}>¿Estás seguro de comprar la carta por {props.price} GACHAS?</span>
+                <span className='jaro-regular' style={{fontSize:"1rem"}}>{t('market.firstPartMes')} {props.price} {t('market.secondPartMes')}</span>
                 <div className='cnt-btns-modal-market'>
-                    <button className='btn-modal-confirm jaro-regular' onClick={handleOpen}>
-                        Confirm
-                    </button>
-                    <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
-                        {t('summon.cancel')}
-                    </button>
+                  <button className='btn-modal-confirm jaro-regular' onClick={handleOpen}>
+                    {t('market.confirm')}
+                  </button>
+                  <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
+                    {t('summon.cancel')}
+                  </button>
                 </div>
             </>
             :
+            props.mode === false && haveGachas === false ? 
             <>
-                <span className='jaro-regular' style={{fontSize:"1rem"}}>¿Estás seguro de quitar la carta en venta?</span>
+                <span className='jaro-regular' style={{fontSize:"1rem"}}>{t('market.sellCardMes')}</span>
                 <div className='cnt-btns-modal-market'>
-                    <button className='btn-modal-confirm jaro-regular' onClick={handleOpen}>
-                        Confirm
-                    </button>
-                    <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
-                        {t('summon.cancel')}
-                    </button>
+                  <button className='btn-modal-confirm jaro-regular' onClick={handleOpen}>
+                    {t('market.confirm')}
+                  </button>
+                  <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
+                    {t('summon.cancel')}
+                  </button>
                 </div>
             </>
+            :
+            haveGachas === true ? 
+            <>
+              <span className='jaro-regular' style={{fontSize:"1rem"}}>
+                {t('market.exitMess')}
+              </span>
+              <div className='cnt-btns-modal-market'>
+                <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
+                  {t('summon.exit')}
+                </button>
+              </div>
+            </>
+            :
+            null
         }
       </Box>
     </Modal>

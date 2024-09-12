@@ -1,5 +1,5 @@
 import './Collection.css'
-import {useEffect, useState, useRef} from 'react'
+import { useEffect, useState } from 'react'
 import CollectionSelect from './CollectionSelect'
 import { PaginationComponent } from './PaginationComponent';
 import { findUserCards } from '../../../services/userCards';
@@ -10,7 +10,7 @@ import { CardModal } from './CardModal/CardModal';
 
 export const Collection = (props:any) => {
   trefoil.register();
-  const {i18n, t} = useTranslation();
+  const { t } = useTranslation();
 
   const [imgs, setImgs] = useState<any>([]);
   const [imgsSelected, setImgsSelected] = useState<any>([]);

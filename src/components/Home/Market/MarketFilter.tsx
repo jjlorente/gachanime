@@ -29,7 +29,6 @@ const MarketFilter = (props:any) => {
     if (nameCard) {
 
       filteredImages = filteredImages.filter((card:any) => {
-        console.log(card['card'].name)
         let name = card['card'].name.toLowerCase();
         return name.includes(nameCard.toLowerCase());
       });
@@ -51,7 +50,7 @@ const MarketFilter = (props:any) => {
     setSelectedCol(value);
 
     const filteredImages = filterImages(selectedAnime, value, selectedRarity, props.dataMarket);
-    props.setImgsSelected(filteredImages);
+    props.setDataMarketSelected(filteredImages);
   };
 
   const handleRarityChange = (event:any) => {
@@ -59,7 +58,7 @@ const MarketFilter = (props:any) => {
     setSelectedRarity(value);
 
     const filteredImages = filterImages(value, selectedCol, selectedRarity, props.dataMarket);
-    props.setImgsSelected(filteredImages);
+    props.setDataMarketSelected(filteredImages);
   }; 
 
   const handleChangeCardName = (event:any) => {
@@ -109,7 +108,7 @@ const MarketFilter = (props:any) => {
       <div className='container-select'>
         <select className='select-anime' value={selectedCol} onChange={handleCollectionChange}>
           <option className='select-option' value="Todas las cartas">{t('collection.allCards')}</option>
-          <option className='select-option' value="Mis cartas">{t('collection.obtainedCards')}</option>
+          <option className='select-option' value="Mis cartas">{t('market.myCards')}</option>
         </select>
       </div>
       <div className='container-select'>

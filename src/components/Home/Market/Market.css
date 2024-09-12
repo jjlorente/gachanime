@@ -53,18 +53,18 @@
 }
 
 .span-username-market {
-    background-color: #051641;
+    background-color: #0f1932;
     width: 100%;
     max-width: 200px;
     color: #FEAA2A;
     text-align: center;
     overflow: hidden;
     border-bottom: 2px solid #FEAA2A;
-    padding: 2px;
+    padding: 5px 5px;
     box-sizing: border-box;
 }
 .span-price-market {
-    background-color: #051641;
+    background-color: #0f1932;
     width: 100%;
     color: #FEAA2A;
     text-align: center;
@@ -108,4 +108,14 @@
     cursor: pointer;
     background-color: rgb(255, 83, 77);
     color: #021444;
+}
+
+.cnt-btns-modal-market > button {
+    width: fit-content !important;
+}
+
+@media (max-width: 550px) {
+    .search-input {
+        font-size: 1rem;
+    }
 }

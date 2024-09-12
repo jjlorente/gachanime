@@ -45,7 +45,6 @@ export const Register = () => {
         if(data._id) {
           const dataGacha = await registerGacha(data._id, 100);
           const userCard = await registerUserCard(data._id);
-          console.log(dataGacha)
           localStorage.setItem("_id", data._id)
           localStorage.setItem("googleAccount", data.googleAccount)
           navigate('/home');

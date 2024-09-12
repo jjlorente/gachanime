@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Market.css';
-import { buyCard, cancelCard, getDataMarket } from '../../../services/market';
+import { getDataMarket } from '../../../services/market';
 import { PaginationComponent } from '../Collection/PaginationComponent';
-import { useUserGachas } from '../Home';
 import { ModalConfirmMarket } from './ModalConfirmMarket';
 import MarketFilter from './MarketFilter';
+import { useTranslation } from 'react-i18next';
+import { trefoil } from 'ldrs';
 
 export const Market = () => {
+  trefoil.register();
+  const { t } = useTranslation()
+
   const [dataMarket, setDataMarket] = useState<any>([]);
   const [dataMarketSelected, setDataMarketSelected] = useState<any>([]);
 
@@ -35,7 +39,6 @@ export const Market = () => {
       setDataMarket(data)
       setDataMarketSelected(data)
     } catch {
-      setDataMarket([])
       setDataMarketSelected([])
     }
   };
@@ -72,6 +75,7 @@ export const Market = () => {
 
   return (
     <div className='Market'>
+
       <MarketFilter setDataMarketSelected={setDataMarketSelected} setDataMarket={setDataMarket} dataMarket={dataMarket} setCurrentPage={setCurrentPage}/>
 
       <div className='section-market cards-container'>
@@ -118,7 +122,7 @@ export const Market = () => {
                     </div>
                   </div>
                   <div className='cnt-info-price'>
-                    <span className='span-username-market'>Dueño: {card['user'].username}</span>
+                    <span className='span-username-market'>{t('market.owner')} {card['user'].username}</span>
                     <span className='span-price-market'>
                       {card['price']}           
                       <img
@@ -129,26 +133,31 @@ export const Market = () => {
                     </span>
                     {
                       userId === card['user']._id ? 
-                      <button key={`cancel-btn-${index}`} className="cancel-btn-market jaro-regular" onClick={() => {setOpenModal(true); setIdCard(card['card']._id); setPrice(card['price']); setMode(false)}}>Cancelar</button>
+                      <button key={`cancel-btn-${index}`} className="cancel-btn-market jaro-regular" onClick={() => {setOpenModal(true); setIdCard(card['card']._id); setPrice(card['price']); setMode(false)}}>{t('summon.cancel')}</button>
                       :
-                      <button key={`buy-btn-${index}`} className="confirm-btn-market jaro-regular" onClick={() => {setOpenModal(true); setIdCard(card['card']._id); setPrice(card['price']); setUserCardId(card['user']._id); setMode(true)}}>Comprar</button>
+                      <button key={`buy-btn-${index}`} className="confirm-btn-market jaro-regular" onClick={() => {setOpenModal(true); setIdCard(card['card']._id); setPrice(card['price']); setUserCardId(card['user']._id); setMode(true)}}>{t('market.buyButton')}</button>
                     }
                   </div>
                 </div>
               );
             })
           ) : (
-            <span style={{fontSize:"2rem"}}>No cards available</span>
+            dataMarket && dataMarket.length > 0 ? 
+              <span style={{fontSize:"2rem"}}>{t('market.notAvailable')}</span>
+            :
+              <div >
+                <l-trefoil size="200" stroke="33" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+              </div>
           )}
         </div>
         {dataMarketSelected.length > 0 ? 
-            <PaginationComponent 
-              totalPosts={dataMarketSelected.length} 
-              cardsPerPage={cardsPerPage}
-              setCurrentPage={setCurrentPage}
-            /> 
-            : 
-            <></>
+          <PaginationComponent 
+            totalPosts={dataMarketSelected.length} 
+            cardsPerPage={cardsPerPage}
+            setCurrentPage={setCurrentPage}
+          /> 
+          : 
+          <></>
         }
       </div>
       <ModalConfirmMarket setDataMarketSelected={setDataMarketSelected} mode={mode} setDataMarket={setDataMarket} openConfirm={openModal} setOpenConfirm={setOpenModal} idCard={idCard} price={price} userCardId={userCardId}/>

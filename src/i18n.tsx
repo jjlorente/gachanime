@@ -19,6 +19,7 @@ i18n.use(initReactI18next).init({
                     collection: 'COLLECTION',
                     home: 'HOME',
                     settings: "SETTINGS",
+                    market: "MARKET",
                     logOut: "Log out"
                 },
                 'user-card': {
@@ -160,7 +161,19 @@ i18n.use(initReactI18next).init({
                     alReadyAcc: "Already have an account?",
                     titleLogin: "Welcome to",
                     eslogan: "Play, collect, and grow your anime world"
-                }               
+                },
+                "market": {
+                    notAvailable: "No cards available",
+                    confirm: "Confirm",
+                    firstPartMes: "Are you sure you want to buy the card for ",
+                    secondPartMes: " GACHAS?",
+                    sellCardMes: "Are you sure you want to remove the card from sale?",
+                    myCards: "My cards for sale",
+                    buyButton: "Buy",
+                    owner: "Owner: ",
+                    exitMess: "You don't have enough GACHAS to buy the card"
+                  }
+                         
             },
         },
 
@@ -174,6 +187,7 @@ i18n.use(initReactI18next).init({
                     collection: 'COLECCIÓN',
                     home: 'INICIO',
                     settings: "AJUSTES",
+                    market: "MERCADO",
                     logOut: "Cerrar sesión"
                 },
                 'user-card': {
@@ -315,6 +329,17 @@ i18n.use(initReactI18next).init({
                     alReadyAcc: "¿Ya tienes una cuenta?",
                     titleLogin: "¡Bienvenido a",
                     eslogan: "Juega, colecciona y haz crecer tu mundo anime"
+                },
+                "market": {
+                    notAvailable: "No hay cartas disponibles",
+                    confirm: "Confirmar",
+                    firstPartMes: "¿Estás seguro de comprar la carta por ",
+                    secondPartMes: " GACHAS?",
+                    sellCardMes: "¿Estás seguro de quitar la carta en venta?",
+                    myCards: "Mis cartas en venta",
+                    buyButton: "Comprar",
+                    owner: "Dueño: ",
+                    exitMess: "No tienes GACHAS suficientes para comprar la carta"
                 }
             },
         }
