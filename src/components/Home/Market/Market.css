@@ -1,0 +1,111 @@
+.Market {
+    height: fit-content;
+    max-width: 1247px;
+    width: 100%;
+    padding: 20px;
+    padding-right: 35px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.section-market {
+    width: 100%;
+    height: fit-content;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px !important;
+    padding: 2rem 2rem !important;
+    justify-content: center;
+}
+
+.card-market {
+    max-width: 200px !important;
+}
+
+.cnt-market-cards {
+    width: 100%;
+    display: flex;
+    gap: 1rem 2rem;
+    justify-content: center;
+    flex-direction: row;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.card-market:hover {
+    transform: scale(1) !important;
+    cursor: default;
+}
+
+.cnt-info-price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-top: 2px;
+    border: 2px solid #FEAA2A;
+    border-radius: 5px;
+}
+
+.span-username-market {
+    background-color: #051641;
+    width: 100%;
+    max-width: 200px;
+    color: #FEAA2A;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 2px solid #FEAA2A;
+    padding: 2px;
+    box-sizing: border-box;
+}
+.span-price-market {
+    background-color: #051641;
+    width: 100%;
+    color: #FEAA2A;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    gap: .5rem;
+}
+
+.confirm-btn-market {
+    width: 100%;
+    background-color: rgb(1, 168, 24);
+    outline: none;
+    list-style: none;
+    border-style: none;
+    color: white;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    padding: .2rem;
+    transition: ease all .2s;
+}
+.cancel-btn-market {
+    width: 100%;
+    background-color: rgb(202, 42, 14);
+    outline: none;
+    list-style: none;
+    border-style: none;
+    color: white;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    padding: .2rem;
+    transition: ease all .2s;
+}
+.confirm-btn-market:hover {
+    cursor: pointer;
+    background-color: rgb(82, 255, 77);
+    color: #021444;
+}
+.cancel-btn-market:hover {
+    cursor: pointer;
+    background-color: rgb(255, 83, 77);
+    color: #021444;
+}

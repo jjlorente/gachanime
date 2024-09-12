@@ -6,6 +6,7 @@ import { googleLogout } from '@react-oauth/google';
 import { navItems, icons } from '../Nav/navConfig';
 import { useTranslation } from 'react-i18next';
 import { RiGamepadFill } from "react-icons/ri";
+import { IoStorefrontSharp } from "react-icons/io5";
 
 export const Header = (props: any) => {
   const [menu, setMenu] = useState<boolean>(false);
@@ -51,6 +52,9 @@ export const Header = (props: any) => {
                   :
                   item.link === "summon" ?
                     <img src='/home/summon-ww.png' style={{width: "30px"}}/>
+                  :
+                  item.link === "market" ?
+                    <IoStorefrontSharp style={{height:"30px", width: "30px"}}/>
                   :
                     icons[item.link as keyof typeof icons]
                 }

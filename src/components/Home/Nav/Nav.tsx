@@ -7,6 +7,7 @@ import { navItems, icons } from './navConfig';
 import { User } from '../../Interfaces/User';
 import { useTranslation } from 'react-i18next';
 import { RiGamepadFill } from "react-icons/ri";
+import { IoStorefrontSharp } from "react-icons/io5";
 
 export const Nav = (props: any) => {
   const { i18n, t } = useTranslation();
@@ -79,6 +80,9 @@ export const Nav = (props: any) => {
               :
               item.link === "summon" ?
                 <img src='/home/summon-ww.png' style={{width: "30px"}}/>
+              :
+              item.link === "market" ?
+                <IoStorefrontSharp style={{height:"30px", width: "30px"}}/>
               :
                 icons[item.link as keyof typeof icons]
             }

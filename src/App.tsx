@@ -19,6 +19,7 @@ import backgroundImage from './assets/image.jpg'
 import { SiluetaGame } from './components/Home/Games/SiluetaGame/SiluetaGame';
 import { OpeningGame } from './components/Home/Games/OpeningGame/OpeningGame';
 import { EyeGame } from './components/Home/Games/EyeGame/EyeGame';
+import { Market } from './components/Home/Market/Market';
 function App() {
   const navigate = useNavigate();
   const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
@@ -77,6 +78,7 @@ function App() {
           <Route path="summon" element={<Summon />} />
           <Route path="collection" element={<Collection />} />
           <Route path="quests" element={<Quests />} />
+          <Route path="market" element={<Market />} />
           <Route path="settings" element={<Settings />} />
         </Route>
 

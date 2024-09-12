@@ -144,7 +144,7 @@ export const Summoning = () => {
     if (!cardSummoned || cardSummoned.length < 1) {
       setVideoPlayed(true);
       audioRef.current = new Audio("/test.mp3");
-      audioRef.current.volume = 0.08;
+      audioRef.current.volume = 0.1;
       audioRef.current.play();
     } else {
       setVideoPlayed(false);

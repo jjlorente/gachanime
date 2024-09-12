@@ -6,6 +6,7 @@ import { findUserCards } from '../../../services/userCards';
 import { findCards } from '../../../services/cards';
 import { trefoil } from 'ldrs';
 import { useTranslation } from 'react-i18next';
+import { CardModal } from './CardModal/CardModal';
 
 export const Collection = (props:any) => {
   trefoil.register();
@@ -17,6 +18,9 @@ export const Collection = (props:any) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(10);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [card, setCard] = useState<any>();
 
   const [copiesCard, setCopiesCard] = useState<{ [key: string]: number } >({});
 
@@ -52,35 +56,35 @@ export const Collection = (props:any) => {
     }
   },[userCards])
 
+  const fetchData = async () => {
+    try {
+      const data = await findCards();
+
+      const rarityOrder = ["S+", "S", "A", "B"];
+      data.sort((a:any, b:any) => {
+        const rarityComparison = rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity);
+        
+        if (rarityComparison === 0) {
+          return b.power - a.power ;
+        }
+        
+        return rarityComparison;
+      });
+
+      setImgs(data)
+      setImgsSelected(data)
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   useEffect(()=> {
     const idUser = localStorage.getItem("_id");
 
     if (idUser) {
       findAllCardsUser(idUser);
     }
-
-    const fetchData = async () => {
-      try {
-        const data = await findCards();
-
-        const rarityOrder = ["S+", "S", "A", "B"];
-        data.sort((a:any, b:any) => {
-          const rarityComparison = rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity);
-          
-          if (rarityComparison === 0) {
-            return b.power - a.power ;
-          }
-          
-          return rarityComparison;
-        });
-
-        setImgs(data)
-        setImgsSelected(data)
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
 
     fetchData();
   },[])
@@ -147,7 +151,7 @@ export const Collection = (props:any) => {
                   : "card-not-user";
 
                 return (
-                  <div key={index+"container-card"} className={userCard ? 'container-card-obtained container-card '+ cardClassName + ' border-collection'+rarityClass : 'container-card '+ cardClassName + ' border-collection'+rarityClass}>
+                  <div onClick={() => { if (userCard) { setOpenModal(true); setCard(img); } }} key={index+"container-card"} className={userCard ? 'container-card-obtained container-card '+ cardClassName + ' border-collection'+rarityClass : 'container-card '+ cardClassName + ' border-collection'+rarityClass}>
                     <span className='copies' style={{ border: borderColor }}>x {copiesCard[img._id] ? copiesCard[img._id] : "0"}</span>
                     <img 
                       key={index} 
@@ -193,9 +197,7 @@ export const Collection = (props:any) => {
                           {img.anime_name}
                       </span>
                     </div>
-                    
                   </div>
-                  
                 );
               })
             ) : (
@@ -220,7 +222,7 @@ export const Collection = (props:any) => {
             <></>
           }
 
-          
+          <CardModal openModal={openModal} setOpenModal={setOpenModal} card={card} setImgsSelected={setImgsSelected} setImgs={setImgs} setUserCards={setUserCards}/>
         </div>
       </div>
     </div>

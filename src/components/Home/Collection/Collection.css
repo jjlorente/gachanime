@@ -30,13 +30,13 @@
     min-height: 680px;
     box-sizing: border-box;
     justify-content: space-between;
-    padding: 22px 10px;
+    padding: 15px 10px;
     height: auto;
     border-radius: 5px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1rem;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.486);
 }
@@ -117,8 +117,8 @@
 }
 
 .container-card {
-    width: 200px;
-    height: 290px;
+    width: 195px;
+    height: 285px;
     max-height: 290px;
     position: relative;
     display: flex;
@@ -188,6 +188,7 @@
 
 .container-card-obtained:hover {
     transform: scale(1.4);
+    cursor: pointer;
     z-index: 1000;
 }
 

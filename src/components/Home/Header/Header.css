@@ -9,7 +9,7 @@
     position: fixed;
     top: 0;
     left: -100px;
-    z-index: 1000;
+    z-index: 9999;
     width: 100%;
     margin-left: 168.4px;
     box-sizing: border-box;

@@ -12,7 +12,7 @@
     position: fixed;
     left: 0;
     bottom: 0;
-    z-index: 1000; 
+    z-index: 9999; 
     color: #ffffff;
     box-shadow: 6px 70px 6px 1px #020e2c;
     transition: ease all .1s;
