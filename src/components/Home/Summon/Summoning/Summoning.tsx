@@ -4,6 +4,8 @@ import { findCardsSummoned } from '../../../../services/cards';
 import { trefoil } from 'ldrs';
 import './Summoning.css';
 import { useTranslation } from 'react-i18next';
+import { calculatePower } from '../../../../services/userCards';
+import { updateTotalPower } from '../../../../services/user';
 
 export const Summoning = () => {
   const {i18n, t} = useTranslation();
@@ -109,7 +111,7 @@ export const Summoning = () => {
     if (idUser && rarityCards.length > 0) {
       const fetchData = async () => {
         const data = await findCardsSummoned(idUser, rarityCards, throws, gachas, prop1);
-
+        
         if (data) {
           let clr = "gray";
           for (const card of data) {
@@ -124,9 +126,16 @@ export const Summoning = () => {
           }
           setColorPulsar(clr);
           setCardSummoned(data);
+          let totalPower = await calculatePower(idUser);
+          if(totalPower){
+            await updateTotalPower(idUser, totalPower)
+          }
         }
       };
+
       fetchData();
+
+      //auqi
     }
   }, [rarityCards]);
 

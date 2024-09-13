@@ -9,6 +9,10 @@ import { findUserById } from '../../../services/user';
 import { calculatePower } from '../../../services/userCards';
 import { ProfileCard } from './ProfileCard/ProfileCard';
 import { useTranslation } from 'react-i18next';
+import { RiGamepadFill } from "react-icons/ri";
+import { IoStorefrontSharp } from "react-icons/io5";
+import { RiVipCrownFill } from "react-icons/ri";
+import { icons } from '../Nav/navConfig';
 
 import RelativeTimeElement from '../Quests/relative-time-element-define.js'
 export { RelativeTimeElement }
@@ -86,11 +90,26 @@ export const Main = (props: any) => {
     <div className="Main">
       <div className='section-main'>
         <div className='container-links-sections-main'>
-          <Link to={"/home/games"} className='link-main'>{t('links.games')}</Link>
-          <Link to={"/home/quests"} className='link-main'>{t('links.quests')}</Link>
-          <Link to={"/home/summon"} className='link-main'>{t('links.summon')}</Link>
-          <Link to={"/home/collection"} className='link-main'>{t('links.collection')}</Link>
-          <Link to={"/home/market"} className='link-main'>{t('links.market')}</Link>
+          <Link to={"/home/games"} className='link-main'>
+            <span className='span-link-main'>{t('links.games')}</span>
+            <RiGamepadFill className='link-main-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
+          </Link>
+          <Link to={"/home/quests"} className='link-main'>
+            <span className='span-link-main'>{t('links.quests')}</span>
+            <svg width={"25px"} className="link-main-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M16.667 18.333H3.333A.833.833 0 012.5 17.5v-15a.833.833 0 01.833-.833h13.334a.833.833 0 01.833.833v15a.833.833 0 01-.833.833zm-10-12.5V7.5h6.666V5.833H6.667zm0 3.334v1.666h6.666V9.167H6.667zm0 3.333v1.667h4.166V12.5H6.667z"></path></svg>
+          </Link>
+          <Link to={"/home/summon"} className='link-main'>
+            <span className='span-link-main'>{t('links.summon')}</span>
+            <img src='/home/summon-ww.png' className="link-main-icon" style={{height:"25px", width: "25px",marginLeft:"2px"}} />
+          </Link>
+          <Link to={"/home/collection"} className='link-main'>
+            <span className='span-link-main'>{t('links.collection')}</span>
+            <svg width={"25px"} className="link-main-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M13.333 1.667L17.5 5.833v11.674a.827.827 0 01-.828.826H3.327a.833.833 0 01-.827-.826V2.493c0-.456.37-.826.828-.826h10.005zm-2.059 10.371l1.842 1.842 1.179-1.178-1.842-1.841a3.334 3.334 0 10-6.2-1.904 3.333 3.333 0 005.021 3.081zm-.515-1.693a1.67 1.67 0 01-1.83.385 1.667 1.667 0 111.83-.385z"></path></svg>
+          </Link>
+          <Link to={"/home/market"} className='link-main'>
+            <span className='span-link-main'>{t('links.market')}</span>
+            <IoStorefrontSharp className="link-main-icon" style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
+          </Link>
         </div>
 
         <div className='sections-container-community height-standar'>

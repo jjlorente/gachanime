@@ -7,6 +7,7 @@ import { navItems, icons } from '../Nav/navConfig';
 import { useTranslation } from 'react-i18next';
 import { RiGamepadFill } from "react-icons/ri";
 import { IoStorefrontSharp } from "react-icons/io5";
+import { RiVipCrownFill } from "react-icons/ri";
 
 export const Header = (props: any) => {
   const [menu, setMenu] = useState<boolean>(false);
@@ -48,13 +49,16 @@ export const Header = (props: any) => {
                 onClick={() => handleSetActiveIndex(item.link)}
               >
                 { item.link === "games" ? 
-                  <RiGamepadFill style={{height:"30px", width: "30px"}}/>
+                  <RiGamepadFill style={{height:"25px", width: "25px"}}/>
                   :
                   item.link === "summon" ?
-                    <img src='/home/summon-ww.png' style={{width: "30px"}}/>
+                    <img src='/home/summon-ww.png' style={{width: "25px"}}/>
                   :
                   item.link === "market" ?
-                    <IoStorefrontSharp style={{height:"30px", width: "30px"}}/>
+                    <IoStorefrontSharp style={{height:"25px", width: "25px"}}/>
+                  :
+                  item.link === "ranking" ?
+                    <RiVipCrownFill style={{height:"25px", width: "25px"}}/>
                   :
                     icons[item.link as keyof typeof icons]
                 }

@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 export const TriesReward = (props: any) => {
     const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries } = useUserGames();
     const { userGachas, setUserGachas } = useUserGachas();
-    const { i18n, t } = useTranslation();
+    const { t } = useTranslation();
     const { alerts, setAlerts } = useUserGachas();
     const [tries, setTries] = useState<number>();
 

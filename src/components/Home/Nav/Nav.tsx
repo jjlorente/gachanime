@@ -8,6 +8,7 @@ import { User } from '../../Interfaces/User';
 import { useTranslation } from 'react-i18next';
 import { RiGamepadFill } from "react-icons/ri";
 import { IoStorefrontSharp } from "react-icons/io5";
+import { RiVipCrownFill } from "react-icons/ri";
 
 export const Nav = (props: any) => {
   const { i18n, t } = useTranslation();
@@ -76,13 +77,16 @@ export const Nav = (props: any) => {
               } */
             }
             { item.link === "games" ? 
-                <RiGamepadFill style={{height:"30px", width: "30px"}}/>
+                <RiGamepadFill className='nav-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
               :
               item.link === "summon" ?
-                <img src='/home/summon-ww.png' style={{width: "30px"}}/>
+                <img src='/home/summon-ww.png' style={{height:"25px", width: "25px",marginLeft:"2px"}} className="icon-summon-nav"/>
               :
               item.link === "market" ?
-                <IoStorefrontSharp style={{height:"30px", width: "30px"}}/>
+                <IoStorefrontSharp className='nav-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
+              :
+              item.link === "ranking" ?
+                <RiVipCrownFill className='nav-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
               :
                 icons[item.link as keyof typeof icons]
             }

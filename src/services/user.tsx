@@ -160,3 +160,48 @@ export const updateUserLan = async (userid: string, lan: string) => {
     throw error;
   }
 }
+
+export const updateTotalPower = async (userid: string, power: number) => {
+  try {
+    const response = await fetch(`${config.apiUrl}/users/updatePower`, {
+      method: 'PUT',
+      headers : {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({userid, power}),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Unknown error');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+export const getRank = async () => {
+  try {
+    const response = await fetch(`${config.apiUrl}/users/getRank`, {
+      method: 'GET',
+      headers : {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Unknown error');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}

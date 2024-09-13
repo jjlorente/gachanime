@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useOutletContext, useNavigate, useLocation } from 'react-router-dom';
 import { Nav } from './Nav/Nav';
 import { Header } from './Header/Header';
-import { findUserById } from '../../services/user';
+import { findUserById, getRank } from '../../services/user';
 import { deleteAll } from '../../services/userGames';
 import { updateWeekQuests } from '../../services/userQuests';
 import { findGacha } from '../../services/gacha';
@@ -168,10 +168,10 @@ export const Home = () => {
   const resetWeek = async () => {
     let userid = localStorage.getItem("_id");
     if(userid) {
-      const data = await updateWeek();
+      await updateWeek();
     }
   };
-
+  
   return (
     <div className='Home'>
       <Header userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>

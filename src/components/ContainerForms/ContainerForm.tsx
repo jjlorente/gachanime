@@ -3,7 +3,7 @@ import "./ContainerForm.css"
 import { useTranslation } from 'react-i18next';
 
 export const ContainerForm = (props:any) => {
-  const {i18n, t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className='container-app'>
       <div className='background-login-img'></div>
