@@ -17,7 +17,8 @@ export const SiluetaGame = (props: any) => {
     const [pjName, setPjName] = useState<string>();
     const [siluetaSelected, setSiluetaSelected] = useState<number>();
     const [gameData, setGameData] = useState<Game>();
-    const { i18n, t } = useTranslation();
+    
+    const { t } = useTranslation();
     const { siluetaTries } = useUserGames();
 
     useEffect(() => {

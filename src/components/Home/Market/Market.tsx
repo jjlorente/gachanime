@@ -16,7 +16,7 @@ export const Market = () => {
 
   const [userId, setUserId] = useState<string>("") 
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(10);
+  const [cardsPerPage, setCardsPerPage] = useState(5);
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [mode, setMode] = useState<boolean>(false);

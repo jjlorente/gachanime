@@ -5,16 +5,14 @@ import { useUserGames } from '../Games';
 import { useState, useEffect } from 'react';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { useUserGachas } from "../../Home";
-import { Input } from '../InputComponent/Input';
 import { Game } from '../../../Interfaces/GamesUser';
-import { useLocation } from 'react-router-dom';
 import { updateGameUser, findCharacters } from '../../../../services/userGames';
 import { trefoil } from 'ldrs';
 import { updateLevel } from '../../../../services/user';
 import { useTranslation } from 'react-i18next';
 
 export const NameGame = () => {
-  const {i18n, t} = useTranslation();
+  const { t } = useTranslation();
   const [gameData, setGameData] = useState<Game>();
   const [finishedNameGame, setFinishedNameGame] = useState<boolean>();
   const [gachasRecompensa, setGachasRecompensa] = useState<number>();
