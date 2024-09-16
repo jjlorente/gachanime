@@ -2,7 +2,7 @@ import { Resets } from '../ResetsComponent/Resets'
 import './NameGame.css'
 import { findGameById, updateSelected } from '../../../../services/userGames';
 import { useUserGames } from '../Games';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { useUserGachas } from "../../Home";
 import { Game } from '../../../Interfaces/GamesUser';
@@ -132,6 +132,7 @@ export const NameGame = () => {
     }
   };
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     let arrayTries = localStorage.getItem("arrayTriesName");
 
@@ -146,9 +147,12 @@ export const NameGame = () => {
     }
 
     let word = inputValue.join("").toUpperCase();
-
     if(isWordCompleted && pjName){
       if(word === pjName?.toUpperCase() && userGamesData) {
+
+        audioRef.current = new Audio("/correct.mp3");
+        audioRef.current.volume = 0.5;
+        audioRef.current.play();
 
         const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, "name");
         await updateLevel(userGamesData.userid, 40)

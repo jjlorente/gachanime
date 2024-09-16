@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useUserGames } from '../Games';
 import { updateGameUser, findCharacters } from '../../../../services/userGames';
 import { useUserGachas } from "../../Home";
@@ -248,10 +248,17 @@ export const Input = (props: any) => {
         }
     };
 
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+
     const handleClickAnime = async (e: React.MouseEvent<HTMLInputElement>) => {
         const value = e.currentTarget.textContent;
         setAnimesSuggested([])
         if(value === props.solution) {
+
+            audioRef.current = new Audio("/correct.mp3");
+            audioRef.current.volume = 0.5;
+            audioRef.current.play();
+              
             if(userGamesData) {
                 await updateLevel(userGamesData.userid, 40)
                 const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game);

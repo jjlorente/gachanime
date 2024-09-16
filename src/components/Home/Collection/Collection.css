@@ -83,18 +83,21 @@
 .anime-name-card{
     font-size: 0.85rem;
     background-color: #01081a1f;
-    padding: 2px 4px;
+    padding: 1px 4px;
     border-radius: 5px;
 }
 
 .name-card {
     position: absolute;
-    top: -24px;
+    top: -24.4px;
     font-size: 1.15rem;
-    padding: 0 24px;
+    z-index: 9;
+    padding: 0 15px;
     box-sizing: border-box;
-    clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
-    border-top: 2px solid rgba(0, 0, 0, 0.295);
+    /* clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); */
+    border: 2px solid rgba(0, 0, 0, 0.295);
+    border-bottom: none;
+    border-radius: 15px 15px 0 0;
 }
 
 .copies {
@@ -131,7 +134,7 @@
 .border-collection-s-plus {
     background: 
         linear-gradient(black, #222) padding-box,
-        linear-gradient(to bottom,red,orange,rgb(255, 251, 0),red,orange,rgb(255, 251, 0),red) border-box;
+        linear-gradient(to bottom,#FD393A,orange,rgb(255, 251, 0),#FD393A,orange,rgb(255, 251, 0),#FD393A) border-box;
 }
 
 .border-collection-s {
@@ -177,19 +180,24 @@
     padding: 5px 0;
     position: absolute;
     bottom: -1px;
-    left: -1px;
+    left: -.8px;
     border-top: 2px solid rgba(0, 0, 0, 0.329);
     border-radius:2px 2px;
+    z-index: 999;
 }
 
 .card-user {
-    transition: ease all .4s;
+    transition: ease all .2s;
 }
 
 .container-card-obtained:hover {
     transform: scale(1.4);
     cursor: pointer;
     z-index: 1000;
+}
+
+.container-card-obtained:hover .power-card {
+    right: -1px;
 }
 
 /* .card-user:hover .container-name-card {

@@ -49,6 +49,7 @@ export const OpeningGame = () => {
             findOpeningGame(userGamesData.openingid)
             setOpeningSelected(userGamesData.openingSelected)
         }
+        console.log(openingSelected)
     }, [userGamesData])
 
     const findOpeningGame = async (id:any) => {
@@ -57,7 +58,9 @@ export const OpeningGame = () => {
             if (data) {
                 setAnimeNameImage(data.anime_name);
                 setGameOpeningData(data);
-                setBase64Audio("data:audio/wav;base64,"+data.opening);
+                if(userGamesData) {
+                    setBase64Audio("data:audio/wav;base64,"+data.opening[userGamesData.openingSelected]);
+                }
                 if(userGamesData) {
                     setFinishedOpeningGame(userGamesData.finishedOpening);
                     let dataTries = userGamesData.triesopening * 5

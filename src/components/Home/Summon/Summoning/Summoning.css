@@ -58,7 +58,7 @@
     justify-content: center;
     align-items: center;
     max-width: 1400px;
-    gap: 3rem;
+    gap: 2rem;
     flex-direction: column;
 }
 
@@ -67,7 +67,7 @@
     width: 100%;
     flex-wrap: wrap;
     height: 100%;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .justifyS {
@@ -144,16 +144,16 @@
 }
 
 .back-front:hover {
-    cursor: pointer;
     transform: scale(1.4);
     z-index: 9;
-    filter: blur(0px);
+    box-sizing: border-box;
 }
-
-.back-front:hover .power-card {
+.back-front:hover .power-card{
+    right: -1px;
+}
+.back-front:hover .power-card{
     top: -1px;
 }
-
 .card-not-showed-s-plus {
     background-color: rgba(255, 0, 0, 0.979);
     filter: drop-shadow(0px 0px 10px rgb(255, 0, 0));
@@ -189,6 +189,10 @@
 
 .back-front:hover .logo-summon-card {
     animation: spinCard 5s linear infinite;
+}
+
+.back-front:hover {
+    cursor: pointer;
 }
 
 .background-border {
