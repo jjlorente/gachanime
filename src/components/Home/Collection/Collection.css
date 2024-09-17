@@ -166,7 +166,7 @@
 }
 
 .img-not {
-    filter: blur(5px);
+    filter: blur(4px);
 }
 
 .container-name-card {

@@ -5,14 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 
 export const TriesReward = (props: any) => {
-    const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries } = useUserGames();
+    const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries, pixelTries } = useUserGames();
     const { userGachas, setUserGachas } = useUserGachas();
     const { t } = useTranslation();
     const { alerts, setAlerts } = useUserGachas();
     const [tries, setTries] = useState<number>();
 
     useEffect(() => {
-
         if ( props.game==="image" && imageTries!=null ) {
             setTries(imageTries)
         } else if ( props.game==="silueta" && siluetaTries!=null ) {
@@ -23,9 +22,13 @@ export const TriesReward = (props: any) => {
             setTries(openingTries)
         } else if ( props.game==="eye" && eyeTries!=null ) {
             setTries(eyeTries)
+        } else if ( props.game==="pixel" && pixelTries!=null ) {
+            console.log("gola")
+
+            setTries(pixelTries)
         }
 
-    },[imageTries, siluetaTries, nameTries, openingTries, eyeTries])
+    },[imageTries, siluetaTries, nameTries, openingTries, eyeTries, pixelTries])
 
     const claimReward = async () => {
         if(userGamesData && props.gachasRecompensa) {
@@ -43,9 +46,12 @@ export const TriesReward = (props: any) => {
                     props.setStatusReward(data[0].statusRewardOpening);
                 } else if (props.game==="eye") {
                     props.setStatusReward(data[0].statusRewardEye);
+                } else if (props.game==="pixel") {
+                    props.setStatusReward(data[0].statusRewardPixel);
                 }
             }
         }
+
         let alertGame = localStorage.getItem("alerts");
         if (alertGame) {
             let arrayAlerts = JSON.parse(alertGame);

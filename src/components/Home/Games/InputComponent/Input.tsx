@@ -203,17 +203,15 @@ export const Input = (props: any) => {
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
     const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
 
-    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, userGamesData } = useUserGames();
+    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData } = useUserGames();
     const { alerts, setAlerts } = useUserGachas();
 
     useEffect(() => {
-        console.log(props.game)
         if(props.game === "silueta" || props.game === "eye") fetchData();
     }, []);
 
     const fetchData = async () => {
         const data = await findCharacters();
-        console.log("entro")
         if(data) {
             data.map((anime : any) => {
                 let names = anime.names_game;
@@ -234,7 +232,7 @@ export const Input = (props: any) => {
                 return
             }
             const inputValue = e.target.value.toLowerCase();
-            if(props.game === "image" || props.game === "opening") {
+            if(props.game === "image" || props.game === "opening" || props.game === "pixel") {
                 const results = animeArray.filter((anime) =>
                     anime.toLowerCase().includes(inputValue)
                 );
@@ -254,7 +252,6 @@ export const Input = (props: any) => {
         const value = e.currentTarget.textContent;
         setAnimesSuggested([])
         if(value === props.solution) {
-
             audioRef.current = new Audio("/correct.mp3");
             audioRef.current.volume = 0.5;
             audioRef.current.play();
@@ -275,6 +272,10 @@ export const Input = (props: any) => {
                 } else if (props.game === "eye") {
                     props.setFinishedGame(data.finishedEye);
                     props.setStatusReward(data.statusRewardEye);
+                } else if (props.game === "pixel") {
+                    props.setFinishedGame(data.finishedPixel);
+                    props.setStatusReward(data.statusRewardPixel);
+                    props.setPixel(1);
                 }
 
                 let alertGame = localStorage.getItem("alerts");
@@ -337,6 +338,21 @@ export const Input = (props: any) => {
                         } else {
                             props.setGachasRecompensa(50)
                         }
+                    } else if (props.game==="pixel") {
+                        setPixelTries(data.triespixel);
+                        let dataTries = data.triespixel * 5
+                        if(dataTries>= 50) {
+                            props.setGachasRecompensa(50)
+                        } else {
+                            props.setGachasRecompensa(50)
+                        }
+
+                        let zoomRest = 10 - data.triespixel;
+                        if (zoomRest <= 1) {
+                            props.setPixel(1);
+                        } else {
+                            props.setPixel(zoomRest);
+                        }
                     }
                 }
             }
@@ -353,7 +369,7 @@ export const Input = (props: any) => {
                             type="text"
                             className="input-imagegame jaro-regular"
                             maxLength={50}
-                            placeholder={ props.game === "image" || props.game === "opening" ? t('games.inputAnime') : t('games.inputCharacter') }
+                            placeholder={ props.game === "image" || props.game === "opening" || props.game === "pixel" ? t('games.inputAnime') : t('games.inputCharacter') }
                             onChange={changeInputName}
                             value={valueInput}
                         />
@@ -373,7 +389,7 @@ export const Input = (props: any) => {
                             <div className="container-suggested">
                                 <span className="anime-suggested">
                                     {
-                                        props.game === "image" ? t('games.inputErrorAnime') : t('games.inputErrorCharacter')
+                                        props.game === "image" || props.game === "pixel" || props.game === "opening" ? t('games.inputErrorAnime') : t('games.inputErrorCharacter')
                                     }
                                 </span>
                             </div>

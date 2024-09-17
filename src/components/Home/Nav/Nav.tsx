@@ -77,16 +77,16 @@ export const Nav = (props: any) => {
               } */
             }
             { item.link === "games" ? 
-                <RiGamepadFill className='nav-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
+                <RiGamepadFill className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>
               :
               item.link === "summon" ?
-                <img src='/home/summon-ww.png' style={{height:"25px", width: "25px",marginLeft:"2px"}} className="icon-summon-nav"/>
+                <img src='/home/summon-ww.png' style={{height:"28px", width: "28px",marginLeft:"1px"}} className="icon-summon-nav"/>
               :
               item.link === "market" ?
-                <IoStorefrontSharp className='nav-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
+                <IoStorefrontSharp className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>
               :
               item.link === "ranking" ?
-                <RiVipCrownFill className='nav-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
+                <RiVipCrownFill className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>
               :
                 icons[item.link as keyof typeof icons]
             }

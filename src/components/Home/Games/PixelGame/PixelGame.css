@@ -1,0 +1,22 @@
+.img-pixel {
+    width: auto;
+    height: 100%;
+    max-height: 350px;
+}
+
+.pixel-center-game {
+    overflow: hidden;
+    max-width: 800px;
+    background-color: rgb(1, 14, 49);
+    min-height: 360px;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 5px;
+    flex-direction: column;
+    padding: .5rem;
+    gap: 1rem;
+    border: 2px solid black;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}

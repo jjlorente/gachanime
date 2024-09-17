@@ -7,6 +7,7 @@ import { GameData, Game } from '../../Interfaces/GamesUser';
 import { Quests } from '../Quests/Quests';
 import { findAllQuestUser } from '../../../services/userQuests';
 
+import { PiImageBroken } from "react-icons/pi";
 import { BiImage } from "react-icons/bi";
 import { BiSolidMusic } from "react-icons/bi";
 import { BiSolidPencil } from "react-icons/bi";
@@ -24,6 +25,8 @@ type ContextType = {
   setEyeTries: React.Dispatch<React.SetStateAction<number | null>>;
   nameTries: number | null;
   setNameTries: React.Dispatch<React.SetStateAction<number | null>>;
+  pixelTries: number | null;
+  setPixelTries: React.Dispatch<React.SetStateAction<number | null>>;
   openingTries: number | null;
   setOpeningTries: React.Dispatch<React.SetStateAction<number | null>>;
   resets: number | null;
@@ -41,6 +44,7 @@ export const Games = (props: any) => {
   const [imageTries, setImageTries] = useState<number>(0);
   const [siluetaTries, setSiluetaTries] = useState<number>(0);
   const [nameTries, setNameTries] = useState<number>(0);
+  const [pixelTries, setPixelTries] = useState<number>(0);
   const [openingTries, setOpeningTries] = useState<number>(0);
   const [eyeTries, setEyeTries] = useState<number>(0);
 
@@ -58,7 +62,9 @@ export const Games = (props: any) => {
         setNameTries(data.triesname);
         setOpeningTries(data.triesopening);
         setEyeTries(data.trieseye);
+        setPixelTries(data.triespixel);
         setResets(data.resets);
+
         if (data.triesimage === 0) {
           localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
         } else if (data.triessilueta === 0) {
@@ -71,6 +77,8 @@ export const Games = (props: any) => {
           localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
         } else if (data.trieseye === 0) {
           localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
+        } else if (data.triespixel === 0) {
+          localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
         }
 
       } else {
@@ -85,6 +93,7 @@ export const Games = (props: any) => {
         localStorage.setItem("arrayErrorsName", JSON.stringify([]));
         localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
         localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
+        localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));  
         try {
           const data = await registerNewGameUser(id);
           await findAllQuestUser(id);
@@ -95,6 +104,7 @@ export const Games = (props: any) => {
             setNameTries(data.triesname);
             setOpeningTries(data.triesopening);
             setEyeTries(data.trieseye);
+            setPixelTries(data.triespixel)
             setResets(data.resets);
           }
         
@@ -162,9 +172,17 @@ export const Games = (props: any) => {
         >
           <IoEye fontSize={"1.4rem"}/>
         </Link>
+        <Link
+          to="pixel"
+          key={"pixel"}
+          className={index === "pixel" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+          onClick={() => { setIndex("pixel"); }}
+        >
+          <PiImageBroken fontSize={"1.4rem"}/>
+        </Link>
       </div>
       <div className='section-games'>
-        <Outlet context={{ findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
+        <Outlet context={{ findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries,pixelTries, setPixelTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
       </div>
     </div>
   );

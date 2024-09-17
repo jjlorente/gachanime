@@ -21,6 +21,7 @@ import { OpeningGame } from './components/Home/Games/OpeningGame/OpeningGame';
 import { EyeGame } from './components/Home/Games/EyeGame/EyeGame';
 import { Market } from './components/Home/Market/Market';
 import { Ranking } from './components/Home/Ranking/Ranking';
+import { PixelGame } from './components/Home/Games/PixelGame/PixelGame';
 function App() {
   const navigate = useNavigate();
   const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
@@ -74,6 +75,7 @@ function App() {
             <Route path='silueta' element={<SiluetaGame />} />
             <Route path='opening' element={<OpeningGame />} />
             <Route path='eyes' element={<EyeGame />} />
+            <Route path='pixel' element={<PixelGame />} />
           </Route>
 
           <Route path="summon" element={<Summon />} />

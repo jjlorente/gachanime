@@ -52,6 +52,7 @@ i18n.use(initReactI18next).init({
                     titleWordle: 'Guess the character of the day!',
                     titleOpening: 'Which anime is the opening from?',
                     titleEye: 'Whose eyes belong to this character?',
+                    titlePixel: 'What anime is the cover from?',
 
                     infoSpanWinImage: 'Congratulations! Collect your reward and come back tomorrow for a new image.',
                     infoSpanImage: 'Each failed attempt moves the image further away. Earn 50 gachas for guessing correctly.',
@@ -79,8 +80,10 @@ i18n.use(initReactI18next).init({
                     infoSpanWordleCorrect: "Congratulations! Collect your reward and come back tomorrow for a new word.",
                     
                     infoSpanOpening: "Guessing the anime of the opening earns you 50 gachas as a reward.",
-                    infoSpanOpeningCorrect: "Congratulations! Collect your reward and come back tomorrow for a new opening."
+                    infoSpanOpeningCorrect: "Congratulations! Collect your reward and come back tomorrow for a new opening.",
 
+                    infoSpanPixel: "Each failed attempt makes the image less pixelated. Receive 50 gachas upon guessing correctly.",
+                    infoSpanPixelCorrect: "Congratulations! Collect your reward and come back tomorrow for a new cover."
                 },
                 "quest": {
                     progress: "Progress",
@@ -220,6 +223,7 @@ i18n.use(initReactI18next).init({
                     titleWordle: '¡Adivina el personaje del día!',
                     titleOpening: '¿De que anime es el opening?',
                     titleEye: '¿De que personaje son los ojos?',
+                    titlePixel: '¿De que anime es la portada?',
 
                     infoSpanWinImage: '¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva imagen.',
                     infoSpanImage: 'Cada intento fallido aleja un poco la imagen. Recibe 50 gachas al acertar.',
@@ -246,9 +250,11 @@ i18n.use(initReactI18next).init({
                     infoSpanWordle: "A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.",
                     infoSpanWordleCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva palabra.",
 
-                    
                     infoSpanOpening: "Al adivinar el anime del opening recibes 50 gachas como recompensa.",
-                    infoSpanOpeningCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para un nuevo opening."
+                    infoSpanOpeningCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para un nuevo opening.",
+
+                    infoSpanPixel: "Cada intento fallido la imagen se pixela menos. Recibe 50 gachas al acertar.",
+                    infoSpanPixelCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva portada."
                 },
                 "quest": {
                     progress: "Progreso",

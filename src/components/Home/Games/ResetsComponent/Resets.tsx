@@ -77,7 +77,21 @@ export const Resets = (props: any) => {
                         }
                     }
                     localStorage.setItem("arrayErrorsName", JSON.stringify([]));  
+                } else if (props.game === "pixel") {
+                    console.log("ENTRO")
+                    const dataPixel = await findGameById(data.pixelid)
+                    if(dataPixel) {
+                        const randomIndex = Math.floor(Math.random() * dataPixel.pixel_game.length);
+                        localStorage.setItem("pixelSelected", randomIndex.toString());
+                        const dataPixelGame = await updateSelected(userGamesData.userid, props.game);
+                        if(dataPixelGame) {
+                            setUserGamesData(dataPixelGame);
+                            //props.findGame(dataSilueta.siluetaid)
+                        }
+                    }
+                    localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));  
                 }
+
             }
         }
     }
