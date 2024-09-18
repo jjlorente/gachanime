@@ -5,8 +5,7 @@ import { findGameById, resetGame, updateSelected } from '../../../../services/us
 
 export const Resets = (props: any) => {
     const { resets, setResets, userGamesData, setUserGamesData } = useUserGames();
-    const { setNameTries } = useUserGames();
-
+    const { setNameTries, setPixelTries, setEyeTries, setImageTries, setOpeningTries, setSiluetaTries } = useUserGames();
     const resetGameClick = async () => {
 
         if(userGamesData) {
@@ -20,6 +19,7 @@ export const Resets = (props: any) => {
                         localStorage.setItem("imgSelected", dataImage.imageSelected);
                         if(dataImage) {
                             setUserGamesData(dataImage);
+                            setImageTries(0);
                             //props.findGame(dataImage.imageid)
                         }
                     }
@@ -32,6 +32,7 @@ export const Resets = (props: any) => {
                         const dataSilueta = await updateSelected(userGamesData.userid, props.game);
                         if(dataSilueta) {
                             setUserGamesData(dataSilueta);
+                            setSiluetaTries(0);
                             //props.findGame(dataSilueta.siluetaid)
                         }
                     }
@@ -44,6 +45,7 @@ export const Resets = (props: any) => {
                         const dataEyes = await updateSelected(userGamesData.userid, props.game);
                         if(dataEyes) {
                             setUserGamesData(dataEyes);
+                            setEyeTries(0);
                         }
                     }
                     localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
@@ -55,6 +57,7 @@ export const Resets = (props: any) => {
                         const dataOp = await updateSelected(userGamesData.userid, props.game);
                         if(dataOp) {
                             setUserGamesData(dataOp);
+                            setOpeningTries(0);
                             //props.findGame(dataOp.openingid)
                         }
                     }
@@ -78,7 +81,7 @@ export const Resets = (props: any) => {
                     }
                     localStorage.setItem("arrayErrorsName", JSON.stringify([]));  
                 } else if (props.game === "pixel") {
-                    console.log("ENTRO")
+                    props.setPixel(15);
                     const dataPixel = await findGameById(data.pixelid)
                     if(dataPixel) {
                         const randomIndex = Math.floor(Math.random() * dataPixel.pixel_game.length);
@@ -86,7 +89,7 @@ export const Resets = (props: any) => {
                         const dataPixelGame = await updateSelected(userGamesData.userid, props.game);
                         if(dataPixelGame) {
                             setUserGamesData(dataPixelGame);
-                            //props.findGame(dataSilueta.siluetaid)
+                            setPixelTries(0)
                         }
                     }
                     localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));  

@@ -255,20 +255,20 @@ export const Quests = () => {
         </span>
       );
     } else if(quest === "all") {
-      if(questStatus < 5) {
+      if(questStatus < 6) {
         return (
           <Link className='link-quest-btn' to={`/home/games`}>
             {t('quest.goToGame')}
           </Link>
         );
-      } else if(questStatus === 5) {
+      } else if(questStatus === 6) {
         return (
           <span className='quest-recompensa-active-click' onClick={(event) => handleClick(amount, quest, event)}>
             {t('quest.claimReward')}
             <span className="reward-icon"></span>
           </span>
         );
-      } else if(questStatus > 5) {
+      } else if(questStatus > 6) {
         return (
           <span className='reward-obtained'>
             {t('quest.claimed')}
@@ -506,11 +506,11 @@ export const Quests = () => {
                   </span>
                   <span>
                     {userQuestsData 
-                      ? (userQuestsData.statusQuestAllGames > 5
-                          ? 5 
+                      ? (userQuestsData.statusQuestAllGames > 6
+                          ? 6
                           : userQuestsData.statusQuestAllGames)
                       : 0} 
-                    / 5
+                    / 6
                   </span>
                 </div>
                 <div className='info-quest'>

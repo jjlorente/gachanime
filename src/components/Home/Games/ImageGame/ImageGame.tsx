@@ -50,12 +50,19 @@ export const ImageGame = () => {
     }, [animesErrors])
 
     useEffect(()=>{
-        if(userGamesData) {
-            findImageGame(userGamesData.imageid)
-            setImgSelected(userGamesData.imageSelected)
+        const fetchData = async () => {
+            if(userGamesData) {
+                let loop = false;
+                while(loop===false) {
+                    loop = true;
+                    await findImageGame(userGamesData.imageid)
+                    setImgSelected(userGamesData.imageSelected)
+                }
+            }
         }
-    }, [userGamesData])
-
+        fetchData();
+    },[userGamesData])
+    
     const findImageGame = async (id:any) => {
         try {
             const data = await findGameById(id)
@@ -76,11 +83,11 @@ export const ImageGame = () => {
                         }
                     }
 
-                    let dataTries = 50
-                    if(dataTries>= 50) {
-                        setGachasRecompensa(50)
+                    let dataTries = userGamesData.triesimage * 5;
+                    if(dataTries >= 25) {
+                        setGachasRecompensa(25)
                     } else {
-                        setGachasRecompensa(50)
+                        setGachasRecompensa(50 - dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardImage)

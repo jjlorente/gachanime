@@ -24,7 +24,7 @@ export const PixelGame = () => {
   const [pixelSelected, setPixelSelected] = useState<number>();
   const [animeNamePixel, setAnimeNamePixel] = useState<string>();
   const [animesPixelErrors, setAnimesPixelErrors] = useState<Array<string>>([]);
-  const [pixelImage, setPixelImage] = useState<number>(10);
+  const [pixelImage, setPixelImage] = useState<number>(20);
   const [gachasRecompensa, setGachasRecompensa] = useState<number>();
   const [statusReward, setStatusReward] = useState<number>();
 
@@ -54,11 +54,18 @@ export const PixelGame = () => {
   }, [animesPixelErrors])
 
   useEffect(()=>{
-    if(userGamesData) {
-      findPixelGame(userGamesData.pixelid)
-      setPixelSelected(userGamesData.pixelSelected)
+    const fetchData = async () => {
+      if(userGamesData) {
+        let loop = false;
+        while(loop===false) {
+          loop = true;
+          await findPixelGame(userGamesData.pixelid)
+          setPixelSelected(userGamesData.pixelSelected)
+        }
+      }
     }
-  }, [userGamesData])
+    fetchData();
+  },[userGamesData])
 
   const findPixelGame = async (id:any) => {
     try {
@@ -71,7 +78,7 @@ export const PixelGame = () => {
           if(userGamesData.finishedPixel === true) {
             setPixelImage(1)
           } else {
-            let zoom = 10 - userGamesData.triespixel;
+            let zoom = 20 - userGamesData.triespixel * 2.5;
             if (zoom <= 1) {
               setPixelImage(1)
             } else {
@@ -79,13 +86,12 @@ export const PixelGame = () => {
             }
           }
 
-          let dataTries = 50
-          if(dataTries>= 50) {
-            setGachasRecompensa(50)
+          let dataTries = userGamesData.triespixel * 5;
+          if(dataTries >= 25) {
+            setGachasRecompensa(25)
           } else {
-            setGachasRecompensa(50)
+            setGachasRecompensa(50 - dataTries)
           }
-
           setStatusReward(userGamesData.statusRewardPixel)
         }
 
@@ -113,25 +119,19 @@ export const PixelGame = () => {
       image.src = gamePixelData.pixel_game[pixelSelected];
 
       image.onload = () => {
-        // Obtener el tamaño de la imagen original
         const originalWidth = image.width;
         const originalHeight = image.height;
 
-        // Ajustar el tamaño del canvas al tamaño de la imagen
         canvas.width = originalWidth;
         canvas.height = originalHeight;
 
-        // Reducir la imagen
         const scaledWidth = originalWidth / pixelSize;
         const scaledHeight = originalHeight / pixelSize;
 
-        // Dibujar la imagen pequeña (pixelada)
         ctx?.drawImage(image, 0, 0, scaledWidth, scaledHeight);
 
-        // Deshabilitar el suavizado de imagen para que los píxeles se vean "duros"
         ctx!.imageSmoothingEnabled = false;
 
-        // Redibujar la imagen escalada al tamaño original
         ctx?.drawImage(
           canvas, 0, 0, scaledWidth, scaledHeight,
           0, 0, originalWidth, originalHeight
@@ -143,7 +143,7 @@ export const PixelGame = () => {
   return (
     <div className='container-imagegame'>
 
-      <Resets title={t('games.titlePixel')} game={"pixel"} finishedGame={finishedPixelGame} findGame={findPixelGame}/>
+      <Resets title={t('games.titlePixel')} game={"pixel"} finishedGame={finishedPixelGame} findGame={findPixelGame} setPixel={setPixelImage}/>
 
       <div className='container-image-center'>
         <div className='section-image-center pixel-center-game'>

@@ -55,12 +55,12 @@ i18n.use(initReactI18next).init({
                     titlePixel: 'What anime is the cover from?',
 
                     infoSpanWinImage: 'Congratulations! Collect your reward and come back tomorrow for a new image.',
-                    infoSpanImage: 'Each failed attempt moves the image further away. Earn 50 gachas for guessing correctly.',
+                    infoSpanImage: 'Each mistake moves the image away. Lose 5 gachas per error. Minimum reward: 25 gachas.',
                     
-                    infoSpanSilueta: 'After 3 wrong guesses, the character anime is revealed. Earn 50 gachas for guessing right.',
+                    infoSpanSilueta: 'After 3 errors, the anime is revealed. Lose 5 gachas per error. Minimum reward: 25 gachas.',
                     infoSpanWinSilueta: 'Congratulations! Collect your reward and come back tomorrow for a new silhouette.',
                     
-                    infoSpanEye: 'After 3 wrong guesses, the character anime is revealed. Earn 50 gachas for guessing right.',
+                    infoSpanEye: 'After 3 errors, the anime is revealed. Lose 5 gachas per error. Minimum reward: 25 gachas.',
                     infoSpanWinEye: 'Congratulations! Collect your reward and come back tomorrow for a new image.',
                     span3Errors: 'Character from ',
                     
@@ -79,10 +79,10 @@ i18n.use(initReactI18next).init({
                     infoSpanWordle: "After 3 mistakes, the anime of the character will be revealed. Earn 50 gachas for a correct guess.",
                     infoSpanWordleCorrect: "Congratulations! Collect your reward and come back tomorrow for a new word.",
                     
-                    infoSpanOpening: "Guessing the anime of the opening earns you 50 gachas as a reward.",
+                    infoSpanOpening: "Lose 5 gachas per error. Minimum reward: 25 gachas.",
                     infoSpanOpeningCorrect: "Congratulations! Collect your reward and come back tomorrow for a new opening.",
 
-                    infoSpanPixel: "Each failed attempt makes the image less pixelated. Receive 50 gachas upon guessing correctly.",
+                    infoSpanPixel: "Each error reduces pixelation. Lose 5 gachas per error. Minimum reward: 25 gachas.",
                     infoSpanPixelCorrect: "Congratulations! Collect your reward and come back tomorrow for a new cover."
                 },
                 "quest": {
@@ -99,7 +99,7 @@ i18n.use(initReactI18next).init({
                     wordleQuest: "Complete the daily wordle",
                     siluetaQuest: "Guess the character silhouette",
                     openingQuest: "Guess which anime the opening is from",
-                    allGamesQuest: "Complete all daily games!",
+                    allGamesQuest: "Complete the six daily games!",
                     summonQuest: "Make 10 summons of 10 cards",
                     connectionQuest: "Connect to GACHANIME for 7 days in a row",
                     level5Quest: "Reach account level 5",
@@ -175,6 +175,11 @@ i18n.use(initReactI18next).init({
                     buyButton: "Buy",
                     owner: "Owner: ",
                     exitMess: "You don't have enough GACHAS to buy the card"
+                  },
+                  "ranking": {
+                      level:"Level",
+                      power:"Power",
+                      cards:"Cards"
                   }
                          
             },
@@ -226,12 +231,12 @@ i18n.use(initReactI18next).init({
                     titlePixel: '¿De que anime es la portada?',
 
                     infoSpanWinImage: '¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva imagen.',
-                    infoSpanImage: 'Cada intento fallido aleja un poco la imagen. Recibe 50 gachas al acertar.',
+                    infoSpanImage: 'Cada error aleja la imagen. Pierdes 5 gachas por fallo. Recompensa mínima: 25 gachas.',
                     
-                    infoSpanSilueta: "A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.",
+                    infoSpanSilueta: "A los 3 fallos se revela el anime. Pierdes 5 gachas por error. Recompensa mínima: 25 gachas.",
                     infoSpanWinSilueta: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva silueta.",
 
-                    infoSpanEye: "A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.",
+                    infoSpanEye: "A los 3 errores, se revela el anime. Pierdes 5 gachas por error. Recompensa mínima: 25 gachas.",
                     infoSpanWinEye: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una imagen nueva.",
                     span3Errors: 'Personaje de ',
 
@@ -250,10 +255,10 @@ i18n.use(initReactI18next).init({
                     infoSpanWordle: "A los 3 fallos se muestra el anime del personaje. Recibe 50 gachas al acertar.",
                     infoSpanWordleCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva palabra.",
 
-                    infoSpanOpening: "Al adivinar el anime del opening recibes 50 gachas como recompensa.",
+                    infoSpanOpening: "Pierdes 5 gachas por error. Recompensa mínima: 25 gachas.",
                     infoSpanOpeningCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para un nuevo opening.",
 
-                    infoSpanPixel: "Cada intento fallido la imagen se pixela menos. Recibe 50 gachas al acertar.",
+                    infoSpanPixel: "Cada error reduce la pixelación. Pierdes 5 gachas por error. Recompensa mínima: 25 gachas.",
                     infoSpanPixelCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva portada."
                 },
                 "quest": {
@@ -270,7 +275,7 @@ i18n.use(initReactI18next).init({
                     wordleQuest: "Adivina la silueta del personaje",
                     siluetaQuest: "Completa el wordle diario",
                     openingQuest: "Adivina de que anime es el opening",
-                    allGamesQuest: "¡Completa todos los juegos diarios!",
+                    allGamesQuest: "¡Completa los seis juegos diarios!",
                     summonQuest: "Haz 10 invocaciones de 10 cartas",
                     connectionQuest: "Conéctate a GACHANIME durante 7 días seguidos",
                     level5Quest: "Alcanza el nivel 5 de cuenta",
@@ -346,6 +351,11 @@ i18n.use(initReactI18next).init({
                     buyButton: "Comprar",
                     owner: "Dueño: ",
                     exitMess: "No tienes GACHAS suficientes para comprar la carta"
+                },
+                "ranking": {
+                    level:"Nivel",
+                    power:"Poder",
+                    cards:"Cartas"
                 }
             },
         }

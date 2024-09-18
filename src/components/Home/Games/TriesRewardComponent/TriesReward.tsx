@@ -3,6 +3,7 @@ import { useUserGachas } from "../../Home";
 import { updateReward } from '../../../../services/userGames';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 export const TriesReward = (props: any) => {
     const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries, pixelTries } = useUserGames();
@@ -23,8 +24,6 @@ export const TriesReward = (props: any) => {
         } else if ( props.game==="eye" && eyeTries!=null ) {
             setTries(eyeTries)
         } else if ( props.game==="pixel" && pixelTries!=null ) {
-            console.log("gola")
-
             setTries(pixelTries)
         }
 

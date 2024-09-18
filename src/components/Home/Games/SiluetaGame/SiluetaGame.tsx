@@ -46,10 +46,17 @@ export const SiluetaGame = (props: any) => {
     }, [animesErrors])
 
     useEffect(()=>{
-        if(userGamesData) {
-            findSiluetaGame(userGamesData.siluetaid)
-            setSiluetaSelected(userGamesData.siluetaSelected)
+        const fetchData = async () => {
+            if(userGamesData) {
+                let loop = false;
+                while(loop===false) {
+                    loop = true;
+                    await findSiluetaGame(userGamesData.siluetaid)
+                    setSiluetaSelected(userGamesData.siluetaSelected)
+                }
+            }
         }
+        fetchData();
     },[userGamesData])
 
     useEffect(()=>{
@@ -66,10 +73,10 @@ export const SiluetaGame = (props: any) => {
                 if(userGamesData) {
                     setFinishedSiluetaGame(userGamesData.finishedSilueta);
                     let dataTries = userGamesData.triessilueta * 5;
-                    if(dataTries>= 50) {
-                        setGachasRecompensa(50)
+                    if(dataTries >= 25) {
+                        setGachasRecompensa(25)
                     } else {
-                        setGachasRecompensa(50)
+                        setGachasRecompensa(50 - dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardSilueta)

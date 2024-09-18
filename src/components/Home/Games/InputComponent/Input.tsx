@@ -309,45 +309,45 @@ export const Input = (props: any) => {
                             props.setZoomImage("100%");
                         }
                         let dataTries = data.triesimage * 5
-                        if(dataTries>= 50) {
-                            props.setGachasRecompensa(50)
+                        if(dataTries >= 25) {
+                            props.setGachasRecompensa(25)
                         } else {
-                            props.setGachasRecompensa(50)
+                            props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game ==="silueta") {
                         setSiluetaTries(data.triessilueta);
                         let dataTries = data.triessilueta * 5
-                        if(dataTries>= 50) {
-                            props.setGachasRecompensa(50)
+                        if(dataTries >= 25) {
+                            props.setGachasRecompensa(25)
                         } else {
-                            props.setGachasRecompensa(50)
+                            props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game ==="eye") {
                         setEyeTries(data.trieseye);
                         let dataTries = data.trieseye * 5
-                        if(dataTries>= 50) {
-                            props.setGachasRecompensa(50)
+                        if(dataTries >= 25) {
+                            props.setGachasRecompensa(25)
                         } else {
-                            props.setGachasRecompensa(50)
+                            props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game==="opening") {
                         setOpeningTries(data.triesopening);
                         let dataTries = data.triesopening * 5
-                        if(dataTries>= 50) {
-                            props.setGachasRecompensa(50)
+                        if(dataTries >= 25) {
+                            props.setGachasRecompensa(25)
                         } else {
-                            props.setGachasRecompensa(50)
+                            props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game==="pixel") {
                         setPixelTries(data.triespixel);
-                        let dataTries = data.triespixel * 5
-                        if(dataTries>= 50) {
-                            props.setGachasRecompensa(50)
+                        let dataTries = data.triespixel * 5;
+                        if(dataTries >= 25) {
+                            props.setGachasRecompensa(25)
                         } else {
-                            props.setGachasRecompensa(50)
+                            props.setGachasRecompensa(50 - dataTries)
                         }
 
-                        let zoomRest = 10 - data.triespixel;
+                        let zoomRest = 20 - data.triespixel * 2.5;
                         if (zoomRest <= 1) {
                             props.setPixel(1);
                         } else {

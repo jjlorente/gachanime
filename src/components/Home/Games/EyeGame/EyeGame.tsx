@@ -45,12 +45,19 @@ export const EyeGame = (props: any) => {
     }, [animesErrors])
 
     useEffect(()=>{
-        if(userGamesData) {
-            findEyeGame(userGamesData.eyeid)
-            setEyeSelected(userGamesData.eyeSelected)
+        const fetchData = async () => {
+            if(userGamesData) {
+                let loop = false;
+                while(loop===false) {
+                    loop = true;
+                    await findEyeGame(userGamesData.eyeid)
+                    setEyeSelected(userGamesData.eyeSelected)
+                }
+            }
         }
+        fetchData();
     },[userGamesData])
-
+    
     useEffect(()=>{
         if(gameData && userGamesData) {
             setPjName(gameData.names_game[userGamesData.eyeSelected])
@@ -65,10 +72,10 @@ export const EyeGame = (props: any) => {
                 if(userGamesData) {
                     setFinishedEyeGame(userGamesData.finishedEye);
                     let dataTries = userGamesData.trieseye * 5;
-                    if(dataTries>= 50) {
-                        setGachasRecompensa(50)
+                    if(dataTries >= 25) {
+                        setGachasRecompensa(25)
                     } else {
-                        setGachasRecompensa(50)
+                        setGachasRecompensa(50 - dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardEye)

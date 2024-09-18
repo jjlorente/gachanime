@@ -63,22 +63,33 @@ export const NameGame = () => {
     }
   };
 
+
+
   useEffect(()=>{
-    if(userGamesData) {
-      findNameGame(userGamesData.nameid)
-      setNameSelected(userGamesData.nameSelected)
-      setNameTriesComp(userGamesData.triesname)
-      let arrayTries = localStorage.getItem("arrayTriesName")
-      if (arrayTries) {
-        setErrorsArray(JSON.parse(arrayTries))
+    const fetchData = async () => {
+      if(userGamesData) {
+        let loop = false;
+        while(loop===false) {
+          loop = true;
+          await findNameGame(userGamesData.nameid)
+          setNameSelected(userGamesData.nameSelected)
+          setNameTriesComp(userGamesData.triesname)
+        }
+        
+        let arrayTries = localStorage.getItem("arrayTriesName")
+        if (arrayTries) {
+          setErrorsArray(JSON.parse(arrayTries))
+        }
+        
+        let localArrayColors = localStorage.getItem("localArrayColors");
+        if (localArrayColors) {
+          let parsedArrayColors: string[][] = JSON.parse(localArrayColors);
+          setArrayColors(parsedArrayColors)
+        }
       }
       
-      let localArrayColors = localStorage.getItem("localArrayColors");
-      if (localArrayColors) {
-        let parsedArrayColors: string[][] = JSON.parse(localArrayColors);
-        setArrayColors(parsedArrayColors)
-      }
     }
+    fetchData();
   },[userGamesData])
 
   useEffect(()=>{

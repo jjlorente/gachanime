@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { getRank } from '../../../services/user';
 import './Ranking.css'
-import { TbRosetteNumber1 } from "react-icons/tb";
-import { TbRosetteNumber2 } from "react-icons/tb";
-import { TbRosetteNumber3 } from "react-icons/tb";
+import { useTranslation } from 'react-i18next';
 
 export const Ranking = () => {
     const [ranks, setRanks] = useState<any>([]); 
     const [sectionRank, setSectionRank] = useState<any>("power"); 
+    const { i18n, t } = useTranslation();
 
     useEffect(() => {
         const getRanks = async () => {
@@ -31,13 +30,13 @@ export const Ranking = () => {
         <div className='Ranking'>
             <nav className='nav-sections-ranking'>
                 <span className={sectionRank === "power" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("power")}}>
-                    Power
+                    {t('ranking.power')}
                 </span>
                 <span className={sectionRank === "level" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("level")}}>
-                    Level
+                    {t('ranking.level')}
                 </span>
                 <span className={sectionRank === "card" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("card")}}>
-                    Cards
+                    {t('ranking.cards')}
                 </span>
             </nav>
             <div className='section-ranking'>

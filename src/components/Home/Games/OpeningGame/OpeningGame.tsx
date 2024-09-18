@@ -44,13 +44,20 @@ export const OpeningGame = () => {
         }
     }, [openingErrors])
 
+
     useEffect(()=>{
-        if(userGamesData) {
-            findOpeningGame(userGamesData.openingid)
-            setOpeningSelected(userGamesData.openingSelected)
+        const fetchData = async () => {
+            if(userGamesData) {
+                let loop = false;
+                while(loop===false) {
+                    loop = true;
+                    await findOpeningGame(userGamesData.openingid)
+                    setOpeningSelected(userGamesData.openingSelected)
+                }
+            }
         }
-        console.log(openingSelected)
-    }, [userGamesData])
+        fetchData();
+    },[userGamesData])
 
     const findOpeningGame = async (id:any) => {
         try {
@@ -64,10 +71,10 @@ export const OpeningGame = () => {
                 if(userGamesData) {
                     setFinishedOpeningGame(userGamesData.finishedOpening);
                     let dataTries = userGamesData.triesopening * 5
-                    if(dataTries>= 50) {
-                        setGachasRecompensa(50)
+                    if(dataTries >= 25) {
+                        setGachasRecompensa(25)
                     } else {
-                        setGachasRecompensa(50)
+                        setGachasRecompensa(50 - dataTries)
                     }
 
                     setStatusReward(userGamesData.statusRewardOpening)
