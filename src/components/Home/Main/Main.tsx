@@ -92,13 +92,13 @@ export const Main = (props: any) => {
             <span className='span-link-main'>{t('links.games')}</span>
             <RiGamepadFill className='link-main-icon' style={{height:"25px", width: "25px",marginLeft:"2px"}}/>
           </Link>
-          <Link to={"/home/quests"} className='link-main'>
-            <span className='span-link-main'>{t('links.quests')}</span>
-            <svg width={"25px"} className="link-main-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M16.667 18.333H3.333A.833.833 0 012.5 17.5v-15a.833.833 0 01.833-.833h13.334a.833.833 0 01.833.833v15a.833.833 0 01-.833.833zm-10-12.5V7.5h6.666V5.833H6.667zm0 3.334v1.666h6.666V9.167H6.667zm0 3.333v1.667h4.166V12.5H6.667z"></path></svg>
-          </Link>
           <Link to={"/home/summon"} className='link-main'>
             <span className='span-link-main'>{t('links.summon')}</span>
             <img src='/home/summon-ww.png' className="link-main-icon" style={{height:"25px", width: "25px",marginLeft:"2px"}} />
+          </Link>
+          <Link to={"/home/quests"} className='link-main'>
+            <span className='span-link-main'>{t('links.quests')}</span>
+            <svg width={"25px"} className="link-main-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M16.667 18.333H3.333A.833.833 0 012.5 17.5v-15a.833.833 0 01.833-.833h13.334a.833.833 0 01.833.833v15a.833.833 0 01-.833.833zm-10-12.5V7.5h6.666V5.833H6.667zm0 3.334v1.666h6.666V9.167H6.667zm0 3.333v1.667h4.166V12.5H6.667z"></path></svg>
           </Link>
           <Link to={"/home/collection"} className='link-main'>
             <span className='span-link-main'>{t('links.collection')}</span>

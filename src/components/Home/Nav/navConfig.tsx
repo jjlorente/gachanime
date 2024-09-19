@@ -1,8 +1,8 @@
 export const navItems = [
   { labelEs: 'Inicio', labelEn: 'Home', link: 'main' },
   { labelEs: 'Juegos', labelEn: 'Games', link: 'games' },
-  { labelEs: 'Misiones', labelEn: 'Quests', link: 'quests' },
   { labelEs: 'Invocar', labelEn: 'Summon', link: 'summon' },
+  { labelEs: 'Misiones', labelEn: 'Quests', link: 'quests' },
   { labelEs: 'Colección', labelEn: 'Collection', link: 'collection' },
   { labelEs: 'Mercado', labelEn: 'Market', link: 'market' },
   { labelEs: 'Ranking', labelEn: 'Ranking', link: 'ranking' },
