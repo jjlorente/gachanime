@@ -49,19 +49,19 @@ export const Summoning = () => {
       }
 
       if ((throws + 1) % 10 === 0) {
-        if (random > 0.2) {
+        if (random > 0.1) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-        } else if (random < 0.2 && random > 0.005) {
+        } else if (random < 0.1 && random > 0.002) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
         } else {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
         }
       } else {
-        if (random <= 0.8) {
+        if (random <= 0.7) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "B"]);
         } else if (random <= 0.9) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-        } else if (random <= 0.99) {
+        } else if (random <= 0.98) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
         } else {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
@@ -77,7 +77,7 @@ export const Summoning = () => {
 
     if (random > 0.1) {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-    } else if (random < 0.1 && random > 0.005) {
+    } else if (random < 0.1 && random > 0.002) {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
     } else {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
@@ -86,11 +86,11 @@ export const Summoning = () => {
 
     for (let i = 0; i < 10 - shots; i++) { 
       let random = Math.random();
-      if (random <= 0.8) {
+      if (random <= 0.70) {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "B"]);
       } else if (random <= 0.9) {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-      } else if (random <= 0.99) {
+      } else if (random <= 0.98) {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
       } else {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);

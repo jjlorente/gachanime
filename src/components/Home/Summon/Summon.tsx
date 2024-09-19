@@ -4,6 +4,7 @@ import { findGacha } from '../../../services/gacha';
 import { ModalConfirm } from './Modals/ModalConfirm';
 import { PaginationComponent } from '../Collection/PaginationComponent';
 import { useTranslation } from 'react-i18next';
+import { FaInfoCircle } from "react-icons/fa";
 
 export const Summon = (props: any) => {
   const {i18n, t} = useTranslation()
@@ -94,13 +95,31 @@ export const Summon = (props: any) => {
       }
 
   }, []);
+  const [isTooltipVisible, setTooltipVisible] = useState(false);
+
+  const handleMouseEnter = () => setTooltipVisible(true);
+  const handleMouseLeave = () => setTooltipVisible(false);
+  const handleClick = () => setTooltipVisible(!isTooltipVisible);
 
   return (
     <div className="Summon">
       {currentSection && currentSection.length > 0 ? (
         currentSection.map((section: any, index: any) => (
           <div className='section-summon' key={index} style={{ backgroundImage: section.backgroundImage }}>
-
+            <div
+              className="tooltip-container"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onClick={handleClick}
+            >
+              <FaInfoCircle className="btn-info-summon" />
+              {isTooltipVisible && <div className="tooltip-text">
+                <span style={{backgroundColor:"gray", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>B 70%</span>
+                <span style={{backgroundColor:"#01A4FF", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>A 20%</span> 
+                <span style={{backgroundColor:"#C74CDF", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>S 8%</span>
+                <span style={{backgroundColor:"#FD393A", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>S+ 2%</span>
+              </div>}
+            </div>
             <span className='title-summon'>{section.title}</span>
 
             <div className='container-type-summon'>
