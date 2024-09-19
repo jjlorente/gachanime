@@ -78,12 +78,20 @@ export const Home = () => {
       }
 
       let daySurvey = await find(); 
-      if(daySurvey) {
-        let day = daySurvey.expirationdDate.split(",").map((str: any) => parseInt(str, 10));
-        day[2] = day[2]-1
-        if (isDateOutdated(day, local)) {
+      if (daySurvey) {
+        let expirationDate = daySurvey.expirationdDate.split(",").map((str: string) => parseInt(str, 10));
+        let expirationYear = expirationDate[0];
+        let expirationMonth = expirationDate[1] - 1;
+        let expirationDay = expirationDate[2];
+    
+        let localDate = new Date();
+        let localYear = localDate.getFullYear();
+        let localMonth = localDate.getMonth();
+        let localDay = localDate.getDate();
+        
+        if (isDateOutdatedSurvey(expirationYear, expirationMonth, expirationDay, localYear, localMonth, localDay)) {
           await finished();
-        } 
+        }
       }
 
       let weekDB = await checkWeek();
@@ -98,6 +106,13 @@ export const Home = () => {
 
     fetchData();
   }, [location]);
+
+  function isDateOutdatedSurvey(expirationYear: number, expirationMonth: number, expirationDay: number, localYear: number, localMonth: number, localDay: number) {
+    let expiration = new Date(expirationYear, expirationMonth, expirationDay);
+    let local = new Date(localYear, localMonth, localDay);
+  
+    return expiration < local;
+  }
 
   useEffect(() => {
     const path = location.pathname.split('/')[2];
@@ -138,6 +153,7 @@ export const Home = () => {
     localStorage.removeItem("openingSelected");
     localStorage.removeItem("imgSelected");
     localStorage.removeItem("alerts");
+    navigate("/");
   };
 
   const getUserData = async (userid: string) => {

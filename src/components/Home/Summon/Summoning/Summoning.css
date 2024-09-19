@@ -196,9 +196,8 @@
 }
 
 .background-border {
-    width: 200px;
-    height: 290px;
-    max-height: 290px;
+    width: 210px;
+    height: 320px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -213,11 +212,7 @@
         linear-gradient(to bottom,red,orange,rgb(255, 251, 0),red,orange,rgb(255, 251, 0),red) border-box;
 }
 
-.border-rarity-a {
-    background: 
-        linear-gradient(black, #222) padding-box,
-        linear-gradient(to bottom, #c74cdf, #f9daff, #c74cdf, #f9daff, #c74cdf, #f9daff, #c74cdf) border-box;
-}
+
 
 .border-rarity-s {
     background: 
@@ -290,136 +285,234 @@
     width: 100%;
 }
 
-.border-s-plus {
-    border: 4px solid rgb(255, 255, 255);
-    position: absolute;
-    z-index: -9;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 5px;
-    box-sizing: border-box;
-    box-shadow: 
-        0px 0px 30px #e50000,
-        0px 0px 40px #e50000,
-        0px 0px 60px #e50000;
-    background: linear-gradient(to right, 
-    #e50000 0%, 
-    #e50000 3%, 
-    #db0000 6%, 
-    #d20000 9%, 
-    #c80000 12%, 
-    #bf0000 15%, 
-    #b50000 18%, 
-    #ac0000 21%, 
-    #a20000 24%, 
-    #990000 27%, 
-    #8f0000 30%, 
-    #860000 33%, 
-    #7c0000 36%, 
-    #730000 39%, 
-    #690000 42%, 
-    #600000 45%, 
-    #560000 48%, 
-    #530101 50%, 
-    #560000 52%, 
-    #600000 55%, 
-    #690000 58%, 
-    #730000 61%, 
-    #7c0000 64%, 
-    #860000 67%, 
-    #8f0000 70%, 
-    #990000 73%, 
-    #a20000 76%, 
-    #ac0000 79%, 
-    #b50000 82%, 
-    #bf0000 85%, 
-    #c80000 88%, 
-    #d20000 91%, 
-    #db0000 94%, 
-    #e50000 97%, 
-    #e50000 100%);
-    background-size: 200% auto;
-    animation: shine 6s linear infinite, shadowPulse 1.5s ease-in-out infinite;
-}
-
 @keyframes shadowPulse {
     0%, 100% {
         box-shadow: 
-            0px 0px 20px #e50000,
-            0px 0px 30px #e50000,
-            0px 0px 40px #e50000;
+            0px 0px 20px rgba(253, 84, 84, 0.5), /* Added vertical offset and reduced opacity */
+            0px 0px 30px rgba(253, 84, 84, 0.5), 
+            0px 0px 40px rgba(253, 84, 84, 0.3);
     }
     50% {
         box-shadow: 
-            0px 0px 80px #e50000,
-            0px 0px 90px #e50000,
-            0px 0px 100px #e50000;
+            0px 0px 35px rgba(253, 84, 84, 0.7), /* Increased vertical offset and opacity */
+            0px 0px 45px rgba(253, 84, 84, 0.6), 
+            0px 0px 55px rgba(253, 84, 84, 0.5);
     }
+}
+
+
+.border-a, .border-rarity-a {
+    width: 210px;
+    height: 320px;
+    position: absolute;
+    box-sizing: border-box;
+    z-index: -9;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: gray;
+    border: 4px solid rgb(255, 255, 255);
+    
+    --border-angle: 0turn;
+    --main-bg: conic-gradient(
+        from var(--border-angle),
+        rgb(249, 79, 255),
+        rgb(249, 79, 255) 5%,
+        rgb(249, 79, 255) 60%,
+        rgb(249, 79, 255) 95%
+    );
+    
+    border: solid 5px transparent;
+    border-radius: 5px;
+    background: 
+        var(--main-bg) padding-box,
+        var(--gradient-border) border-box, 
+        var(--main-bg) border-box;
+    
+    background-position: center center;
+    background-size: cover; 
 }
 
 .border-a {
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        rgb(143, 0, 148) 0%,  
+        rgb(143, 0, 148) 10%, 
+        rgb(230, 230, 230) 20%,
+        rgb(143, 0, 148) 30%, 
+        rgb(143, 0, 148) 40%, 
+        rgb(230, 230, 230) 50%,
+        rgb(143, 0, 148) 60%, 
+        rgb(143, 0, 148) 70%, 
+        rgb(230, 230, 230) 80%,
+        rgb(230, 230, 230) 90%,
+        rgb(143, 0, 148) 100%
+    );
+    
+    animation: bg-spin 6s linear infinite, shadowPulse-a 1.5s ease-in-out infinite !important;
+}
+.border-s, .border-rarity-s {
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        rgb(108, 154, 255) 0%,  
+        rgb(0, 17, 255) 30%, 
+        rgb(117, 161, 255) 100%
+    );
+    
+    animation: bg-spin 4s linear infinite;
+}
+.border-s-plus, .border-rarity-s-plus {
+    width: 210px;
+    height: 320px;
     position: absolute;
-    box-sizing: border-box;    
+    box-sizing: border-box;
+    z-index: -9;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: gray;
+    border: 4px solid rgb(255, 255, 255);
+    
+    --border-angle: 0turn;
+    --main-bg: conic-gradient(
+        from var(--border-angle),
+        rgb(216, 1, 1),
+        rgb(216, 1, 1) 5%,
+        rgb(216, 1, 1)60%,
+        rgb(216, 1, 1) 95%
+    );
+    
+    border: solid 5px transparent;
+    border-radius: 5px;   
+    background: 
+        var(--main-bg) padding-box,
+        var(--gradient-border) border-box, 
+        var(--main-bg) border-box;
+    
+    background-position: center center;
+    background-size: cover; 
+}
+.border-s-plus, .border-rarity-s-plus {
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        #f03  0%, 
+        rgb(247, 0, 255)  10%, 
+        yellow 20%, 
+        #f03  30%, 
+        rgb(247, 0, 255)  40%, 
+        yellow 50%, 
+        #f03  60%, 
+        rgb(247, 0, 255) 70%, 
+        yellow 80%, 
+        #f03  90%, 
+        #f03  100%
+    ); 
+    animation: bg-spin 3s linear infinite, shadowPulse 1.5s ease-in-out infinite !important;
+}
+.border-rarity-a {
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        rgb(143, 0, 148) 0%,  
+        rgb(143, 0, 148) 10%, 
+        rgb(230, 230, 230) 20%,
+        rgb(143, 0, 148) 30%, 
+        rgb(143, 0, 148) 40%, 
+        rgb(230, 230, 230) 50%,
+        rgb(143, 0, 148) 60%, 
+        rgb(143, 0, 148) 70%, 
+        rgb(230, 230, 230) 80%,
+        rgb(230, 230, 230) 90%,
+        rgb(143, 0, 148) 100%
+    );
+    
+    animation: bg-spin 3s linear infinite, shadowPulse-a 1.5s ease-in-out infinite !important;
+}
+.border-s, .border-rarity-s {
+    width: 210px;
+    height: 320px;
+    position: absolute;
+    box-sizing: border-box;
+    z-index: -9;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: gray;
+    border: 4px solid rgb(255, 255, 255);
+    
+    --border-angle: 0turn;
+    --main-bg: conic-gradient(
+        from var(--border-angle),
+        rgb(0, 140, 255),
+        rgb(0, 140, 255) 5%,
+        rgb(0, 140, 255) 60%,
+        rgb(0, 140, 255) 95%
+    );
+    
+    border: solid 5px transparent;
+    border-radius: 5px;   
+    background: 
+        var(--main-bg) padding-box,
+        var(--gradient-border) border-box, 
+        var(--main-bg) border-box;
+    
+    background-position: center center;
+    background-size: cover;    
+}
+.border-b {
+    width: 195px;
+    height: 285px;
+    position: absolute;
+    box-sizing: border-box;
     z-index: -9;
     display: block;
     height: 100%;
     width: 100%;
     overflow: hidden;
-    border-radius: 5px;
-    background: linear-gradient(to right, 
-    #ff00ff 0%, 
-    #cc00cc 50%,
-    #ff00ff 100%);
-    box-shadow: 0px 0px 20px rgb(225, 0, 255);
-    box-sizing: border-box;
+    background: gray;
     border: 4px solid rgb(255, 255, 255);
-    background-size: 200% auto;
-    animation: shine 3s linear infinite, shadowPulse-a 2s ease-in-out infinite;
+    
+    --border-angle: 0turn;
+    --main-bg: conic-gradient(
+        from var(--border-angle),
+        gray,
+        gray 5%,
+        gray 60%,
+        gray 95%
+    );
+    
+    border: solid 5px transparent;
+    border-radius: 5px;
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        rgb(58, 58, 58)  0%, 
+        rgb(58, 58, 58)  20%, 
+        rgb(58, 58, 58) 40%, 
+        rgb(58, 58, 58)  60%, 
+        rgb(58, 58, 58) 80%, 
+        rgb(58, 58, 58) 100%
+    );    
+    background: 
+        var(--main-bg) padding-box,
+        var(--gradient-border) border-box, 
+        var(--main-bg) border-box;
+    
+    background-position: center center;
+    background-size: cover; 
 }
 
-.border-s {
-    position: absolute;
-    z-index: -9;
-    display: block;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 5px;
-    box-sizing: border-box;
-    border: 4px solid rgb(255, 255, 255);
-    box-shadow: 
-        0px 0px 10px rgba(0, 47, 255, 1),
-        0px 0px 20px rgba(0, 47, 255, 0.7),
-        0px 0px 30px rgba(0, 47, 255, 0.5);
-
-    background-size: 200% auto;
-}
 @keyframes shadowPulse-a {
     0%, 100% {
         box-shadow: 
-            0px 0px 10px #C74CDF,
-            0px 0px 20px #C74CDF,
-            0px 0px 30px #C74CDF;
+            0px 0px 5px rgba(199, 77, 223, 0.692), /* More subtle shadow */
+            0px 0px 10px rgba(199, 77, 223, 0.623), 
+            0px 0px 15px rgba(199, 77, 223, 0.548);
     }
     50% {
         box-shadow: 
-            0px 0px 40px #C74CDF,
-            0px 0px 50px #C74CDF,
-            0px 0px 60px #C74CDF;
+            1px 0px 15px rgba(199, 77, 223, 0.589), /* Slightly more pronounced */
+            2px 0px 15px rgba(199, 77, 223, 0.575), 
+            3px 0px 25px rgba(199, 77, 223, 0.541);
     }
-}
-.border-b {
-    position: absolute;
-    box-sizing: border-box;
-    z-index: -9;
-    display: block;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 5px;
-    background: gray;
-    border: 4px solid rgb(255, 255, 255);
 }
 
 @keyframes shine {

@@ -38,11 +38,11 @@ i18n.use(initReactI18next).init({
                     nextCommunity: 'Coming soon:',
                     titleRoadMap: 'COMING SOON TO GACHANIME',
                     nextRoadMap: [
-                        '- Marketplace for buying and selling cards between players using GACHAS',
-                        '- Special summon banners',
-                        '- New daily game',
-                        '- Player ranking',
-                        '- Discord and Twitter for the community'
+                        "- Card trading market between players",
+                        "- Banners for special summons",
+                        "- New daily game",
+                        "- New section and game with your obtained cards",
+                        "- Discord for the community!"
                     ],
                     finishedPoll: "Poll finished!"
                 },
@@ -214,11 +214,11 @@ i18n.use(initReactI18next).init({
                     nextCommunity: "Próximamente estarán disponibles:",
                     titleRoadMap: "PRÓXIMAMENTE EN GACHANIME",
                     nextRoadMap: [
-                        '- Mercado de compra y venta de cartas entre jugadores por GACHAS',
+                        '- Mercado de intercambio de cartas entre jugadores',
                         '- Banners para invocaciones especiales',
                         '- Nuevo juego diario',
-                        '- Ranking entre jugadores',
-                        '- Discord y Twitter para la comunidad'
+                        '- Nueva sección y juego con tus cartas obtenidas',
+                        '- Discord para la comunidad!'
                     ],
                     finishedPoll: "¡Votación finalizada!"
                 },

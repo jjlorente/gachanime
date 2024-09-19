@@ -60,16 +60,20 @@ export const Collection = (props:any) => {
     try {
       const data = await findCards();
 
-      const rarityOrder = ["S+", "S", "A", "B"];
-      data.sort((a:any, b:any) => {
-        const rarityComparison = rarityOrder.indexOf(a.rarity) - rarityOrder.indexOf(b.rarity);
-        
-        if (rarityComparison === 0) {
-          return b.power - a.power ;
-        }
-        
-        return rarityComparison;
-      });
+      data.sort((a: any, b: any) => {
+      if (a.anime_name < b.anime_name) {
+        return -1;
+      }
+      if (a.anime_name > b.anime_name) {
+        return 1;
+      }
+  
+      if (a.anime_name === b.anime_name) {
+        return b.power - a.power;
+      }
+  
+      return 0;
+    });
 
       setImgs(data)
       setImgsSelected(data)

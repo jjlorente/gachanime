@@ -94,6 +94,13 @@ export const OpeningGame = () => {
         }
     };
 
+    useEffect(() => {
+        const audioElement = document.getElementById('audio');
+        if (audioElement) {
+            audioElement.removeAttribute('title');
+        }
+    }, [gameOpeningData]);
+
     return (
         <div className='container-imagegame'>
 

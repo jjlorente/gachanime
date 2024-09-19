@@ -74,23 +74,23 @@
     right: 0px;
     padding: 0 10px;
     top: 0px;
-    border-radius: 0 1px 0 5px;
+    border-radius: 0 0 0 5px;
     background-color: rgb(243, 243, 243);
     border-bottom: 2px solid rgba(0, 0, 0, 0.329);
     border-left: 2px solid rgba(0, 0, 0, 0.329);
 }
 
 .anime-name-card{
-    font-size: 0.85rem;
-    background-color: #01081a1f;
-    padding: 1px 4px;
+    font-size: 0.9rem;
+    background-color: #01081a56;
+    padding: 1px 6px;
     border-radius: 5px;
 }
 
 .name-card {
     position: absolute;
-    top: -24.4px;
-    font-size: 1.15rem;
+    top: -26.5px;
+    font-size: 1.25rem;
     z-index: 9;
     padding: 0 15px;
     box-sizing: border-box;
@@ -122,37 +122,120 @@
 .container-card {
     width: 195px;
     height: 285px;
-    max-height: 290px;
+    display: grid;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+    place-content: center;
+    color: white;
+    text-shadow: 
+    -.5px -.5px 0 #000,  
+     .5px -.5px 0 #000,
+    -.5px  .5px 0 #000,
+     .5px  .5px 0 #000;
+
+    --border-angle: 0turn;
+    --main-bg: conic-gradient(
+        from var(--border-angle),
+        #213,
+        #112 5%,
+        #112 60%,
+        #213 95%
+    );
+    
+    border: solid 5px transparent;
     border-radius: 5px;
-    border: 4px solid #0000;
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        gray  0%, 
+        gray  20%, 
+        gray 40%, 
+        gray  60%, 
+        gray 80%, 
+        gray 100%
+    );    
+    background: 
+        var(--main-bg) padding-box,
+        var(--gradient-border) border-box, 
+        var(--main-bg) border-box;
+    
+    background-position: center center;
+    background-size: cover; 
+}
+
+@keyframes bg-spin {
+    to {
+        --border-angle: 1turn;
+    }
+}
+
+@property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
 }
 
 .border-collection-s-plus {
-    background: 
-        linear-gradient(black, #222) padding-box,
-        linear-gradient(to bottom,#FD393A,orange,rgb(255, 251, 0),#FD393A,orange,rgb(255, 251, 0),#FD393A) border-box;
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        #f03  0%, 
+        rgb(247, 0, 255)  10%, 
+        yellow 20%, 
+        #f03  30%, 
+        rgb(247, 0, 255)  40%, 
+        yellow 50%, 
+        #f03  60%, 
+        rgb(247, 0, 255) 70%, 
+        yellow 80%, 
+        #f03  90%, 
+        #f03  100%
+    ); 
+    animation: bg-spin 3s linear infinite;
+}
+
+.card-not-user {
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        gray  0%, 
+        gray  100%
+    ) !important; 
+    animation: none !important;
 }
 
 .border-collection-s {
-    background: 
-        linear-gradient(black, #222) padding-box,
-        linear-gradient(to bottom, #c74cdf, #f9daff, #c74cdf, #f9daff, #c74cdf, #f9daff, #c74cdf) border-box;
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        rgb(143, 0, 148) 0%,  
+        rgb(143, 0, 148) 10%, 
+        rgb(230, 230, 230) 20%,
+        rgb(143, 0, 148) 30%, 
+        rgb(143, 0, 148) 40%, 
+        rgb(230, 230, 230) 50%,
+        rgb(143, 0, 148) 60%, 
+        rgb(143, 0, 148) 70%, 
+        rgb(230, 230, 230) 80%,
+        rgb(230, 230, 230) 90%,
+        rgb(143, 0, 148) 100%
+    );
+    
+    animation: bg-spin 6s linear infinite;
 }
-
 .border-collection-a {
-    background: 
-        linear-gradient(black, #222) padding-box,
-        linear-gradient(to bottom, #00a4ff, #0026ff, #00a4ff) border-box;
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        rgb(108, 154, 255) 0%,  
+        rgb(0, 17, 255) 30%, 
+        rgb(117, 161, 255) 100%
+    );
+    
+    animation: bg-spin 5s linear infinite;
 }
 
 .border-collection-b {
-    background: 
-        linear-gradient(black, #222) padding-box,
-        linear-gradient(to bottom,gray,gray) border-box;
+        --gradient-border: conic-gradient(
+            from var(--border-angle),
+            gray  0%,
+            gray  100%
+        ); 
+        animation: none;
 }
 
 .card-collection {

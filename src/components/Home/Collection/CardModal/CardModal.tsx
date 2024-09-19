@@ -71,7 +71,7 @@ export const CardModal = (props: any) => {
                   alt={`Imagen ${props.card.name}`} 
                   className={"card-modal " + "border-collection"+props.card.rarity}
                 />
-                <span className={'jaro-regular ' +'span-card-name '+ "bg-card"+props.card.rarity} style={{ fontSize: "1.2rem", width:"100%" }}>
+                <span className={'jaro-regular name-sell-span ' +'span-card-name '+ "bg-card"+props.card.rarity} style={{ fontSize: "1.8rem", width:"100%" }}>
                   {props.card.name}
                 </span>
               </div>

@@ -11,8 +11,6 @@ import { ProfileCard } from './ProfileCard/ProfileCard';
 import { useTranslation } from 'react-i18next';
 import { RiGamepadFill } from "react-icons/ri";
 import { IoStorefrontSharp } from "react-icons/io5";
-import { RiVipCrownFill } from "react-icons/ri";
-import { icons } from '../Nav/navConfig';
 
 import RelativeTimeElement from '../Quests/relative-time-element-define.js'
 export { RelativeTimeElement }

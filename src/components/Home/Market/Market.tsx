@@ -86,7 +86,7 @@ export const Market = () => {
               const backgroundColor = getBackgroundColor(card['card'].rarity);
 
               return (
-                <div key={`card-${index}`}>
+                <div key={`card-${index}`} style={{display:"flex", flexDirection:"column", gap:".3rem"}}>
                   <div
                     className={'container-card-obtained container-card card-market' + ' border-collection' + rarityClass}
                   >
