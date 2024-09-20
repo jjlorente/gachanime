@@ -3,20 +3,20 @@ export interface GameData {
     nameid: string;
     imageid: string;
     openingid: string;
-    siluetaid: string;
+    siluetaid: string[];
     eyeid: string;
     pixelid: string;
 
     triesname: number;
     triesimage: number;
     triesopening: number;
-    triessilueta: number;
+    triessilueta: number[];
     trieseye: number;
     triespixel: number;
 
     finishedImage: boolean;
     finishedName: boolean;
-    finishedSilueta: boolean;
+    finishedSilueta: boolean[];
     finishedOpening: boolean;
     finishedEye: boolean;
     finishedPixel: boolean;
@@ -25,13 +25,13 @@ export interface GameData {
 
     statusRewardImage: number;
     statusRewardName: number;
-    statusRewardSilueta: number;
+    statusRewardSilueta: number[];
     statusRewardOpening: number;
     statusRewardEye: number;
     statusRewardPixel: number;
 
     imageSelected: number;
-    siluetaSelected: number;
+    siluetaSelected: number[];
     nameSelected: number;
     openingSelected: number;
     eyeSelected: number;
@@ -40,6 +40,8 @@ export interface GameData {
 
 export interface Game {
     names_game: Array<string>;
+    names_game_medium: Array<string>;
+    names_game_hard: Array<string>;
     anime_name: string;
     image_game: Array<string>;
     silueta_game: Array<string>;
@@ -48,6 +50,10 @@ export interface Game {
     eye_game: Array<string>;
     eye_solution: Array<string>;
     pixel_game: Array<string>;
+    silueta_game_medium: Array<string>;
+    silueta_solution_medium: Array<string>;
+    silueta_game_hard: Array<string>;
+    silueta_solution_hard: Array<string>;
 }
 
 export interface UserQuests {

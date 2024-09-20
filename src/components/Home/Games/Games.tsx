@@ -19,8 +19,12 @@ type ContextType = {
   setUserGamesData: React.Dispatch<React.SetStateAction<number | null>>;
   imageTries: number | null;
   setImageTries: React.Dispatch<React.SetStateAction<number | null>>;
+
   siluetaTries: number | null;
   setSiluetaTries: React.Dispatch<React.SetStateAction<number | null>>;
+
+  mode: number | null;
+
   eyeTries: number | null;
   setEyeTries: React.Dispatch<React.SetStateAction<number | null>>;
   nameTries: number | null;
@@ -42,23 +46,26 @@ export const Games = (props: any) => {
   const { userGachas, setUserGachas, alerts, setAlerts } = useUserGachas();
   const [userGamesData, setUserGamesData] = useState<GameData>();
   const [imageTries, setImageTries] = useState<number>(0);
-  const [siluetaTries, setSiluetaTries] = useState<number>(0);
+
+  const [siluetaTries, setSiluetaTries] = useState<number>(0)
+
   const [nameTries, setNameTries] = useState<number>(0);
   const [pixelTries, setPixelTries] = useState<number>(0);
   const [openingTries, setOpeningTries] = useState<number>(0);
   const [eyeTries, setEyeTries] = useState<number>(0);
 
   const [resets, setResets] = useState<number>(10);
+  const [mode, setMode] = useState<number>(0);
 
   const [index, setIndex] = useState("image");
 
   const findAllGamesUser = async (id: any) => {
     try {
       const data = await findUserGames(id);
-      if (data) {
+      if (data && mode!==null) {
         setUserGamesData(data);
         setImageTries(data.triesimage);
-        setSiluetaTries(data.triessilueta);
+        setSiluetaTries(data.triessilueta[mode]);
         setNameTries(data.triesname);
         setOpeningTries(data.triesopening);
         setEyeTries(data.trieseye);
@@ -89,7 +96,11 @@ export const Games = (props: any) => {
         localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
         localStorage.setItem("arrayTriesName", JSON.stringify([]));
         localStorage.setItem("localArrayColors", JSON.stringify([]));
+
         localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsSiluetaMedium", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));
+
         localStorage.setItem("arrayErrorsName", JSON.stringify([]));
         localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
         localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
@@ -100,7 +111,7 @@ export const Games = (props: any) => {
           if (data) {
             setUserGamesData(data);
             setImageTries(data.triesimage);
-            setSiluetaTries(data.triessilueta);
+            setSiluetaTries(data.triessilueta[mode]);
             setNameTries(data.triesname);
             setOpeningTries(data.triesopening);
             setEyeTries(data.trieseye);
@@ -129,8 +140,17 @@ export const Games = (props: any) => {
 
   }, [location]);
 
+  const handleModeChange = async (newMode: number) => {
+    setMode(newMode);
+  };
+
   return (
     <div className="Games">
+      <div>
+        <button onClick={async () => await handleModeChange(0)}> Easy Mode </button>
+        <button onClick={async () => await handleModeChange(1)}> Medium Mode </button>
+        <button onClick={async () => await handleModeChange(2)}> Hard Mode </button>
+      </div>
       <div className='nav-games'>
         <Link
           to="image"
@@ -182,7 +202,7 @@ export const Games = (props: any) => {
         </Link>
       </div>
       <div className='section-games'>
-        <Outlet context={{ findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries,pixelTries, setPixelTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
+        <Outlet context={{ mode, findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries,pixelTries, setPixelTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
       </div>
     </div>
   );

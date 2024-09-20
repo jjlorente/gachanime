@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 export const TriesReward = (props: any) => {
-    const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries, pixelTries } = useUserGames();
+    const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries, pixelTries, mode } = useUserGames();
     const { userGachas, setUserGachas } = useUserGachas();
     const { t } = useTranslation();
     const { alerts, setAlerts } = useUserGachas();
@@ -26,19 +26,19 @@ export const TriesReward = (props: any) => {
         } else if ( props.game==="pixel" && pixelTries!=null ) {
             setTries(pixelTries)
         }
-
+        console.log(tries)
     },[imageTries, siluetaTries, nameTries, openingTries, eyeTries, pixelTries])
 
     const claimReward = async () => {
-        if(userGamesData && props.gachasRecompensa) {
-            const data = await updateReward(userGamesData.userid, props.gachasRecompensa, 2, props.game)
+        if(userGamesData && props.gachasRecompensa && mode !== null) {
+            const data = await updateReward(userGamesData.userid, props.gachasRecompensa, 2, props.game, mode)
             if(data) {
                 let gachas = data[1].gachas;
                 setUserGachas(gachas);
                 if(props.game==="image") {
                     props.setStatusReward(data[0].statusRewardImage);
                 } else if (props.game==="silueta") {
-                    props.setStatusReward(data[0].statusRewardSilueta);
+                    props.setStatusReward(data[0].statusRewardSilueta[mode]);
                 } else if (props.game==="name") {
                     props.setStatusReward(data[0].statusRewardName);
                 } else if (props.game==="opening") {

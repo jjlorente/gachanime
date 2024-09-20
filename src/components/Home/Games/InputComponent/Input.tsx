@@ -15,7 +15,7 @@ export const Input = (props: any) => {
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
     const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
 
-    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData } = useUserGames();
+    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData, mode} = useUserGames();
     const { alerts, setAlerts } = useUserGachas();
 
     useEffect(() => {
@@ -68,21 +68,23 @@ export const Input = (props: any) => {
         }
         console.log(value)
         setAnimesSuggested([])
+        console.log(props.solution, "SOLUTION")
+
         if(value === props.solution) {
             audioRef.current = new Audio("/correct.mp3");
             audioRef.current.volume = 0.5;
             audioRef.current.play();
-              
-            if(userGamesData) {
+            console.log(props.solution, "SOLUTION")
+            if(userGamesData && mode!==null) {
                 await updateLevel(userGamesData.userid, 40)
-                const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game);
+                const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game, mode);
                 if (props.game === "image") {
                     props.setFinishedGame(data.finishedImage);
                     props.setStatusReward(data.statusRewardImage);
                     props.setZoomImage("100%");
                 } else if (props.game === "silueta") {
-                    props.setFinishedGame(data.finishedSilueta);
-                    props.setStatusReward(data.statusRewardSilueta);
+                    props.setFinishedGame(data.finishedSilueta[mode]);
+                    props.setStatusReward(data.statusRewardSilueta[mode]);
                 } else if (props.game === "opening") {
                     props.setFinishedGame(data.finishedOpening);
                     props.setStatusReward(data.statusRewardOpening);
@@ -112,8 +114,8 @@ export const Input = (props: any) => {
             if (value) {
                 props.setAnimesErrors((prevAnimes:any) => [ ...prevAnimes, valueCon ]);
             }
-            if(userGamesData) {
-                const data = await updateGameUser(userGamesData.userid, false, 1, 0, 0, props.game);
+            if(userGamesData && mode !== null) {
+                const data = await updateGameUser(userGamesData.userid, false, 1, 0, 0, props.game, mode);
                 if (data) {
                     if (props.game==="image") {
                         setImageTries(data.triesimage);
@@ -132,8 +134,8 @@ export const Input = (props: any) => {
                             props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game ==="silueta") {
-                        setSiluetaTries(data.triessilueta);
-                        let dataTries = data.triessilueta * 5
+                        setSiluetaTries(data.triessilueta[mode]);
+                        let dataTries = data.triessilueta[mode] * 5
                         if(dataTries >= 25) {
                             props.setGachasRecompensa(25)
                         } else {

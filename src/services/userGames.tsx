@@ -66,14 +66,14 @@ export const registerNewGameUser = async (userId: string) => {
     }
 };
 
-export const updateGameUser = async (userid: string, finished: boolean, tries: Number, resets: Number, statusReward: Number, game: string) => {
+export const updateGameUser = async (userid: string, finished: boolean, tries: Number, resets: Number, statusReward: Number, game: string, mode: number) => {
     try {
         const response = await fetch(`${config.apiUrl}/userGames/update`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ userid, finished, tries, resets, statusReward, game}),
+            body: JSON.stringify({ userid, finished, tries, resets, statusReward, game, mode}),
         });
 
         if (!response.ok) {
@@ -89,14 +89,14 @@ export const updateGameUser = async (userid: string, finished: boolean, tries: N
     }
 };
 
-export const updateSelected = async (userid: string, game: string) => {
+export const updateSelected = async (userid: string, game: string, mode: number) => {
     try {
         const response = await fetch(`${config.apiUrl}/userGames/updateSelected`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ userid, game }),
+            body: JSON.stringify({ userid, game, mode }),
         });
 
         if (!response.ok) {
@@ -112,14 +112,14 @@ export const updateSelected = async (userid: string, game: string) => {
     }
 };
 
-export const updateReward = async (userid: string, gachas: Number, status: Number, game: string) => {
+export const updateReward = async (userid: string, gachas: Number, status: Number, game: string, mode: number) => {
     try {
         const response = await fetch(`${config.apiUrl}/userGames/updateReward`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-            body: JSON.stringify({ userid, gachas, status, game }),
+            body: JSON.stringify({ userid, gachas, status, game, mode }),
         });
 
         if (!response.ok) {
@@ -157,14 +157,14 @@ export const findCharacters = async () => {
     }
 };
 
-export const resetGame = async (userid: string, game: string) => {
+export const resetGame = async (userid: string, game: string, mode: number) => {
     try {
         const response = await fetch(`${config.apiUrl}/userGames/resetGame`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userid, game }),
+            body: JSON.stringify({ userid, game, mode }),
         });
 
         if (!response.ok) {

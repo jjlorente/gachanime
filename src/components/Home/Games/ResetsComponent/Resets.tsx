@@ -4,13 +4,14 @@ import { useUserGames } from '../Games';
 import { findGameById, resetGame, updateSelected } from '../../../../services/userGames';
 
 export const Resets = (props: any) => {
-    const { resets, setResets, userGamesData, setUserGamesData } = useUserGames();
+    const { resets, setResets, userGamesData, setUserGamesData, mode} = useUserGames();
     const { setNameTries, setPixelTries, setEyeTries, setImageTries, setOpeningTries, setSiluetaTries } = useUserGames();
-    const resetGameClick = async () => {
 
-        if(userGamesData) {
-            const data = await resetGame(userGamesData.userid, props.game);
+    const resetGameClick = async () => {
+        if(userGamesData && mode !== null) {
+            const data = await resetGame(userGamesData.userid, props.game, mode);
             if(data) {
+                console.log(data)
                 setResets(data.resets);
                 if (props.game === "image") {
                     const dataImg = await findGameById(data.imageid)
@@ -25,18 +26,24 @@ export const Resets = (props: any) => {
                     }
                     localStorage.setItem("arrayErrorsImage", JSON.stringify([]));  
                 } else if (props.game === "silueta") {
-                    const dataSil = await findGameById(data.siluetaid)
+                    const dataSil = await findGameById(data.siluetaid[mode])
                     if(dataSil) {
                         const randomIndex = Math.floor(Math.random() * dataSil.silueta_game.length);
                         localStorage.setItem("siluetaSelected", randomIndex.toString());
-                        const dataSilueta = await updateSelected(userGamesData.userid, props.game);
+                        const dataSilueta = await updateSelected(userGamesData.userid, props.game, mode);
                         if(dataSilueta) {
                             setUserGamesData(dataSilueta);
                             setSiluetaTries(0);
                             //props.findGame(dataSilueta.siluetaid)
                         }
                     }
-                    localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));  
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));  
+                    } else if (mode === 1) {
+                        localStorage.setItem("arrayErrorsSiluetaMedium", JSON.stringify([]));  
+                    } else if (mode === 2) {
+                        localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));  
+                    }
                 } else if (props.game === "eye") {
                     const dataEye = await findGameById(data.eyeid)
                     if(dataEye) {
