@@ -153,7 +153,7 @@ export const Home = () => {
     localStorage.removeItem("openingSelected");
     localStorage.removeItem("imgSelected");
     localStorage.removeItem("alerts");
-    navigate("/");
+    navigate("/home/main");
   };
 
   const getUserData = async (userid: string) => {

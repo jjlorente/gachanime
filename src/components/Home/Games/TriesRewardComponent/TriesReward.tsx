@@ -26,7 +26,6 @@ export const TriesReward = (props: any) => {
         } else if ( props.game==="pixel" && pixelTries!=null ) {
             setTries(pixelTries)
         }
-        console.log(tries)
     },[imageTries, siluetaTries, nameTries, openingTries, eyeTries, pixelTries])
 
     const claimReward = async () => {
@@ -36,13 +35,13 @@ export const TriesReward = (props: any) => {
                 let gachas = data[1].gachas;
                 setUserGachas(gachas);
                 if(props.game==="image") {
-                    props.setStatusReward(data[0].statusRewardImage);
+                    props.setStatusReward(data[0].statusRewardImage[mode]);
                 } else if (props.game==="silueta") {
                     props.setStatusReward(data[0].statusRewardSilueta[mode]);
                 } else if (props.game==="name") {
                     props.setStatusReward(data[0].statusRewardName);
                 } else if (props.game==="opening") {
-                    props.setStatusReward(data[0].statusRewardOpening);
+                    props.setStatusReward(data[0].statusRewardOpening[mode]);
                 } else if (props.game==="eye") {
                     props.setStatusReward(data[0].statusRewardEye);
                 } else if (props.game==="pixel") {

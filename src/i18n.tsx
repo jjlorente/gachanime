@@ -50,7 +50,7 @@ i18n.use(initReactI18next).init({
                     titleImage: 'Which anime is the image from?',
                     titleSilueta: 'Which character is the silhouette from?',
                     titleWordle: 'Guess the character of the day!',
-                    titleOpening: 'Which anime is the opening from?',
+                    titleOpening: 'Which anime is this song from?',
                     titleEye: 'Whose eyes belong to this character?',
                     titlePixel: 'What anime is the cover from?',
 
@@ -226,7 +226,7 @@ i18n.use(initReactI18next).init({
                     titleImage: '¿De que anime es la imagen?',
                     titleSilueta: '¿De que personaje es la silueta?',
                     titleWordle: '¡Adivina el personaje del día!',
-                    titleOpening: '¿De que anime es el opening?',
+                    titleOpening: '¿De que anime es la canción?',
                     titleEye: '¿De que personaje son los ojos?',
                     titlePixel: '¿De que anime es la portada?',
 

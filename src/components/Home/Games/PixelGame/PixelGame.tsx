@@ -24,7 +24,7 @@ export const PixelGame = () => {
   const [pixelSelected, setPixelSelected] = useState<number>();
   const [animeNamePixel, setAnimeNamePixel] = useState<string>();
   const [animesPixelErrors, setAnimesPixelErrors] = useState<Array<string>>([]);
-  const [pixelImage, setPixelImage] = useState<number>(20);
+  const [pixelImage, setPixelImage] = useState<number>(30);
   const [gachasRecompensa, setGachasRecompensa] = useState<number>();
   const [statusReward, setStatusReward] = useState<number>();
 
@@ -78,7 +78,7 @@ export const PixelGame = () => {
           if(userGamesData.finishedPixel === true) {
             setPixelImage(1)
           } else {
-            let zoom = 20 - userGamesData.triespixel * 2.5;
+            let zoom = 30 - userGamesData.triespixel * 2.5;
             if (zoom <= 1) {
               setPixelImage(1)
             } else {
@@ -99,7 +99,7 @@ export const PixelGame = () => {
         if (userGamesData && userGamesData.pixelSelected && imageLocal) {
           localStorage.setItem("pixelSelected", userGamesData.pixelSelected.toString())
         } else if (userGamesData && !imageLocal) {
-          const dataImageSelected = await updateSelected(userGamesData.userid, "pixel");
+          const dataImageSelected = await updateSelected(userGamesData.userid, "pixel", 0);
           setUserGamesData(dataImageSelected);
           localStorage.setItem("pixelSelected", dataImageSelected.pixelSelected)
         }

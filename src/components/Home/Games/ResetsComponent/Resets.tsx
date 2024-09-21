@@ -11,12 +11,11 @@ export const Resets = (props: any) => {
         if(userGamesData && mode !== null) {
             const data = await resetGame(userGamesData.userid, props.game, mode);
             if(data) {
-                console.log(data)
                 setResets(data.resets);
                 if (props.game === "image") {
-                    const dataImg = await findGameById(data.imageid)
+                    const dataImg = await findGameById(data.imageid[mode])
                     if(dataImg) {
-                        const dataImage = await updateSelected(userGamesData.userid, props.game);
+                        const dataImage = await updateSelected(userGamesData.userid, props.game, mode);
                         localStorage.setItem("imgSelected", dataImage.imageSelected);
                         if(dataImage) {
                             setUserGamesData(dataImage);
@@ -24,7 +23,13 @@ export const Resets = (props: any) => {
                             //props.findGame(dataImage.imageid)
                         }
                     }
-                    localStorage.setItem("arrayErrorsImage", JSON.stringify([]));  
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
+                    } else if (mode === 1) {
+                        localStorage.setItem("arrayErrorsImageMedium", JSON.stringify([]));
+                    } else if (mode === 2) {
+                        localStorage.setItem("arrayErrorsImageHard", JSON.stringify([]));
+                    }  
                 } else if (props.game === "silueta") {
                     const dataSil = await findGameById(data.siluetaid[mode])
                     if(dataSil) {
@@ -49,7 +54,7 @@ export const Resets = (props: any) => {
                     if(dataEye) {
                         const randomIndex = Math.floor(Math.random() * dataEye.eye_game.length);
                         localStorage.setItem("eyeSelected", randomIndex.toString());
-                        const dataEyes = await updateSelected(userGamesData.userid, props.game);
+                        const dataEyes = await updateSelected(userGamesData.userid, props.game,0);
                         if(dataEyes) {
                             setUserGamesData(dataEyes);
                             setEyeTries(0);
@@ -57,18 +62,24 @@ export const Resets = (props: any) => {
                     }
                     localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
                 } else if (props.game === "opening") {
-                    const dataOpening = await findGameById(data.openingid)
+                    const dataOpening = await findGameById(data.openingid[mode])
                     if(dataOpening) {
                         const randomIndex = Math.floor(Math.random() * dataOpening.opening.length);
                         localStorage.setItem("openingSelected", randomIndex.toString());
-                        const dataOp = await updateSelected(userGamesData.userid, props.game);
+                        const dataOp = await updateSelected(userGamesData.userid, props.game, mode);
                         if(dataOp) {
                             setUserGamesData(dataOp);
                             setOpeningTries(0);
                             //props.findGame(dataOp.openingid)
                         }
                     }
-                    localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));  
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));  
+                    } else if (mode === 1) {
+                        localStorage.setItem("arrayErrorsOpeningMedium", JSON.stringify([]));  
+                    } else if (mode === 2) {
+                        localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));  
+                    }
                 } else if (props.game === "name") {
                     const dataName = await findGameById(data.nameid)
                     if(dataName) {
@@ -80,7 +91,7 @@ export const Resets = (props: any) => {
 
                         const randomIndex = Math.floor(Math.random() * dataName.names_game.length);
                         localStorage.setItem("nameSelected", randomIndex.toString());
-                        const dataNameGame = await updateSelected(userGamesData.userid, props.game);
+                        const dataNameGame = await updateSelected(userGamesData.userid, props.game,0);
                         if(dataNameGame) {
                             setUserGamesData(dataNameGame);
                             //props.findGame(dataNameGame.nameid)
@@ -93,7 +104,7 @@ export const Resets = (props: any) => {
                     if(dataPixel) {
                         const randomIndex = Math.floor(Math.random() * dataPixel.pixel_game.length);
                         localStorage.setItem("pixelSelected", randomIndex.toString());
-                        const dataPixelGame = await updateSelected(userGamesData.userid, props.game);
+                        const dataPixelGame = await updateSelected(userGamesData.userid, props.game,0);
                         if(dataPixelGame) {
                             setUserGamesData(dataPixelGame);
                             setPixelTries(0)

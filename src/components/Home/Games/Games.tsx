@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation, useOutletContext } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Games.css';
 import { useUserGachas } from "../Home";
@@ -43,10 +43,11 @@ export function useUserGames() {
 }
 
 export const Games = (props: any) => {
+
   const { userGachas, setUserGachas, alerts, setAlerts } = useUserGachas();
   const [userGamesData, setUserGamesData] = useState<GameData>();
-  const [imageTries, setImageTries] = useState<number>(0);
 
+  const [imageTries, setImageTries] = useState<number>(0);
   const [siluetaTries, setSiluetaTries] = useState<number>(0)
 
   const [nameTries, setNameTries] = useState<number>(0);
@@ -64,10 +65,10 @@ export const Games = (props: any) => {
       const data = await findUserGames(id);
       if (data && mode!==null) {
         setUserGamesData(data);
-        setImageTries(data.triesimage);
+        setImageTries(data.triesimage[mode]);
         setSiluetaTries(data.triessilueta[mode]);
         setNameTries(data.triesname);
-        setOpeningTries(data.triesopening);
+        setOpeningTries(data.triesopening[mode]);
         setEyeTries(data.trieseye);
         setPixelTries(data.triespixel);
         setResets(data.resets);
@@ -93,16 +94,23 @@ export const Games = (props: any) => {
         localStorage.setItem("siluetaSelected", "");
         localStorage.setItem("nameSelected", "");
         localStorage.setItem("openingSelected", "");
-        localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
         localStorage.setItem("arrayTriesName", JSON.stringify([]));
         localStorage.setItem("localArrayColors", JSON.stringify([]));
+
+        localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsImageMedium", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsImageHard", JSON.stringify([]));
 
         localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
         localStorage.setItem("arrayErrorsSiluetaMedium", JSON.stringify([]));
         localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));
 
         localStorage.setItem("arrayErrorsName", JSON.stringify([]));
+
         localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsOpeningMedium", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
+
         localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
         localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));  
         try {
@@ -110,10 +118,10 @@ export const Games = (props: any) => {
           await findAllQuestUser(id);
           if (data) {
             setUserGamesData(data);
-            setImageTries(data.triesimage);
+            setImageTries(data.triesimage[mode]);
             setSiluetaTries(data.triessilueta[mode]);
             setNameTries(data.triesname);
-            setOpeningTries(data.triesopening);
+            setOpeningTries(data.triesopening[mode]);
             setEyeTries(data.trieseye);
             setPixelTries(data.triespixel)
             setResets(data.resets);
@@ -137,7 +145,6 @@ export const Games = (props: any) => {
       let path = location.pathname.split("/")[3];
       setIndex(path)
     }
-
   }, [location]);
 
   const handleModeChange = async (newMode: number) => {
@@ -146,10 +153,22 @@ export const Games = (props: any) => {
 
   return (
     <div className="Games">
-      <div>
-        <button onClick={async () => await handleModeChange(0)}> Easy Mode </button>
-        <button onClick={async () => await handleModeChange(1)}> Medium Mode </button>
-        <button onClick={async () => await handleModeChange(2)}> Hard Mode </button>
+      <div className='container-btns-modes'>
+        <button 
+          className={mode === 0 ? 'jaro-regular active-mode' :'jaro-regular' } 
+          onClick={async () => await handleModeChange(0)}> 
+            EASY
+        </button>
+        <button 
+          className={mode === 1 ? 'jaro-regular active-mode' :'jaro-regular' } 
+          onClick={async () => await handleModeChange(1)}> 
+            NORMAL 
+          </button>
+        <button 
+          className={mode === 2 ? 'jaro-regular active-mode' :'jaro-regular' } 
+          onClick={async () => await handleModeChange(2)}> 
+            HARD 
+        </button>
       </div>
       <div className='nav-games'>
         <Link

@@ -66,28 +66,25 @@ export const Input = (props: any) => {
         if ((props.game === "silueta" || props.game === "eye") && value != null) {
             value = value.split(" ")[0];
         }
-        console.log(value)
         setAnimesSuggested([])
-        console.log(props.solution, "SOLUTION")
 
         if(value === props.solution) {
             audioRef.current = new Audio("/correct.mp3");
             audioRef.current.volume = 0.5;
             audioRef.current.play();
-            console.log(props.solution, "SOLUTION")
             if(userGamesData && mode!==null) {
                 await updateLevel(userGamesData.userid, 40)
                 const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, props.game, mode);
                 if (props.game === "image") {
-                    props.setFinishedGame(data.finishedImage);
-                    props.setStatusReward(data.statusRewardImage);
+                    props.setFinishedGame(data.finishedImage[mode]);
+                    props.setStatusReward(data.statusRewardImage[mode]);
                     props.setZoomImage("100%");
                 } else if (props.game === "silueta") {
                     props.setFinishedGame(data.finishedSilueta[mode]);
                     props.setStatusReward(data.statusRewardSilueta[mode]);
                 } else if (props.game === "opening") {
-                    props.setFinishedGame(data.finishedOpening);
-                    props.setStatusReward(data.statusRewardOpening);
+                    props.setFinishedGame(data.finishedOpening[mode]);
+                    props.setStatusReward(data.statusRewardOpening[mode]);
                 } else if (props.game === "eye") {
                     props.setFinishedGame(data.finishedEye);
                     props.setStatusReward(data.statusRewardEye);
@@ -118,16 +115,16 @@ export const Input = (props: any) => {
                 const data = await updateGameUser(userGamesData.userid, false, 1, 0, 0, props.game, mode);
                 if (data) {
                     if (props.game==="image") {
-                        setImageTries(data.triesimage);
+                        setImageTries(data.triesimage[mode]);
                         let zoomActual = parseInt(props.zoomImage.split("%")[0]);
-                        let zoomRest = data.triesimage * 50;
-                        if (zoomRest <= 400) {
-                            zoomActual = 500 - zoomRest;
+                        let zoomRest = data.triesimage[mode] * 50;
+                        if (zoomRest <= 350) {
+                            zoomActual = 450 - zoomRest;
                             props.setZoomImage(zoomActual+"%");
                         } else {
                             props.setZoomImage("100%");
                         }
-                        let dataTries = data.triesimage * 5
+                        let dataTries = data.triesimage[mode] * 5
                         if(dataTries >= 25) {
                             props.setGachasRecompensa(25)
                         } else {
@@ -150,8 +147,8 @@ export const Input = (props: any) => {
                             props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game==="opening") {
-                        setOpeningTries(data.triesopening);
-                        let dataTries = data.triesopening * 5
+                        setOpeningTries(data.triesopening[mode]);
+                        let dataTries = data.triesopening[mode] * 5
                         if(dataTries >= 25) {
                             props.setGachasRecompensa(25)
                         } else {
@@ -166,7 +163,7 @@ export const Input = (props: any) => {
                             props.setGachasRecompensa(50 - dataTries)
                         }
 
-                        let zoomRest = 20 - data.triespixel * 2.5;
+                        let zoomRest = 30 - data.triespixel * 2.5;
                         if (zoomRest <= 1) {
                             props.setPixel(1);
                         } else {
