@@ -20,7 +20,6 @@ export const Resets = (props: any) => {
                         if(dataImage) {
                             setUserGamesData(dataImage);
                             setImageTries(0);
-                            //props.findGame(dataImage.imageid)
                         }
                     }
                     if(mode === 0) {
@@ -39,7 +38,6 @@ export const Resets = (props: any) => {
                         if(dataSilueta) {
                             setUserGamesData(dataSilueta);
                             setSiluetaTries(0);
-                            //props.findGame(dataSilueta.siluetaid)
                         }
                     }
                     if(mode === 0) {
@@ -70,7 +68,6 @@ export const Resets = (props: any) => {
                         if(dataOp) {
                             setUserGamesData(dataOp);
                             setOpeningTries(0);
-                            //props.findGame(dataOp.openingid)
                         }
                     }
                     if(mode === 0) {
@@ -94,7 +91,6 @@ export const Resets = (props: any) => {
                         const dataNameGame = await updateSelected(userGamesData.userid, props.game,0);
                         if(dataNameGame) {
                             setUserGamesData(dataNameGame);
-                            //props.findGame(dataNameGame.nameid)
                         }
                     }
                     localStorage.setItem("arrayErrorsName", JSON.stringify([]));  
