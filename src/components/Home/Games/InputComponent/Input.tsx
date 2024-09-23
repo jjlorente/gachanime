@@ -15,7 +15,7 @@ export const Input = (props: any) => {
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
     const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
 
-    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData, mode} = useUserGames();
+    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData, setUserGamesData, mode} = useUserGames();
     const { alerts, setAlerts } = useUserGachas();
 
     useEffect(() => {
@@ -79,12 +79,33 @@ export const Input = (props: any) => {
                     props.setFinishedGame(data.finishedImage[mode]);
                     props.setStatusReward(data.statusRewardImage[mode]);
                     props.setZoomImage("100%");
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
+                    } else if(mode === 1) {
+                        localStorage.setItem("arrayErrorsImageMedium", JSON.stringify([]));
+                    } else if(mode === 2) {
+                        localStorage.setItem("arrayErrorsImageHard", JSON.stringify([]));
+                    }
                 } else if (props.game === "silueta") {
                     props.setFinishedGame(data.finishedSilueta[mode]);
                     props.setStatusReward(data.statusRewardSilueta[mode]);
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
+                    } else if(mode === 1) {
+                        localStorage.setItem("arrayErrorsSiluetaMedium", JSON.stringify([]));
+                    } else if(mode === 2) {
+                        localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));
+                    }
                 } else if (props.game === "opening") {
                     props.setFinishedGame(data.finishedOpening[mode]);
                     props.setStatusReward(data.statusRewardOpening[mode]);
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
+                    } else if(mode === 1) {
+                        localStorage.setItem("arrayErrorsOpeningMedium", JSON.stringify([]));
+                    } else if(mode === 2) {
+                        localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
+                    }
                 } else if (props.game === "eye") {
                     props.setFinishedGame(data.finishedEye);
                     props.setStatusReward(data.statusRewardEye);
@@ -113,13 +134,14 @@ export const Input = (props: any) => {
             }
             if(userGamesData && mode !== null) {
                 const data = await updateGameUser(userGamesData.userid, false, 1, 0, 0, props.game, mode);
+                setUserGamesData(data)
                 if (data) {
                     if (props.game==="image") {
                         setImageTries(data.triesimage[mode]);
                         let zoomActual = parseInt(props.zoomImage.split("%")[0]);
-                        let zoomRest = data.triesimage[mode] * 50;
-                        if (zoomRest <= 350) {
-                            zoomActual = 450 - zoomRest;
+                        let zoomRest = data.triesimage[mode] * 70;
+                        if (zoomRest <= 250) {
+                            zoomActual = 350 - zoomRest;
                             props.setZoomImage(zoomActual+"%");
                         } else {
                             props.setZoomImage("100%");
@@ -212,7 +234,7 @@ export const Input = (props: any) => {
                         ) : null}
                     </div> 
                 ) : props.finishedGame === true ? (
-                    <span className="anime-correct">{props.solution}</span>
+                    <span className="anime-correct">{props.song ? props.solution + " - " + props.song : props.solution}</span>
                 ) : null
             )}
         </>

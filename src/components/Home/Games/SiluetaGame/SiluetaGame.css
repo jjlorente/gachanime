@@ -1,0 +1,15 @@
+.span-info-clue {
+    padding:5px 20px;
+    border-radius:5px; 
+    font-size:1.5rem !important;
+    border:2px solid white;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 550px) {
+    .span-info-clue {
+        font-size:1.1rem !important;
+    }
+}

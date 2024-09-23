@@ -200,3 +200,26 @@ export const deleteAll = async () => {
         throw error;
     }
 };
+
+export const updateGameName = async (userid: string, word: string, colors: Array<string>) => {
+    try {
+        const response = await fetch(`${config.apiUrl}/userGames/updateGameName`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+            body: JSON.stringify({ userid, word, colors }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Unknown error');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};

@@ -98,10 +98,6 @@ export const PixelGame = () => {
         const imageLocal = localStorage.getItem("pixelSelected");
         if (userGamesData && userGamesData.pixelSelected && imageLocal) {
           localStorage.setItem("pixelSelected", userGamesData.pixelSelected.toString())
-        } else if (userGamesData && !imageLocal) {
-          const dataImageSelected = await updateSelected(userGamesData.userid, "pixel", 0);
-          setUserGamesData(dataImageSelected);
-          localStorage.setItem("pixelSelected", dataImageSelected.pixelSelected)
         }
       }
     } catch (error: any) {

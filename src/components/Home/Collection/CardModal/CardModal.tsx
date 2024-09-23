@@ -78,13 +78,13 @@ export const CardModal = (props: any) => {
               <div style={{display:"flex", flexDirection:"column",gap:".5rem"}}>
                 <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                   <span className={'jaro-regular ' +'span-card-name'} style={{ fontSize: "1rem", textAlign:"start" }}>
-                    Colocar la carta a la venta en el mercado:
+                    {t('collection.sellCardMsg')}
                   </span>
                   <input onChange={handleChange} maxLength={6} value={price && price > 0 ? price : ""} placeholder='Precio en GACHAS...' className={'jaro-regular input-btn-market'} type="text" style={{ fontSize: "1rem" }}/>
                 </div>
                 <div className='cnt-btns-modal-market'>
                   <button className={price && price > 0 ? 'btn-modal-confirm jaro-regular' : 'btn-modal-confirm jaro-regular inactive-btn-market'} onClick={handleOpen}>
-                    Confirm
+                    {t('collection.confirmSellMsg')}
                   </button>
                   <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
                     {t('summon.cancel')}

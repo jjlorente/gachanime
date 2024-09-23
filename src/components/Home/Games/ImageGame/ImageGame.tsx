@@ -12,7 +12,7 @@ import { Input } from '../InputComponent/Input';
 import { useTranslation } from 'react-i18next';
 
 export const ImageGame = () => {
-    const { userGamesData, setUserGamesData, findAllGamesUser, mode, setImageTries } = useUserGames();
+    const { userGamesData, setUserGamesData, mode, setImageTries } = useUserGames();
     const { i18n, t } = useTranslation();
 
     library.add(faRotateRight);
@@ -25,18 +25,11 @@ export const ImageGame = () => {
     const [imgSelected, setImgSelected] = useState<number>();
     const [animeNameImage, setAnimeNameImage] = useState<string>();
     const [animesErrors, setAnimesErrors] = useState<Array<string>>([]);
-    const [zoomImage, setZoomImage] = useState<string>("450%");
+    const [zoomImage, setZoomImage] = useState<string>("350%");
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>();
 
     const { imageTries } = useUserGames();
-
-    useEffect(() => {
-        const idUser = localStorage.getItem("_id");
-        if (idUser) {
-          findAllGamesUser(idUser);
-        }
-    }, []);
 
     useEffect(()=> {
         let arrayErrors;
@@ -47,7 +40,7 @@ export const ImageGame = () => {
         } else if(mode === 2) {
             arrayErrors = localStorage.getItem("arrayErrorsImageHard")
         }
-
+        
         if(!arrayErrors) {
             if(mode === 0) {
                 localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
@@ -59,9 +52,11 @@ export const ImageGame = () => {
         } else {
             if (finishedImageGame === false || finishedImageGame === undefined) {
                 setAnimesErrors(JSON.parse(arrayErrors))
+            } else if (finishedImageGame === true) {
+                setAnimesErrors([])
             }
         }
-    },[userGamesData, mode])
+    },[ userGamesData ,finishedImageGame ])
 
     useEffect(()=>{
         if(animesErrors && animesErrors.length > 0 && finishedImageGame === false) {
@@ -104,7 +99,7 @@ export const ImageGame = () => {
             }
         }
         fetchData();
-    },[mode])
+    },[mode]);
 
     const findImageGame = async (id:any) => {
         try {
@@ -127,11 +122,11 @@ export const ImageGame = () => {
                     if(userGamesData.finishedImage[mode] === true) {
                         setZoomImage("100%")
                     } else {
-                        let zoom = userGamesData.triesimage[mode] * 50;
-                        if (zoom >= 350) {
+                        let zoom = userGamesData.triesimage[mode] * 70;
+                        if (zoom >= 250) {
                             setZoomImage("100%")
                         } else {
-                            zoom = 450 - zoom;
+                            zoom = 350 - zoom;
                             setZoomImage(zoom+"%")
                         }
                     }
@@ -149,11 +144,7 @@ export const ImageGame = () => {
 
                 if (userGamesData && userGamesData.imageSelected[mode] && imageLocal) {
                     localStorage.setItem("imgSelected", userGamesData.imageSelected[mode].toString())
-                } else if (userGamesData && !imageLocal) {
-                    const dataImageSelected = await updateSelected(userGamesData.userid, "image", mode);
-                    setUserGamesData(dataImageSelected);
-                    localStorage.setItem("imgSelected", dataImageSelected.imageSelected[mode])
-                }
+                } 
             }
         } catch (error: any) {
             console.error('Error:', error);

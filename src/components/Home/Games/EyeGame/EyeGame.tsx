@@ -84,10 +84,6 @@ export const EyeGame = (props: any) => {
                 const eyeLocal = localStorage.getItem("eyeSelected");
                 if (userGamesData && userGamesData.eyeSelected) {
                     localStorage.setItem("eyeSelected", userGamesData.eyeSelected.toString())
-                } else if (userGamesData && !eyeLocal) {
-                    const dataEyeSelected = await updateSelected(userGamesData.userid, "eye");
-                    setUserGamesData(dataEyeSelected);
-                    localStorage.setItem("eyeSelected", dataEyeSelected.eyeSelected)
                 }
             }
         } catch (error: any) {

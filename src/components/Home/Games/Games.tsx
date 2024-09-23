@@ -60,6 +60,18 @@ export const Games = (props: any) => {
 
   const [index, setIndex] = useState("image");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const idUser = localStorage.getItem("_id");
+      if (idUser) {
+        let data = await findAllGamesUser(idUser);
+        return data
+      }
+    }
+    
+    fetchData()
+  }, []);
+
   const findAllGamesUser = async (id: any) => {
     try {
       const data = await findUserGames(id);
@@ -75,14 +87,20 @@ export const Games = (props: any) => {
 
         if (data.triesimage === 0) {
           localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsImageMedium", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsImageHard", JSON.stringify([]));
         } else if (data.triessilueta === 0) {
           localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsSiluetaMedium", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));
         } else if (data.triesname === 0) {
           localStorage.setItem("arrayErrorsName", JSON.stringify([]));
           localStorage.setItem("arrayTriesName", JSON.stringify([]));
           localStorage.setItem("localArrayColors", JSON.stringify([]));
         } else if (data.triesopening === 0) {
           localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsOpeningMedium", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
         } else if (data.trieseye === 0) {
           localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
         } else if (data.triespixel === 0) {

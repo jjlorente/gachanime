@@ -1,6 +1,6 @@
 import { Resets } from '../ResetsComponent/Resets'
 import './NameGame.css'
-import { findGameById, updateSelected } from '../../../../services/userGames';
+import { findGameById, updateGameName, updateSelected } from '../../../../services/userGames';
 import { useUserGames } from '../Games';
 import { useState, useEffect, useRef } from 'react';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
@@ -51,10 +51,6 @@ export const NameGame = () => {
         const nameLocal = localStorage.getItem("nameSelected");
         if (userGamesData && userGamesData.nameSelected) {
           localStorage.setItem("nameSelected", userGamesData.nameSelected.toString())
-        } else if (userGamesData && !nameLocal) {
-          const dataNameSelected = await updateSelected(userGamesData.userid, "name");
-          setUserGamesData(dataNameSelected);
-          localStorage.setItem("nameSelected", dataNameSelected.nameSelected)
         }
       }
 
@@ -74,18 +70,12 @@ export const NameGame = () => {
           await findNameGame(userGamesData.nameid)
           setNameSelected(userGamesData.nameSelected)
           setNameTriesComp(userGamesData.triesname)
+          if(userGamesData.trieswords) {
+            setErrorsArray(userGamesData.trieswords)
+            setArrayColors(userGamesData.triescolors)
+          }
         }
-        
-        let arrayTries = localStorage.getItem("arrayTriesName")
-        if (arrayTries) {
-          setErrorsArray(JSON.parse(arrayTries))
-        }
-        
-        let localArrayColors = localStorage.getItem("localArrayColors");
-        if (localArrayColors) {
-          let parsedArrayColors: string[][] = JSON.parse(localArrayColors);
-          setArrayColors(parsedArrayColors)
-        }
+
       }
       
     }
@@ -165,7 +155,7 @@ export const NameGame = () => {
         audioRef.current.volume = 0.5;
         audioRef.current.play();
 
-        const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, "name");
+        const data = await updateGameUser(userGamesData.userid, true, 0, 0, 1, "name", 0);
         await updateLevel(userGamesData.userid, 40)
         setFinishedNameGame(data.finishedName);
         setStatusReward(data.statusRewardName);
@@ -184,23 +174,24 @@ export const NameGame = () => {
 
       } else {
         if (userGamesData) {
-          await updateGameUser(userGamesData.userid, false, 1, 0, 0, "name");
+          await updateGameUser(userGamesData.userid, false, 1, 0, 0, "name", 0);
           setNameTriesComp(nameTriesComp + 1)
           setGachasRecompensa(50)
           setStatusReward(userGamesData.statusRewardName)
         }
-        if (arrayTries) {
-          let array = JSON.parse(arrayTries)
-          array.push(word)
-          localStorage.setItem("arrayTriesName" , JSON.stringify(array))
+        if (userGamesData && userGamesData.trieswords) {
+          console.log("entro")
           setErrorsArray([...errorsArray, word])
         } else {
-          localStorage.setItem("arrayTriesName" , JSON.stringify([word]))
           setErrorsArray([word])
         }
 
         
-        wordle(word, pjName)
+        const result = await wordle(word, pjName)
+        let idUser = localStorage.getItem("_id");
+        if(idUser) {
+          await updateGameName(idUser, word, result)
+        }
 
         setNameTries(nameTriesComp + 1)
         const newInputValues = Array(pjName.length).fill("");
@@ -210,7 +201,7 @@ export const NameGame = () => {
     }
   };
 
-  function wordle(word:string, pjName:string) {
+  async function wordle(word:string, pjName:string) {
     const wordArr = word.split('');
     const pjNameArr = pjName.toUpperCase().split('');
 

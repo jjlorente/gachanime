@@ -20,6 +20,7 @@ export const Summoning = () => {
   const [countCardsShowed, setCountCardsShowed] = useState(0);
   const [videoPlayed, setVideoPlayed] = useState(false);
   const [videoRarity, setVideoRarity] = useState("");
+  const audioRefFlipCard = useRef<HTMLAudioElement | null>(null);
 
   const handleClear = () => {
     navigate('/home/summon');
@@ -29,7 +30,9 @@ export const Summoning = () => {
 
   const handleSkip = () => {
     setCountCardsShowed(cardSummoned.length);
-    
+    audioRefFlipCard.current = new Audio("/flip-card.mp3");
+    audioRefFlipCard.current.volume = 0.3;
+    audioRefFlipCard.current.play();
     const newArray = [];
     for (let i = 0; i < cardSummoned.length; i++) {
       newArray.push(true);
@@ -146,6 +149,9 @@ export const Summoning = () => {
       updatedShowCard[index] = !updatedShowCard[index];
       return updatedShowCard;
     });
+    audioRefFlipCard.current = new Audio("/flip-card.mp3");
+    audioRefFlipCard.current.volume = 0.3;
+    audioRefFlipCard.current.play();
   };
 
   const audioRef = useRef<HTMLAudioElement | null>(null);

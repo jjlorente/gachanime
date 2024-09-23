@@ -131,6 +131,9 @@
     width: fit-content;
     gap: .5rem;
     justify-content: space-between;
+    width: 195px;
+    position: absolute;
+    left: 30%;
 }
 
 .picture-top {
@@ -156,5 +159,10 @@
     }
     .nav-sections-ranking {
         font-size: 1.2rem;
+    }
+    .username-top {
+        position:relative;
+        left: 0%;
+        width: fit-content;
     }
 }

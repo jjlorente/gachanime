@@ -99,7 +99,7 @@ i18n.use(initReactI18next).init({
                     wordleQuest: "Complete the daily wordle",
                     siluetaQuest: "Guess the character silhouette",
                     openingQuest: "Guess which anime the opening is from",
-                    allGamesQuest: "Complete the six daily games!",
+                    allGamesQuest: "Complete six daily games",
                     summonQuest: "Make 10 summons of 10 cards",
                     connectionQuest: "Connect to GACHANIME for 7 days in a row",
                     level5Quest: "Reach account level 5",
@@ -129,7 +129,9 @@ i18n.use(initReactI18next).init({
                     obtainedCards: "Obtained cards",
                     notObtained: "Not obtained cards",
                     allRares: "All rarities",
-                    nameOfCard: "Name of the card..."
+                    nameOfCard: "Name of the card...",
+                    sellCardMsg: "Place the card for sale in the marketplace:",
+                    confirmSellMsg: "Confirm"
                 },
                 "settings": {
                     editPicture: "Edit profile picture",
@@ -275,7 +277,7 @@ i18n.use(initReactI18next).init({
                     wordleQuest: "Adivina la silueta del personaje",
                     siluetaQuest: "Completa el wordle diario",
                     openingQuest: "Adivina de que anime es el opening",
-                    allGamesQuest: "¡Completa los seis juegos diarios!",
+                    allGamesQuest: "¡Completa seis juegos diarios!",
                     summonQuest: "Haz 10 invocaciones de 10 cartas",
                     connectionQuest: "Conéctate a GACHANIME durante 7 días seguidos",
                     level5Quest: "Alcanza el nivel 5 de cuenta",
@@ -305,7 +307,9 @@ i18n.use(initReactI18next).init({
                     obtainedCards: "Cartas obtenidas",
                     notObtained: "Cartas no obtenidas",
                     allRares: "Todas las rarezas",
-                    nameOfCard: "Nombre de la carta..."
+                    nameOfCard: "Nombre de la carta...",
+                    sellCardMsg: "Colocar la carta a la venta en el mercado:",
+                    confirmSellMsg: "Confirmar"
                 },
                 "settings": {
                     editPicture: "Editar foto de perfil",

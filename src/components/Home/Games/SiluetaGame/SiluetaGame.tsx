@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 export const SiluetaGame = (props: any) => {
     const [finishedSiluetaGame, setFinishedSiluetaGame] = useState<boolean>();
-    const { userGamesData, setUserGamesData, findAllGamesUser, mode, setSiluetaTries } = useUserGames();
+    const { userGamesData, setUserGamesData, mode, setSiluetaTries } = useUserGames();
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>(0);
     const [animesErrors, setAnimesErrors] = useState<Array<string>>([]);
@@ -22,13 +22,6 @@ export const SiluetaGame = (props: any) => {
 
     const { t } = useTranslation();
     const { siluetaTries } = useUserGames();
-
-    useEffect(() => {
-        const idUser = localStorage.getItem("_id");
-        if (idUser) {
-          findAllGamesUser(idUser);
-        }
-      }, []);
 
     useEffect(()=> {
         let arrayErrors;
@@ -51,9 +44,11 @@ export const SiluetaGame = (props: any) => {
         } else {
             if (finishedSiluetaGame === false || finishedSiluetaGame === undefined) {
                 setAnimesErrors(JSON.parse(arrayErrors))
+            } else if (finishedSiluetaGame === true) {
+                setAnimesErrors([])
             }
         }
-    },[userGamesData, mode])
+    },[ userGamesData , finishedSiluetaGame ])
 
     useEffect(()=>{
         if(animesErrors && animesErrors.length > 0 && finishedSiluetaGame === false) {
@@ -122,7 +117,6 @@ export const SiluetaGame = (props: any) => {
                     if(mode === 0) {
                         setSrc(data.silueta_game[userGamesData.siluetaSelected[0]])
                         setSrcSolution(data.silueta_solution[userGamesData.siluetaSelected[0]])
-                        console.log("Tries: " + userGamesData.triessilueta)
                         setSiluetaTries(userGamesData.triessilueta[0])
                     } else if(mode === 1) {
                         setSrc(data.silueta_game_medium[userGamesData.siluetaSelected[1]])
@@ -147,10 +141,6 @@ export const SiluetaGame = (props: any) => {
                 const siluetaLocal = localStorage.getItem("siluetaSelected");
                 if (userGamesData && userGamesData.siluetaSelected[mode]) {
                     localStorage.setItem("siluetaSelected", userGamesData.siluetaSelected[mode].toString())
-                } else if (userGamesData && !siluetaLocal) {
-                    const dataSiluetaSelected = await updateSelected(userGamesData.userid, "silueta", mode);
-                    setUserGamesData(dataSiluetaSelected);
-                    localStorage.setItem("siluetaSelected", dataSiluetaSelected.siluetaSelected[mode])
                 }
             }
         } catch (error: any) {

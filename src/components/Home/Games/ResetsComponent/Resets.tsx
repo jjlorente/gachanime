@@ -120,10 +120,16 @@ export const Resets = (props: any) => {
                 {props.title}
             </h1>
 
-            <span className={resets === 0 || props.finishedGame === true ? "resets-empty" : "gachas-resets"} onClick={resets === 0 || props.finishedGame ? undefined : resetGameClick}>
+            <span 
+                className={resets === 0 || props.finishedGame === true ? "resets-empty" : "gachas-resets"} 
+                onClick={resets === 0 || props.finishedGame ? undefined : resetGameClick}
+            >
                 <>
                     {resets} / 10
-                    <FontAwesomeIcon icon={faRotateRight} className={resets === 0 || props.finishedGame === true ? "" : "refresh"} />  
+                    <FontAwesomeIcon 
+                        icon={faRotateRight} 
+                        className={resets === 0 || props.finishedGame === true ? "" : "refresh"} 
+                    />  
                 </>
             </span> 
 

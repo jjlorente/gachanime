@@ -18,6 +18,8 @@ export const OpeningGame = () => {
     const [gameOpeningData, setGameOpeningData] = useState<Game>();
     const [openingSelected, setOpeningSelected] = useState<number>();
     const [animeNameImage, setAnimeNameImage] = useState<string>();
+    const [animeSong, setAnimeSong] = useState<string>();
+    const [linkYT, setLinkYT] = useState<string>();
     const [base64Audio, setBase64Audio] = useState<string>();
     const [openingErrors, setOpeningErrors] = useState<Array<string>>([]);
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
@@ -51,9 +53,11 @@ export const OpeningGame = () => {
         } else {
             if (finishedOpeningGame === false || finishedOpeningGame === undefined) {
                 setOpeningErrors(JSON.parse(arrayErrors))
+            } else if (finishedOpeningGame === true) {
+                setOpeningErrors([])
             }
         }
-    },[userGamesData, mode])
+    },[ userGamesData , finishedOpeningGame ])
 
     useEffect(()=>{
         if(openingErrors && openingErrors.length > 0 && finishedOpeningGame === false) {
@@ -103,8 +107,16 @@ export const OpeningGame = () => {
             const data = await findGameById(id);
             if (data && mode !== null) {
                 setAnimeNameImage(data.anime_name);
+                
                 setGameOpeningData(data);
                 if(userGamesData) {
+                    if(data.opening_solutions !== undefined) {
+                        let numOpeningName = userGamesData.openingSelected[mode]*2;
+                        let numOpeningLink = numOpeningName + 1;
+
+                        setAnimeSong(data.opening_solutions[mode][numOpeningName]);
+                        setLinkYT(data.opening_solutions[mode][numOpeningLink]);
+                    } 
                     if(mode === 0) {
                         setBase64Audio("data:audio/wav;base64,"+data.opening[userGamesData.openingSelected[0]]);
                         setOpeningTries(userGamesData.triesopening[0])
@@ -131,10 +143,6 @@ export const OpeningGame = () => {
                 const openingLocal = localStorage.getItem("openingSelected");
                 if (userGamesData && userGamesData.openingSelected[mode]) {
                     localStorage.setItem("openingSelected", userGamesData.openingSelected[mode].toString());
-                } else if (userGamesData && !openingLocal) {
-                    const dataOpeningSelected = await updateSelected(userGamesData.userid, "opening", mode);
-                    setUserGamesData(dataOpeningSelected);
-                    localStorage.setItem("openingSelected", dataOpeningSelected.openingSelected[mode])
                 }
             }
         } catch (error: any) {
@@ -154,7 +162,7 @@ export const OpeningGame = () => {
 
         <Resets title={t('games.titleOpening')} game={"opening"} finishedGame={finishedOpeningGame} findGame={findOpeningGame}/>
             <div className='container-image-center'>
-                {gameOpeningData !== undefined && base64Audio !== undefined ? 
+                {gameOpeningData !== undefined && base64Audio !== undefined && finishedOpeningGame === false ? 
                     <ReactAudioPlayer
                         id="audio"
                         src={base64Audio}
@@ -162,7 +170,16 @@ export const OpeningGame = () => {
                         controls
                     />
                     :
-                    <></>
+                    linkYT ? 
+                        <iframe 
+                            width="100%" 
+                            height="315" 
+                            src={`https://www.youtube.com/embed/${linkYT}?controls=1&modestbranding=1&rel=0&autoplay=0&showinfo=0&iv_load_policy=3&disablekb=1`} 
+                            allow="autoplay; encrypted-media" 
+                            allowFullScreen
+                        ></iframe>                    
+                    :
+                        null
                 }       
             </div>
 
@@ -182,7 +199,7 @@ export const OpeningGame = () => {
                         :
                         <span className='span-info-image'>{t('games.infoSpanOpening')}</span>
             }
-            <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
+            <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} song={animeSong} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
         </div>
         {openingErrors && finishedOpeningGame === false ? 
             <div className='errors-imagegame'>

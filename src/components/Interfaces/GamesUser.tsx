@@ -8,6 +8,9 @@ export interface GameData {
     pixelid: string;
 
     triesname: number;
+    trieswords: string[];
+    triescolors: string[][];
+    
     triesopening: number[];
     triesimage: number[];
     triessilueta: number[];
@@ -51,6 +54,7 @@ export interface Game {
     opening: Array<string>;
     opening_medium: Array<string>;
     opening_hard: Array<string>;
+    opening_solutions: Array<Array<string>>;
     eye_game: Array<string>;
     eye_solution: Array<string>;
     pixel_game: Array<string>;
