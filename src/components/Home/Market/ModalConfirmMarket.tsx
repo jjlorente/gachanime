@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useUserGachas } from '../Home';
 import { buyCard, cancelCard, getDataMarket } from '../../../services/market';
+import { calculatePower } from '../../../services/userCards';
+import { updateTotalPower } from '../../../services/user';
 
 
 export const ModalConfirmMarket = (props: any) => {
@@ -21,6 +23,10 @@ export const ModalConfirmMarket = (props: any) => {
         if(userGachas && userGachas - props.price >= 0) {
           let data = await buyCard(userId, props.idCard, props.price, props.userCardId);
           await getData();
+          let totalPower = await calculatePower(userId);
+          if(totalPower){
+            await updateTotalPower(userId, totalPower)
+          }
           setUserGachas(data.gachas)
           props.setOpenConfirm(false)
         } else {
@@ -32,6 +38,10 @@ export const ModalConfirmMarket = (props: any) => {
           props.setOpenConfirm(false)
           await cancelCard(userId, props.idCard, props.price);
           await getData();
+          let totalPower = await calculatePower(userId);
+          if(totalPower){
+            await updateTotalPower(userId, totalPower)
+          }
         }
       }
     }

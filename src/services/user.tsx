@@ -138,6 +138,29 @@ export const updateUser = async (userid: string, picture: string, username: stri
   }
 }
 
+export const unlockMode = async (userid: string, mode: number) => {
+  try {
+    const response = await fetch(`${config.apiUrl}/users/unlockMode`, {
+      method: 'PUT',
+      headers : {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({userid, mode}),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Unknown error');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
 export const updateUserLan = async (userid: string, lan: string) => {
   try {
     const response = await fetch(`${config.apiUrl}/users/updateUserLan`, {

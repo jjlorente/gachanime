@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { addCard } from '../../../../services/market';
 import { findCards } from '../../../../services/cards';
-import { findUserCards } from '../../../../services/userCards';
+import { calculatePower, findUserCards } from '../../../../services/userCards';
+import { updateTotalPower } from '../../../../services/user';
 
 export const CardConfirmModal = (props: any) => {
   const {i18n, t} = useTranslation();
@@ -18,6 +19,10 @@ export const CardConfirmModal = (props: any) => {
     let userId = localStorage.getItem("_id")
     if(userId && props.cardId && props.price) {
         await addCard(userId, props.cardId, props.price)
+        let totalPower = await calculatePower(userId);
+        if(totalPower){
+          await updateTotalPower(userId, totalPower)
+        }
         props.setOpenConfirm(false);
         props.setOpenModal(false);
         props.setPrice(0);
@@ -52,8 +57,9 @@ export const CardConfirmModal = (props: any) => {
     textAlign: "center",
     width: "fit-content",
     p:3,
-    maxHeight: "fit-content",
-    gap:"1rem"
+    gap:"1rem",
+    maxHeight: "90vh",
+    overflow: "auto",
   };
 
   return (
@@ -65,14 +71,14 @@ export const CardConfirmModal = (props: any) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <span className='jaro-regular' style={{fontSize:"1rem"}}>¿Estás seguro la carta en venta por {props.price} GACHAS?</span>
+        <span className='jaro-regular' style={{fontSize:"1rem"}}>{t('market.confirmSellCard')} {props.price} GACHAS?</span>
         <div className='cnt-btns-modal-market'>
-            <button className='btn-modal-confirm jaro-regular' onClick={handleOpen}>
-                Confirm
-            </button>
-            <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
-                {t('summon.cancel')}
-            </button>
+          <button className='btn-modal-confirm jaro-regular' onClick={handleOpen}>
+            {t('summon.confirm2')}
+          </button>
+          <button className='btn-modal-cancel jaro-regular' onClick={handleClose}>
+            {t('summon.cancel')}
+          </button>
         </div>
       </Box>
     </Modal>

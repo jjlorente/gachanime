@@ -15,7 +15,7 @@ export const Input = (props: any) => {
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
     const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
 
-    const { setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData, setUserGamesData, mode} = useUserGames();
+    const { unlock, setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData, setUserGamesData, mode} = useUserGames();
     const { alerts, setAlerts } = useUserGachas();
 
     useEffect(() => {
@@ -107,11 +107,25 @@ export const Input = (props: any) => {
                         localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
                     }
                 } else if (props.game === "eye") {
-                    props.setFinishedGame(data.finishedEye);
-                    props.setStatusReward(data.statusRewardEye);
+                    props.setFinishedGame(data.finishedEye[mode]);
+                    props.setStatusReward(data.statusRewardEye[mode]);
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
+                    } else if(mode === 1) {
+                        localStorage.setItem("arrayErrorsEyeMedium", JSON.stringify([]));
+                    } else if(mode === 2) {
+                        localStorage.setItem("arrayErrorsEyeHard", JSON.stringify([]));
+                    }
                 } else if (props.game === "pixel") {
-                    props.setFinishedGame(data.finishedPixel);
-                    props.setStatusReward(data.statusRewardPixel);
+                    props.setFinishedGame(data.finishedPixel[mode]);
+                    props.setStatusReward(data.statusRewardPixel[mode]);
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
+                    } else if(mode === 1) {
+                        localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify([]));
+                    } else if(mode === 2) {
+                        localStorage.setItem("arrayErrorsPixelHard", JSON.stringify([]));
+                    }
                     props.setPixel(1);
                 }
 
@@ -161,8 +175,8 @@ export const Input = (props: any) => {
                             props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game ==="eye") {
-                        setEyeTries(data.trieseye);
-                        let dataTries = data.trieseye * 5
+                        setEyeTries(data.trieseye[mode]);
+                        let dataTries = data.trieseye[mode] * 5
                         if(dataTries >= 25) {
                             props.setGachasRecompensa(25)
                         } else {
@@ -177,15 +191,15 @@ export const Input = (props: any) => {
                             props.setGachasRecompensa(50 - dataTries)
                         }
                     } else if (props.game==="pixel") {
-                        setPixelTries(data.triespixel);
-                        let dataTries = data.triespixel * 5;
+                        setPixelTries(data.triespixel[mode]);
+                        let dataTries = data.triespixel[mode] * 5;
                         if(dataTries >= 25) {
                             props.setGachasRecompensa(25)
                         } else {
                             props.setGachasRecompensa(50 - dataTries)
                         }
 
-                        let zoomRest = 30 - data.triespixel * 2.5;
+                        let zoomRest = 130 - data.triespixel[mode] * 20;
                         if (zoomRest <= 1) {
                             props.setPixel(1);
                         } else {
@@ -201,7 +215,7 @@ export const Input = (props: any) => {
     return (
         <>
             {props.finishedGame !== undefined && (
-                props.finishedGame === false ? (
+                props.finishedGame === false && unlock ? (
                     <div className='container-input-suggested'>
                         <input
                             type="text"
@@ -235,7 +249,8 @@ export const Input = (props: any) => {
                     </div> 
                 ) : props.finishedGame === true ? (
                     <span className="anime-correct">{props.song ? props.solution + " - " + props.song : props.solution}</span>
-                ) : null
+                ) : <span className="anime-locked">{t('games.infoBlockedInput')}</span>
+
             )}
         </>
     )

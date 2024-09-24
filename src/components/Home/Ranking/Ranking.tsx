@@ -19,13 +19,8 @@ export const Ranking = () => {
         };
 
         getRanks();
-        console.log(ranks)
     }, []);
     
-    useEffect(() => {
-        console.log(ranks.topCollection)
-    }, [ranks]);
-
     return (
         <div className='Ranking'>
             <nav className='nav-sections-ranking'>

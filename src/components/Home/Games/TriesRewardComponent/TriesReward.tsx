@@ -43,9 +43,9 @@ export const TriesReward = (props: any) => {
                 } else if (props.game==="opening") {
                     props.setStatusReward(data[0].statusRewardOpening[mode]);
                 } else if (props.game==="eye") {
-                    props.setStatusReward(data[0].statusRewardEye);
+                    props.setStatusReward(data[0].statusRewardEye[mode]);
                 } else if (props.game==="pixel") {
-                    props.setStatusReward(data[0].statusRewardPixel);
+                    props.setStatusReward(data[0].statusRewardPixel[mode]);
                 }
             }
         }

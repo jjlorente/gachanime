@@ -49,7 +49,10 @@ export const CardModal = (props: any) => {
     textAlign: "center",
     width: "fit-content",
     p:3,
-    maxHeight: "fit-content"
+    marginTop: ".5rem",
+    display: "block",
+    maxHeight: "90vh",
+    overflow: "auto"
   };
 
   return (

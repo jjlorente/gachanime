@@ -5,7 +5,7 @@ import { findGameById, resetGame, updateSelected } from '../../../../services/us
 
 export const Resets = (props: any) => {
     const { resets, setResets, userGamesData, setUserGamesData, mode} = useUserGames();
-    const { setNameTries, setPixelTries, setEyeTries, setImageTries, setOpeningTries, setSiluetaTries } = useUserGames();
+    const { setNameTries, setPixelTries, setEyeTries, setImageTries, setOpeningTries, setSiluetaTries, unlock } = useUserGames();
 
     const resetGameClick = async () => {
         if(userGamesData && mode !== null) {
@@ -48,17 +48,23 @@ export const Resets = (props: any) => {
                         localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));  
                     }
                 } else if (props.game === "eye") {
-                    const dataEye = await findGameById(data.eyeid)
+                    const dataEye = await findGameById(data.eyeid[mode])
                     if(dataEye) {
                         const randomIndex = Math.floor(Math.random() * dataEye.eye_game.length);
                         localStorage.setItem("eyeSelected", randomIndex.toString());
-                        const dataEyes = await updateSelected(userGamesData.userid, props.game,0);
+                        const dataEyes = await updateSelected(userGamesData.userid, props.game, mode);
                         if(dataEyes) {
                             setUserGamesData(dataEyes);
                             setEyeTries(0);
                         }
                     }
-                    localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
+                    } else if (mode === 1) {
+                        localStorage.setItem("arrayErrorsEyeMedium", JSON.stringify([]));
+                    } else if (mode === 2) {
+                        localStorage.setItem("arrayErrorsEyeHard", JSON.stringify([]));
+                    }
                 } else if (props.game === "opening") {
                     const dataOpening = await findGameById(data.openingid[mode])
                     if(dataOpening) {
@@ -95,18 +101,23 @@ export const Resets = (props: any) => {
                     }
                     localStorage.setItem("arrayErrorsName", JSON.stringify([]));  
                 } else if (props.game === "pixel") {
-                    props.setPixel(15);
-                    const dataPixel = await findGameById(data.pixelid)
+                    const dataPixel = await findGameById(data.pixelid[mode])
                     if(dataPixel) {
                         const randomIndex = Math.floor(Math.random() * dataPixel.pixel_game.length);
                         localStorage.setItem("pixelSelected", randomIndex.toString());
-                        const dataPixelGame = await updateSelected(userGamesData.userid, props.game,0);
+                        const dataPixelGame = await updateSelected(userGamesData.userid, props.game, mode);
                         if(dataPixelGame) {
                             setUserGamesData(dataPixelGame);
                             setPixelTries(0)
                         }
                     }
-                    localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));  
+                    if(mode === 0) {
+                        localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));  
+                    } else if (mode === 1) {
+                        localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify([]));  
+                    } else if (mode === 2) {
+                        localStorage.setItem("arrayErrorsPixelHard", JSON.stringify([]));  
+                    }  
                 }
 
             }
@@ -121,7 +132,7 @@ export const Resets = (props: any) => {
             </h1>
 
             <span 
-                className={resets === 0 || props.finishedGame === true ? "resets-empty" : "gachas-resets"} 
+                className={resets === 0 || props.finishedGame === true || !unlock ? "resets-empty" : "gachas-resets"} 
                 onClick={resets === 0 || props.finishedGame ? undefined : resetGameClick}
             >
                 <>

@@ -6,6 +6,8 @@ import { findUserGames, findGameById, registerNewGameUser } from '../../../servi
 import { GameData, Game } from '../../Interfaces/GamesUser';
 import { Quests } from '../Quests/Quests';
 import { findAllQuestUser } from '../../../services/userQuests';
+import { unlockMode } from '../../../services/user';
+import { useTranslation } from 'react-i18next';
 
 import { PiImageBroken } from "react-icons/pi";
 import { BiImage } from "react-icons/bi";
@@ -13,6 +15,9 @@ import { BiSolidMusic } from "react-icons/bi";
 import { BiSolidPencil } from "react-icons/bi";
 import { ImAccessibility } from "react-icons/im";
 import { IoEye } from "react-icons/io5";
+import { findUserById } from '../../../services/user';
+import { UnlockModal } from './UnlockModal/UnlockModal';
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 type ContextType = { 
   userGamesData: GameData | null;
@@ -24,6 +29,8 @@ type ContextType = {
   setSiluetaTries: React.Dispatch<React.SetStateAction<number | null>>;
 
   mode: number | null;
+  unlock: boolean | null;
+  setUnlock: React.Dispatch<React.SetStateAction<boolean | null>>;
 
   eyeTries: number | null;
   setEyeTries: React.Dispatch<React.SetStateAction<number | null>>;
@@ -43,7 +50,9 @@ export function useUserGames() {
 }
 
 export const Games = (props: any) => {
+  const { i18n, t } = useTranslation();
 
+  const [userData, setUserData] = useState<any>();
   const { userGachas, setUserGachas, alerts, setAlerts } = useUserGachas();
   const [userGamesData, setUserGamesData] = useState<GameData>();
 
@@ -57,8 +66,29 @@ export const Games = (props: any) => {
 
   const [resets, setResets] = useState<number>(10);
   const [mode, setMode] = useState<number>(0);
+  const [unlock, setUnlock] = useState<boolean>();
 
   const [index, setIndex] = useState("image");
+
+  const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = localStorage.getItem("userData");
+      if (user) {
+        const parsedUser = JSON.parse(user);
+        if (mode === 0 && mode !== null && parsedUser.unlockModes) {
+          setUnlock(parsedUser.unlockModes[0])
+        } else if (mode === 1 && mode !== null && parsedUser.unlockModes) {
+          setUnlock(parsedUser.unlockModes[1])
+        } else if (mode === 2 && mode !== null && parsedUser.unlockModes) {
+          setUnlock(parsedUser.unlockModes[2])
+        }
+      }
+    };
+    
+    fetchData()
+  }, [mode]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,6 +96,24 @@ export const Games = (props: any) => {
       if (idUser) {
         let data = await findAllGamesUser(idUser);
         return data
+      }
+    }
+    
+    fetchData()
+  }, []);
+
+  const getUserData = async (userid: string) => {
+    const user = await findUserById(userid);
+    if (user) {
+      setUserData(user);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const idUser = localStorage.getItem("_id");
+      if (idUser) {
+        await getUserData(idUser);
       }
     }
     
@@ -81,8 +129,8 @@ export const Games = (props: any) => {
         setSiluetaTries(data.triessilueta[mode]);
         setNameTries(data.triesname);
         setOpeningTries(data.triesopening[mode]);
-        setEyeTries(data.trieseye);
-        setPixelTries(data.triespixel);
+        setEyeTries(data.trieseye[mode]);
+        setPixelTries(data.triespixel[mode]);
         setResets(data.resets);
 
         if (data.triesimage === 0) {
@@ -103,8 +151,12 @@ export const Games = (props: any) => {
           localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
         } else if (data.trieseye === 0) {
           localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsEyeMedium", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsEyeHard", JSON.stringify([]));
         } else if (data.triespixel === 0) {
           localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify([]));
+          localStorage.setItem("arrayErrorsPixelHard", JSON.stringify([]));
         }
 
       } else {
@@ -129,8 +181,13 @@ export const Games = (props: any) => {
         localStorage.setItem("arrayErrorsOpeningMedium", JSON.stringify([]));
         localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
 
-        localStorage.setItem("arrayErrorsEye", JSON.stringify([]));  
-        localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));  
+        localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsEyeMedium", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsEyeHard", JSON.stringify([]));
+
+        localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify([]));
+        localStorage.setItem("arrayErrorsPixelHard", JSON.stringify([]));
         try {
           const data = await registerNewGameUser(id);
           await findAllQuestUser(id);
@@ -140,8 +197,8 @@ export const Games = (props: any) => {
             setSiluetaTries(data.triessilueta[mode]);
             setNameTries(data.triesname);
             setOpeningTries(data.triesopening[mode]);
-            setEyeTries(data.trieseye);
-            setPixelTries(data.triespixel)
+            setEyeTries(data.trieseye[mode]);
+            setPixelTries(data.triespixel[mode])
             setResets(data.resets);
           }
         
@@ -169,6 +226,18 @@ export const Games = (props: any) => {
     setMode(newMode);
   };
 
+  const handleUnlockMode = async () => {
+    const idUser = localStorage.getItem("_id");
+    if (idUser) {
+      const data = await unlockMode(idUser, mode)
+      if(data) {
+        setUserData(data)
+        localStorage.setItem("userData", JSON.stringify(data));
+        setUnlock(true);
+      }
+    }
+  };
+
   return (
     <div className="Games">
       <div className='container-btns-modes'>
@@ -188,59 +257,114 @@ export const Games = (props: any) => {
             HARD 
         </button>
       </div>
-      <div className='nav-games'>
-        <Link
-          to="image"
-          key={"image"}
-          className={index === "image" ? "active-game link-reset link-game" : "link-reset link-game"}
-          onClick={() => { setIndex("image"); }}
-        >
-          <BiImage fontSize={"2rem"}/>
-        </Link>
-        <Link
-          to="silueta"
-          key={"silueta"}
-          className={index === "silueta" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
-          onClick={() => { setIndex("silueta"); }}
-        >
-          <ImAccessibility fontSize={"1.4rem"}/>
-        </Link>
-        <Link
-          to="name"
-          key={"name"}
-          className={index === "name" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
-          onClick={() => { setIndex("name"); }}
-        >
-          <BiSolidPencil fontSize={"1.4rem"}/>
-        </Link>
-        <Link
-          to="opening"
-          key={"opening"}
-          className={index === "opening" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
-          onClick={() => { setIndex("adivinanza"); }}
-        >
-          <BiSolidMusic fontSize={"1.4rem"}/>
-        </Link>
-        <Link
-          to="eyes"
-          key={"eyes"}
-          className={index === "eyes" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
-          onClick={() => { setIndex("eyes"); }}
-        >
-          <IoEye fontSize={"1.4rem"}/>
-        </Link>
-        <Link
-          to="pixel"
-          key={"pixel"}
-          className={index === "pixel" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
-          onClick={() => { setIndex("pixel"); }}
-        >
-          <PiImageBroken fontSize={"1.4rem"}/>
-        </Link>
+      <div className='section-games-modes'>
+
+        <div className='nav-games'>
+          <Link
+            to="image"
+            key={"image"}
+            className={index === "image" ? "active-game link-reset link-game" : "link-reset link-game"}
+            onClick={() => { setIndex("image"); }}
+          >
+            <BiImage fontSize={"2rem"}/>
+          </Link>
+          <Link
+            to="silueta"
+            key={"silueta"}
+            className={index === "silueta" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+            onClick={() => { setIndex("silueta"); }}
+          >
+            <ImAccessibility fontSize={"1.4rem"}/>
+          </Link>
+          <Link
+            to="name"
+            key={"name"}
+            className={index === "name" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+            onClick={() => { setIndex("name"); }}
+          >
+            <BiSolidPencil fontSize={"1.4rem"}/>
+          </Link>
+          <Link
+            to="opening"
+            key={"opening"}
+            className={index === "opening" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+            onClick={() => { setIndex("adivinanza"); }}
+          >
+            <BiSolidMusic fontSize={"1.4rem"}/>
+          </Link>
+          <Link
+            to="eyes"
+            key={"eyes"}
+            className={index === "eyes" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+            onClick={() => { setIndex("eyes"); }}
+          >
+            <IoEye fontSize={"1.4rem"}/>
+          </Link>
+          <Link
+            to="pixel"
+            key={"pixel"}
+            className={index === "pixel" ? "active-game link-reset link-game inactive-game" : "link-reset link-game inactive-game"}
+            onClick={() => { setIndex("pixel"); }}
+          >
+            <PiImageBroken fontSize={"1.4rem"}/>
+          </Link>
+        </div>
+        <div className={mode !== undefined ? "section-games expanded" : "section-games"}>
+          {unlock !== undefined ? 
+            <div className={`blocked-mode ${unlock ? 'hidden' : ''}`}>
+              <h2 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
+              {
+                mode === 1 ? (
+                  <>
+                    {t('games.titleUnlockMode')} <span style={{ color: "#FFAA2A" }}>30.000</span> {t('games.titleUnlockModeMedium')}
+                  </>
+                ) : (
+                  <>
+                    {t('games.titleUnlockMode')} <span style={{ color: "#FFAA2A" }}>120.000</span> {t('games.titleUnlockModeHard')}
+                  </>
+                )
+              }
+              </h2>
+              <div className='container-unblock-mode'>
+                <img src='/unlock.png' style={{ height: "100%", width: "auto" }} className="icon-summon-nav" />
+                <div className='cnt-button-unlock-modal'>
+                  {
+                    userData && userData.totalPower !== undefined ? (
+                      <h3 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
+                        {t('games.powerOf') +" "+ userData.username + " " }
+                        <span style={{ color: "#FEAA2A" }}>{userData.totalPower.toLocaleString()}</span>
+                      </h3>
+                    ) : null
+                  }
+                  {
+                    mode === 1 ? 
+                      userData && userData.totalPower !== undefined ?
+                        <button className={userData.totalPower > 30000 ? 'jaro-regular btn-unblock link-main' : "jaro-regular btn-unblock link-main blocked"} onClick={userData.totalPower > 30000 ? handleUnlockMode : undefined}>
+                          {t('games.mediumButton')}
+                        </button> 
+                        :
+                        <button className={"jaro-regular btn-unblock link-main blocked"} onClick={undefined}>
+                          {t('games.mediumButton')}
+                        </button> 
+                      : 
+                      userData && userData.totalPower !== undefined ?
+                        <button className={userData.totalPower > 120000 ? 'jaro-regular btn-unblock link-main' : "jaro-regular btn-unblock link-main blocked"} onClick={userData.totalPower > 120000 ? handleUnlockMode : undefined}>
+                          {t('games.hardButton')}
+                        </button> 
+                        : 
+                        <button className={"jaro-regular btn-unblock link-main blocked"} onClick={undefined}>
+                          {t('games.hardButton')}
+                        </button> 
+                  }
+                </div>
+              </div>
+            </div>
+            : <></>
+          }
+          <Outlet context={{ unlock, mode, findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries,pixelTries, setPixelTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
+        </div>
       </div>
-      <div className='section-games'>
-        <Outlet context={{ mode, findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries,pixelTries, setPixelTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
-      </div>
+      {/* <UnlockModal openModal={openModal} setOpenModal={setOpenModal} mode={mode} unlock={unlock} /> */}
     </div>
   );
 };

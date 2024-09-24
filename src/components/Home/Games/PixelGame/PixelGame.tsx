@@ -3,7 +3,7 @@ import './PixelGame.css';
 import { useState } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { findGameById, updateSelected } from '../../../../services/userGames';
+import { findGameById, findUserGames, updateSelected } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
 import { trefoil } from 'ldrs';
 import { useUserGames } from '../Games';
@@ -13,7 +13,7 @@ import { Input } from '../InputComponent/Input';
 import { useTranslation } from 'react-i18next';
 
 export const PixelGame = () => {
-  const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
+  const { userGamesData, setUserGamesData, findAllGamesUser, mode, setPixelTries } = useUserGames();
   const { i18n, t } = useTranslation();
 
   library.add(faRotateRight);
@@ -24,9 +24,12 @@ export const PixelGame = () => {
   const [pixelSelected, setPixelSelected] = useState<number>();
   const [animeNamePixel, setAnimeNamePixel] = useState<string>();
   const [animesPixelErrors, setAnimesPixelErrors] = useState<Array<string>>([]);
-  const [pixelImage, setPixelImage] = useState<number>(30);
+  const [pixelImage, setPixelImage] = useState<number>(130);
   const [gachasRecompensa, setGachasRecompensa] = useState<number>();
   const [statusReward, setStatusReward] = useState<number>();
+  const [srcImage, setSrc] = useState<string>();
+
+  const [showPicture, setShowPicture] = useState<boolean>();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pixelSize = pixelImage;
@@ -39,46 +42,97 @@ export const PixelGame = () => {
   }, []);
 
   useEffect(()=> {
-    let arrayErrors = localStorage.getItem("arrayErrorsPixel");
-    if(!arrayErrors) {
-      localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
-    } else {
-      setAnimesPixelErrors(JSON.parse(arrayErrors))
+    let arrayErrors;
+    if(mode === 0) {
+        arrayErrors = localStorage.getItem("arrayErrorsPixel")
+    } else if(mode === 1) {
+        arrayErrors = localStorage.getItem("arrayErrorsPixelMedium")
+    } else if(mode === 2) {
+        arrayErrors = localStorage.getItem("arrayErrorsPixelHard")
     }
-  },[userGamesData])
+
+    if(!arrayErrors) {
+        if(mode === 0) {
+            localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
+        } else if(mode === 1) {
+            localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify([]));
+        } else if(mode === 2) {
+            localStorage.setItem("arrayErrorsPixelHard", JSON.stringify([]));
+        }
+    } else {
+        if (finishedPixelGame === false || finishedPixelGame === undefined) {
+            setAnimesPixelErrors(JSON.parse(arrayErrors))
+        } else if (finishedPixelGame === true) {
+          setAnimesPixelErrors([])
+        }
+    }
+  },[ userGamesData , finishedPixelGame ])
 
   useEffect(()=>{
-    if(animesPixelErrors && animesPixelErrors.length > 0 ) {
-      localStorage.setItem("arrayErrorsPixel", JSON.stringify(animesPixelErrors));
+    if(animesPixelErrors && animesPixelErrors.length > 0 && finishedPixelGame === false) {
+        if(mode === 0) {
+            localStorage.setItem("arrayErrorsPixel", JSON.stringify(animesPixelErrors));
+        } else if(mode === 1) {
+            localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify(animesPixelErrors));
+        } else if(mode === 2) {
+            localStorage.setItem("arrayErrorsPixelHard", JSON.stringify(animesPixelErrors));
+        }
     }
   }, [animesPixelErrors])
 
   useEffect(()=>{
     const fetchData = async () => {
-      if(userGamesData) {
+      if(userGamesData && mode !== null) {
         let loop = false;
         while(loop===false) {
           loop = true;
-          await findPixelGame(userGamesData.pixelid)
-          setPixelSelected(userGamesData.pixelSelected)
+          await findPixelGame(userGamesData.pixelid[mode])
+          setPixelSelected(userGamesData.pixelSelected[mode])
         }
       }
     }
     fetchData();
-  },[userGamesData])
+  },[userGamesData, mode])
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      if(userGamesData && mode !== null) {
+        let loop = false;
+        const idUser = localStorage.getItem("_id");
+        if (idUser) {
+          while(loop===false) {
+            loop = true;
+            const data = await findUserGames(idUser);
+            setUserGamesData(data);
+          }
+        }
+      }
+    }
+    fetchData();
+  },[mode])
 
   const findPixelGame = async (id:any) => {
     try {
       const data = await findGameById(id)
-      if (data) {
+      if (data && mode !== null) {
         setAnimeNamePixel(data.anime_name);
         setGamePixelData(data);
         if(userGamesData) {
-          setFinishedPixelGame(userGamesData.finishedPixel);
-          if(userGamesData.finishedPixel === true) {
+          if(mode === 0) {
+            setSrc(data.pixel_game[userGamesData.pixelSelected[0]])
+            setPixelTries(userGamesData.triespixel[0])
+          } else if(mode === 1) {
+            setSrc(data.pixel_game_medium[userGamesData.pixelSelected[1]])
+            setPixelTries(userGamesData.triespixel[1])
+          } else if(mode === 2) {
+            setSrc(data.pixel_game_hard[userGamesData.pixelSelected[2]])
+            setPixelTries(userGamesData.triespixel[2])
+          }
+          setFinishedPixelGame(userGamesData.finishedPixel[mode]);
+          if(userGamesData.finishedPixel[mode] === true) {
             setPixelImage(1)
           } else {
-            let zoom = 30 - userGamesData.triespixel * 2.5;
+            let zoom = 130 - userGamesData.triespixel[mode] * 20;
             if (zoom <= 1) {
               setPixelImage(1)
             } else {
@@ -86,13 +140,13 @@ export const PixelGame = () => {
             }
           }
 
-          let dataTries = userGamesData.triespixel * 5;
+          let dataTries = userGamesData.triespixel[mode] * 5;
           if(dataTries >= 25) {
             setGachasRecompensa(25)
           } else {
             setGachasRecompensa(50 - dataTries)
           }
-          setStatusReward(userGamesData.statusRewardPixel)
+          setStatusReward(userGamesData.statusRewardPixel[mode])
         }
 
         const imageLocal = localStorage.getItem("pixelSelected");
@@ -109,10 +163,10 @@ export const PixelGame = () => {
 
     const canvas = canvasRef.current;
 
-    if (canvas && gamePixelData && pixelSelected !== undefined) {
+    if (canvas && srcImage && gamePixelData && pixelSelected !== undefined && mode !== null) {
       const ctx = canvas.getContext('2d');
       const image = new Image();
-      image.src = gamePixelData.pixel_game[pixelSelected];
+      image.src = srcImage;
 
       image.onload = () => {
         const originalWidth = image.width;
@@ -134,7 +188,7 @@ export const PixelGame = () => {
         );
       };
     }
-  }, [pixelSize, pixelImage, gamePixelData, pixelSelected]);
+  }, [pixelSize, pixelImage, gamePixelData, pixelSelected, srcImage]);
 
   return (
     <div className='container-imagegame'>
@@ -143,7 +197,7 @@ export const PixelGame = () => {
 
       <div className='container-image-center'>
         <div className='section-image-center pixel-center-game'>
-          <canvas ref={canvasRef} className='img-pixel'></canvas>
+          {showPicture ? <canvas ref={canvasRef} className='img-pixel'></canvas> : null}
         </div>
         {
           finishedPixelGame === false ?    

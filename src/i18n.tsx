@@ -83,7 +83,16 @@ i18n.use(initReactI18next).init({
                     infoSpanOpeningCorrect: "Congratulations! Collect your reward and come back tomorrow for a new opening.",
 
                     infoSpanPixel: "Each error reduces pixelation. Lose 5 gachas per error. Minimum reward: 25 gachas.",
-                    infoSpanPixelCorrect: "Congratulations! Collect your reward and come back tomorrow for a new cover."
+                    infoSpanPixelCorrect: "Congratulations! Collect your reward and come back tomorrow for a new cover.",
+
+                    infoBlockedInput: "Unlock the difficulty to be able to play",
+
+                    titleUnlockMode: "Reach ",
+                    titleUnlockModeMedium: " power to unlock normal difficulty",
+                    titleUnlockModeHard: " power to unlock hard difficulty",
+                    powerOf: "Power of",
+                    mediumButton: "UNLOCK NORMAL DIFFICULTY",
+                    hardButton: "UNLOCK HARD DIFFICULTY"
                 },
                 "quest": {
                     progress: "Progress",
@@ -176,7 +185,8 @@ i18n.use(initReactI18next).init({
                     myCards: "My cards for sale",
                     buyButton: "Buy",
                     owner: "Owner: ",
-                    exitMess: "You don't have enough GACHAS to buy the card"
+                    exitMess: "You don't have enough GACHAS to buy the card",
+                    confirmSellCard: "Are you sure to sell the card for "
                   },
                   "ranking": {
                       level:"Level",
@@ -261,7 +271,16 @@ i18n.use(initReactI18next).init({
                     infoSpanOpeningCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para un nuevo opening.",
 
                     infoSpanPixel: "Cada error reduce la pixelación. Pierdes 5 gachas por error. Recompensa mínima: 25 gachas.",
-                    infoSpanPixelCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva portada."
+                    infoSpanPixelCorrect: "¡Enhorabuena! Recoge tu recompensa y vuelve mañana para una nueva portada.",
+
+                    infoBlockedInput: "Desbloquea la dificultad para poder jugar",
+
+                    titleUnlockMode: "Alcanza ",
+                    titleUnlockModeMedium: " de poder para desbloquear la dificultad normal",
+                    titleUnlockModeHard: " de poder para desbloquear la dificultad difícil",
+                    powerOf: "Poder de",
+                    mediumButton: "DESBLOQUEAR LA DIFICULTAD NORMAL",
+                    hardButton: "DESBLOQUEAR LA DIFICULTAD DIFÍCIL"
                 },
                 "quest": {
                     progress: "Progreso",
@@ -354,7 +373,8 @@ i18n.use(initReactI18next).init({
                     myCards: "Mis cartas en venta",
                     buyButton: "Comprar",
                     owner: "Dueño: ",
-                    exitMess: "No tienes GACHAS suficientes para comprar la carta"
+                    exitMess: "No tienes GACHAS suficientes para comprar la carta",
+                    confirmSellCard: "¿Estás seguro de poner la carta en venta por "
                 },
                 "ranking": {
                     level:"Nivel",
