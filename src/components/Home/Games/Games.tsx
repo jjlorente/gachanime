@@ -310,7 +310,7 @@ export const Games = (props: any) => {
           </Link>
         </div>
         <div className={mode !== undefined ? "section-games expanded" : "section-games"}>
-          {unlock !== undefined ? 
+          {userData && mode !== null && userData.unlockModes[mode] === false ? 
             <div className={`blocked-mode ${unlock ? 'hidden' : ''}`}>
               <h2 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
               {

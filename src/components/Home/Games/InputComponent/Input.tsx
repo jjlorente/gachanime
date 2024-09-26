@@ -153,9 +153,9 @@ export const Input = (props: any) => {
                     if (props.game==="image") {
                         setImageTries(data.triesimage[mode]);
                         let zoomActual = parseInt(props.zoomImage.split("%")[0]);
-                        let zoomRest = data.triesimage[mode] * 70;
-                        if (zoomRest <= 250) {
-                            zoomActual = 350 - zoomRest;
+                        let zoomRest = data.triesimage[mode] * 50;
+                        if (zoomRest <= 200) {
+                            zoomActual = 300 - zoomRest;
                             props.setZoomImage(zoomActual+"%");
                         } else {
                             props.setZoomImage("100%");
@@ -249,7 +249,7 @@ export const Input = (props: any) => {
                     </div> 
                 ) : props.finishedGame === true ? (
                     <span className="anime-correct">{props.song ? props.solution + " - " + props.song : props.solution}</span>
-                ) : <span className="anime-locked">{t('games.infoBlockedInput')}</span>
+                ) : !unlock ? (<span className="anime-locked">{t('games.infoBlockedInput')}</span>) : <></>
 
             )}
         </>

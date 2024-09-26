@@ -197,7 +197,7 @@ export const PixelGame = () => {
 
       <div className='container-image-center'>
         <div className='section-image-center pixel-center-game'>
-          {showPicture ? <canvas ref={canvasRef} className='img-pixel'></canvas> : null}
+          <canvas ref={canvasRef} className='img-pixel'></canvas>
         </div>
         {
           finishedPixelGame === false ?    
