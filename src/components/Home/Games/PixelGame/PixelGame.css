@@ -7,7 +7,7 @@
 .pixel-center-game {
     overflow: hidden;
     max-width: 800px;
-    background-color: rgb(1, 14, 49);
+    min-width: 220px;
     min-height: 360px;
     display: flex;
     box-sizing: border-box;
@@ -15,7 +15,6 @@
     flex-direction: column;
     padding: .2rem;
     gap: 1rem;
-    border: 2px solid black;
     position: relative;
     justify-content: center;
     align-items: center;

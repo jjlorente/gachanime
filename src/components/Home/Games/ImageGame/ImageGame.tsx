@@ -56,7 +56,7 @@ export const ImageGame = () => {
                 setAnimesErrors([])
             }
         }
-    },[ userGamesData ,finishedImageGame ])
+    },[ userGamesData ,finishedImageGame, mode ])
 
     useEffect(()=>{
         if(animesErrors && animesErrors.length > 0 && finishedImageGame === false) {

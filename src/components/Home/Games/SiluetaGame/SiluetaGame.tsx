@@ -48,7 +48,7 @@ export const SiluetaGame = (props: any) => {
                 setAnimesErrors([])
             }
         }
-    },[ userGamesData , finishedSiluetaGame ])
+    },[ userGamesData , finishedSiluetaGame, mode])
 
     useEffect(()=>{
         if(animesErrors && animesErrors.length > 0 && finishedSiluetaGame === false) {

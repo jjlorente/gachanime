@@ -180,13 +180,14 @@ export const resetGame = async (userid: string, game: string, mode: number) => {
     }
 };
 
-export const deleteAll = async () => {
+export const deleteAll = async (userid: string, type: boolean) => {
     try {
         const response = await fetch(`${config.apiUrl}/userGames/deleteAll`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({ userid, type }),
         });
 
         if (!response.ok) {

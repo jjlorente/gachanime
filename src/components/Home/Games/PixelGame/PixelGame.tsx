@@ -13,7 +13,7 @@ import { Input } from '../InputComponent/Input';
 import { useTranslation } from 'react-i18next';
 
 export const PixelGame = () => {
-  const { userGamesData, setUserGamesData, findAllGamesUser, mode, setPixelTries } = useUserGames();
+  const { userGamesData, setUserGamesData, mode, setPixelTries } = useUserGames();
   const { i18n, t } = useTranslation();
 
   library.add(faRotateRight);
@@ -33,13 +33,6 @@ export const PixelGame = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pixelSize = pixelImage;
-
-  useEffect(() => {
-    const idUser = localStorage.getItem("_id");
-    if (idUser) {
-      findAllGamesUser(idUser);
-    }
-  }, []);
 
   useEffect(()=> {
     let arrayErrors;
@@ -66,7 +59,7 @@ export const PixelGame = () => {
           setAnimesPixelErrors([])
         }
     }
-  },[ userGamesData , finishedPixelGame ])
+  },[ userGamesData , finishedPixelGame, mode ])
 
   useEffect(()=>{
     if(animesPixelErrors && animesPixelErrors.length > 0 && finishedPixelGame === false) {
@@ -197,7 +190,11 @@ export const PixelGame = () => {
 
       <div className='container-image-center'>
         <div className='section-image-center pixel-center-game'>
-          <canvas ref={canvasRef} className='img-pixel'></canvas>
+          {srcImage ?           
+            <canvas ref={canvasRef} className='img-pixel'></canvas>
+            :                         
+            <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+          }
         </div>
         {
           finishedPixelGame === false ?    

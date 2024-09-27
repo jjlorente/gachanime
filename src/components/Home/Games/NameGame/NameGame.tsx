@@ -24,18 +24,11 @@ export const NameGame = () => {
   const [errorsArray, setErrorsArray] = useState<Array<string>>([]);
   const [nameTriesComp, setNameTriesComp] = useState<number>(0);
 
-  const { userGamesData, setUserGamesData, findAllGamesUser } = useUserGames();
+  const { userGamesData, setUserGamesData } = useUserGames();
   const { alerts, setAlerts } = useUserGachas();
   const { nameTries, setNameTries } = useUserGames();
 
   trefoil.register();
-
-  useEffect(() => {
-    const idUser = localStorage.getItem("_id");
-    if (idUser) {
-      findAllGamesUser(idUser);
-    }
-  }, []);
 
   const findNameGame = async (id:any) => {
     try {
@@ -269,7 +262,11 @@ export const NameGame = () => {
         findGame={findNameGame}
         setArrayColors={setArrayColors}
       />
-
+      {pjName ?                         
+        null        
+        : 
+        <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+      }
       <div className='container-name-game' style={{ display: "flex", flexDirection: "column", gap: ".6rem", width:"100%",justifyContent:"center" }}>
         {Array.from({ length: 6 }, (_, indexArray) => (
           nameTriesComp === indexArray && finishedNameGame === false ? (
@@ -298,7 +295,7 @@ export const NameGame = () => {
                   />
                 )) 
                 :                         
-                <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+                null              
               }
               <button key={"button-form-"+indexArray} style={{ display: "none" }} type="submit"></button>
             </form>

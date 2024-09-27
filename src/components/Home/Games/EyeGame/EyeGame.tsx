@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 export const EyeGame = (props: any) => {
     const [finishedEyeGame, setFinishedEyeGame] = useState<boolean>();
-    const { userGamesData, setUserGamesData, findAllGamesUser, mode, setEyeTries } = useUserGames();
+    const { userGamesData, setUserGamesData, mode, setEyeTries } = useUserGames();
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>(0);
     const [animesErrors, setAnimesErrors] = useState<Array<string>>([]);
@@ -21,13 +21,6 @@ export const EyeGame = (props: any) => {
     const { eyeTries } = useUserGames();
     const [srcImage, setSrc] = useState<string>();
     const [srcImageSolution, setSrcSolution] = useState<string>();
-
-    useEffect(() => {
-        const idUser = localStorage.getItem("_id");
-        if (idUser) {
-          findAllGamesUser(idUser);
-        }
-      }, []);
 
      useEffect(()=> {
         let arrayErrors;
@@ -54,7 +47,7 @@ export const EyeGame = (props: any) => {
                 setAnimesErrors([])
             }
         }
-    },[ userGamesData , finishedEyeGame ])
+    },[ userGamesData , finishedEyeGame, mode ])
 
     useEffect(()=>{
         if(animesErrors && animesErrors.length > 0 && finishedEyeGame === false) {
@@ -162,7 +155,7 @@ export const EyeGame = (props: any) => {
                     {eyeSelected !== undefined ? 
                         <img className={finishedEyeGame ? "eye_img_solution" : "eye_game"} src={finishedEyeGame ? srcImageSolution : srcImage} alt="" />
                         :
-                        <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+                        <l-trefoil size="150" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                     }       
                 </div>
 

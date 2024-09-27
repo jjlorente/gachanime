@@ -2,10 +2,10 @@ import { Link, Outlet, useLocation, useNavigate, useOutletContext } from 'react-
 import { useEffect, useState } from 'react';
 import './Games.css';
 import { useUserGachas } from "../Home";
-import { findUserGames, findGameById, registerNewGameUser } from '../../../services/userGames';
+import { findUserGames, findGameById, registerNewGameUser, deleteAll } from '../../../services/userGames';
 import { GameData, Game } from '../../Interfaces/GamesUser';
 import { Quests } from '../Quests/Quests';
-import { findAllQuestUser } from '../../../services/userQuests';
+import { findAllQuestUser, updateWeekQuests } from '../../../services/userQuests';
 import { unlockMode } from '../../../services/user';
 import { useTranslation } from 'react-i18next';
 
@@ -18,6 +18,7 @@ import { IoEye } from "react-icons/io5";
 import { findUserById } from '../../../services/user';
 import { UnlockModal } from './UnlockModal/UnlockModal';
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { findDay, updateDay, updateWeek } from '../../../services/day';
 
 type ContextType = { 
   userGamesData: GameData | null;
@@ -55,22 +56,86 @@ export const Games = (props: any) => {
   const [userData, setUserData] = useState<any>();
   const { userGachas, setUserGachas, alerts, setAlerts } = useUserGachas();
   const [userGamesData, setUserGamesData] = useState<GameData>();
-
   const [imageTries, setImageTries] = useState<number>(0);
   const [siluetaTries, setSiluetaTries] = useState<number>(0)
-
   const [nameTries, setNameTries] = useState<number>(0);
   const [pixelTries, setPixelTries] = useState<number>(0);
   const [openingTries, setOpeningTries] = useState<number>(0);
   const [eyeTries, setEyeTries] = useState<number>(0);
-
   const [resets, setResets] = useState<number>(10);
   const [mode, setMode] = useState<number>(0);
   const [unlock, setUnlock] = useState<boolean>();
-
   const [index, setIndex] = useState("image");
-
   const [openModal, setOpenModal] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const checkDay = async () => {
+      try {
+        const day = await findDay();
+        return day.lastReset;
+      } catch (error) {
+        console.error('Error al obtener el día:', error);
+        return null;
+      }
+    };
+
+    const fetchData = async () => {
+      const now = new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" });
+      const dateInSpain = new Date(now);
+
+      let dayDB = await checkDay();
+      const local = getYearMonthDay(dateInSpain);
+
+      if (dayDB) {
+        dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
+        localStorage.setItem("time", dayDB.toString());
+        if (isDateOutdated(dayDB, local)) {
+          await resetDaily();
+        } else {
+          const idUser = localStorage.getItem("_id");
+          if (idUser) {
+            try {
+              const data = await findUserGames(idUser);
+              if(data && mode !== null) {
+                setUserGamesData(data);
+                setImageTries(data.triesimage[mode]);
+                setSiluetaTries(data.triessilueta[mode]);
+                setNameTries(data.triesname);
+                setOpeningTries(data.triesopening[mode]);
+                setEyeTries(data.trieseye[mode]);
+                setPixelTries(data.triespixel[mode]);
+                setResets(data.resets);
+              } else {
+                const data = await registerNewGameUser(idUser)
+                setUserGamesData(data);
+              }
+            } catch (error: any) {
+              console.error('Error:', error);
+              if (error === "Games no encontradas") {
+                console.log("Games no encontradas");
+              }
+            }
+          }
+        }
+      }
+      
+    };
+    fetchData();
+  }, []);
+
+  const resetDaily = async () => {
+    let userid = localStorage.getItem("_id");
+    if(userid) {
+      const data = await deleteAll(userid, true);
+      setUserGamesData(data);
+    }
+  };
+
+  const getYearMonthDay = (date: Date) => [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+  
+  const isDateOutdated = (storedDate: number[], currentDate: number[]) => 
+    storedDate[0] < currentDate[0] || storedDate[1] < currentDate[1] || storedDate[2] < currentDate[2];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,17 +155,6 @@ export const Games = (props: any) => {
     fetchData()
   }, [mode]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const idUser = localStorage.getItem("_id");
-      if (idUser) {
-        let data = await findAllGamesUser(idUser);
-        return data
-      }
-    }
-    
-    fetchData()
-  }, []);
 
   const getUserData = async (userid: string) => {
     const user = await findUserById(userid);
@@ -120,101 +174,6 @@ export const Games = (props: any) => {
     fetchData()
   }, []);
 
-  const findAllGamesUser = async (id: any) => {
-    try {
-      const data = await findUserGames(id);
-      if (data && mode!==null) {
-        setUserGamesData(data);
-        setImageTries(data.triesimage[mode]);
-        setSiluetaTries(data.triessilueta[mode]);
-        setNameTries(data.triesname);
-        setOpeningTries(data.triesopening[mode]);
-        setEyeTries(data.trieseye[mode]);
-        setPixelTries(data.triespixel[mode]);
-        setResets(data.resets);
-
-        if (data.triesimage === 0) {
-          localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsImageMedium", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsImageHard", JSON.stringify([]));
-        } else if (data.triessilueta === 0) {
-          localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsSiluetaMedium", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));
-        } else if (data.triesname === 0) {
-          localStorage.setItem("arrayErrorsName", JSON.stringify([]));
-          localStorage.setItem("arrayTriesName", JSON.stringify([]));
-          localStorage.setItem("localArrayColors", JSON.stringify([]));
-        } else if (data.triesopening === 0) {
-          localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsOpeningMedium", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
-        } else if (data.trieseye === 0) {
-          localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsEyeMedium", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsEyeHard", JSON.stringify([]));
-        } else if (data.triespixel === 0) {
-          localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify([]));
-          localStorage.setItem("arrayErrorsPixelHard", JSON.stringify([]));
-        }
-
-      } else {
-        localStorage.setItem("imgSelected", "");
-        localStorage.setItem("siluetaSelected", "");
-        localStorage.setItem("nameSelected", "");
-        localStorage.setItem("openingSelected", "");
-        localStorage.setItem("arrayTriesName", JSON.stringify([]));
-        localStorage.setItem("localArrayColors", JSON.stringify([]));
-
-        localStorage.setItem("arrayErrorsImage", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsImageMedium", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsImageHard", JSON.stringify([]));
-
-        localStorage.setItem("arrayErrorsSilueta", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsSiluetaMedium", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsSiluetaHard", JSON.stringify([]));
-
-        localStorage.setItem("arrayErrorsName", JSON.stringify([]));
-
-        localStorage.setItem("arrayErrorsOpening", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsOpeningMedium", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsOpeningHard", JSON.stringify([]));
-
-        localStorage.setItem("arrayErrorsEye", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsEyeMedium", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsEyeHard", JSON.stringify([]));
-
-        localStorage.setItem("arrayErrorsPixel", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsPixelMedium", JSON.stringify([]));
-        localStorage.setItem("arrayErrorsPixelHard", JSON.stringify([]));
-        try {
-          const data = await registerNewGameUser(id);
-          await findAllQuestUser(id);
-          if (data) {
-            setUserGamesData(data);
-            setImageTries(data.triesimage[mode]);
-            setSiluetaTries(data.triessilueta[mode]);
-            setNameTries(data.triesname);
-            setOpeningTries(data.triesopening[mode]);
-            setEyeTries(data.trieseye[mode]);
-            setPixelTries(data.triespixel[mode])
-            setResets(data.resets);
-          }
-        
-        } catch (error: any) {
-          console.error('Error:', error);
-        }
-      }
-    } catch (error: any) {
-      console.error('Error:', error);
-      if (error === "Games no encontradas") {
-        console.log("Games no encontradas");
-      }
-    }
-  };
-
-  const location = useLocation();
   useEffect(() => {
     if(location) {
       let path = location.pathname.split("/")[3];
@@ -361,7 +320,7 @@ export const Games = (props: any) => {
             </div>
             : <></>
           }
-          <Outlet context={{ unlock, mode, findAllGamesUser, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries,pixelTries, setPixelTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
+          <Outlet context={{ unlock, mode, userGachas, setUserGachas, userGamesData, setUserGamesData, resets, setResets, nameTries, setNameTries, imageTries, setImageTries,pixelTries, setPixelTries, siluetaTries, setSiluetaTries, openingTries, setOpeningTries, eyeTries, setEyeTries, alerts, setAlerts }} />
         </div>
       </div>
       {/* <UnlockModal openModal={openModal} setOpenModal={setOpenModal} mode={mode} unlock={unlock} /> */}

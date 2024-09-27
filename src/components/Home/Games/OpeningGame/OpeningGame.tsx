@@ -10,7 +10,7 @@ import ReactAudioPlayer from 'react-audio-player';
 import { useTranslation } from 'react-i18next';
 
 export const OpeningGame = () => {
-    const { userGamesData, setUserGamesData, findAllGamesUser, mode, setOpeningTries } = useUserGames();
+    const { userGamesData, setUserGamesData, mode, setOpeningTries } = useUserGames();
     const {i18n, t} = useTranslation();
     const { openingTries } = useUserGames();
 
@@ -24,13 +24,6 @@ export const OpeningGame = () => {
     const [openingErrors, setOpeningErrors] = useState<Array<string>>([]);
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>();
-
-    useEffect(() => {
-        const idUser = localStorage.getItem("_id");
-        if (idUser) {
-          findAllGamesUser(idUser);
-        }
-      }, []);
 
       useEffect(()=> {
         let arrayErrors;
@@ -57,7 +50,7 @@ export const OpeningGame = () => {
                 setOpeningErrors([])
             }
         }
-    },[ userGamesData , finishedOpeningGame ])
+    },[ userGamesData , finishedOpeningGame, mode ])
 
     useEffect(()=>{
         if(openingErrors && openingErrors.length > 0 && finishedOpeningGame === false) {
@@ -179,7 +172,7 @@ export const OpeningGame = () => {
                             allowFullScreen
                         ></iframe>                    
                     :
-                        null
+                        <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                 }       
             </div>
 
