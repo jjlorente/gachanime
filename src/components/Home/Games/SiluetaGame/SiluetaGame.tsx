@@ -81,6 +81,8 @@ export const SiluetaGame = (props: any) => {
         const fetchData = async () => {
             if(userGamesData && mode !== null) {
                 let loop = false;
+                setFinishedSiluetaGame(undefined);
+                setSiluetaSelected(undefined);
                 const idUser = localStorage.getItem("_id");
                 if (idUser) {
                     while(loop===false) {
@@ -111,23 +113,11 @@ export const SiluetaGame = (props: any) => {
             const data = await findGameById(id)
             
             if (data && mode !== null) {
-                setGameData(data);
                 if(userGamesData) {
-
-                    if(mode === 0) {
-                        setSrc(data.silueta_game[userGamesData.siluetaSelected[0]])
-                        setSrcSolution(data.silueta_solution[userGamesData.siluetaSelected[0]])
-                        setSiluetaTries(userGamesData.triessilueta[0])
-                    } else if(mode === 1) {
-                        setSrc(data.silueta_game_medium[userGamesData.siluetaSelected[1]])
-                        setSrcSolution(data.silueta_solution_medium[userGamesData.siluetaSelected[1]])
-                        setSiluetaTries(userGamesData.triessilueta[1])
-                    } else if(mode === 2) {
-                        setSrc(data.silueta_game_hard[userGamesData.siluetaSelected[2]])
-                        setSrcSolution(data.silueta_solution_hard[userGamesData.siluetaSelected[2]])
-                        setSiluetaTries(userGamesData.triessilueta[2])
-                    }
+                    await getSrcData(mode, data)
+                    setGameData(data);
                     setFinishedSiluetaGame(userGamesData.finishedSilueta[mode]);
+
                     let dataTries = userGamesData.triessilueta[mode] * 5;
                     if(dataTries >= 25) {
                         setGachasRecompensa(25)
@@ -148,10 +138,33 @@ export const SiluetaGame = (props: any) => {
         }
     };
 
+    const getSrcData = async (mode: number, data: any) => {
+        if(userGamesData) {
+            if(mode === 0) {
+                setSrc(data.silueta_game[userGamesData.siluetaSelected[0]])
+                setSrcSolution(data.silueta_solution[userGamesData.siluetaSelected[0]])
+                setSiluetaTries(userGamesData.triessilueta[0])
+            } else if(mode === 1) {
+                setSrc(data.silueta_game_medium[userGamesData.siluetaSelected[1]])
+                setSrcSolution(data.silueta_solution_medium[userGamesData.siluetaSelected[1]])
+                setSiluetaTries(userGamesData.triessilueta[1])
+            } else if(mode === 2) {
+                setSrc(data.silueta_game_hard[userGamesData.siluetaSelected[2]])
+                setSrcSolution(data.silueta_solution_hard[userGamesData.siluetaSelected[2]])
+                setSiluetaTries(userGamesData.triessilueta[2])
+            }
+        }
+    }
+
     return (
         <div className='container-imagegame'>      
 
-            <Resets title={t('games.titleSilueta')} game={"silueta"} finishedGame={finishedSiluetaGame} findGame={findSiluetaGame}/>
+            {
+                finishedSiluetaGame !== undefined ? 
+                <Resets setFinished={setFinishedSiluetaGame} setDataSelected={setSiluetaSelected} title={t('games.titleSilueta')} game={"silueta"} finishedGame={finishedSiluetaGame} findGame={findSiluetaGame}/>
+                :
+                <Resets title={t('games.titleSilueta')} game={"silueta"} finishedGame={true} findGame={findSiluetaGame}/>
+            }
 
             <div className='container-image-center'>
                 
@@ -171,10 +184,10 @@ export const SiluetaGame = (props: any) => {
                 </div>
 
                 {
-                    finishedSiluetaGame === false ?    
-                        null            
-                        :
+                    finishedSiluetaGame === true && finishedSiluetaGame !== undefined ?    
                         <span className='span-info-image'>{t('games.infoSpanWinSilueta')}</span>
+                        :
+                        null                
                 }
 
                 {siluetaTries && siluetaTries >= 3 && finishedSiluetaGame === false ? 
@@ -187,8 +200,13 @@ export const SiluetaGame = (props: any) => {
                     <></>
                 }
 
-                <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedSiluetaGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"silueta"}/>
-            
+                {
+                    finishedSiluetaGame !== undefined ?
+                        <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedSiluetaGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"silueta"}/>
+                        :
+                        null
+                }
+
             </div>
             
             <div className='container-imagegame-input'>

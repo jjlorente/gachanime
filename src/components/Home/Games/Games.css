@@ -184,7 +184,7 @@
 
 .blocked-mode {
     position: absolute;
-    background-color: hsl(225deg 58% 12% / 96%);
+    background-color: hsl(225deg 58% 12% / 97%);
     height: 100%;
     width: 100%;
     z-index: 9999;

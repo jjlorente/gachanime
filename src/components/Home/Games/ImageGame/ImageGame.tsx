@@ -88,6 +88,8 @@ export const ImageGame = () => {
         const fetchData = async () => {
             if(userGamesData && mode !== null) {
                 let loop = false;
+                setFinishedImageGame(undefined);
+                setImgSelected(undefined);
                 const idUser = localStorage.getItem("_id");
                 if (idUser) {
                     while(loop===false) {
@@ -105,20 +107,12 @@ export const ImageGame = () => {
         try {
             const data = await findGameById(id)
             if (data && mode !== null) {
-                setAnimeNameImage(data.anime_name);
-                setGameImageData(data);
                 if(userGamesData) {
-                    if(mode === 0) {
-                        setSrc(data.image_game[userGamesData.imageSelected[0]])
-                        setImageTries(userGamesData.triesimage[0])
-                    } else if(mode === 1) {
-                        setSrc(data.image_game_medium[userGamesData.imageSelected[1]])
-                        setImageTries(userGamesData.triesimage[1])
-                    } else if(mode === 2) {
-                        setSrc(data.image_game_hard[userGamesData.imageSelected[2]])
-                        setImageTries(userGamesData.triesimage[2])
-                    }
+                    await getSrcData(mode, data)
                     setFinishedImageGame(userGamesData.finishedImage[mode]);
+                    setAnimeNameImage(data.anime_name);
+                    setGameImageData(data);
+
                     if(userGamesData.finishedImage[mode] === true) {
                         setZoomImage("100%")
                     } else {
@@ -151,10 +145,30 @@ export const ImageGame = () => {
         }
     };
 
+    const getSrcData = async (mode: number, data: any) => {
+        if(userGamesData) {
+            if(mode === 0) {
+                setSrc(data.image_game[userGamesData.imageSelected[0]])
+                setImageTries(userGamesData.triesimage[0])
+            } else if(mode === 1) {
+                setSrc(data.image_game_medium[userGamesData.imageSelected[1]])
+                setImageTries(userGamesData.triesimage[1])
+            } else if(mode === 2) {
+                setSrc(data.image_game_hard[userGamesData.imageSelected[2]])
+                setImageTries(userGamesData.triesimage[2])
+            }
+        }
+    }
+
     return (
         <div className='container-imagegame'>
 
-            <Resets title={t('games.titleImage')} game={"image"} finishedGame={finishedImageGame} findGame={findImageGame}/>
+            {
+                finishedImageGame !== undefined ? 
+                <Resets setFinished={setFinishedImageGame} setDataSelected={setImgSelected} title={t('games.titleImage')} game={"image"} finishedGame={finishedImageGame} findGame={findImageGame}/>
+                :
+                <Resets title={t('games.titleImage')} game={"image"} finishedGame={true} findGame={findImageGame}/>
+            }
 
             <div className='container-image-center'>
                 <div className='section-image-center image-center-game'>        
@@ -166,13 +180,19 @@ export const ImageGame = () => {
                 </div>
                 
                 {
-                    finishedImageGame === false ?    
-                        null            
-                        :
+                    finishedImageGame === true && finishedImageGame !== undefined ?   
                         <span className='span-info-image'>{t('games.infoSpanWinImage')}</span>
+                        :
+                        null
                 }
-                <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedImageGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"image"}/>
-            
+
+                {
+                    finishedImageGame !== undefined ?
+                        <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedImageGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"image"}/>
+                        :
+                        null           
+                }     
+
             </div>
             <div className='container-imagegame-input'>
                 {

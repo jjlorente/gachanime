@@ -79,6 +79,8 @@ export const EyeGame = (props: any) => {
         const fetchData = async () => {
             if(userGamesData && mode !== null) {
                 let loop = false;
+                setFinishedEyeGame(undefined);
+                setEyeSelected(undefined);
                 const idUser = localStorage.getItem("_id");
                 if (idUser) {
                     while(loop===false) {
@@ -110,19 +112,10 @@ export const EyeGame = (props: any) => {
             if (data && mode !== null) {
                 setGameData(data);
                 if(userGamesData) {
-                    if(mode === 0) {
-                        setSrc(data.eye_game[userGamesData.eyeSelected[0]])
-                        setSrcSolution(data.eye_solution[userGamesData.eyeSelected[0]])
-                        setEyeTries(userGamesData.trieseye[0])
-                    } else if(mode === 1) {
-                        setSrc(data.eye_game_medium[userGamesData.eyeSelected[1]])
-                        setSrcSolution(data.eye_solution_medium[userGamesData.eyeSelected[1]])
-                        setEyeTries(userGamesData.trieseye[1])
-                    } else if(mode === 2) {
-                        setSrc(data.eye_game_hard[userGamesData.eyeSelected[2]])
-                        setSrcSolution(data.eye_solution_hard[userGamesData.eyeSelected[2]])
-                        setEyeTries(userGamesData.trieseye[2])
-                    }
+                    await getSrcData(mode, data)
+                    setGameData(data);
+                    setFinishedEyeGame(userGamesData.finishedEye[mode]);
+
                     setFinishedEyeGame(userGamesData.finishedEye[mode]);
                     let dataTries = userGamesData.trieseye[mode] * 5;
                     if(dataTries >= 25) {
@@ -144,10 +137,33 @@ export const EyeGame = (props: any) => {
         }
     };
 
+    const getSrcData = async (mode: number, data: any) => {
+        if(userGamesData) {
+            if(mode === 0) {
+                setSrc(data.eye_game[userGamesData.eyeSelected[0]])
+                setSrcSolution(data.eye_solution[userGamesData.eyeSelected[0]])
+                setEyeTries(userGamesData.trieseye[0])
+            } else if(mode === 1) {
+                setSrc(data.eye_game_medium[userGamesData.eyeSelected[1]])
+                setSrcSolution(data.eye_solution_medium[userGamesData.eyeSelected[1]])
+                setEyeTries(userGamesData.trieseye[1])
+            } else if(mode === 2) {
+                setSrc(data.eye_game_hard[userGamesData.eyeSelected[2]])
+                setSrcSolution(data.eye_solution_hard[userGamesData.eyeSelected[2]])
+                setEyeTries(userGamesData.trieseye[2])
+            }
+        }
+    }
+
     return (
         <div className='container-imagegame'>      
 
-            <Resets title={t('games.titleEye')} game={"eye"} finishedGame={finishedEyeGame} findGame={findEyeGame}/>
+            {
+                finishedEyeGame !== undefined ? 
+                <Resets setFinished={setFinishedEyeGame} setDataSelected={setEyeSelected} title={t('games.titleEye')} game={"eye"} finishedGame={finishedEyeGame} findGame={findEyeGame}/>
+                :
+                <Resets title={t('games.titleEye')} game={"eye"} finishedGame={true} findGame={findEyeGame}/>
+            }
 
             <div className='container-image-center'>
                 
@@ -155,15 +171,15 @@ export const EyeGame = (props: any) => {
                     {eyeSelected !== undefined ? 
                         <img className={finishedEyeGame ? "eye_img_solution" : "eye_game"} src={finishedEyeGame ? srcImageSolution : srcImage} alt="" />
                         :
-                        <l-trefoil size="150" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+                        <l-trefoil size="110" stroke="15" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                     }       
                 </div>
 
                 {
-                    finishedEyeGame === false ?    
-                        null            
-                        :
+                    finishedEyeGame === true && finishedEyeGame !== undefined ?    
                         <span className='span-info-image'>{t('games.infoSpanWinEye')}</span>
+                        :
+                        null                
                 }
 
                 {eyeTries && eyeTries >= 3 && finishedEyeGame === false ? 
@@ -176,8 +192,13 @@ export const EyeGame = (props: any) => {
                     <></>
                 }
 
-                <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedEyeGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"eye"}/>
-            
+                {
+                    finishedEyeGame !== undefined ?
+                        <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedEyeGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"eye"}/>
+                        :
+                        null
+                }
+
             </div>
             
             <div className='container-imagegame-input'>

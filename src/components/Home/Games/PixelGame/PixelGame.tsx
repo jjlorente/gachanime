@@ -91,6 +91,8 @@ export const PixelGame = () => {
     const fetchData = async () => {
       if(userGamesData && mode !== null) {
         let loop = false;
+        setFinishedPixelGame(undefined);
+        setPixelSelected(undefined);
         const idUser = localStorage.getItem("_id");
         if (idUser) {
           while(loop===false) {
@@ -111,17 +113,11 @@ export const PixelGame = () => {
         setAnimeNamePixel(data.anime_name);
         setGamePixelData(data);
         if(userGamesData) {
-          if(mode === 0) {
-            setSrc(data.pixel_game[userGamesData.pixelSelected[0]])
-            setPixelTries(userGamesData.triespixel[0])
-          } else if(mode === 1) {
-            setSrc(data.pixel_game_medium[userGamesData.pixelSelected[1]])
-            setPixelTries(userGamesData.triespixel[1])
-          } else if(mode === 2) {
-            setSrc(data.pixel_game_hard[userGamesData.pixelSelected[2]])
-            setPixelTries(userGamesData.triespixel[2])
-          }
+          await getSrcData(mode, data);
           setFinishedPixelGame(userGamesData.finishedPixel[mode]);
+          setAnimeNamePixel(data.anime_name);
+          setGamePixelData(data);
+
           if(userGamesData.finishedPixel[mode] === true) {
             setPixelImage(1)
           } else {
@@ -151,6 +147,20 @@ export const PixelGame = () => {
         console.error('Error:', error);
     }
   };
+  const getSrcData = async (mode: number, data: any) => {
+    if(userGamesData) {
+      if(mode === 0) {
+        setSrc(data.pixel_game[userGamesData.pixelSelected[0]])
+        setPixelTries(userGamesData.triespixel[0])
+      } else if(mode === 1) {
+        setSrc(data.pixel_game_medium[userGamesData.pixelSelected[1]])
+        setPixelTries(userGamesData.triespixel[1])
+      } else if(mode === 2) {
+        setSrc(data.pixel_game_hard[userGamesData.pixelSelected[2]])
+        setPixelTries(userGamesData.triespixel[2])
+      }
+    }
+  }
 
   useEffect(() => {
 
@@ -186,24 +196,37 @@ export const PixelGame = () => {
   return (
     <div className='container-imagegame'>
 
-      <Resets title={t('games.titlePixel')} game={"pixel"} finishedGame={finishedPixelGame} findGame={findPixelGame} setPixel={setPixelImage}/>
+      {
+        finishedPixelGame !== undefined ? 
+        <Resets setFinished={setFinishedPixelGame} setDataSelected={setPixelSelected} title={t('games.titlePixel')} game={"pixel"} finishedGame={finishedPixelGame} findGame={findPixelGame} setPixel={setPixelImage}/>
+        :
+        <Resets title={t('games.titlePixel')} game={"pixel"} finishedGame={true} findGame={findPixelGame} setPixel={setPixelImage}/>
+      }
 
       <div className='container-image-center'>
         <div className='section-image-center pixel-center-game'>
-          {srcImage ?           
+          {srcImage && pixelSelected !== undefined ?           
             <canvas ref={canvasRef} className='img-pixel'></canvas>
             :                         
             <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
           }
         </div>
+
         {
-          finishedPixelGame === false ?    
-            null            
-            :
+          finishedPixelGame === true && finishedPixelGame !== undefined ?    
             <span className='span-info-image'>{t('games.infoSpanPixelCorrect')}</span>
+            :
+            null
         }
-        <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedPixelGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"pixel"}/>
-      </div>
+
+        {
+          finishedPixelGame !== undefined ?
+            <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedPixelGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"pixel"}/>
+            :
+            null 
+        }
+        
+        </div>
       <div className='container-imagegame-input'>
         {
           finishedPixelGame === false ?                

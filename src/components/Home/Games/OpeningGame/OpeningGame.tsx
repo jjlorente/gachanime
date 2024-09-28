@@ -82,6 +82,8 @@ export const OpeningGame = () => {
         const fetchData = async () => {
             if(userGamesData && mode !== null) {
                 let loop = false;
+                setFinishedOpeningGame(undefined);
+                setOpeningSelected(undefined);
                 const idUser = localStorage.getItem("_id");
                 if (idUser) {
                     while(loop===false) {
@@ -99,27 +101,11 @@ export const OpeningGame = () => {
         try {
             const data = await findGameById(id);
             if (data && mode !== null) {
-                setAnimeNameImage(data.anime_name);
-                
-                setGameOpeningData(data);
                 if(userGamesData) {
-                    if(data.opening_solutions !== undefined) {
-                        let numOpeningName = userGamesData.openingSelected[mode]*2;
-                        let numOpeningLink = numOpeningName + 1;
-
-                        setAnimeSong(data.opening_solutions[mode][numOpeningName]);
-                        setLinkYT(data.opening_solutions[mode][numOpeningLink]);
-                    } 
-                    if(mode === 0) {
-                        setBase64Audio("data:audio/wav;base64,"+data.opening[userGamesData.openingSelected[0]]);
-                        setOpeningTries(userGamesData.triesopening[0])
-                    } else if(mode === 1) {
-                        setBase64Audio("data:audio/wav;base64,"+data.opening_medium[userGamesData.openingSelected[1]]);
-                        setOpeningTries(userGamesData.triesopening[1])
-                    } else if(mode === 2) {
-                        setBase64Audio("data:audio/wav;base64,"+data.opening_hard[userGamesData.openingSelected[2]]);
-                        setOpeningTries(userGamesData.triesopening[2])
-                    }
+                    await getSrcData(mode, data)
+                    setFinishedOpeningGame(userGamesData.finishedOpening[mode]);
+                    setAnimeNameImage(data.anime_name);
+                    setGameOpeningData(data);
                 }
                 if(userGamesData) {
                     setFinishedOpeningGame(userGamesData.finishedOpening[mode]);
@@ -150,12 +136,40 @@ export const OpeningGame = () => {
         }
     }, [gameOpeningData]);
 
+    const getSrcData = async (mode: number, data: any) => {
+        if(userGamesData) {
+            if(data.opening_solutions !== undefined) {
+                let numOpeningName = userGamesData.openingSelected[mode]*2;
+                let numOpeningLink = numOpeningName + 1;
+
+                setAnimeSong(data.opening_solutions[mode][numOpeningName]);
+                setLinkYT(data.opening_solutions[mode][numOpeningLink]);
+            } 
+            if(mode === 0) {
+                setBase64Audio("data:audio/wav;base64,"+data.opening[userGamesData.openingSelected[0]]);
+                setOpeningTries(userGamesData.triesopening[0])
+            } else if(mode === 1) {
+                setBase64Audio("data:audio/wav;base64,"+data.opening_medium[userGamesData.openingSelected[1]]);
+                setOpeningTries(userGamesData.triesopening[1])
+            } else if(mode === 2) {
+                setBase64Audio("data:audio/wav;base64,"+data.opening_hard[userGamesData.openingSelected[2]]);
+                setOpeningTries(userGamesData.triesopening[2])
+            }
+        }
+    }
+
     return (
         <div className='container-imagegame'>
 
-        <Resets title={t('games.titleOpening')} game={"opening"} finishedGame={finishedOpeningGame} findGame={findOpeningGame}/>
+            {
+                finishedOpeningGame !== undefined ? 
+                <Resets setFinished={setFinishedOpeningGame} setDataSelected={setOpeningSelected} title={t('games.titleOpening')} game={"opening"} finishedGame={finishedOpeningGame} findGame={findOpeningGame}/>
+                :
+                <Resets title={t('games.titleOpening')} game={"opening"} finishedGame={true} findGame={findOpeningGame}/>
+            }
+
             <div className='container-image-center'>
-                {gameOpeningData !== undefined && base64Audio !== undefined && finishedOpeningGame === false ? 
+                {gameOpeningData !== undefined && base64Audio !== undefined && finishedOpeningGame === false && openingSelected !== undefined ? 
                     <ReactAudioPlayer
                         id="audio"
                         src={base64Audio}
@@ -163,7 +177,7 @@ export const OpeningGame = () => {
                         controls
                     />
                     :
-                    linkYT ? 
+                    linkYT && openingSelected !== undefined ? 
                         <iframe 
                             width="100%" 
                             height="315" 
@@ -177,23 +191,32 @@ export const OpeningGame = () => {
             </div>
 
             {
-                finishedOpeningGame === true ?    
+                finishedOpeningGame === true && finishedOpeningGame !== undefined ?    
                     <span className='span-info-image'>{t('games.infoSpanOpeningCorrect')}</span>
                     :
                     null
             }
 
-            <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedOpeningGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"opening"}/>
-        
-        <div className='container-imagegame-input'>
             {
-                    finishedOpeningGame === true ?  
-                        null  
-                        :
-                        <span className='span-info-image'>{t('games.infoSpanOpening')}</span>
+                    finishedOpeningGame !== undefined ?
+                    <TriesReward statusReward={statusReward} setStatusReward={setStatusReward} finishedGame={finishedOpeningGame} setGachasRecompensa={setGachasRecompensa} gachasRecompensa={gachasRecompensa} game={"opening"}/>
+                    :
+                    null
             }
+
+        <div className='container-imagegame-input'>
+
+            {
+                finishedOpeningGame === false ?  
+                    <span className='span-info-image'>{t('games.infoSpanOpening')}</span>
+                    :
+                    null            
+            }
+
             <Input setGachasRecompensa={setGachasRecompensa} setAnimesErrors={setOpeningErrors} finishedGame={finishedOpeningGame} solution={animeNameImage} song={animeSong} game={"opening"} setFinishedGame={setFinishedOpeningGame} setStatusReward={setStatusReward} />
+        
         </div>
+
         {openingErrors && finishedOpeningGame === false ? 
             <div className='errors-imagegame'>
                 {openingErrors.slice().reverse().map((anime, index) => (

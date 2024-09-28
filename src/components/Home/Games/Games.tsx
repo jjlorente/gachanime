@@ -16,8 +16,6 @@ import { BiSolidPencil } from "react-icons/bi";
 import { ImAccessibility } from "react-icons/im";
 import { IoEye } from "react-icons/io5";
 import { findUserById } from '../../../services/user';
-import { UnlockModal } from './UnlockModal/UnlockModal';
-import { FaLongArrowAltRight } from "react-icons/fa";
 import { findDay, updateDay, updateWeek } from '../../../services/day';
 
 type ContextType = { 
@@ -43,7 +41,6 @@ type ContextType = {
   setOpeningTries: React.Dispatch<React.SetStateAction<number | null>>;
   resets: number | null;
   setResets: React.Dispatch<React.SetStateAction<number | null>>;
-  findAllGamesUser: (id: any) => Promise<void>;
 };
 
 export function useUserGames() {
@@ -83,15 +80,17 @@ export const Games = (props: any) => {
     const fetchData = async () => {
       const now = new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" });
       const dateInSpain = new Date(now);
-
+      
       let dayDB = await checkDay();
       const local = getYearMonthDay(dateInSpain);
-
       if (dayDB) {
         dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
         localStorage.setItem("time", dayDB.toString());
         if (isDateOutdated(dayDB, local)) {
+          //RESET DAILY, RESET GAMES AND UPDATE DAY DB
           await resetDaily();
+          let day = await updateDay();
+          localStorage.setItem("time", day.toString());
         } else {
           const idUser = localStorage.getItem("_id");
           if (idUser) {

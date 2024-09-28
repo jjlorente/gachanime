@@ -9,6 +9,10 @@ export const Resets = (props: any) => {
 
     const resetGameClick = async () => {
         if(userGamesData && mode !== null) {
+            if(props.setDataSelected && props.setFinished) {
+                props.setDataSelected(undefined)
+                props.setFinished(undefined)
+            }
             const data = await resetGame(userGamesData.userid, props.game, mode);
             if(data) {
                 setResets(data.resets);

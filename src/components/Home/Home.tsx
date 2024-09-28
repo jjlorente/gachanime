@@ -8,6 +8,8 @@ import { deleteAll } from '../../services/userGames';
 import { updateWeekQuests } from '../../services/userQuests';
 import { findGacha } from '../../services/gacha';
 import { findDay, createDay, updateDay, updateWeek } from '../../services/day';
+import { findUserQuests, registerNewQuestUser } from '../../services/userQuests';
+
 import { useTranslation } from 'react-i18next';
 import { find, finished } from '../../services/surveys';
 
@@ -67,14 +69,18 @@ export const Home = () => {
 
       if (dayDB) {
         dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
-        localStorage.setItem("time", dayDB.toString());
         if (isDateOutdated(dayDB, local)) {
+          //RESET DAILY, RESET DAY QUEST AND LOCALSTORGE
           await clearLocalStorage();
           await resetDaily();
-
-          let day = await updateDay();
-          localStorage.setItem("time", day.toString());
         } 
+      }
+      const idUser = localStorage.getItem("_id");
+      if(idUser) {
+        const data = await findUserQuests(idUser);
+        if(!data) {
+          registerNewQuestUser(idUser)
+        }
       }
 
       let daySurvey = await find(); 
@@ -103,7 +109,6 @@ export const Home = () => {
         } 
       }
     };
-    console.log("hgola")
     fetchData();
   }, [location]);
 
