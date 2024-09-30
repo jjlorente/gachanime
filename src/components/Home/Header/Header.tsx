@@ -35,7 +35,7 @@ export const Header = (props: any) => {
       <div className='container-header'>
         <img
           src={menu ? "/home/close.png" : "/home/menu-header.svg"}
-          alt="Logo"
+          alt="Image for toggle Menu Header"
           className="logo-menu"
           onClick={toggleMenu}
         />
@@ -52,7 +52,7 @@ export const Header = (props: any) => {
                   <RiGamepadFill style={{height:"25px", width: "25px"}}/>
                   :
                   item.link === "summon" ?
-                    <img src='/home/summon-ww.png' style={{width: "25px"}}/>
+                    <img src='/home/summon-ww.png' style={{width: "25px"}} alt="Image for summoning link"/>
                   :
                   item.link === "market" ?
                     <IoStorefrontSharp style={{height:"25px", width: "25px"}}/>
@@ -70,7 +70,7 @@ export const Header = (props: any) => {
             <div className='container-btn-logout'>
               <button onClick={logOut} className="logout-btn">
                 <span className='span-active-logout'>{t('links.logOut')}</span>
-                <img className='svg-logout' src='/home/logout.svg' alt="logout" />
+                <img className='svg-logout' src='/home/logout.svg' alt="Image for logout user" />
               </button>
             </div>
           </div>
@@ -92,7 +92,7 @@ export const Header = (props: any) => {
           <span>{props.userGachas}</span>
           <img
             src='/home/summon-o.png'
-            alt="Logo Summon"
+            alt="Logo of Summon"
             className='logo-summon'
           />
         </Link>

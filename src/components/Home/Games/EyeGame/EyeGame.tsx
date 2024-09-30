@@ -169,7 +169,7 @@ export const EyeGame = (props: any) => {
                 
                 <div className={finishedEyeGame ? 'section-image-center eye-center-game-solution' : 'section-image-center eye-center-game'} style={{backgroundColor:"white", border:"solid black 2px"}}>        
                     {eyeSelected !== undefined ? 
-                        <img className={finishedEyeGame ? "eye_img_solution" : "eye_game"} src={finishedEyeGame ? srcImageSolution : srcImage} alt="" />
+                        <img className={finishedEyeGame ? "eye_img_solution" : "eye_game"} src={finishedEyeGame ? srcImageSolution : srcImage} alt="Image for game eye character" />
                         :
                         <l-trefoil size="110" stroke="15" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                     }       

@@ -94,7 +94,7 @@ export const Main = (props: any) => {
           </Link>
           <Link to={"/home/summon"} className='link-main'>
             <span className='span-link-main'>{t('links.summon')}</span>
-            <img src='/home/summon-ww.png' className="link-main-icon" style={{height:"25px", width: "25px",marginLeft:"2px"}} />
+            <img src='/home/summon-ww.png' className="link-main-icon" style={{height:"25px", width: "25px",marginLeft:"2px"}} alt="Image for summoning link"/>
           </Link>
           <Link to={"/home/quests"} className='link-main'>
             <span className='span-link-main'>{t('links.quests')}</span>
@@ -137,7 +137,7 @@ export const Main = (props: any) => {
                         : { display: `none` }
                     }
                   >
-                    <img className='sticker-luffy' src='/luffy-sticker.png' alt="Luffy sticker"/>
+                    <img className='sticker-luffy' src='/luffy-sticker.png' alt="Luffy of sticker from One piece"/>
                   </span>
                   <span>{percentage2} %</span>
                 </div>
@@ -218,7 +218,7 @@ export const Main = (props: any) => {
                       : { display: `none` }
                   }
                 >
-                  <img className='sticker-luffy' src='/luffy-sticker.png' alt="Luffy sticker"/>
+                  <img className='sticker-luffy' src='/luffy-sticker.png' alt="Luffy of sticker from One Piece"/>
                 </span>
                 <span>{percentage2} %</span>
               </div>

@@ -101,6 +101,8 @@ export const Collection = (props:any) => {
         return "4px solid #c74cdf";
       case "S+":
         return "4px solid #ff3939";
+      case "SS":
+        return "4px solid #f1ec00";
       default:
         return "gray 4px solid";
     }
@@ -120,6 +122,8 @@ export const Collection = (props:any) => {
         return "#00a4ff";
       case "S":
         return "#c74cdf";
+      case "SS":
+        return "#f1ec00";
       default:
         return "gray";
     }
@@ -133,6 +137,8 @@ export const Collection = (props:any) => {
         return "-a";
       case "S":
         return "-s";
+      case "SS":
+        return "-ss";
       default:
         return "-b";
     }
@@ -160,7 +166,7 @@ export const Collection = (props:any) => {
                     <img 
                       key={index} 
                       src={img.base64_image} 
-                      alt={`Imagen ${index + 1}`} 
+                      alt={`Imagen of card anime`} 
                       className={
                         userCard
                           ? "card-collection"
@@ -174,15 +180,24 @@ export const Collection = (props:any) => {
                     >
                       {img.rarity}
                     </span>
-
-                    <span 
-                      style={{ background: backgroundColor }}
-                      className={'power-card'}
-                      key={index+"power-span"}
-                    >
-                      {img.power} P
-                    </span>
-
+                  { img.rarity !== "SS" ?
+                      <span 
+                        style={{ background: backgroundColor }}
+                        className={'power-card'}
+                        key={index+"power-span"}
+                      >
+                        {img.power} P
+                      </span>
+                      :
+                      <span 
+                        style={{ background: "transparent" }}
+                        className={'power-card-ss'}
+                        key={index+"power-span"}
+                      >
+                        {img.power} P
+                      </span>
+                    }
+                  { img.rarity !== "SS" ?
                     <div 
                       style={{ background: backgroundColor }}
                       className='container-name-card'
@@ -201,6 +216,19 @@ export const Collection = (props:any) => {
                           {img.anime_name}
                       </span>
                     </div>
+                    :
+                    <div 
+                      className='container-name-card-ss'
+                    >  
+                      <span 
+                        key={index+"name-span"} 
+                        className='name-card-ss'
+                        >
+                          {img.name.toUpperCase()}
+                      </span>
+                    </div>
+                  }
+
                   </div>
                 );
               })

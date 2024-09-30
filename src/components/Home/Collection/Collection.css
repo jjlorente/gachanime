@@ -80,6 +80,19 @@
     border-left: 2px solid rgba(0, 0, 0, 0.329);
 }
 
+.power-card-ss {
+    position: absolute;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    text-align: center;
+    right: 0px;
+    padding: 0 5px;
+    top: 0px;
+    border-radius: 0 0 0 5px;
+    background-color: transparent;
+    color: yellow;
+}
+
 .anime-name-card{
     font-size: 0.9rem;
     background-color: #01081a56;
@@ -98,6 +111,17 @@
     border: 2px solid rgba(0, 0, 0, 0.295);
     border-bottom: none;
     border-radius: 15px 15px 0 0;
+}
+
+.name-card-ss {
+    position: absolute;
+    top: 0px;
+    font-size: 2.5rem;
+    z-index: 9;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border-bottom: none;
+    color: rgb(255, 238, 0);
 }
 
 .copies {
@@ -191,6 +215,26 @@
     animation: bg-spin 3s linear infinite;
 }
 
+.border-collection-ss {
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        white  0%, 
+        yellow  10%, 
+        yellow  15%,
+        rgb(255, 255, 0) 20%, 
+        white  30%, 
+        yellow 40%, 
+        yellow  45%,
+        rgb(255, 255, 0) 50%, 
+        white  60%, 
+        yellow 70%, 
+        yellow  75%,
+        rgb(255, 255, 0) 80%, 
+        white  100%
+    ); 
+    animation: bg-spin 3s linear infinite;
+}
+
 .card-not-user {
     --gradient-border: conic-gradient(
         from var(--border-angle),
@@ -267,6 +311,21 @@
     border-top: 2px solid rgba(0, 0, 0, 0.329);
     border-radius:2px 2px;
     z-index: 999;
+}
+
+.container-name-card-ss {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 5px 0;
+    position: absolute;
+    bottom: 0px;
+    z-index: 999;
+    height: 50px;
 }
 
 .card-user {

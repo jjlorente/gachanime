@@ -50,11 +50,12 @@ export const ModalConfirmMarket = (props: any) => {
 
   const getData = async () => {
     try {
-        const data = await getDataMarket();
-        props.setDataMarket(data)
-        props.setDataMarketSelected(data)
+      const data = await getDataMarket();
+      props.setDataMarket(data)
+      props.setDataMarketSelected(data)
     } catch {
-        props.setDataMarketSelected([])
+      props.setDataMarket([])
+      props.setDataMarketSelected([])
     }
   };
 

@@ -117,7 +117,8 @@ export const Summon = (props: any) => {
                 <span style={{backgroundColor:"gray", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>B 70%</span>
                 <span style={{backgroundColor:"#01A4FF", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>A 20%</span> 
                 <span style={{backgroundColor:"#C74CDF", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>S 8%</span>
-                <span style={{backgroundColor:"#FD393A", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>S+ 2%</span>
+                <span style={{backgroundColor:"#FD393A", padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>S+ 1.9%</span>
+                <span style={{backgroundColor:"yellow", color: "black",padding:"2px 8px", borderRadius:"5px", width:"70px", wordSpacing:"5px"}}>SS 0.1%</span>
               </div>}
             </div>
             <span className='title-summon'>{section.title}</span>

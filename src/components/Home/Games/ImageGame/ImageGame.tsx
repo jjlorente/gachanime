@@ -25,7 +25,7 @@ export const ImageGame = () => {
     const [imgSelected, setImgSelected] = useState<number>();
     const [animeNameImage, setAnimeNameImage] = useState<string>();
     const [animesErrors, setAnimesErrors] = useState<Array<string>>([]);
-    const [zoomImage, setZoomImage] = useState<string>("300%");
+    const [zoomImage, setZoomImage] = useState<string>("350%");
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>();
 
@@ -117,10 +117,10 @@ export const ImageGame = () => {
                         setZoomImage("100%")
                     } else {
                         let zoom = userGamesData.triesimage[mode] * 50;
-                        if (zoom >= 200) {
+                        if (zoom >= 250) {
                             setZoomImage("100%")
                         } else {
-                            zoom = 300 - zoom;
+                            zoom = 350 - zoom;
                             setZoomImage(zoom+"%")
                         }
                     }
@@ -173,7 +173,7 @@ export const ImageGame = () => {
             <div className='container-image-center'>
                 <div className='section-image-center image-center-game'>        
                     {imgSelected !== undefined ? 
-                        <img className='img-game' width={zoomImage} height={zoomImage === "100%" ? "100%" : "auto"} src={ srcImage ? srcImage: "" } alt="Game image" />
+                        <img className='img-game' width={zoomImage} height={zoomImage === "100%" ? "100%" : "auto"} src={ srcImage ? srcImage: "" } alt="Image for Game image anime" />
                         :
                         <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
                     }       

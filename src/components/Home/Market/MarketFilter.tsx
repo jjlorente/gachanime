@@ -114,6 +114,7 @@ const MarketFilter = (props:any) => {
       <div className='container-select'>
         <select className='select-anime' value={selectedRarity} onChange={handleRarityChange}>
           <option className='select-option' value="">{t('collection.allRares')}</option>
+          <option className='select-option' value="SS">SS</option>
           <option className='select-option' value="S+">S+</option>
           <option className='select-option' value="S">S</option>
           <option className='select-option' value="A">A</option>

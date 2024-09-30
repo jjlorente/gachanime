@@ -284,7 +284,7 @@ export const Games = (props: any) => {
               }
               </h2>
               <div className='container-unblock-mode'>
-                <img src='/unlock.png' style={{ height: "100%", width: "auto" }} className="icon-summon-nav" />
+                <img src='/unlock.png' style={{ height: "100%", width: "auto" }} className="icon-summon-nav" alt='Unlock image for user modes'/>
                 <div className='cnt-button-unlock-modal'>
                   {
                     userData && userData.totalPower !== undefined ? (

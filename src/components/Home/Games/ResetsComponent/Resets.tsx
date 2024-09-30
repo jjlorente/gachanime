@@ -96,7 +96,7 @@ export const Resets = (props: any) => {
                         setNameTries(0);
                         props.setArrayColors([])
 
-                        const randomIndex = Math.floor(Math.random() * dataName.names_game.length);
+                        const randomIndex = Math.floor(Math.random() * dataName.wordle_game.length);
                         localStorage.setItem("nameSelected", randomIndex.toString());
                         const dataNameGame = await updateSelected(userGamesData.userid, props.game,0);
                         if(dataNameGame) {

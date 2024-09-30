@@ -11,7 +11,7 @@ export const Market = () => {
   trefoil.register();
   const { t } = useTranslation()
 
-  const [dataMarket, setDataMarket] = useState<any>([]);
+  const [dataMarket, setDataMarket] = useState<Array<string>>();
   const [dataMarketSelected, setDataMarketSelected] = useState<any>([]);
 
   const [userId, setUserId] = useState<string>("") 
@@ -27,7 +27,9 @@ export const Market = () => {
 
   const lastPostIndex = currentPage * cardsPerPage;
   const firstPostIndex = lastPostIndex - cardsPerPage;
-  const currentCards = dataMarketSelected.slice(firstPostIndex, lastPostIndex);
+
+  let currentCards;
+  dataMarket !== undefined ? currentCards = dataMarketSelected.slice(firstPostIndex, lastPostIndex) : null;
 
   const getData = async () => {
     let id = localStorage.getItem("_id")
@@ -39,6 +41,7 @@ export const Market = () => {
       setDataMarket(data)
       setDataMarketSelected(data)
     } catch {
+      setDataMarket([])
       setDataMarketSelected([])
     }
   };
@@ -55,6 +58,8 @@ export const Market = () => {
         return '#00a4ff';
       case 'S':
         return '#c74cdf';
+      case 'SS':
+        return '#f1ec00';
       default:
         return 'gray';
     }
@@ -62,6 +67,8 @@ export const Market = () => {
 
   const getRarityClassName = (rarity: any) => {
     switch (rarity) {
+      case 'SS':
+        return '-ss';
       case 'S+':
         return '-s-plus';
       case 'A':
@@ -76,7 +83,7 @@ export const Market = () => {
   return (
     <div className='Market'>
 
-      <MarketFilter setDataMarketSelected={setDataMarketSelected} setDataMarket={setDataMarket} dataMarket={dataMarket} setCurrentPage={setCurrentPage}/>
+      <MarketFilter setDataMarketSelected={setDataMarketSelected} setDataMarket={setDataMarket} dataMarket={dataMarket} setCurrentPage={setCurrentPage} getData={getData}/>
 
       <div className='section-market cards-container'>
         <div className='cnt-market-cards'>
@@ -92,7 +99,7 @@ export const Market = () => {
                   >
                     <img
                       src={card['card'].base64_image}
-                      alt={`Imagen ${index + 1}`}
+                      alt={`Image of card for market`}
                       className={'card-collection'}
                     />
                     <span
@@ -109,17 +116,30 @@ export const Market = () => {
                       {card['card'].power} P
                     </span>
 
-                    <div style={{ background: backgroundColor }} className='container-name-card'>
-                      <span
-                        style={{ background: backgroundColor }}
-                        className='name-card'
-                      >
-                        {card['card'].name}
-                      </span>
-                      <span className='anime-name-card'>
-                        {card['card'].anime_name}
-                      </span>
-                    </div>
+                    { 
+                      card['card'].rarity !== "SS" ? (
+                        <div style={{ background: backgroundColor }} className='container-name-card'>
+                          <span
+                            style={{ background: backgroundColor }}
+                            className='name-card'
+                          >
+                            {card['card'].name}
+                          </span>
+                          <span className='anime-name-card'>
+                            {card['card'].anime_name}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className='container-name-card-ss'>  
+                          <span 
+                            key={index + "name-span"} 
+                            className='name-card-ss'
+                          >
+                            {card['card'].name.toUpperCase()}
+                          </span>
+                        </div>
+                      )
+                    }
                   </div>
                   <div className='cnt-info-price'>
                     <span className='span-username-market'>{t('market.owner')} {card['user'].username}</span>
@@ -127,7 +147,7 @@ export const Market = () => {
                       {card['price']}           
                       <img
                         src='/home/summon-o.png'
-                        alt="Logo Summon"
+                        alt="Logo Summon for market"
                         className='logo-summon'
                       />
                     </span>
@@ -142,15 +162,15 @@ export const Market = () => {
               );
             })
           ) : (
-            dataMarket && dataMarket.length > 0 ? 
-              <span style={{fontSize:"2rem"}}>{t('market.notAvailable')}</span>
-            :
+            dataMarket === undefined ? 
               <div >
                 <l-trefoil size="200" stroke="33" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
               </div>
+              :
+              <span style={{fontSize:"2rem"}}>{t('market.notAvailable')}</span>
           )}
         </div>
-        {dataMarketSelected.length > 0 ? 
+        {dataMarketSelected && dataMarketSelected.length > 0 ? 
           <PaginationComponent 
             totalPosts={dataMarketSelected.length} 
             cardsPerPage={cardsPerPage}
@@ -160,7 +180,7 @@ export const Market = () => {
           <></>
         }
       </div>
-      <ModalConfirmMarket setDataMarketSelected={setDataMarketSelected} mode={mode} setDataMarket={setDataMarket} openConfirm={openModal} setOpenConfirm={setOpenModal} idCard={idCard} price={price} userCardId={userCardId}/>
+      <ModalConfirmMarket getData={getData} setDataMarketSelected={setDataMarketSelected} mode={mode} setDataMarket={setDataMarket} openConfirm={openModal} setOpenConfirm={setOpenModal} idCard={idCard} price={price} userCardId={userCardId}/>
     </div>
   );
 };

@@ -15,16 +15,16 @@ import { Collection } from './components/Home/Collection/Collection';
 import { Summoning } from './components/Home/Summon/Summoning/Summoning';
 import { NameGame } from './components/Home/Games/NameGame/NameGame';
 import { ImageGame } from './components/Home/Games/ImageGame/ImageGame';
-import backgroundImage from './assets/image.jpg'
 import { SiluetaGame } from './components/Home/Games/SiluetaGame/SiluetaGame';
 import { OpeningGame } from './components/Home/Games/OpeningGame/OpeningGame';
 import { EyeGame } from './components/Home/Games/EyeGame/EyeGame';
 import { Market } from './components/Home/Market/Market';
 import { Ranking } from './components/Home/Ranking/Ranking';
 import { PixelGame } from './components/Home/Games/PixelGame/PixelGame';
+
 function App() {
   const navigate = useNavigate();
-  const clientId = "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com"
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
   useEffect(() => {
     const userId = localStorage.getItem("_id");
@@ -36,6 +36,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+
     function start() {
       gapi.client.init({
         clientId: clientId,

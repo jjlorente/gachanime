@@ -80,7 +80,7 @@ export const Nav = (props: any) => {
                 <RiGamepadFill className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>
               :
               item.link === "summon" ?
-                <img src='/home/summon-ww.png' style={{height:"28px", width: "28px",marginLeft:"1px"}} className="icon-summon-nav"/>
+                <img src='/home/summon-ww.png' style={{height:"28px", width: "28px",marginLeft:"1px"}} className="icon-summon-nav" alt='Logo image for user nav'/>
               :
               item.link === "market" ?
                 <IoStorefrontSharp className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>
@@ -105,7 +105,7 @@ export const Nav = (props: any) => {
       <div className='container-btn-logout'>
         <button onClick={logOut} className="logout-btn">
           {classNav ? <span className='span-active-logout'>{t('links.logOut')}</span> : <span className='span-inactive-logout'>{t('links.logOut')}</span>}
-          <img className='svg-logout' src='/home/logout.svg' alt="logout" />
+          <img className='svg-logout' src='/home/logout.svg' alt="Logout image for user" />
         </button>
       </div>
     </div>

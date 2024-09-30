@@ -189,7 +189,7 @@ export const Register = () => {
           maxLength={15}
           minLength={6}
         />
-        <img id='passwordRef' className='btn-toggle-password' onClick={handlePasswordToggle} src={showPassword ? "../eye-2.png" : "../eye-1.png"} alt=""/>
+        <img id='passwordRef' className='btn-toggle-password' onClick={handlePasswordToggle} src={showPassword ? "../eye-2.png" : "../eye-1.png"} alt="Eye image for show or hide password"/>
       </div>
       <div className='input-container'>
         {inputText === "passwordRepeat" ? <span className='span-input-focus'>{t('login.repeatPass')}</span> : ""}
@@ -208,7 +208,7 @@ export const Register = () => {
           maxLength={15}
           minLength={6}
         />
-        <img id='passwordRepeatRef' className='btn-toggle-password' onClick={handlePasswordToggle} src={showPasswordRepeat ? "../eye-2.png" : "../eye-1.png"} alt=""/>
+        <img id='passwordRepeatRef' className='btn-toggle-password' onClick={handlePasswordToggle} src={showPasswordRepeat ? "../eye-2.png" : "../eye-1.png"} alt="Eye image for show or hide password"/>
       </div>
       {showErrorLogin ? 
         <span className='span-error-login'>{showErrorLogin}</span> : <></>

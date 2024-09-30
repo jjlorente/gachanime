@@ -40,7 +40,7 @@
     width: 100% !important;
 }
 
-.border-collectionS\+, .border-collectionS, .border-collectionA {
+.border-collectionS\+, .border-collectionS, .border-collectionA, .border-collectionSS {
     display: grid;
     position: relative;
     place-content: center;
@@ -122,6 +122,26 @@
     animation: bg-spin 6s linear infinite;
 }
 
+.border-collectionSS {
+    --gradient-border: conic-gradient(
+        from var(--border-angle),
+        white  0%, 
+        yellow  10%, 
+        yellow  15%,
+        rgb(255, 255, 0) 20%, 
+        white  30%, 
+        yellow 40%, 
+        yellow  45%,
+        rgb(255, 255, 0) 50%, 
+        white  60%, 
+        yellow 70%, 
+        yellow  75%,
+        rgb(255, 255, 0) 80%, 
+        white  100%
+    ); 
+    animation: bg-spin 3s linear infinite;
+}
+
 .border-collectionA {
     --gradient-border: conic-gradient(
         from var(--border-angle),
@@ -153,6 +173,9 @@
      1px  1px 0 #000;
 }
 
+.bg-cardSS {
+    background-color: yellow;
+}
 .bg-cardS\+ {
     background-color: #FD393A;
 }

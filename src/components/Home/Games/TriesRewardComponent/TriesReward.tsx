@@ -72,7 +72,7 @@ export const TriesReward = (props: any) => {
             {(props.gachasRecompensa && (props.statusReward === 1 || props.statusReward === 0)) ? (
                 <span onClick={props.finishedGame === true && props.statusReward === 1 ? claimReward : undefined} className={props.finishedGame === true ? 'gachas-recompensa-active-click' : 'gachas-recompensa-inactive'}>
                     {t('games.claimReward') + props.gachasRecompensa}
-                    <img src='/home/summon-w.png' alt="Logo Summon" className='logo-summon-w' />
+                    <img src='/home/summon-w.png' alt="Logo of Summon" className='logo-summon-w' />
                     {props.statusReward === 1 ? (
                         <span className='reward-icon'></span>
                     ) : null}

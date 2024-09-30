@@ -24,15 +24,15 @@ export const Ranking = () => {
     return (
         <div className='Ranking'>
             <nav className='nav-sections-ranking'>
-                <span className={sectionRank === "power" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("power")}}>
+                <h4 className={sectionRank === "power" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("power")}}>
                     {t('ranking.power')}
-                </span>
-                <span className={sectionRank === "level" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("level")}}>
+                </h4>
+                <h4 className={sectionRank === "level" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("level")}}>
                     {t('ranking.level')}
-                </span>
-                <span className={sectionRank === "card" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("card")}}>
+                </h4>
+                <h4 className={sectionRank === "card" ? 'span-rank-section-active' : 'span-rank-section'} onClick={()=>{setSectionRank("card")}}>
                     {t('ranking.cards')}
-                </span>
+                </h4>
             </nav>
             <div className='section-ranking'>
             {
@@ -44,7 +44,7 @@ export const Ranking = () => {
                                     <span>Nº {index + 1}</span>
                                     <div className='username-top'>
                                         <span>{user.username}</span>
-                                        <img className='img-marco-top' src={user.profilePicture} alt='Profile'></img>
+                                        <img className='img-marco-top' src={user.profilePicture} alt='Profile image from user of GACHANIME'></img>
                                     </div>
                                     <span>{user.totalPower} P</span>
                                 </div>
@@ -57,7 +57,7 @@ export const Ranking = () => {
                                     <span>Nº {index + 1}</span>
                                     <div className='username-top'>
                                         <span>{user.username}</span>
-                                        <img className='img-marco-top' src={user.profilePicture} alt='Profile'></img>
+                                        <img className='img-marco-top' src={user.profilePicture} alt='Profile image from user of GACHANIME'></img>
                                     </div>
                                     <span>Level {user.profileLevel}</span>
                                 </div>
@@ -70,7 +70,7 @@ export const Ranking = () => {
                                     <span>Nº {index + 1}</span>
                                     <div className='username-top'>
                                         <span>{user.userDetails.username}</span>
-                                        <img className='img-marco-top' src={user.userDetails.profilePicture} alt='Profile'></img>
+                                        <img className='img-marco-top' src={user.userDetails.profilePicture} alt='Profile image from user of GACHANIME'></img>
                                     </div>
                                     <span>{user.totalUniqueCards} / {ranks.totalCards}</span>
                                 </div>

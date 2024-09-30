@@ -81,9 +81,9 @@ export const NameGame = () => {
       let formattedName: string = ""
       if(nameSelectedLocal) {
         let numero = parseInt(nameSelectedLocal, 10);
-        formattedName = gameData.names_game[numero]?.replace(/\s+/g, '');
+        formattedName = gameData.wordle_game[numero]?.replace(/\s+/g, '');
       } else {
-        formattedName = gameData.names_game[userGamesData.nameSelected]?.replace(/\s+/g, '');
+        formattedName = gameData.wordle_game[userGamesData.nameSelected]?.replace(/\s+/g, '');
       }
       setPjName(formattedName)
     }
@@ -253,21 +253,29 @@ export const NameGame = () => {
 
   return (
     <div className='container-imagegame'>
-
-      <Resets 
-        title={t('games.titleWordle')}
-        game={"name"}
-        setNameTriesComp={setNameTriesComp}
-        finishedGame={finishedNameGame}
-        findGame={findNameGame}
-        setArrayColors={setArrayColors}
-      />
-      {pjName ?                         
-        null        
-        : 
-        <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+      {
+        finishedNameGame !== undefined ? 
+        <Resets 
+          setFinished={setFinishedNameGame} 
+          setDataSelected={setNameSelected}
+          title={t('games.titleWordle')}
+          game={"name"}
+          setNameTriesComp={setNameTriesComp}
+          finishedGame={finishedNameGame}
+          findGame={findNameGame}
+          setArrayColors={setArrayColors}
+        />
+        :
+        <Resets 
+          title={t('games.titleWordle')}
+          game={"name"}
+          finishedGame={true}
+          findGame={findNameGame}
+          setArrayColors={setArrayColors}
+        />
       }
-      <div className='container-name-game' style={{ display: "flex", flexDirection: "column", gap: ".6rem", width:"100%",justifyContent:"center" }}>
+      {nameSelected !== undefined ?                         
+        <div className='container-name-game' style={{ display: "flex", flexDirection: "column", gap: ".6rem", width:"100%",justifyContent:"center" }}>
         {Array.from({ length: 6 }, (_, indexArray) => (
           nameTriesComp === indexArray && finishedNameGame === false ? (
             <form onSubmit={handleSubmit} className='name-container-game' key={"form-"+indexArray}>
@@ -342,7 +350,11 @@ export const NameGame = () => {
             </div>
           )
         ))}
-      </div>
+      </div>        
+        : 
+        <l-trefoil size="200" stroke="22" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
+      }
+
       
       {nameTriesComp >= 3 && finishedNameGame === false ? 
         <div className='container-imagegame-input'>

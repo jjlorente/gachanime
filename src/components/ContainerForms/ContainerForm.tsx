@@ -8,13 +8,13 @@ export const ContainerForm = (props:any) => {
     <div className='container-app'>
       <div className='background-login-img'></div>
       <div className='container-title'>
-          <h1 className="title jaro-regular">
-            GACHANIME
-          </h1>
-          <span className="eslogan-title jaro-regular" style={{marginTop:"-.8rem"}}>
-            {t('login.eslogan')} 
-          </span>
-          <img className='goku-up-img' src="../goku-sticker-1.png" alt="sticker goku" />
+        <h1 className="title jaro-regular">
+          GACHANIME
+        </h1>
+        <span className="eslogan-title jaro-regular" style={{marginTop:"-.8rem", color:"white"}}>
+          {t('login.eslogan')} 
+        </span>
+        <img className='goku-up-img' src="../goku-sticker-1.png" alt="Sticker of Goku, from Dragon Ball" />
       </div>
       <div className='container-form'>
         <h2 className="jaro-regular" id='title-form'>

@@ -116,6 +116,7 @@ const CardFilter = (props:any) => {
       <div className='container-select'>
         <select className='select-anime' value={selectedRarity} onChange={handleRarityChange}>
           <option className='select-option' value="">{t('collection.allRares')}</option>
+          <option className='select-option' value="SS">SS</option>
           <option className='select-option' value="S+">S+</option>
           <option className='select-option' value="S">S</option>
           <option className='select-option' value="A">A</option>
@@ -123,7 +124,7 @@ const CardFilter = (props:any) => {
         </select>
       </div>
       <input className='search-input' type="text" placeholder={t('collection.nameOfCard')} onChange={handleChangeCardName} value={nameCard}></input>
-      <button className='button-clear' onClick={handleClickClearAll}><img src='/paper.png'/></button>
+      <button className='button-clear' onClick={handleClickClearAll}><img src='/paper.png' alt='Image for delete filter'/></button>
     </div>
   );
 };

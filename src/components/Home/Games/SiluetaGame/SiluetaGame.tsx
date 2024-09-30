@@ -175,7 +175,7 @@ export const SiluetaGame = (props: any) => {
                         width={"auto"} 
                         height={"100%"} 
                         src={finishedSiluetaGame ? srcImageSolution : srcImage}
-                        alt="Game image" 
+                        alt="Image for game silhouette" 
                     />
                     
                         :

@@ -122,7 +122,7 @@ export const Login: React.FC = () => {
                         className='btn-toggle-password'
                         onClick={handlePasswordToggle}
                         src={showPassword ? "../eye-2.png" : "../eye-1.png"}
-                        alt=""
+                        alt="Eye image for show or hide password"
                     />
                 </div>
                 {showErrorLogin && <span className='span-error-login'>{showErrorLogin}</span>}

@@ -283,7 +283,7 @@ export const Quests = () => {
   return (
     <div className="Quests">
       <div className='title-quest-container'>
-        <span 
+        <h4 
           onClick={() => {setSection("daily")}} 
           className={section === "daily" ? 'daily-quest active-quest-day' : "daily-quest inactive-quest-daily"
         }>
@@ -303,8 +303,8 @@ export const Quests = () => {
                 null
             }
           </p>
-        </span> 
-        <span 
+        </h4> 
+        <h4 
           onClick={() => {setSection("week")}} 
           className={section === "week" ? 'daily-quest active-quest-day' : "daily-quest inactive-quest-daily"
         }>
@@ -324,15 +324,15 @@ export const Quests = () => {
                 null
             }
           </p>
-        </span> 
-        <span 
+        </h4> 
+        <h4 
           onClick={() => {setSection("special")}} 
           className={section === "special" ? 'daily-quest active-quest-day' : "daily-quest inactive-quest-daily"
         }>
           <p className='title-quest-special'>
             {t('quest.special')}
           </p>
-        </span>
+        </h4>
       </div>
       <div className='section-quest'>
         {section === "daily" && quests ? 
@@ -354,7 +354,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -393,7 +393,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -433,7 +433,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -473,7 +473,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -520,7 +520,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -573,7 +573,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -617,7 +617,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -664,7 +664,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -705,7 +705,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -748,7 +748,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>
@@ -793,7 +793,7 @@ export const Quests = () => {
                   <div className='reward-quest'>
                     <img
                       src='/home/summon-o.png'
-                      alt="Logo Summon"
+                      alt="Image summoning for quest"
                       className='logo-quest'
                     />
                     <div className='reward-quest-num'>

@@ -54,10 +54,12 @@ export const Summoning = () => {
       if ((throws + 1) % 10 === 0) {
         if (random > 0.1) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-        } else if (random < 0.1 && random > 0.002) {
+        } else if (random < 0.1 && random > 0.02) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
-        } else {
+        } else if (random < 0.02 && random > 0.001) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
+        } else {
+          setRarityCards((prevRarityCards) => [...prevRarityCards, "SS"]);
         }
       } else {
         if (random <= 0.7) {
@@ -66,8 +68,10 @@ export const Summoning = () => {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
         } else if (random <= 0.98) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
-        } else {
+        } else if (random <= 0.999) {
           setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
+        } else {
+          setRarityCards((prevRarityCards) => [...prevRarityCards, "SS"]);
         }
       }
       return;
@@ -80,10 +84,12 @@ export const Summoning = () => {
 
     if (random > 0.1) {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
-    } else if (random < 0.1 && random > 0.002) {
+    } else if (random < 0.1 && random > 0.02) {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
-    } else {
+    } else if (random < 0.02 && random > 0.001) {
       setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
+    } else {
+      setRarityCards((prevRarityCards) => [...prevRarityCards, "SS"]);
     }
     shots += 1;
 
@@ -95,8 +101,10 @@ export const Summoning = () => {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "A"]);
       } else if (random <= 0.98) {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "S"]);
-      } else {
+      } else if (random <= 0.999) {
         setRarityCards((prevRarityCards) => [...prevRarityCards, "S+"]);
+      } else {
+        setRarityCards((prevRarityCards) => [...prevRarityCards, "SS"]);
       }
     }
     return;
@@ -118,9 +126,12 @@ export const Summoning = () => {
         if (data) {
           let clr = "gray";
           for (const card of data) {
-            if (card.rarity === "S+") {
-              clr = "red";
+            if (card.rarity === "SS") {
+              clr = "#f1ec00";
               break;
+            }
+            else if (card.rarity === "S+") {
+              clr = "red";
             } else if (card.rarity === "S") {
               clr = "pink";
             } else if (card.rarity === "A" && clr === "gray") {
@@ -170,9 +181,12 @@ export const Summoning = () => {
     let rarity = "b";
     if (cardSummoned) {
       for (const card of cardSummoned) {
-        if (card.rarity === "S+") {
-          rarity = "ss";
+        if (card.rarity === "SS") {
+          rarity = "sss";
           break;
+        }
+        else if (card.rarity === "S+") {
+          rarity = "ss";
         } else if (card.rarity === "S" && rarity !== "ss") {
           rarity = "s";
         } else if (card.rarity === "A" && rarity !== "ss" && rarity !== "s") {
@@ -186,6 +200,8 @@ export const Summoning = () => {
 
   const getBackgroundColor = (rarity: any) => {
     switch (rarity) {
+      case "SS":
+        return "ss";
       case "S+":
         return "s-plus";
       case "A":
@@ -199,6 +215,8 @@ export const Summoning = () => {
 
   const getBorderColor = (rarity: any) => {
     switch (rarity) {
+      case "SS":
+        return "#f1ec00";
       case "S+":
         return "#FF3939";
       case "A":
@@ -290,31 +308,56 @@ export const Summoning = () => {
                     >
                       {card.rarity}
                     </span>
-                    <span
-                      style={{ background: borderColor }}
-                      className={'power-card'}
-                      key={index + 'power-span'}
-                    >
-                      {card.power} P
-                    </span>
-                    <div
+
+                    { card.rarity !== "SS" ?
+                      <span 
+                        style={{ background: borderColor }}
+                        className={'power-card'}
+                        key={index+"power-span"}
+                      >
+                        {card.power} P
+                      </span>
+                      :
+                      <span 
+                        style={{ background: "transparent" }}
+                        className={'power-card-ss'}
+                        key={index+"power-span"}
+                      >
+                        {card.power} P
+                      </span>
+                    }
+
+                  { card.rarity !== "SS" ?
+                    <div 
                       style={{ background: borderColor }}
                       className='container-name-card'
-                    >
-                      <span
+                    >  
+                      <span 
                         style={{ background: borderColor }}
-                        key={index + 'name-span'}
+                        key={index+"name-span"} 
                         className='name-card'
-                      >
-                        {card.name}
+                        >
+                          {card.name}
                       </span>
                       <span 
-                        key={index + 'anime-span'} 
+                        key={index+"anime-span"} 
                         className='anime-name-card'
-                      >
-                        {card.anime_name}
+                        >
+                          {card.anime_name}
                       </span>
                     </div>
+                    :
+                    <div 
+                      className='container-name-card-ss'
+                    >  
+                      <span 
+                        key={index+"name-span"} 
+                        className='name-card-ss'
+                        >
+                          {card.name.toUpperCase()}
+                      </span>
+                    </div>
+                  }
                   </div>
                 </div>
               );

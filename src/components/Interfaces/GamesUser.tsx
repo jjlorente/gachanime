@@ -49,6 +49,8 @@ export interface Game {
     names_game_medium: Array<string>;
     names_game_hard: Array<string>;
 
+    wordle_game: Array<string>;
+
     image_game: Array<string>;
     image_game_medium: Array<string>;
     image_game_hard: Array<string>;
