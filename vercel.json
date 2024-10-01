@@ -1,0 +1,11 @@
+{
+    "rewrites": [
+      { "source": "/auth", "destination": "/index.html" },
+      { "source": "/home/(.*)", "destination": "/index.html" },
+      { "source": "/", "destination": "/index.html" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/index.html" }
+    ]
+}
+  
