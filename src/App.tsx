@@ -21,10 +21,11 @@ import { EyeGame } from './components/Home/Games/EyeGame/EyeGame';
 import { Market } from './components/Home/Market/Market';
 import { Ranking } from './components/Home/Ranking/Ranking';
 import { PixelGame } from './components/Home/Games/PixelGame/PixelGame';
+import config from './config';
 
 function App() {
   const navigate = useNavigate();
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  const clientId = config.googleClientId;
 
   useEffect(() => {
     const userId = localStorage.getItem("_id");
