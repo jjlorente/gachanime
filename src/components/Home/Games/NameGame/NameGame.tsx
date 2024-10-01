@@ -1,12 +1,12 @@
 import { Resets } from '../ResetsComponent/Resets'
 import './NameGame.css'
-import { findGameById, updateGameName, updateSelected } from '../../../../services/userGames';
+import { findGameById, updateGameName } from '../../../../services/userGames';
 import { useUserGames } from '../Games';
 import { useState, useEffect, useRef } from 'react';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { useUserGachas } from "../../Home";
 import { Game } from '../../../Interfaces/GamesUser';
-import { updateGameUser, findCharacters } from '../../../../services/userGames';
+import { updateGameUser } from '../../../../services/userGames';
 import { trefoil } from 'ldrs';
 import { updateLevel } from '../../../../services/user';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ export const NameGame = () => {
   const [errorsArray, setErrorsArray] = useState<Array<string>>([]);
   const [nameTriesComp, setNameTriesComp] = useState<number>(0);
 
-  const { userGamesData, setUserGamesData } = useUserGames();
+  const { userGamesData } = useUserGames();
   const { alerts, setAlerts } = useUserGachas();
   const { nameTries, setNameTries } = useUserGames();
 
@@ -41,7 +41,6 @@ export const NameGame = () => {
           setStatusReward(userGamesData.statusRewardName)
         }
 
-        const nameLocal = localStorage.getItem("nameSelected");
         if (userGamesData && userGamesData.nameSelected) {
           localStorage.setItem("nameSelected", userGamesData.nameSelected.toString())
         }
@@ -128,7 +127,6 @@ export const NameGame = () => {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    let arrayTries = localStorage.getItem("arrayTriesName");
 
     e.preventDefault();
     let isWordCompleted = true

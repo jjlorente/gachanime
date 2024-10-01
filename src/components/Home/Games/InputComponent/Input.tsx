@@ -9,14 +9,14 @@ import JSONAnimes from './animes.json';
 import JSONCharacters from './characters.json';
 
 export const Input = (props: any) => {
-    const { i18n, t } = useTranslation();
+    const { t } = useTranslation();
 
     const [valueInput, setValueInput] = useState<string>("");
     const [animesSuggested, setAnimesSuggested] = useState<Array<string>>([]);
     const [arrayCharacters, setArrayCharacters] = useState<Array<string>>([]);
 
     const { unlock, setOpeningTries, setImageTries, setSiluetaTries, setEyeTries, setPixelTries, userGamesData, setUserGamesData, mode} = useUserGames();
-    const { alerts, setAlerts } = useUserGachas();
+    const { setAlerts } = useUserGachas();
 
     useEffect(() => {
         if(props.game === "silueta" || props.game === "eye") fetchData();

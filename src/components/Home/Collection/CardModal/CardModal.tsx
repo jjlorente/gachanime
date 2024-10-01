@@ -2,14 +2,14 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import './CardModal.css';
 import { useTranslation } from 'react-i18next';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CardConfirmModal } from './CardConfirmModal';
 
 export const CardModal = (props: any) => {
   const [openConfirm, setOpenConfirm] = useState<boolean>(false);
   const [price, setPrice] = useState<number>();
 
-  const {i18n, t} = useTranslation();
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setPrice(0)

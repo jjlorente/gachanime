@@ -10,6 +10,7 @@ export const PaginationComponent = (props: any) => {
     }
     
     const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+        console.log(event)
         props.setCurrentPage(page);
     };
 

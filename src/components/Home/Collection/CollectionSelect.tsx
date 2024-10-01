@@ -7,7 +7,7 @@ const CardFilter = (props:any) => {
   const [selectedCol, setSelectedCol] = useState('');
   const [selectedRarity, setSelectedRarity] = useState('');
   const [nameCard, setNameCard] = useState('');
-  const {i18n, t} = useTranslation();
+  const { t } = useTranslation();
   const [animeNames, setAnimeNames] = useState<string[]>([]);
 
   const filterImages = (anime:any, collection:any, rarity:any, imgs:any) => {

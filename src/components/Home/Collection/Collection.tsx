@@ -8,7 +8,7 @@ import { trefoil } from 'ldrs';
 import { useTranslation } from 'react-i18next';
 import { CardModal } from './CardModal/CardModal';
 
-export const Collection = (props:any) => {
+export const Collection = () => {
   trefoil.register();
   const { t } = useTranslation();
 
@@ -17,7 +17,7 @@ export const Collection = (props:any) => {
   const [userCards, setUserCards] = useState<any>([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(10);
+  const [cardsPerPage] = useState(10);
 
   const [openModal, setOpenModal] = useState(false);
   const [card, setCard] = useState<any>();

@@ -3,13 +3,12 @@ import { useUserGachas } from "../../Home";
 import { updateReward } from '../../../../services/userGames';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import { useOutletContext } from 'react-router-dom';
 
 export const TriesReward = (props: any) => {
     const { imageTries, userGamesData, siluetaTries, nameTries, openingTries, eyeTries, pixelTries, mode } = useUserGames();
-    const { userGachas, setUserGachas } = useUserGachas();
+    const { setUserGachas } = useUserGachas();
     const { t } = useTranslation();
-    const { alerts, setAlerts } = useUserGachas();
+    const { setAlerts } = useUserGachas();
     const [tries, setTries] = useState<number>();
 
     useEffect(() => {

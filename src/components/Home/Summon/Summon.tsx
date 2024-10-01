@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react';
 import './Summon.css';
 import { findGacha } from '../../../services/gacha';
 import { ModalConfirm } from './Modals/ModalConfirm';
-import { PaginationComponent } from '../Collection/PaginationComponent';
 import { useTranslation } from 'react-i18next';
 import { FaInfoCircle } from "react-icons/fa";
 
-export const Summon = (props: any) => {
+export const Summon = () => {
   const {i18n, t} = useTranslation()
-  const [currentPage, setCurrentPage] = useState(1);
-  const [page, setPage] = useState(1);
+  const [currentPage] = useState(1);
+  const [page] = useState(1);
   const [throws, setThrows] = useState(0);
   const [gachas, setGachas] = useState(0);
   const [animeType, setAnimeType] = useState("");

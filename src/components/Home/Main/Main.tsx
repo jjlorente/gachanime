@@ -26,7 +26,7 @@ export const Main = (props: any) => {
   const [percentage2, setPercentage2] = useState<number>();
   const [dataUser, setDataUser] = useState<any>();
   const [power, setPower] = useState<number>();
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   const [dailyTime, setDailyTime] = useState<string>();
 
   useEffect(() => {

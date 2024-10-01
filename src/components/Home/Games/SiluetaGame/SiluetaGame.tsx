@@ -4,11 +4,11 @@ import { useUserGames } from '../Games';
 import { useState, useEffect } from 'react';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { Input } from '../InputComponent/Input';
-import { findGameById, findUserGames, updateSelected } from '../../../../services/userGames';
+import { findGameById, findUserGames } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
 import { useTranslation } from 'react-i18next';
 
-export const SiluetaGame = (props: any) => {
+export const SiluetaGame = () => {
     const [finishedSiluetaGame, setFinishedSiluetaGame] = useState<boolean>();
     const { userGamesData, setUserGamesData, mode, setSiluetaTries } = useUserGames();
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();

@@ -2,14 +2,12 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import './CardModal.css';
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
 import { addCard } from '../../../../services/market';
-import { findCards } from '../../../../services/cards';
 import { calculatePower, findUserCards } from '../../../../services/userCards';
 import { updateTotalPower } from '../../../../services/user';
 
 export const CardConfirmModal = (props: any) => {
-  const {i18n, t} = useTranslation();
+  const { t } = useTranslation();
 
   const handleClose = () => {
     props.setOpenConfirm(false);

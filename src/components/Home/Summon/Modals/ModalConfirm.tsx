@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 export const ModalConfirm = (props: any) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
-  const {i18n, t} = useTranslation();
+  const {t} = useTranslation();
 
   const handleClose = () => {
     props.setOpenModalConfirm(false);

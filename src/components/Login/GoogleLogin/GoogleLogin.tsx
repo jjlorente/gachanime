@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 const Login = () => {
     const navigate = useNavigate();
     const [widthGoogle, setWidthGoogle] = useState("500px");
-    const {i18n,t} = useTranslation();
+    const {i18n} = useTranslation();
     const handleLoginSuccess = async (credentialResponse: any) => {
         const googleAccount = true;
         const token = credentialResponse.credential;

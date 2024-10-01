@@ -10,7 +10,7 @@ import { RiGamepadFill } from "react-icons/ri";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { RiVipCrownFill } from "react-icons/ri";
 
-export const Nav = (props: any) => {
+export const Nav = () => {
   const { i18n, t } = useTranslation();
   const navigate = useNavigate(); 
   const location = useLocation();

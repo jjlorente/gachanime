@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 export const Login: React.FC = () => {
     const navigate = useNavigate();
-    const {i18n, t} = useTranslation();
+    const {t} = useTranslation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [inputText, setInputText] = useState('');

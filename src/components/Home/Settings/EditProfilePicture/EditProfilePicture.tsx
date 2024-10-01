@@ -3,7 +3,7 @@ import { updateUser } from '../../../../services/user';
 import { useTranslation } from 'react-i18next';
 
 const EditProfilePicture = (props:any) => {
-  const {i18n,t} = useTranslation();
+  const {t} = useTranslation();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | undefined>(props.user.profilePicture);
   const fileInputRef = React.createRef<HTMLInputElement>();

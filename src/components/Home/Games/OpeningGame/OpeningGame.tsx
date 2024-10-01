@@ -1,4 +1,4 @@
-import { findGameById, findUserGames, updateSelected } from '../../../../services/userGames';
+import { findGameById, findUserGames } from '../../../../services/userGames';
 import { useState, useEffect } from 'react';
 import './OpeningGame.css'
 import { useUserGames } from '../Games';
@@ -11,8 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 export const OpeningGame = () => {
     const { userGamesData, setUserGamesData, mode, setOpeningTries } = useUserGames();
-    const {i18n, t} = useTranslation();
-    const { openingTries } = useUserGames();
+    const {t} = useTranslation();
 
     const [finishedOpeningGame, setFinishedOpeningGame] = useState<boolean>();
     const [gameOpeningData, setGameOpeningData] = useState<Game>();

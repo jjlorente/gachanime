@@ -1,27 +1,16 @@
-import { useUserGames } from '../Games/Games';
 import './Settings.css'
 import { useState, useEffect, useRef } from 'react';
 import { findUserById, updateUser, updateUserLan } from '../../../services/user';
-import { MdEdit } from "react-icons/md";
 import EditProfilePicture from './EditProfilePicture/EditProfilePicture';
 import { useTranslation } from 'react-i18next';
 
-export const Settings = (props:any) => {
-  const { userGamesData } = useUserGames();
+export const Settings = () => {
   const [user, setUser] = useState<any>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isEditable, setIsEditable] = useState(false);
   const [valueInput, setValueInput] = useState<string>("");
   const [errorInput, setErrorInput] = useState<string>("");
   const { i18n, t } = useTranslation();
 
-  const handleEditClick = () => {
-    setIsEditable(true);
-    if(inputRef.current) {
-      inputRef.current.focus();
-    }
-    document.getElementById("edit-username-input")?.focus()
-  };
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 export const Ranking = () => {
     const [ranks, setRanks] = useState<any>([]); 
     const [sectionRank, setSectionRank] = useState<any>("power"); 
-    const { i18n, t } = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const getRanks = async () => {

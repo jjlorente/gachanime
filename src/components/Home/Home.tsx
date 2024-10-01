@@ -214,7 +214,7 @@ export const Home = () => {
   return (
     <div className='Home'>
       <Header userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
-      <Nav userData={userData} userGachas={userGachas} activeIndex={activeIndex} setActiveIndex={setActiveIndex} alerts={alerts} setAlerts={setAlerts}/>
+      <Nav />
       <Outlet context={{ userGachas, setUserGachas, alerts, setAlerts, setActiveIndex }}/>
     </div>
   );

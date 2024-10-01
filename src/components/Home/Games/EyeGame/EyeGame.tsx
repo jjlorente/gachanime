@@ -4,11 +4,11 @@ import { useUserGames } from '../Games';
 import { useState, useEffect } from 'react';
 import { TriesReward } from '../TriesRewardComponent/TriesReward';
 import { Input } from '../InputComponent/Input';
-import { findGameById, findUserGames, updateSelected } from '../../../../services/userGames';
+import { findGameById, findUserGames } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
 import { useTranslation } from 'react-i18next';
 
-export const EyeGame = (props: any) => {
+export const EyeGame = () => {
     const [finishedEyeGame, setFinishedEyeGame] = useState<boolean>();
     const { userGamesData, setUserGamesData, mode, setEyeTries } = useUserGames();
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
@@ -17,7 +17,7 @@ export const EyeGame = (props: any) => {
     const [pjName, setPjName] = useState<string>();
     const [eyeSelected, setEyeSelected] = useState<number>();
     const [gameData, setGameData] = useState<Game>();
-    const { i18n, t } = useTranslation();
+    const { t } = useTranslation();
     const { eyeTries } = useUserGames();
     const [srcImage, setSrc] = useState<string>();
     const [srcImageSolution, setSrcSolution] = useState<string>();
@@ -127,7 +127,6 @@ export const EyeGame = (props: any) => {
                     setStatusReward(userGamesData.statusRewardEye[mode])
                 }
 
-                const eyeLocal = localStorage.getItem("eyeSelected");
                 if (userGamesData && userGamesData.eyeSelected[mode]) {
                     localStorage.setItem("eyeSelected", userGamesData.eyeSelected[mode].toString())
                 }

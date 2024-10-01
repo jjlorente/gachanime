@@ -10,7 +10,7 @@ import { registerUserCard } from '../../services/userCards';
 import { useTranslation } from 'react-i18next';
 
 export const Register = () => {
-  const {i18n, t} = useTranslation();
+  const {t} = useTranslation();
   const navigate = useNavigate();
   
   const [inputName, setInputName] = useState('');

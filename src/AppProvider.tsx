@@ -19,8 +19,8 @@ interface AppProviderProps {
 }
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-  const [userData, setUserData] = useState<any>(null);
-  const [userGachas, setUserGachas] = useState<any>(null);
+  const [userData] = useState<any>(null);
+  const [userGachas] = useState<any>(null);
 
   const value = {
     userData,

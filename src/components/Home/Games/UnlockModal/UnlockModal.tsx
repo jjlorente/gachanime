@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { IoAddCircleSharp } from "react-icons/io5";
 
 export const UnlockModal = (props: any) => {
-  const {i18n, t} = useTranslation();
+  const {t} = useTranslation();
   const [arrayCards, setArrayCards] = useState<Array<Array<string>>>([]);
 
   const reqMedium = [[

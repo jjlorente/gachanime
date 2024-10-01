@@ -2,7 +2,7 @@ import './ImageGame.css'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import { findGameById, findUserGames, updateSelected } from '../../../../services/userGames';
+import { findGameById, findUserGames } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
 import { trefoil } from 'ldrs';
 import { useUserGames } from '../Games';
@@ -13,13 +13,12 @@ import { useTranslation } from 'react-i18next';
 
 export const ImageGame = () => {
     const { userGamesData, setUserGamesData, mode, setImageTries } = useUserGames();
-    const { i18n, t } = useTranslation();
+    const { t } = useTranslation();
 
     library.add(faRotateRight);
     trefoil.register();
 
     const [srcImage, setSrc] = useState<string>();
-    const [gameData, setGameData] = useState<Game>();
     const [finishedImageGame, setFinishedImageGame] = useState<boolean>();
     const [gameImageData, setGameImageData] = useState<Game>();
     const [imgSelected, setImgSelected] = useState<number>();
@@ -29,7 +28,6 @@ export const ImageGame = () => {
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>();
 
-    const { imageTries } = useUserGames();
 
     useEffect(()=> {
         let arrayErrors;

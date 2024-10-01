@@ -3,7 +3,7 @@ import './PixelGame.css';
 import { useState } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { findGameById, findUserGames, updateSelected } from '../../../../services/userGames';
+import { findGameById, findUserGames } from '../../../../services/userGames';
 import { Game } from '../../../Interfaces/GamesUser';
 import { trefoil } from 'ldrs';
 import { useUserGames } from '../Games';
@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 export const PixelGame = () => {
   const { userGamesData, setUserGamesData, mode, setPixelTries } = useUserGames();
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
 
   library.add(faRotateRight);
   trefoil.register();

@@ -1,20 +1,13 @@
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export const ModalMain = (props: any) => {
-  const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
   const handleClose = () => {
     props.setMd(false);
     setMessage("");
-  };
-
-  const handleConfirm = (numberCards: any) => {
-
   };
 
   useEffect(() => {

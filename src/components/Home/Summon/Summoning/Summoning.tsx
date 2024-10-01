@@ -8,12 +8,12 @@ import { calculatePower } from '../../../../services/userCards';
 import { updateTotalPower } from '../../../../services/user';
 
 export const Summoning = () => {
-  const {i18n, t} = useTranslation();
+  const {t} = useTranslation();
   trefoil.register();
   const [colorPulsar, setColorPulsar] = useState("gray");
   const navigate = useNavigate();
   const location = useLocation();
-  const { prop1, prop2, prop3, throws, gachas } = location.state || {};
+  const { prop1, prop3, throws, gachas } = location.state || {};
   const [rarityCards, setRarityCards] = useState<string[]>([]);
   const [cardSummoned, setCardSummoned] = useState<any>();
   const [show, setShow] = useState<boolean[]>([]);

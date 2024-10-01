@@ -1,11 +1,9 @@
-import { Link, Outlet, useLocation, useNavigate, useOutletContext } from 'react-router-dom';
+import { Link, Outlet, useLocation, useOutletContext } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Games.css';
 import { useUserGachas } from "../Home";
-import { findUserGames, findGameById, registerNewGameUser, deleteAll } from '../../../services/userGames';
-import { GameData, Game } from '../../Interfaces/GamesUser';
-import { Quests } from '../Quests/Quests';
-import { findAllQuestUser, updateWeekQuests } from '../../../services/userQuests';
+import { findUserGames, registerNewGameUser, deleteAll } from '../../../services/userGames';
+import { GameData } from '../../Interfaces/GamesUser';
 import { unlockMode } from '../../../services/user';
 import { useTranslation } from 'react-i18next';
 
@@ -16,7 +14,7 @@ import { BiSolidPencil } from "react-icons/bi";
 import { ImAccessibility } from "react-icons/im";
 import { IoEye } from "react-icons/io5";
 import { findUserById } from '../../../services/user';
-import { findDay, updateDay, updateWeek } from '../../../services/day';
+import { findDay, updateDay } from '../../../services/day';
 
 type ContextType = { 
   userGamesData: GameData | null;
@@ -47,8 +45,8 @@ export function useUserGames() {
   return useOutletContext<ContextType>();
 }
 
-export const Games = (props: any) => {
-  const { i18n, t } = useTranslation();
+export const Games = () => {
+  const { t } = useTranslation();
 
   const [userData, setUserData] = useState<any>();
   const { userGachas, setUserGachas, alerts, setAlerts } = useUserGachas();
@@ -63,7 +61,6 @@ export const Games = (props: any) => {
   const [mode, setMode] = useState<number>(0);
   const [unlock, setUnlock] = useState<boolean>();
   const [index, setIndex] = useState("image");
-  const [openModal, setOpenModal] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
