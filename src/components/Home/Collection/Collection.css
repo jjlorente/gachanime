@@ -83,7 +83,7 @@
 .power-card-ss {
     position: absolute;
     box-sizing: border-box;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     text-align: center;
     right: 0px;
     padding: 0 5px;
@@ -91,6 +91,7 @@
     border-radius: 0 0 0 5px;
     background-color: transparent;
     color: yellow;
+    text-shadow: none;
 }
 
 .anime-name-card{
@@ -120,8 +121,11 @@
     z-index: 9;
     padding: 0 15px;
     box-sizing: border-box;
-    border-bottom: none;
-    color: rgb(255, 238, 0);
+    text-shadow: none !important;
+    background: -webkit-linear-gradient(90deg, yellow 10%, yellow 30%, orange 60%, w 90%); /* Compatibilidad con navegadores antiguos */
+    background: linear-gradient(90deg, yellow 10%, yellow 30%, orange 60%, red 90%); /* Degradado con porcentajes */
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .copies {

@@ -154,8 +154,8 @@ export const Input = (props: any) => {
                         setImageTries(data.triesimage[mode]);
                         let zoomActual = parseInt(props.zoomImage.split("%")[0]);
                         let zoomRest = data.triesimage[mode] * 50;
-                        if (zoomRest <= 250) {
-                            zoomActual = 350 - zoomRest;
+                        if (zoomRest <= 300) {
+                            zoomActual = 400 - zoomRest;
                             props.setZoomImage(zoomActual+"%");
                         } else {
                             props.setZoomImage("100%");

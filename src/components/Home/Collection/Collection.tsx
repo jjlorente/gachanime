@@ -147,116 +147,141 @@ export const Collection = (props:any) => {
   return (
     <div className="Collection">
       <div className='section-collection'>
-        <CollectionSelect imgsSelected={imgsSelected} setImgsSelected={setImgsSelected} imgs={imgs} userCards={userCards} setCurrentPage={setCurrentPage}/>
+        <CollectionSelect 
+          imgsSelected={imgsSelected} 
+          setImgsSelected={setImgsSelected} 
+          imgs={imgs} 
+          userCards={userCards} 
+          setCurrentPage={setCurrentPage}
+        />
         <div className="cards-container">
           <div className="cards">
-            {currentCards.length > 0  ? (
+            {currentCards.length > 0 ? (
               currentCards.map((img:any, index:any) => {
                 const borderColor = getBorderColor(img.rarity);
                 const rarityClass = getRarityClassName(img.rarity);
                 const userCard = userContainCard(img._id);
                 const backgroundColor = getBackgroundColor(img.rarity);
-                const cardClassName = userCard
-                  ? "card-user"
-                  : "card-not-user";
-
+                const cardClassName = userCard ? "card-user" : "card-not-user";
+  
                 return (
-                  <div onClick={() => { if (userCard) { setOpenModal(true); setCard(img); } }} key={index+"container-card"} className={userCard ? 'container-card-obtained container-card '+ cardClassName + ' border-collection'+rarityClass : 'container-card '+ cardClassName + ' border-collection'+rarityClass}>
-                    <span className='copies' style={{ border: borderColor }}>x {copiesCard[img._id] ? copiesCard[img._id] : "0"}</span>
+                  <div 
+                    onClick={() => { if (userCard) { setOpenModal(true); setCard(img); } }} 
+                    key={index + "container-card"} 
+                    className={
+                      userCard 
+                        ? 'container-card-obtained container-card ' + cardClassName + ' border-collection' + rarityClass 
+                        : 'container-card ' + cardClassName + ' border-collection' + rarityClass
+                    }
+                  >
+                    <span className='copies' style={{ border: borderColor }}>
+                      x {copiesCard[img._id] ? copiesCard[img._id] : "0"}
+                    </span>
                     <img 
                       key={index} 
                       src={img.base64_image} 
                       alt={`Imagen of card anime`} 
                       className={
-                        userCard
-                          ? "card-collection"
+                        userCard 
+                          ? "card-collection" 
                           : "img-not card-collection"
-                        }
+                      }
                     />
                     <span 
-                      style={{ background: backgroundColor }}
-                      className={'rarity-card'}
-                      key={index+"rarity-span"}
+                      style={{ background: backgroundColor }} 
+                      className={'rarity-card'} 
+                      key={index + "rarity-span"}
                     >
                       {img.rarity}
                     </span>
-                  { img.rarity !== "SS" ?
+                    {img.rarity !== "SS" ? (
                       <span 
-                        style={{ background: backgroundColor }}
-                        className={'power-card'}
-                        key={index+"power-span"}
+                        style={{ background: backgroundColor }} 
+                        className={'power-card'} 
+                        key={index + "power-span"}
                       >
                         {img.power} P
                       </span>
-                      :
+                    ) : (
                       <span 
-                        style={{ background: "transparent" }}
-                        className={'power-card-ss'}
-                        key={index+"power-span"}
+                        style={{ background: "transparent" }} 
+                        className={'power-card-ss'} 
+                        key={index + "power-span"}
                       >
                         {img.power} P
                       </span>
-                    }
-                  { img.rarity !== "SS" ?
-                    <div 
-                      style={{ background: backgroundColor }}
-                      className='container-name-card'
-                    >  
-                      <span 
-                        style={{ background: backgroundColor }}
-                        key={index+"name-span"} 
-                        className='name-card'
+                    )}
+                    {img.rarity !== "SS" ? (
+                      <div 
+                        style={{ background: backgroundColor }} 
+                        className='container-name-card'
+                      >  
+                        <span 
+                          style={{ background: backgroundColor }} 
+                          key={index + "name-span"} 
+                          className='name-card'
                         >
                           {img.name}
-                      </span>
-                      <span 
-                        key={index+"anime-span"} 
-                        className='anime-name-card'
+                        </span>
+                        <span 
+                          key={index + "anime-span"} 
+                          className='anime-name-card'
                         >
                           {img.anime_name}
-                      </span>
-                    </div>
-                    :
-                    <div 
-                      className='container-name-card-ss'
-                    >  
-                      <span 
-                        key={index+"name-span"} 
-                        className='name-card-ss'
+                        </span>
+                      </div>
+                    ) : (
+                      <div className='container-name-card-ss'>  
+                        <span 
+                          key={index + "name-span"} 
+                          className='name-card-ss'
                         >
                           {img.name.toUpperCase()}
-                      </span>
-                    </div>
-                  }
-
+                        </span>
+                      </div>
+                    )}
                   </div>
                 );
               })
             ) : (
-              imgs.length > 0 ?
-              <div style={{margin:"13rem 0 0 0"}}>
-                <span style={{fontSize:"3rem"}}>{t('collection.notOwned')}</span>
-              </div>
-              : 
-              <div style={{margin:"13rem 0 0 0"}}>
-                <l-trefoil size="200" stroke="33" stroke-length="0.5" bg-opacity="0.2" color={"#0077ff"} speed="3"></l-trefoil>
-              </div>
+              imgs.length > 0 ? (
+                <div style={{ margin: "13rem 0 0 0" }}>
+                  <span style={{ fontSize: "3rem" }}>{t('collection.notOwned')}</span>
+                </div>
+              ) : (
+                <div style={{ margin: "13rem 0 0 0" }}>
+                  <l-trefoil 
+                    size="200" 
+                    stroke="33" 
+                    stroke-length="0.5" 
+                    bg-opacity="0.2" 
+                    color={"#0077ff"} 
+                    speed="3"
+                  />
+                </div>
+              )
             )}     
           </div>
-
-          {imgsSelected.length > 0 ? 
+  
+          {imgsSelected.length > 0 ? (
             <PaginationComponent 
               totalPosts={imgsSelected.length} 
-              cardsPerPage={cardsPerPage}
+              cardsPerPage={cardsPerPage} 
               setCurrentPage={setCurrentPage}
-            /> 
-            : 
-            <></>
-          }
-
-          <CardModal openModal={openModal} setOpenModal={setOpenModal} card={card} setImgsSelected={setImgsSelected} setImgs={setImgs} setUserCards={setUserCards}/>
+            />
+          ) : null}
+  
+          <CardModal 
+            openModal={openModal} 
+            setOpenModal={setOpenModal} 
+            card={card} 
+            setImgsSelected={setImgsSelected} 
+            setImgs={setImgs} 
+            setUserCards={setUserCards}
+          />
         </div>
       </div>
     </div>
   )
+  
 }

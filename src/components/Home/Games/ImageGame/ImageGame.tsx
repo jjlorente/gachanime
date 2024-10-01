@@ -25,7 +25,7 @@ export const ImageGame = () => {
     const [imgSelected, setImgSelected] = useState<number>();
     const [animeNameImage, setAnimeNameImage] = useState<string>();
     const [animesErrors, setAnimesErrors] = useState<Array<string>>([]);
-    const [zoomImage, setZoomImage] = useState<string>("350%");
+    const [zoomImage, setZoomImage] = useState<string>("400%");
     const [gachasRecompensa, setGachasRecompensa] = useState<number>();
     const [statusReward, setStatusReward] = useState<number>();
 
@@ -117,10 +117,10 @@ export const ImageGame = () => {
                         setZoomImage("100%")
                     } else {
                         let zoom = userGamesData.triesimage[mode] * 50;
-                        if (zoom >= 250) {
+                        if (zoom >= 300) {
                             setZoomImage("100%")
                         } else {
-                            zoom = 350 - zoom;
+                            zoom = 400 - zoom;
                             setZoomImage(zoom+"%")
                         }
                     }
