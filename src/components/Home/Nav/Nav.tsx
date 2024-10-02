@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { RiGamepadFill } from "react-icons/ri";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { RiVipCrownFill } from "react-icons/ri";
+import { GiMagicGate } from "react-icons/gi";
 
 export const Nav = () => {
   const { i18n, t } = useTranslation();
@@ -80,7 +81,7 @@ export const Nav = () => {
                 <RiGamepadFill className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>
               :
               item.link === "summon" ?
-                <img src='/home/summon-ww.png' style={{height:"28px", width: "28px",marginLeft:"1px"}} className="icon-summon-nav" alt='Logo image for user nav'/>
+                <GiMagicGate className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>
               :
               item.link === "market" ?
                 <IoStorefrontSharp className='nav-icon' style={{height:"28px", width: "28px",marginLeft:"1px"}}/>

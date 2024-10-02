@@ -45,7 +45,7 @@ const Login = () => {
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 400) {
-                setWidthGoogle("100px");
+                setWidthGoogle("200px");
             } else if (window.innerWidth < 740) {
                 setWidthGoogle("260px");
             } else {

@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { RiGamepadFill } from "react-icons/ri";
 import { IoStorefrontSharp } from "react-icons/io5";
 import { RiVipCrownFill } from "react-icons/ri";
+import { GiMagicGate } from "react-icons/gi";
 
 export const Header = (props: any) => {
   const [menu, setMenu] = useState<boolean>(false);
@@ -46,13 +47,13 @@ export const Header = (props: any) => {
                 to={item.link}
                 key={index}
                 className={`item-nav-vertical link-reset ${item.link === props.activeIndex ? 'nav-active' : ''}`}
-                onClick={() => handleSetActiveIndex(item.link)}
+                onClick={() => {handleSetActiveIndex(item.link); setMenu(false)}}
               >
                 { item.link === "games" ? 
-                  <RiGamepadFill style={{height:"25px", width: "25px"}}/>
+                    <RiGamepadFill style={{height:"25px", width: "25px"}}/>
                   :
                   item.link === "summon" ?
-                    <img src='/home/summon-ww.png' style={{width: "25px"}} alt="Image for summoning link"/>
+                    <GiMagicGate style={{height:"25px", width: "25px"}}/>
                   :
                   item.link === "market" ?
                     <IoStorefrontSharp style={{height:"25px", width: "25px"}}/>
