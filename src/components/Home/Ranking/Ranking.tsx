@@ -43,7 +43,7 @@ export const Ranking = () => {
                                 <div className={index === 0 ? 'user-info-cont one' : index === 1 ? 'user-info-cont two' : index === 2 ? 'user-info-cont third' : "user-info-cont"} key={index}>
                                     <span>Nº {index + 1}</span>
                                     <div className='username-top'>
-                                        <span>{user.username}</span>
+                                        <span>{user.username.split(" ")[0] ? user.username.split(" ")[0] : user.username}</span>
                                         <img className='img-marco-top' src={user.profilePicture} alt='Profile image from user of GACHANIME'></img>
                                     </div>
                                     <span>{user.totalPower} P</span>
@@ -56,7 +56,7 @@ export const Ranking = () => {
                                 <div className={index === 0 ? 'user-info-cont one' : index === 1 ? 'user-info-cont two' : index === 2 ? 'user-info-cont third' : "user-info-cont"} key={index}>
                                     <span>Nº {index + 1}</span>
                                     <div className='username-top'>
-                                        <span>{user.username}</span>
+                                        <span>{user.username.split(" ")[0] ? user.username.split(" ")[0] : user.username}</span>
                                         <img className='img-marco-top' src={user.profilePicture} alt='Profile image from user of GACHANIME'></img>
                                     </div>
                                     <span>Level {user.profileLevel}</span>
@@ -69,7 +69,7 @@ export const Ranking = () => {
                                 <div className={index === 0 ? 'user-info-cont one' : index === 1 ? 'user-info-cont two' : index === 2 ? 'user-info-cont third' : "user-info-cont"} key={index}>
                                     <span>Nº {index + 1}</span>
                                     <div className='username-top'>
-                                        <span>{user.userDetails.username}</span>
+                                        <span>{user.userDetails.username.split(" ")[0] ? user.userDetails.username.split(" ")[0] : user.userDetails.username }</span>
                                         <img className='img-marco-top' src={user.userDetails.profilePicture} alt='Profile image from user of GACHANIME'></img>
                                     </div>
                                     <span>{user.totalUniqueCards} / {ranks.totalCards}</span>

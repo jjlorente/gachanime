@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Outlet, useOutletContext, useNavigate, useLocation } from 'react-router-dom';
 import { Nav } from './Nav/Nav';
 import { Header } from './Header/Header';
-import { findUserById, getRank } from '../../services/user';
-import { deleteAll } from '../../services/userGames';
+import { findUserById, updateReset } from '../../services/user';
+import { deleteAll, findUserGames, registerNewGameUser } from '../../services/userGames';
 import { updateWeekQuests } from '../../services/userQuests';
 import { findGacha } from '../../services/gacha';
 import { findDay, createDay, updateDay, updateWeek } from '../../services/day';
@@ -40,16 +40,6 @@ export const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const checkDay = async () => {
-      try {
-        const day = await findDay();
-        return day.lastReset;
-      } catch (error) {
-        console.error('Error al obtener el día:', error);
-        return null;
-      }
-    };
-
     const checkWeek = async () => {
       try {
         const day = await findDay();
@@ -63,21 +53,35 @@ export const Home = () => {
     const fetchData = async () => {
       const now = new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" });
       const dateInSpain = new Date(now);
-
-      let dayDB = await checkDay();
       const local = getYearMonthDay(dateInSpain);
 
-      if (dayDB) {
-        dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
-        if (isDateOutdated(dayDB, local)) {
-          //RESET DAILY, RESET DAY QUEST AND LOCALSTORGE
+      const idUser = localStorage.getItem("_id");
+
+      let dayReset;
+      if(idUser) {
+        dayReset = await findUserById(idUser);
+        dayReset = dayReset.resetGameDay.split(",").map((str: any) => parseInt(str, 10));
+      }
+      let dataGame;
+      if(idUser) {
+        dataGame = await findUserGames(idUser);
+      }
+
+      if (dayReset && idUser) {
+        if (isDateOutdated(dayReset, local) && dataGame) {
           await clearLocalStorage();
-          await resetDaily();
+          await deleteAll(idUser, false);
+          await updateWeekQuests(idUser, 1, 1, 0);
+          await updateReset(idUser);
           let day = await updateDay();
           localStorage.setItem("time", day.toString());
+        } else if(!dataGame) {
+          let day = await updateDay();
+          localStorage.setItem("time", day.toString());
+          await registerNewGameUser(idUser)
         } 
       }
-      const idUser = localStorage.getItem("_id");
+
       if(idUser) {
         const data = await findUserQuests(idUser);
         if(!data) {
@@ -112,7 +116,7 @@ export const Home = () => {
       }
     };
     fetchData();
-  }, [location]);
+  }, []);
 
   const clearLocalStorage = async () => {
     localStorage.setItem("imgSelected", "");
@@ -195,13 +199,6 @@ export const Home = () => {
     if (dataGacha) {
       setUserGachas(dataGacha.gachas);
       setUserThrows(dataGacha.throws);
-    }
-  };
-
-  const resetDaily = async () => {
-    let userid = localStorage.getItem("_id");
-    if(userid) {
-      await deleteAll(userid, false);
     }
   };
 

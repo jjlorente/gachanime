@@ -2,11 +2,10 @@ import { Link, Outlet, useLocation, useOutletContext } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Games.css';
 import { useUserGachas } from "../Home";
-import { findUserGames, registerNewGameUser, deleteAll } from '../../../services/userGames';
+import { findUserGames } from '../../../services/userGames';
 import { GameData } from '../../Interfaces/GamesUser';
-import { unlockMode , updateReset} from '../../../services/user';
+import { unlockMode } from '../../../services/user';
 import { useTranslation } from 'react-i18next';
-import { updateWeekQuests } from '../../../services/userQuests';
 import { PiImageBroken } from "react-icons/pi";
 import { BiImage } from "react-icons/bi";
 import { BiSolidMusic } from "react-icons/bi";
@@ -14,7 +13,6 @@ import { BiSolidPencil } from "react-icons/bi";
 import { ImAccessibility } from "react-icons/im";
 import { IoEye } from "react-icons/io5";
 import { findUserById } from '../../../services/user';
-import { findDay, updateDay } from '../../../services/day';
 
 type ContextType = { 
   userGamesData: GameData | null;
@@ -64,90 +62,32 @@ export const Games = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const checkDay = async () => {
-      try {
-        const day = await findDay();
-        return day.lastReset;
-      } catch (error) {
-        console.error('Error al obtener el día:', error);
-        return null;
-      }
-    };
-
     const fetchData = async () => {
-      const now = new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" });
-      const dateInSpain = new Date(now);
       const idUser = localStorage.getItem("_id");
-      let dayReset;
-      if(idUser) {
-        dayReset = await findUserById(idUser);
-      }
-
-      let dayDB = await checkDay();
-      const local = getYearMonthDay(dateInSpain);
-      if (dayDB) {
-        dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
-        localStorage.setItem("time", dayDB.toString());
-        let dataGame;
-        if(idUser) {
-          dataGame = await findUserGames(idUser);
-        }
-        dayReset = dayReset.resetGameDay.split(",").map((str: any) => parseInt(str, 10));
-
-        if (isDateOutdated(dayReset, local) && dataGame) {
-          if(idUser) {
-            await updateWeekQuests(idUser, 1, 1, 0);
-            await updateReset(idUser);
-          }
-
-          await resetDaily();
-        } else {
-          if (idUser) {
-            try {
-              const data = await findUserGames(idUser);
-              if(data && mode !== null) {
-
-                setUserGamesData(data);
-                setImageTries(data.triesimage[mode]);
-                setSiluetaTries(data.triessilueta[mode]);
-                setNameTries(data.triesname);
-                setOpeningTries(data.triesopening[mode]);
-                setEyeTries(data.trieseye[mode]);
-                setPixelTries(data.triespixel[mode]);
-                setResets(data.resets);
-              } else {
-                console.log("nuevo usuario games")
-                let day = await updateDay();
-                localStorage.setItem("time", day.toString());
-                const data = await registerNewGameUser(idUser)
-                setUserGamesData(data);
-              }
-            } catch (error: any) {
-              console.error('Error:', error);
-              if (error === "Games no encontradas") {
-                console.log("Games no encontradas");
-              }
-            }
+      if (idUser) {
+        try {
+          const data = await findUserGames(idUser);
+          if(data && mode !== null) {
+            console.log("GAMES EXISTENTE | SECTION GAMES")
+            setUserGamesData(data);
+            setImageTries(data.triesimage[mode]);
+            setSiluetaTries(data.triessilueta[mode]);
+            setNameTries(data.triesname);
+            setOpeningTries(data.triesopening[mode]);
+            setEyeTries(data.trieseye[mode]);
+            setPixelTries(data.triespixel[mode]);
+            setResets(data.resets);
+          } 
+        } catch (error: any) {
+          console.error('Error:', error);
+          if (error === "Games no encontradas") {
+            console.log("Games no encontradas");
           }
         }
       }
-      
     };
     fetchData();
   }, []);
-
-  const resetDaily = async () => {
-    let userid = localStorage.getItem("_id");
-    if(userid) {
-      const data = await deleteAll(userid, true);
-      setUserGamesData(data);
-    }
-  };
-
-  const getYearMonthDay = (date: Date) => [date.getFullYear(), date.getMonth() + 1, date.getDate()];
-  
-  const isDateOutdated = (storedDate: number[], currentDate: number[]) => 
-    storedDate[0] < currentDate[0] || storedDate[1] < currentDate[1] || storedDate[2] < currentDate[2];
 
   useEffect(() => {
     const fetchDataMode = async () => {
