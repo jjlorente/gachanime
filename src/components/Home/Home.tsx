@@ -73,6 +73,8 @@ export const Home = () => {
           //RESET DAILY, RESET DAY QUEST AND LOCALSTORGE
           await clearLocalStorage();
           await resetDaily();
+          let day = await updateDay();
+          localStorage.setItem("time", day.toString());
         } 
       }
       const idUser = localStorage.getItem("_id");
@@ -199,7 +201,6 @@ export const Home = () => {
   const resetDaily = async () => {
     let userid = localStorage.getItem("_id");
     if(userid) {
-      await updateWeekQuests(userid, 1, 1, 0);
       await deleteAll(userid, false);
     }
   };

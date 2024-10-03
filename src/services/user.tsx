@@ -70,6 +70,29 @@ export const registerUser = async (username: string, password: string, email: st
   }
 };
 
+export const updateReset = async (userId: string) => {
+  try {
+    const response = await fetch(`${config.apiUrl}/users/updateReset`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Unknown error');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+
 export const findUserById = async (id: string) => {
   try {
       const response = await fetch(`${config.apiUrl}/users/findById?id=${id}`, {

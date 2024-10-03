@@ -4,9 +4,9 @@ import './Games.css';
 import { useUserGachas } from "../Home";
 import { findUserGames, registerNewGameUser, deleteAll } from '../../../services/userGames';
 import { GameData } from '../../Interfaces/GamesUser';
-import { unlockMode } from '../../../services/user';
+import { unlockMode , updateReset} from '../../../services/user';
 import { useTranslation } from 'react-i18next';
-
+import { updateWeekQuests } from '../../../services/userQuests';
 import { PiImageBroken } from "react-icons/pi";
 import { BiImage } from "react-icons/bi";
 import { BiSolidMusic } from "react-icons/bi";
@@ -77,23 +77,36 @@ export const Games = () => {
     const fetchData = async () => {
       const now = new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" });
       const dateInSpain = new Date(now);
-      
+      const idUser = localStorage.getItem("_id");
+      let dayReset;
+      if(idUser) {
+        dayReset = await findUserById(idUser);
+      }
+
       let dayDB = await checkDay();
       const local = getYearMonthDay(dateInSpain);
       if (dayDB) {
         dayDB = dayDB.split(",").map((str: any) => parseInt(str, 10));
         localStorage.setItem("time", dayDB.toString());
-        if (isDateOutdated(dayDB, local)) {
-          //RESET DAILY, RESET GAMES AND UPDATE DAY DB
+        let dataGame;
+        if(idUser) {
+          dataGame = await findUserGames(idUser);
+        }
+        dayReset = dayReset.resetGameDay.split(",").map((str: any) => parseInt(str, 10));
+
+        if (isDateOutdated(dayReset, local) && dataGame) {
+          if(idUser) {
+            await updateWeekQuests(idUser, 1, 1, 0);
+            await updateReset(idUser);
+          }
+
           await resetDaily();
-          let day = await updateDay();
-          localStorage.setItem("time", day.toString());
         } else {
-          const idUser = localStorage.getItem("_id");
           if (idUser) {
             try {
               const data = await findUserGames(idUser);
               if(data && mode !== null) {
+
                 setUserGamesData(data);
                 setImageTries(data.triesimage[mode]);
                 setSiluetaTries(data.triessilueta[mode]);
@@ -103,6 +116,9 @@ export const Games = () => {
                 setPixelTries(data.triespixel[mode]);
                 setResets(data.resets);
               } else {
+                console.log("nuevo usuario games")
+                let day = await updateDay();
+                localStorage.setItem("time", day.toString());
                 const data = await registerNewGameUser(idUser)
                 setUserGamesData(data);
               }
@@ -134,7 +150,7 @@ export const Games = () => {
     storedDate[0] < currentDate[0] || storedDate[1] < currentDate[1] || storedDate[2] < currentDate[2];
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataMode = async () => {
       const user = localStorage.getItem("userData");
       if (user) {
         const parsedUser = JSON.parse(user);
@@ -148,7 +164,7 @@ export const Games = () => {
       }
     };
     
-    fetchData()
+    fetchDataMode()
   }, [mode]);
 
 
@@ -160,14 +176,14 @@ export const Games = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataUser = async () => {
       const idUser = localStorage.getItem("_id");
       if (idUser) {
         await getUserData(idUser);
       }
     }
     
-    fetchData()
+    fetchDataUser()
   }, []);
 
   useEffect(() => {
