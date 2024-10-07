@@ -68,7 +68,6 @@ export const Games = () => {
         try {
           const data = await findUserGames(idUser);
           if(data && mode !== null) {
-            console.log("GAMES EXISTENTE | SECTION GAMES")
             setUserGamesData(data);
             setImageTries(data.triesimage[mode]);
             setSiluetaTries(data.triessilueta[mode]);
@@ -80,9 +79,6 @@ export const Games = () => {
           } 
         } catch (error: any) {
           console.error('Error:', error);
-          if (error === "Games no encontradas") {
-            console.log("Games no encontradas");
-          }
         }
       }
     };

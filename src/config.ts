@@ -1,6 +1,6 @@
 const config = {
-  googleClientId: "343896712510-niddt5vhrnapb2gep298evcio2m9jtd4.apps.googleusercontent.com",
-  apiUrl: "https://gachanime-backend-production.up.railway.app/api"
+  googleClientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+  apiUrl: import.meta.env.VITE_API_URL,
   // apiUrl: "http://localhost:3000/api"
 };
 
