@@ -251,3 +251,26 @@ export const getRank = async () => {
     throw error;
   }
 }
+
+export const getNumberCards = async (userid: string) => {
+  try {
+    const response = await fetch(`${config.apiUrl}/users/getNumberCards`, {
+      method: 'POST',
+      headers : {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({userid})
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Unknown error');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}

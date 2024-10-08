@@ -4,7 +4,7 @@ import './Games.css';
 import { useUserGachas } from "../Home";
 import { findUserGames } from '../../../services/userGames';
 import { GameData } from '../../Interfaces/GamesUser';
-import { unlockMode } from '../../../services/user';
+import { getNumberCards, unlockMode } from '../../../services/user';
 import { useTranslation } from 'react-i18next';
 import { PiImageBroken } from "react-icons/pi";
 import { BiImage } from "react-icons/bi";
@@ -58,6 +58,7 @@ export const Games = () => {
   const [resets, setResets] = useState<number>(10);
   const [mode, setMode] = useState<number>(0);
   const [unlock, setUnlock] = useState<boolean>();
+  const [uniqueCards, setUniqueCards] = useState<number>(0);
   const [index, setIndex] = useState("image");
   const location = useLocation();
 
@@ -66,6 +67,8 @@ export const Games = () => {
       const idUser = localStorage.getItem("_id");
       if (idUser) {
         try {
+          const numCards = await getNumberCards(idUser);
+          setUniqueCards(numCards.uniqueCards);
           const data = await findUserGames(idUser);
           if(data && mode !== null) {
             setUserGamesData(data);
@@ -82,6 +85,7 @@ export const Games = () => {
         }
       }
     };
+
     fetchData();
   }, []);
 
@@ -227,7 +231,7 @@ export const Games = () => {
                   </>
                 ) : (
                   <>
-                    {t('games.titleUnlockMode')} <span style={{ color: "#FFAA2A" }}>120.000</span> {t('games.titleUnlockModeHard')}
+                    {t('games.titleUnlockHard')} <span style={{ color: "#FFAA2A" }}>50</span> {t('games.titleUnlockModeHard')}
                   </>
                 )
               }
@@ -237,10 +241,23 @@ export const Games = () => {
                 <div className='cnt-button-unlock-modal'>
                   {
                     userData && userData.totalPower !== undefined ? (
-                      <h3 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
-                        {t('games.powerOf') +" "+ userData.username + " " }
-                        <span style={{ color: "#FEAA2A" }}>{userData.totalPower.toLocaleString()}</span>
-                      </h3>
+                      
+                      mode === 1 ? (
+                        <>
+                          <h3 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
+                            {t('games.powerOf') +" "+ userData.username + " " }
+                            <span style={{ color: "#FEAA2A" }}>{userData.totalPower.toLocaleString()}</span>
+                          </h3>
+                        </>
+                      ) : (
+                        <>
+                          <h3 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
+                            {t('games.cardsOf') +" "+ userData.username + " " }
+                            <span style={{ color: "#FEAA2A" }}>{uniqueCards}</span>
+                          </h3>
+                        </>
+                      )
+                      
                     ) : null
                   }
                   {
@@ -255,7 +272,7 @@ export const Games = () => {
                         </button> 
                       : 
                       userData && userData.totalPower !== undefined ?
-                        <button className={userData.totalPower > 120000 ? 'jaro-regular btn-unblock link-main' : "jaro-regular btn-unblock link-main blocked"} onClick={userData.totalPower > 120000 ? handleUnlockMode : undefined}>
+                        <button className={uniqueCards >= 50 ? 'jaro-regular btn-unblock link-main' : "jaro-regular btn-unblock link-main blocked"} onClick={uniqueCards >= 50 ? handleUnlockMode : undefined}>
                           {t('games.hardButton')}
                         </button> 
                         : 

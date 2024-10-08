@@ -88,9 +88,11 @@ i18n.use(initReactI18next).init({
                     infoBlockedInput: "Unlock the difficulty to be able to play",
 
                     titleUnlockMode: "Reach ",
+                    titleUnlockHard: "Collect ",
                     titleUnlockModeMedium: " power to unlock normal difficulty",
-                    titleUnlockModeHard: " power to unlock hard difficulty",
+                    titleUnlockModeHard: " unique cards without repeats to unlock hard difficulty",
                     powerOf: "Power of",
+                    cardsOf: "Cards of",
                     mediumButton: "UNLOCK NORMAL DIFFICULTY",
                     hardButton: "UNLOCK HARD DIFFICULTY"
                 },
@@ -186,7 +188,8 @@ i18n.use(initReactI18next).init({
                     buyButton: "Buy",
                     owner: "Owner: ",
                     exitMess: "You don't have enough GACHAS to buy the card",
-                    confirmSellCard: "Are you sure to sell the card for "
+                    confirmSellCard: "Are you sure to sell the card for ",
+                    placeHolderSellCard: "Price in GACHAS..."
                   },
                   "ranking": {
                       level:"Level",
@@ -276,9 +279,11 @@ i18n.use(initReactI18next).init({
                     infoBlockedInput: "Desbloquea la dificultad para poder jugar",
 
                     titleUnlockMode: "Alcanza ",
+                    titleUnlockHard: "Consigue ",
                     titleUnlockModeMedium: " de poder para desbloquear la dificultad normal",
-                    titleUnlockModeHard: " de poder para desbloquear la dificultad difícil",
+                    titleUnlockModeHard: " cartas únicas sin repetir para desbloquear la dificultad difícil",
                     powerOf: "Poder de",
+                    cardsOf: "Cartas únicas de",
                     mediumButton: "DESBLOQUEAR LA DIFICULTAD NORMAL",
                     hardButton: "DESBLOQUEAR LA DIFICULTAD DIFÍCIL"
                 },
@@ -374,7 +379,8 @@ i18n.use(initReactI18next).init({
                     buyButton: "Comprar",
                     owner: "Dueño: ",
                     exitMess: "No tienes GACHAS suficientes para comprar la carta",
-                    confirmSellCard: "¿Estás seguro de poner la carta en venta por "
+                    confirmSellCard: "¿Estás seguro de poner la carta en venta por ",
+                    placeHolderSellCard: "Precio en GACHAS..."
                 },
                 "ranking": {
                     level:"Nivel",
