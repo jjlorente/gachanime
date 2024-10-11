@@ -39,6 +39,11 @@ export const Register = () => {
       setShowErrorLogin(t('login.errorMail'))
       setEmail("")
       document.getElementById("email")?.focus()
+    } else if(password.length < 6) {
+      setShowErrorLogin("The password must be at least 6 characters long")
+      setPassword("")
+      setPasswordRepeat("")
+      document.getElementById("password")?.focus()
     } else {
       try {
         const data = await registerUser(username, password, email, googleAccount);
@@ -57,6 +62,16 @@ export const Register = () => {
           setPasswordRepeat("")
           document.getElementById("username")?.focus()
         } else if(error.message === "Credenciales inválidas") {
+          setShowErrorLogin(t('login.wrongPass'))
+          setPassword("")
+          setPasswordRepeat("")
+          document.getElementById("password")?.focus()
+        } else if(error.message === "Email necesario") {
+          setShowErrorLogin(t('login.errorMail'))
+          setPassword("")
+          setPasswordRepeat("")
+          document.getElementById("email")?.focus()
+        } else if(error.message === "Password necesaria") {
           setShowErrorLogin(t('login.wrongPass'))
           setPassword("")
           setPasswordRepeat("")
