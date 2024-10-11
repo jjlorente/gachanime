@@ -12,14 +12,14 @@ export const findGoogleUser = async (username: any, email: any, googleAccount: a
     
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData);
+      throw new Error("error findGoogleUser");
     }
 
     const data = await response.json();
     return data
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error findGoogleUser');
     throw error;
   }
 };
@@ -36,13 +36,13 @@ export const findUser = async (username: string, password: string, googleAccount
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.error || 'Unknown error');
+      throw new Error('findUser error');
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error findUser');
     throw error;
   }
 };
