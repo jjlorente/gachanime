@@ -12,14 +12,13 @@ export const findGoogleUser = async (username: any, email: any, googleAccount: a
     
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error("error findGoogleUser");
+      throw new Error(errorData);
     }
 
     const data = await response.json();
     return data
 
   } catch (error) {
-    console.error('Error findGoogleUser');
     throw error;
   }
 };
@@ -36,13 +35,12 @@ export const findUser = async (username: string, password: string, googleAccount
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error('findUser error');
+      throw new Error(errorData.error || 'Unknown error');
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error findUser');
     throw error;
   }
 };
@@ -65,7 +63,6 @@ export const registerUser = async (username: string, password: string, email: st
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 };
@@ -88,7 +85,6 @@ export const updateReset = async (userId: string) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 };
@@ -110,7 +106,6 @@ export const findUserById = async (id: string) => {
       const data = await response.json();
       return data;
   } catch (error) {
-      console.error('Error:', error);
       throw error;
   }
 };
@@ -133,7 +128,6 @@ export const updateLevel = async (userid: string, exp: number) => {
       const data = await response.json();
       return data;
   } catch (error) {
-      console.error('Error:', error);
       throw error;
   }
 };
@@ -156,7 +150,6 @@ export const updateUser = async (userid: string, picture: string, username: stri
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 }
@@ -179,7 +172,6 @@ export const unlockMode = async (userid: string, mode: number) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 }
@@ -202,7 +194,6 @@ export const updateUserLan = async (userid: string, lan: string) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 }
@@ -225,7 +216,6 @@ export const updateTotalPower = async (userid: string, power: number) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 }
@@ -247,7 +237,6 @@ export const getRank = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 }
@@ -270,7 +259,6 @@ export const getNumberCards = async (userid: string) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 }
