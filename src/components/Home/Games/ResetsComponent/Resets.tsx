@@ -140,7 +140,7 @@ export const Resets = (props: any) => {
                 onClick={resets === 0 || props.finishedGame ? undefined : resetGameClick}
             >
                 <>
-                    {resets} / 10
+                    {resets} / 5
                     <FontAwesomeIcon 
                         icon={faRotateRight} 
                         className={resets === 0 || props.finishedGame === true ? "" : "refresh"} 

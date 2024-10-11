@@ -55,7 +55,7 @@ export const Games = () => {
   const [pixelTries, setPixelTries] = useState<number>(0);
   const [openingTries, setOpeningTries] = useState<number>(0);
   const [eyeTries, setEyeTries] = useState<number>(0);
-  const [resets, setResets] = useState<number>(10);
+  const [resets, setResets] = useState<number>(5);
   const [mode, setMode] = useState<number>(0);
   const [unlock, setUnlock] = useState<boolean>();
   const [uniqueCards, setUniqueCards] = useState<number>(0);

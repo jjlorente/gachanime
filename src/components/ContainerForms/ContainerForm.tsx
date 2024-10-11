@@ -11,7 +11,7 @@ export const ContainerForm = () => {
         <h1 className="title jaro-regular">
           GACHANIME
         </h1>
-        <span className="eslogan-title jaro-regular" style={{marginTop:"-.8rem", color:"white"}}>
+        <span className="eslogan-title jaro-regular" style={{marginTop:"-1rem", color:"white"}}>
           {t('login.eslogan')} 
         </span>
         <img className='goku-up-img' src="../goku-sticker-1.png" alt="Sticker of Goku, from Dragon Ball" />
