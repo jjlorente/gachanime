@@ -187,7 +187,7 @@
     background-color: hsl(225deg 58% 12% / 97%);
     height: 100%;
     width: 100%;
-    z-index: 9999;
+    z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
