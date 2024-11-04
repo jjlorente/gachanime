@@ -223,7 +223,7 @@ export const Games = () => {
         <div className={mode !== undefined ? "section-games expanded" : "section-games"}>
           {userData && mode !== null && userData.unlockModes[mode] === false ? 
             <div className={`blocked-mode ${unlock ? 'hidden' : ''}`}>
-              <h2 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
+              <h2 className="title-unlock-mode">
               {
                 mode === 1 ? (
                   <>
@@ -237,21 +237,21 @@ export const Games = () => {
               }
               </h2>
               <div className='container-unblock-mode'>
-                <img src='/unlock.png' style={{ height: "100%", width: "auto" }} className="icon-summon-nav" alt='Unlock image for user modes'/>
+                <img src='/unlock.png' className="icon-summon-unlock" alt='Unlock image for user modes'/>
                 <div className='cnt-button-unlock-modal'>
                   {
                     userData && userData.totalPower !== undefined ? (
                       
                       mode === 1 ? (
                         <>
-                          <h3 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
+                          <h3 className="subtitle-unlock">
                             {t('games.powerOf') +" "+ userData.username + " " }
                             <span style={{ color: "#FEAA2A" }}>{userData.totalPower.toLocaleString()}</span>
                           </h3>
                         </>
                       ) : (
                         <>
-                          <h3 style={{ fontSize: "1.7rem", fontWeight: "normal" }}>
+                          <h3 className="subtitle-unlock">
                             {t('games.cardsOf') +" "+ userData.username + " " }
                             <span style={{ color: "#FEAA2A" }}>{uniqueCards}</span>
                           </h3>

@@ -271,3 +271,54 @@
     background-color: #1c8c05 !important;
     border: 2px solid #ffffff !important;
 }
+
+
+.title-unlock-mode {
+   font-size: 1.7rem; 
+   font-weight: normal;
+}
+
+.icon-summon-unlock {
+    height: 100%;
+    width: auto;
+}
+
+.subtitle-unlock {
+    font-size: 1.7rem; 
+    font-weight: normal;
+}
+
+@media (max-width: 550px) {
+    .title-unlock-mode {
+        font-size: 1rem; 
+    }
+
+    .btn-unblock {
+        font-size: 1rem !important; 
+    }
+
+    .icon-summon-unlock {
+        height: 80%;
+    }
+
+    .subtitle-unlock {
+        font-size: 1.1rem; 
+    }
+}
+
+@media (max-width: 430px) {
+    .icon-summon-unlock {
+        height: 50%;
+    }    
+    .title-unlock-mode {
+        font-size: 0.9rem; 
+    }
+
+    .btn-unblock {
+        font-size: 0.7rem !important; 
+    }
+
+    .subtitle-unlock {
+        font-size: 0.9rem; 
+    }
+}
